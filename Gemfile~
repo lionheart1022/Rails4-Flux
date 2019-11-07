@@ -15,7 +15,7 @@ gem 'delayed_job_active_record', '~> 4.1.0'
 gem 'local_time', '~> 2.1.0'
 
 # Users
-gem "devise", ">= 4.7.1"
+gem 'devise', '~> 3.4.1'
 
 # Countries
 gem 'countries', '~> 2.0.0', require: 'countries/global'
