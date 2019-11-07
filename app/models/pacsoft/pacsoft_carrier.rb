@@ -1,0 +1,2 @@
+class PacsoftCarrier < Carrier
+end

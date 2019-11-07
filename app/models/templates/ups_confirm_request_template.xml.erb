@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="ISO 8859-1"?>
+<AccessRequest xml:lang="en-US">
+  <AccessLicenseNumber><%= credentials.access_token %></AccessLicenseNumber>
+  <UserId><%= credentials.company %></UserId>
+  <Password><%= credentials.password %></Password>
+</AccessRequest>
+<?xml version="1.0" encoding="ISO 8859-1"?>
+<ShipmentConfirmRequest xml:lang="en-US">
+  <Request>
+    <TransactionReference>
+      <CustomerContext>Customer Comment</CustomerContext>
+      <XpciVersion/>
+    </TransactionReference>
+    <RequestAction>ShipConfirm</RequestAction>
+    <RequestOption><%= "validate" %></RequestOption>
+  </Request>
+  <LabelSpecification>
+    <LabelPrintMethod>
+      <Code>gif</Code>
+      <Description>gif file</Description>
+    </LabelPrintMethod>
+    <HTTPUserAgent></HTTPUserAgent>
+    <LabelImageFormat>
+      <Code>gif</Code>
+      <Description>gif</Description>
+    </LabelImageFormat>
+  </LabelSpecification>
+  <Shipment>
+    <ReferenceNumber>
+      <Code>
+        CF
+      </Code>
+      <Value>
+        <%= "CF-#{shipment.shipment_id}" %>
+      </Value>
+    </ReferenceNumber>
+    <ReferenceNumber>
+      <Code></Code>
+      <Value>
+        <%= "#{shipment.reference}" %>
+      </Value>
+    </ReferenceNumber>
+    <Description><%= transform_to_ups_char_set(shipment.description) %></Description>
+    <% if shipping_options.import %>
+      <ReturnService>
+        <Code><%= shipping_options.return_service_code %></Code>
+      </ReturnService>
+      <Shipper>
+        <Name><%= transform_to_ups_char_set(recipient.company_name) %></Name>
+        <AttentionName><%= transform_to_ups_char_set(recipient.attention) %></AttentionName>
+        <PhoneNumber><%= transform_to_ups_char_set(recipient.phone_number_number) %></PhoneNumber>
+        <ShipperNumber><%= transform_to_ups_char_set(credentials.account) %></ShipperNumber>
+      <TaxIdentificationNumber></TaxIdentificationNumber>
+        <Address>
+        <AddressLine1><%= transform_to_ups_char_set(recipient.address_line1) %></AddressLine1>
+        <AddressLine2><%= transform_to_ups_char_set(recipient.address_line2) %></AddressLine2>
+        <AddressLine3><%= transform_to_ups_char_set(recipient.address_line3) %></AddressLine3>
+        <City><%= transform_to_ups_char_set(recipient.city) %></City>
+        <StateProvinceCode><%= transform_to_ups_char_set(recipient.state_code) %></StateProvinceCode>
+        <PostalCode><%= transform_to_ups_char_set(recipient.zip_code) %></PostalCode>
+        <PostcodeExtendedLow></PostcodeExtendedLow>
+        <CountryCode><%= transform_to_ups_char_set(recipient.country_code) %></CountryCode>
+       </Address>
+      </Shipper>
+    <% else %>
+      <Shipper>
+        <Name><%= transform_to_ups_char_set(sender.company_name) %></Name>
+        <AttentionName><%= transform_to_ups_char_set(sender.attention) %></AttentionName>
+        <PhoneNumber><%= transform_to_ups_char_set(sender.phone_number_number) %></PhoneNumber>
+        <ShipperNumber><%= transform_to_ups_char_set(credentials.account) %></ShipperNumber>
+      <TaxIdentificationNumber></TaxIdentificationNumber>
+        <Address>
+        <AddressLine1><%= transform_to_ups_char_set(sender.address_line1) %></AddressLine1>
+        <AddressLine2><%= transform_to_ups_char_set(sender.address_line2) %></AddressLine2>
+        <AddressLine3><%= transform_to_ups_char_set(sender.address_line3) %></AddressLine3>
+        <City><%= transform_to_ups_char_set(sender.city) %></City>
+        <StateProvinceCode><%= transform_to_ups_char_set(sender.state_code) %></StateProvinceCode>
+        <PostalCode><%= transform_to_ups_char_set(sender.zip_code) %></PostalCode>
+        <PostcodeExtendedLow></PostcodeExtendedLow>
+        <CountryCode><%= transform_to_ups_char_set(sender.country_code) %></CountryCode>
+       </Address>
+      </Shipper>
+    <% end %>
+  	<ShipTo>
+      <CompanyName><%= transform_to_ups_char_set(recipient.company_name) %></CompanyName>
+      <AttentionName><%= transform_to_ups_char_set(recipient.attention) %></AttentionName>
+      <PhoneNumber><%= transform_to_ups_char_set(recipient.phone_number_number) %></PhoneNumber>
+      <Address>
+        <AddressLine1><%= transform_to_ups_char_set(recipient.address_line1) %></AddressLine1>
+        <AddressLine2><%= transform_to_ups_char_set(recipient.address_line2) %></AddressLine2>
+        <AddressLine3><%= transform_to_ups_char_set(recipient.address_line3) %></AddressLine3>
+        <City><%= transform_to_ups_char_set(transform_to_ups_char_set(recipient.city)) %></City>
+        <StateProvinceCode><%= transform_to_ups_char_set(recipient.state_code) %></StateProvinceCode>
+        <PostalCode><%= transform_to_ups_char_set(recipient.zip_code) %></PostalCode>
+        <CountryCode><%= transform_to_ups_char_set(recipient.country_code) %></CountryCode>
+      </Address>
+    </ShipTo>
+    <ShipFrom>
+      <CompanyName><%= transform_to_ups_char_set(sender.company_name) %></CompanyName>
+      <AttentionName><%= transform_to_ups_char_set(sender.attention) %></AttentionName>
+      <PhoneNumber><%= transform_to_ups_char_set(sender.phone_number_number) %></PhoneNumber>
+	  <TaxIdentificationNumber></TaxIdentificationNumber>
+      <Address>
+        <AddressLine1><%= transform_to_ups_char_set(sender.address_line1) %></AddressLine1>
+        <AddressLine2><%= transform_to_ups_char_set(sender.address_line2) %></AddressLine2>
+        <AddressLine3><%= transform_to_ups_char_set(sender.address_line3) %></AddressLine3>
+        <City><%= transform_to_ups_char_set(sender.city) %></City>
+    	<StateProvinceCode><%= transform_to_ups_char_set(sender.state_code) %></StateProvinceCode>
+    	<PostalCode><%= transform_to_ups_char_set(sender.zip_code) %></PostalCode>
+    	<CountryCode><%= transform_to_ups_char_set(sender.country_code) %></CountryCode>
+      </Address>
+    </ShipFrom>
+    <SoldTo>
+      <CompanyName><%= transform_to_ups_char_set(recipient.company_name) %></CompanyName>
+      <AttentionName><%= transform_to_ups_char_set(recipient.attention) %></AttentionName>
+      <PhoneNumber><%= transform_to_ups_char_set(recipient.phone_number_number) %></PhoneNumber>
+      <Address>
+        <AddressLine1><%= transform_to_ups_char_set(recipient.address_line1) %></AddressLine1>
+        <AddressLine2><%= transform_to_ups_char_set(recipient.address_line2) %></AddressLine2>
+        <AddressLine3><%= transform_to_ups_char_set(recipient.address_line3) %></AddressLine3>
+        <City><%= transform_to_ups_char_set(transform_to_ups_char_set(recipient.city)) %></City>
+        <StateProvinceCode><%= transform_to_ups_char_set(recipient.state_code) %></StateProvinceCode>
+        <PostalCode><%= transform_to_ups_char_set(recipient.zip_code) %></PostalCode>
+        <CountryCode><%= transform_to_ups_char_set(recipient.country_code) %></CountryCode>
+      </Address>
+    </SoldTo>
+    <PaymentInformation>
+      <Prepaid>
+        <BillShipper>
+          <AccountNumber><%= transform_to_ups_char_set(credentials.account) %></AccountNumber>
+        </BillShipper>
+      </Prepaid>
+    </PaymentInformation>
+    <Service>
+      <Code><%= transform_to_ups_char_set(shipping_options.service_code) %></Code>
+      <Description><%= transform_to_ups_char_set(shipment.description) %></Description>
+    </Service>
+    <ShipmentServiceOptions>
+      <% if shipping_options.notification_code.present? && recipient.email.present? %>
+        <Notification>
+          <NotificationCode>6</NotificationCode>
+          <EMailMessage>
+            <EMailAddress><%= xml_escape(recipient.email) %></EMailAddress>
+          </EMailMessage>
+        </Notification>
+      <% end %>
+
+      <% if shipment.dutiable %>
+        <InternationalForms>
+          <FormType>01</FormType>
+          <Product>
+            <Description><%= shipment.description %></Description>
+            <Unit>
+              <Number><%= shipment.number_of_packages %></Number>
+              <Value><%= shipment.customs_amount %></Value>
+              <UnitOfMeasurement>
+                <Code>KGS</Code>
+              </UnitOfMeasurement>
+            </Unit>
+            <CommodityCode><%= shipment.customs_code %></CommodityCode>
+            <OriginCountryCode><%= sender.country_code %></OriginCountryCode>
+          </Product>
+          <InvoiceDate><%= shipment.shipping_date.strftime('%Y%m%d') %></InvoiceDate>
+          <ReasonForExport>OTHER</ReasonForExport>
+          <CurrencyCode><%= shipment.customs_currency %></CurrencyCode>
+        </InternationalForms>
+      <% end %>
+    </ShipmentServiceOptions>
+    <% shipment.package_dimensions.dimensions.each do |dimension| %>
+      <Package>
+      <PackagingType>
+        <Code><%= transform_to_ups_char_set(shipping_options.packaging_code) %></Code>
+      </PackagingType>
+      <% unless shipping_options.letter %>
+        <Dimensions>
+          <UnitOfMeasurement>
+          <Code>CM</Code>
+          </UnitOfMeasurement>
+          <Length><%= transform_to_ups_char_set(dimension.length) %></Length>
+          <Width><%= transform_to_ups_char_set(dimension.width) %></Width>
+          <Height><%= transform_to_ups_char_set(dimension.height) %></Height>
+        </Dimensions>
+      <% end %>
+      <Description>Package Description</Description>
+      <PackageWeight>
+        <UnitOfMeasurement>
+        <Code>KGS</Code>
+        </UnitOfMeasurement>
+        <% if shipping_options.letter %>
+          <Weight>0</Weight>
+        <% else %>
+          <Weight><%= transform_to_ups_char_set(dimension.weight) %></Weight>
+        <% end %>
+      </PackageWeight>
+    </Package>
+    <% end %>
+  </Shipment>
+  <% if shipping_options.documents_only %><DocumentsOnlyIndicator></DocumentsOnlyIndicator><% end %>
+</ShipmentConfirmRequest>

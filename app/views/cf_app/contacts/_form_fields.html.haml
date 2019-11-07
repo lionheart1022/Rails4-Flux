@@ -1,0 +1,13 @@
+= form.input :company_name, autofocus: true
+= form.input :attention
+= form.input :address_line1
+= form.input :address_line2
+= form.input :address_line3
+= form.input :zip_code
+= form.input :city
+%div{ data: { behavior: "country_and_state_inputs__container" } }
+  = form.input :country_code, iso_codes: true, label: "Country", input_html: { data: { behavior: "country_and_state_inputs__country" } }
+  = form.input :state_code, as: :states_grouped_by_country, label: "State", input_html: { data: { behavior: "country_and_state_inputs__state" } }
+= form.input :phone_number
+= form.input :email
+= form.input :residential

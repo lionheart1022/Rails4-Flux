@@ -1,0 +1,17 @@
+defaults: &defaults
+  access_key_id: <%=ENV["AWS_STORAGE_ACCESS_KEY_ID"]%>
+  secret_access_key: <%=ENV["AWS_STORAGE_SECRET_ACCESS_KEY"]%>
+development:
+  <<: *defaults
+  bucket: "cargoflux-development"
+  access_key_id: "AKIAJR2NUG3KD36IDR3A"
+  secret_access_key: "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"
+test:
+  <<: *defaults
+  bucket: "cargoflux-development"
+staging:
+  <<: *defaults
+  bucket: "cargoflux-staging"
+production:
+  <<: *defaults
+  bucket: "cargoflux-production"

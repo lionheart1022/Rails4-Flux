@@ -1,0 +1,19 @@
+%header.page_header
+  %h1
+    %span Configure ferry route
+    %small= @ferry_route.name
+
+= simple_form_for @ferry_route_configuration, as: :ferry_route_configuration, url: companies_ferry_route_configuration_path(@ferry_route.id), method: :patch do |form|
+  = form.input :account_number
+  = form.input :scandlines_id, label: "Scandlines ID"
+  = form.input :carrier_product_id, collection: form.object.available_carrier_products, label_method: :name
+
+  %h2 SFTP
+
+  = form.input :sftp_host, label: "SFTP host"
+  = form.input :sftp_user, label: "SFTP user"
+  = form.input :sftp_password, as: :string, label: "SFTP password"
+
+  %ul.actions
+    %li= link_to "Cancel", companies_ferry_routes_path
+    %li.primary= form.submit "Save"

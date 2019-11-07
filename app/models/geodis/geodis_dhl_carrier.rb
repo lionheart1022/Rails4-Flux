@@ -1,0 +1,2 @@
+class GeodisDHLCarrier < GeodisCarrier
+end

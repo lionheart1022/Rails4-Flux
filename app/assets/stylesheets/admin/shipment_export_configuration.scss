@@ -1,0 +1,14 @@
+.shipment_export_configuration__table {
+  th:first-child, td:first-child {
+    padding-left: 15px;
+  }
+}
+
+.shipment_export_configuration__label_cell {
+  padding-left: 0;
+
+  label {
+    display: inline-block;
+    line-height: inherit;
+  }
+}

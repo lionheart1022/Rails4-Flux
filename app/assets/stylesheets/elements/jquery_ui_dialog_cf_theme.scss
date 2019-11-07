@@ -1,0 +1,90 @@
+@import "admin/mixins";
+
+.cf-ui-dialog-modal {
+  border-radius: 4px;
+  border-color: #bbb;
+  box-shadow: 0 2px 8px #ccc;
+
+  &,
+  .ui-button {
+    @include font_maven_pro;
+  }
+
+  .ui-button.ui-dialog-titlebar-close {
+    background: none;
+    border-radius: 0;
+    border: none;
+  }
+
+  .ui-button {
+    background: #eee;
+    font-size: 16px;
+    padding: 0;
+  }
+
+  .ui-button.cf-ui-dialog-modal--ok-btn {
+    background-color: $blue;
+    color: #fff;
+  }
+
+  .ui-button.cf-ui-dialog-modal--cancel-btn { }
+
+  .ui-dialog-titlebar {
+    background: none;
+    border-radius: 0;
+    border: none;
+    padding: 24px 32px;
+    text-align: center;
+
+    &.ui-widget-header {
+      font-weight: normal;
+      font-size: 20px;
+    }
+  }
+
+  .ui-dialog-title {
+    width: 100%;
+  }
+
+  .ui-dialog-content {
+    padding: 8px 32px 32px 32px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+
+    p {
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
+  .ui-dialog-buttonpane {
+    margin: 0;
+    border: none;
+    padding: 1px 24px 24px 24px;
+
+    button {
+      border-radius: 4px;
+      border: none;
+      font-size: 15px;
+      margin: 0 0 0 8px;
+
+      .ui-button-text {
+        line-height: 26px;
+      }
+    }
+  }
+
+  .cf-modal-show-spinner {
+    min-height: 80px;
+    text-align: center;
+
+    .spinner--wrapper-size60 {
+      display: inline-block;
+    }
+  }
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}

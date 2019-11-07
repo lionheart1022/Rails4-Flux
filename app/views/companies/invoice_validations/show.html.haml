@@ -1,0 +1,37 @@
+%header.page_header
+  %h1 Validate invoices
+  %ul.page_actions
+    %li= link_to "New validation", new_companies_invoice_validation_path, class: "primary-btn"
+.flex-column
+  .half-width-column
+    File used :
+    = @invoice_validation.name
+  .half-width-column
+    %table.no-border-table
+      %tr
+        %td Total Shipments
+        %td.right-details= @invoice_validation.processed_shipments_count
+
+- if @invoice_validation.invoice_validation_error_rows.any?
+  = render 'shared/danger_alert', title: "We found #{@invoice_validation.invoice_validation_error_rows.count} shipments with high difference", message: "File columns used: '#{@invoice_validation.shipment_id_column_name}', '#{@invoice_validation.cost_column_name}'"
+
+  %table.invoice-validation-details
+    %tr
+      %th{ width: "60%" } ID
+      %th Expected price
+      %th Actual cost
+      %th Difference
+    - @invoice_validation.invoice_validation_error_rows.each do |error_row|
+      %tr
+        %td= error_row.unique_shipment_id
+        %td= "#{error_row.expected_price_currency} #{error_row.expected_price_amount.to_f}"
+        %td= "#{error_row.actual_cost_currency} #{error_row.actual_cost_amount.to_f}"
+        %td.difference= "#{error_row.difference_price_currency} #{error_row.difference_price_amount.to_f}"
+
+  - if @invoice_validation.exported_excel_errors?
+    = link_to "Download", @invoice_validation.errors_report_download_url, class: "float-right-btn primary-btn"
+  - else
+    = link_to "Export list", export_excel_file_companies_invoice_validation_path(@invoice_validation), class: "float-right-btn primary-btn"
+
+- else
+  = render 'shared/success_alert', title: "Great, there are no problems with your invoice", message: "File columns used: '#{@invoice_validation.shipment_id_column_name}', '#{@invoice_validation.cost_column_name}'"

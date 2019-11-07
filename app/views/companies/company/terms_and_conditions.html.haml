@@ -1,0 +1,44 @@
+- company = @view_model.company
+%h1 Terms and Conditions
+
+%table.files
+  %tr
+    %th Description
+    %th File
+    %th
+  - @view_model.company_assets.each do |asset|
+
+    %tr.file
+      %td= asset.description
+      %td= link_to(asset.attachment_file_name, asset.attachment.url, target: "_blank")
+      %td.delete_link
+        - if @view_model.can_manage_files
+          =  link_to('Remove', companies_terms_and_condition_path(asset.id), method: :delete, data: { confirm: "Removing file. Are you sure?" })
+      %td.loading_indicator{hidden: true}
+        = image_tag("admin/loading_indicator.gif", alt: "")
+
+  - if @view_model.can_manage_files
+    %tr.new_file.simple_form
+      = simple_form_for @view_model.s3_company_callback_url do |f|
+        %td
+          = f.input :description, as: :string, label: false, placeholder: 'Description', input_html: { id: 'file_description' }
+
+      %td
+        #company_attachment.attachment
+        %button#company_terms_choose_file Choose File
+        = s3_uploader_form(callback_url: @view_model.s3_company_callback_url,
+                                         data:  { bucket_name: Rails.configuration.aws[:bucket] },
+                                         id: 's3_company_attachment_uploader',
+                                         key: "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file",
+                                         callback_param: 'file[direct_attachment_url]',
+                                         expiration:  24.hours.from_now.utc.iso8601,
+                                         max_file_size:  500.megabytes) do |f|
+          = file_field_tag :file, multiple: false, hidden: true
+          #company_attachment_uploads.attachment
+      %td
+        %ul.actions
+          %li.primary
+            = submit_tag 'Upload', id: 'upload_company_file'
+            #upload_loading_indicator{hidden: true}
+              = image_tag("admin/loading_indicator.gif", alt: "")
+

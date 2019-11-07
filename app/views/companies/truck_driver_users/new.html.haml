@@ -1,0 +1,14 @@
+%header.page_header
+  %h1
+    Truck drivers
+    %small= @truck_driver.name
+
+  %ul.page_actions
+    %li= link_to("Cancel", companies_truck_drivers_path, class: "secondary-btn")
+
+= simple_form_for(@form, url: url_for(action: "create"), as: :user, method: :post, html: { id: nil, class: nil }) do |f|
+  = f.input :email, autofocus: true
+  = f.input :send_invitation_email, as: :boolean
+
+  %ul.actions
+    %li.primary= f.submit "Create user for truck driver"

@@ -1,0 +1,24 @@
+%tr{ id: "list_view_pickup_#{pickup.id}" }
+  %td.state_indicator_cell
+    %span.state_indicator.pickup_state_indicator{ class: "pickup_state_#{pickup.state}" }
+      %span.state_indicator_updateable{ data: { behavior: "pickup_state_updating", state_form_html: render("companies/pickups/state_update_form", pickup: pickup, disable_remote: local_assigns[:disable_remote_state_update_form]) } }
+        = ViewHelper::Pickups.state_name(pickup.state)
+  %td
+    = pickup.customer_name
+  %td.id
+    %div
+      = link_to(pickup.unique_pickup_id, companies_pickup_path(pickup))
+    - if pickup.show_id_from_carrier?
+      %div.p-t-6
+        = render pickup.id_from_carrier_partial, pickup: pickup
+  %td
+    - if pickup.shipment
+      = link_to pickup.shipment.unique_shipment_id, companies_shipment_path(pickup.shipment)
+  %td.date
+    = pickup.pickup_date
+  %td
+    = pickup.from_time
+  %td
+    = pickup.to_time
+  %td
+    = pickup.description

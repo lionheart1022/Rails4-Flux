@@ -1,0 +1,7 @@
+%h2 Travel
+.form_pane
+  = form.input :route_id, label: "Route", as: :select, collection: form.object.available_routes, label_method: :name, input_html: { data: { behavior: "ferry_route_select", behavior_config: { route_departure_times_map: form.object.route_departure_times_map } } }
+
+  .multi_field_group.travel_date_and_time_fields
+    = form.input :travel_date, as: :date
+    = form.input :travel_time, as: :select, collection: form.object.travel_time_options, input_html: { data: { behavior: "ferry_departure_time_select" } }

@@ -1,0 +1,3 @@
+class TNTTracking < Tracking
+
+end

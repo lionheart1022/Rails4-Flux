@@ -1,0 +1,17 @@
+%header.page_header
+  %h1
+    Shipment Updates
+    %small Configuration
+
+= render "companies/shipment_updates/subnav", active_nav: :configuration
+
+%table
+  %thead
+    %th Carrier
+    %th Account
+    %th
+  %tbody
+    - @carrier_feedback_configurations.each do |configuration|
+      %tr
+        %td= configuration.carrier_name
+        %td= configuration.account_label

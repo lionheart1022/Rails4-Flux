@@ -1,0 +1,3 @@
+= form_tag companies_invoice_validations_path, enctype: "multipart/form-data", class: 'simple_form' do
+  = file_field_tag :file, multiple: false, class: "string", accept: ".xlsx, .xls"
+  = submit_tag "Validate", class: "primary-btn"

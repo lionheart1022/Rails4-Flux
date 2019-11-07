@@ -1,0 +1,24 @@
+%h2 Truck and Driver
+.truck_and_driver.form_pane
+  = form_tag companies_shipment_delivery_path(view_model.shipment), method: :put, class: "simple_form " do
+    = label_tag :shipment_select_truck_and_driver do
+      = check_box_tag :shipment_select_truck_and_driver, "1", !view_model.select_truck_and_driver
+      Select truck and driver
+
+    .truck_and_driver_fields
+      .truck_and_driver_fields_column
+        = label_tag :truck_id, "Truck"
+        = select_tag :truck_id, options_from_collection_for_select(view_model.trucks, :id, :name, @view_model.latest_delivery.try(:truck_id)), include_blank: true, data: { behavior: "shipment_form_truck_select" , behavior_config: { default_drivers: view_model.truck_and_driver_mapping } }
+      .truck_and_driver_fields_column
+        = label_tag :driver_id, "Driver"
+        = select_tag :driver_id, options_from_collection_for_select(view_model.drivers, :id, :name, view_model.latest_delivery.try(:truck_driver).try(:id)), include_blank: true, data: { behavior: "shipment_form_driver_select" }
+    %br 
+
+    = submit_tag 'Save', class: "primary-btn"
+
+  - if view_model.shipment.done_deliveries.any?
+    %br
+    %br
+    This shipment was in the following deliveries:
+    - view_model.shipment.done_deliveries.each do |delivery|
+      = link_to delivery.unique_delivery_number_with_prefix, companies_delivery_path(delivery)

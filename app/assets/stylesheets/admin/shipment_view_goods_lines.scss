@@ -1,0 +1,28 @@
+@import "admin/mixins";
+
+.shipment_view_goods_lines__table {
+  th, td {
+    text-align: right;
+  }
+}
+
+.shipment_view_goods_lines__index_cell {
+  border-right: 1px solid #dedede;
+  font-weight: bold;
+  width: 50px;
+}
+
+.shipment_view_goods_lines__times_cell {
+  color: #aaa;
+  width: 24px;
+}
+
+.shipment_view_goods_lines__table td.shipment_view_goods_lines__times_cell {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.shipment_view_goods_lines__total_row td {
+  font-weight: bold;
+}

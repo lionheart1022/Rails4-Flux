@@ -1,0 +1,19 @@
+%header.page_header
+  %h1 Company address
+
+= simple_form_for(@address, as: :contact, url: customers_address_path, method: :put, html: { id: nil, class: nil }) do |f|
+  = f.input :company_name, autofocus: true
+  = f.input :attention
+  = f.input :address_line1
+  = f.input :address_line2
+  = f.input :address_line3
+  = f.input :zip_code
+  = f.input :city
+  %div{ data: { behavior: "country_and_state_inputs__container" } }
+    = f.input :country_code, iso_codes: true, label: "Country", input_html: { data: { behavior: "country_and_state_inputs__country" } }
+    = f.input :state_code, as: :states_grouped_by_country, label: "State", input_html: { data: { behavior: "country_and_state_inputs__state" } }
+  = f.input :phone_number
+  = f.input :email
+
+  %ul.actions
+    %li.primary= f.submit "Save Address"

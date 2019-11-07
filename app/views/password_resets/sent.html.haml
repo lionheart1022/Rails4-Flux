@@ -1,0 +1,13 @@
+%h2 Password reset mail
+
+- if params[:email].present?
+  .padded
+    %strong= params[:email]
+
+.padded
+  If we could find the email you provided in our system we'll send you a password reset mail shortly.
+  %br
+  In some rare cases the mail can also end up in your Spam inbox.
+
+.padded
+  = link_to "Sign in", new_user_session_path, class: "secondary-btn"

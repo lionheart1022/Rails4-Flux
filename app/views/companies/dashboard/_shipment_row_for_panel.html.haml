@@ -1,0 +1,19 @@
+%tr
+  %td
+    = shipment.customer_name_for_company(company_id: current_company.id)
+  %td.id
+    = link_to(shipment.unique_shipment_id, companies_shipment_path(shipment))
+  %td.date
+    = shipment.shipping_date
+  %td
+    = shipment.carrier_product.suffixed_name
+  %td
+    = render("components/shared/contact", contact: shipment.sender)
+  %td
+    = render("components/shared/contact", contact: shipment.recipient)
+  %td.awb
+    = render(partial: "components/shared/carrier_products/awb", locals: { shipment: shipment })
+
+- if shipment.description.present?
+  %tr.description
+    %td{ :colspan => "7" }= shipment.description

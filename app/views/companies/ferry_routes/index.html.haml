@@ -1,0 +1,32 @@
+%header.page_header.with_table_below
+  %h1 Ferry routes
+
+%table
+  %thead
+    %tr
+      %th{ width: "70%" } Route
+      %th{ width: "20%" } Last modification
+      %th
+  %tbody
+    - @ferry_routes.each do |ferry_route|
+      %tr
+        %td
+          %div= ferry_route.name
+          %div
+            - ferry_route.ordered_active_products.each do |ferry_product|
+              - if ferry_product.ready_for_use?
+                %span.ferry_time_of_departure.ready
+                  %span= ferry_product.time_of_departure
+                  %span.checkmark ✓
+              - else
+                %span.ferry_time_of_departure
+                  = ferry_product.time_of_departure
+          - if ferry_route.active_products? && pricing_schema = ferry_route.pricing_schema
+            %div
+              %strong= pricing_schema.description_label
+              %span= pricing_schema.amount_label
+        %td
+          %span= time_ago_in_words(ferry_route.updated_at)
+          %span ago
+        %td
+          = link_to("Configure", companies_ferry_route_configuration_path(ferry_route.id)) if ferry_route.active_products?

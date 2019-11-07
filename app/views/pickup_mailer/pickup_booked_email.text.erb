@@ -1,0 +1,2 @@
+<%= "#{@company.name} has booked your pickup with id: #{@pickup.unique_pickup_id}" %>
+<%= ViewHelper::Pickups.customer_email_pickup_url_with_common_or_company_domain(pickup: @pickup, company: @company) %>

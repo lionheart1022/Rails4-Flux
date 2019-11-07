@@ -1,0 +1,21 @@
+.page_actions
+  %h1 Pickups - Current
+
+  %ul.actions.fix_right_alignment
+    %li.primary= link_to("New pickup", url_for(action: "new"))
+
+  .scopes
+    = simple_form_for(@view_model, url: url_for(action: "index"), method: :get, as: :scope) do |form|
+      .scope_inputs
+        = form.input :sorting, collection: form.object.sorting_options, label: false, input_html: { name: "sorting" }, include_blank: false
+        = form.input :state, collection: form.object.state_options, label: false, input_html: { name: "filter_state" }, include_blank: false
+
+- @view_model.output_relation_with_pagination.tap do |records|
+  - if records.size > 0
+    %table.pickups
+      %thead
+        = render partial: "components/customers/pickups/list_view_pickup_columns"
+      %tbody
+        = render partial: "components/customers/pickups/list_view_pickup_row", collection: records, as: :data
+  - else
+    %p.noresults No pickups found

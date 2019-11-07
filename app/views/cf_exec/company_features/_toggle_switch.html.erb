@@ -1,0 +1,19 @@
+<% if feature_flag.persisted? %>
+  <%= form_tag exec_company_feature_path(@company, feature_flag.identifier), method: :delete, remote: true, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+    <%= hidden_field_tag "feature[identifier]", feature_flag.identifier, id: nil %>
+
+    <label class="toggle-switch">
+      <%= check_box_tag nil, "1", true %>
+      <span class="toggle-switch-slider"></span>
+    </label>
+  <% end %>
+<% else %>
+  <%= form_tag exec_company_features_path(@company), method: :post, remote: true, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+    <%= hidden_field_tag "feature[identifier]", feature_flag.identifier, id: nil %>
+
+    <label class="toggle-switch">
+      <%= check_box_tag nil, "1", false %>
+      <span class="toggle-switch-slider"></span>
+    </label>
+  <% end %>
+<% end %>

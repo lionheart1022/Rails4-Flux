@@ -1,0 +1,31 @@
+%header.page_header
+  %h1 Create Report
+
+= simple_form_for(@draft_report, url: companies_draft_reports_path, method: :post, html: { id: nil }) do |form|
+  = form.fields_for :shipment_filter, form.object.shipment_filter do |filter_fields|
+    = filter_fields.input :customer_recording_id, as: :customer_recording_select, input_html: { placeholder: "All customers", data: { :"allow-clear" => true, :width => "300px" } }, label: "Customer"
+    = filter_fields.input :carrier_id, as: :carrier_autocomplete_select, input_html: { placeholder: "All carriers", data: { :"allow-clear" => true, :width => "300px" } }
+
+    = filter_fields.input :date do
+      %span.date_range_container{ data: { behavior: "date_range_input" } }
+        = filter_fields.input_field :start_date, as: :string, placeholder: "Start date", data: { behavior: "date_range_input__start" }, class: "date_range__input", autocomplete: "off"
+        = filter_fields.input_field :end_date, as: :string, placeholder: "End date", data: { behavior: "date_range_input__end" }, class: "date_range__input", autocomplete: "off"
+
+    = filter_fields.input :pricing_status, collection: form.object.pricing_status_options, include_blank: "Ignore pricing", label: "Pricing"
+    = filter_fields.input :shipment_state, collection: form.object.state_options, include_blank: "All states", label: "State"
+    = filter_fields.input :report_inclusion, collection: form.object.report_inclusion_options, include_blank: "All shipments"
+
+  %h2 Extra options
+
+  = form.fields_for :configuration, form.object.report_configuration do |config_fields|
+    = config_fields.input :with_detailed_pricing, as: :boolean
+
+    - if current_company.ferry_booking_enabled?
+      = config_fields.input :ferry_booking_data, as: :boolean
+
+    - if current_context.company_feature_flag_enabled?("truck-driver-db")
+      = config_fields.input :truck_driver_data, as: :boolean
+
+  %ul.actions
+    %li.primary= form.submit "Search"
+    %li.secondary= link_to "Cancel", companies_reports_path

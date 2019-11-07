@@ -1,0 +1,4 @@
+%nav.nav-pills-container
+  %ul.nav-pills-list
+    %li= link_to "Updates", companies_shipment_updates_path, class: (active_nav == :updates ? "nav-pill-active" : nil)
+    %li= link_to "Configuration", companies_carrier_feedback_configurations_path, class: (active_nav == :configuration ? "nav-pill-active" : nil)

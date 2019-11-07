@@ -1,0 +1,78 @@
+%header.page_header.with_table_below
+  %h1
+    = @carrier.name
+    %small= link_to "All carriers", companies_carriers_path
+
+  - unless @carrier.is_locked_for_editing?
+    %ul.page_actions
+      - if @carrier.type.blank?
+        %li= link_to("New carrier product", new_companies_carrier_product_path(@carrier), class: "primary-btn")
+      %li= link_to("Edit carrier", edit_companies_carrier_path(@carrier), class: "secondary-btn")
+
+- if @carrier_products.size > 0
+  = form_tag(bulk_update_companies_carrier_path(@carrier), method: :put) do
+    %table
+      %thead
+        %tr
+          %th Product
+          %th{ "width" => "150", "data-behavior" => "carrier_product__credentials__th" }
+            Credentials
+          %th= "Custom&nbsp;Label".html_safe
+          %th= "Product&nbsp;Code".html_safe
+          - if current_context.company_feature_flag_enabled?("product-rules")
+            %th Rules
+          %th{ "width" => "150", "data-behavior" => "carrier_product__automatic_tracking_checkbox__th" }
+            = check_box_tag nil, "1", false, data: { behavior: "carrier_product__automatic_tracking_checkbox__all" }
+            = "Automatic&nbsp;Tracking".html_safe
+          %th
+      %tbody
+        - @carrier_products.each_with_index do |product, product_index|
+          = fields_for "carrier[carrier_products]", product, index: product_index do |ff|
+            %tr
+              %td
+                %div= suffixed_name(name: product.name, company: product.owner_carrier_product.company)
+                %div
+                  %small= product.owner_carrier_product.company.name
+              %td{ "data-carrier-product-has-credentials" => product.supports_shipment_auto_booking?.to_s }
+                - if product.supports_shipment_auto_booking?
+                  - if product.is_locked_for_configuring?
+                    %em Referenced
+                  - else
+                    = link_to(edit_companies_carrier_product_credential_path(product), class: "product-credentials-link") do
+                      - if product.credentials_before_type_cast
+                        %span.credentials-indicator--specified{ title: "Credentials provided" }
+                      - else
+                        %span.credentials-indicator--blank{ title: "Credentials not provided" }
+                      %span.credentials-inner-text Edit credentials
+                - else
+                  = content_tag(:span, "N/A", class: "blank-dimmed")
+              %td= product.custom_label?.to_s.capitalize
+              %td= product.product_code || content_tag(:span, "N/A", class: "blank-dimmed")
+              - if current_context.company_feature_flag_enabled?("product-rules")
+                %td
+                  - if product.rules.size == 1
+                    = indicator_link_to(true, "Edit rules", companies_carrier_product_rules_path(product))
+                    %br
+                    = link_to "Add rule", new_companies_carrier_product_rule_path(product)
+                  - elsif product.rules.size == 0
+                    = indicator_link_to(false, "Edit rules", companies_carrier_product_rules_path(product))
+                  - else
+                    - product.rules.each_with_index do |product_rule, index|
+                      = indicator_link_to(true, "Edit rule ##{index + 1}", edit_companies_carrier_product_rule_path(product, product_rule))
+                      %br
+                    = link_to "Add rule", new_companies_carrier_product_rule_path(product)
+              %td{ "data-behavior" => "carrier_product__automatic_tracking_checkbox__cell" }
+                = ff.hidden_field(:id, id: nil)
+                = ff.check_box(:automatic_tracking, id: nil, data: { behavior: "carrier_product__automatic_tracking_checkbox" }) if product.can_enable_tracking?
+              %td.text-right
+                - unless product.is_locked_for_editing?
+                  = link_to("Edit", edit_companies_carrier_product_path(product), class: "secondary-btn btn--small")
+                  = link_to("Disable", disable_companies_carrier_product_path(product), method: :patch, class: "secondary-btn btn--small")
+        %tr{ "data-behavior" => "carrier_product__bulk_update__tr" }
+          %td{ colspan: "4" }
+          - if current_context.company_feature_flag_enabled?("product-rules")
+            %td
+          %td{ colspan: "2" }
+            = button_tag "Save", type: "submit", class: "primary-btn", name: nil
+- else
+  %p.no_results= "No carrier products found."

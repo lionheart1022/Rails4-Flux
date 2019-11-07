@@ -1,0 +1,142 @@
+.samskip_label_container
+  %table.label_row
+    %tbody
+      %tr.without_border
+        %td.label_column_company_logo
+          = image_tag(@view_model.logo_url, alt: nil)
+        %td.label_column_right_title Landsdækkende Erhvervstransport
+      %tr
+        %td.label_column_for_header
+          = @view_model.company_address
+          %br
+          = @view_model.company_postal_code_and_city
+          %br
+          Tlf:
+          = @view_model.company_phone_number
+          %br
+          Fax:
+          = @view_model.company_fax_number
+        %td.label_column_for_contact
+          Kontakt os:
+          %br
+          = @view_model.company_email
+
+  .samskip_label_line1_container
+    %table.label_row
+      %thead
+        %tr
+          %th.label_column_for_truck_number
+          %th.label_column_for_shipment_id AWB NR.
+      %tbody
+        %tr
+          %td
+          %td= @view_model.shipment_id
+
+  .samskip_label_line2_container
+    %table.label_row
+      %thead
+        %tr
+          %th.label_column_for_driver
+          %th.label_column_for_date Dato
+          %th.label_column_for_reference Reference
+      %tbody
+        %tr
+          %td
+          %td= l(@view_model.date, format: "%d/%m-%Y")
+          %td= @view_model.reference
+
+  .samskip_label_addresses_container
+    %table.label_row
+      %thead
+        %tr
+          %th.label_column_for_sender Afsender
+          %th.label_column_for_recipient Modtager
+      %tbody
+        %tr
+          %td
+            - @view_model.sender.tap do |contact|
+              .company_name
+                = truncate(contact.company_name, length: 50)
+              .address_line1
+                = truncate(contact.address_line1, length: 50)
+              .address_line2
+                = truncate(contact.address_line2, length: 50)
+              .address_line3
+                = truncate(contact.address_line3, length: 50)
+              .city
+                = truncate(contact.city, length: 50)
+              .zip_code
+                = truncate(contact.zip_code, length: 50)
+              .country_name
+                = truncate(contact.country_name, length: 50)
+          %td
+            - @view_model.recipient.tap do |contact|
+              .company_name
+                = truncate(contact.company_name, length: 50)
+              .address_line1
+                = truncate(contact.address_line1, length: 50)
+              .address_line2
+                = truncate(contact.address_line2, length: 50)
+              .address_line3
+                = truncate(contact.address_line3, length: 50)
+              .city
+                = truncate(contact.city, length: 50)
+              .zip_code
+                = truncate(contact.zip_code, length: 50)
+              .country_name
+                = truncate(contact.country_name, length: 50)
+
+  .samskip_label_packages_container
+    %table.label_row
+      %thead
+        %tr
+          %th.label_column_for_package_amount Antal
+          %th.label_column_for_package_contents Indhold
+          %th.label_column_for_package_weight Vægt
+          %th.label_column_for_package_volume_weight CBM/LDM
+      %tbody
+        - @view_model.aggregated_package_dimensions.each do |aggr|
+          %tr.samskip_label_package_line
+            %td= aggr.amount
+            %td= @view_model.description
+            %td
+              = aggr.weight
+              kg
+            %td
+              = aggr.volume_weight.round(3)
+              = @view_model.volume_weight_unit
+        %tr.samskip_label_remarks_for_driver
+          %td{ colspan: 4 }
+            = @view_model.remarks || "REMARKS HERE"
+
+  .samskip_label_pallet_receipt_container
+    %h3.label_column_header Pallekvittering
+    %div.pallet_text
+      Samskip har afleveret
+      %span.underline_blank
+      1/1 EUR paller
+    %div.pallet_text
+      Samskip har modtaget
+      %span.underline_blank
+      1/1 EUR paller
+
+  .samskip_label_line-3_container
+    %table.label_row
+      %tbody
+        %tr
+          %td.label_column_50percent Nedenstående repræsentant for modtager kvitterer hermed for modtagelse af godset uden synlige skader eller mangler.
+          %td
+
+  .samskip_label_line-2_container
+    %table.label_row
+      %thead
+        %tr
+          %th.label_column_50percent Kvittering for modtagelse
+          %th Kvittering for afhentning
+      %tbody
+        %tr
+          %td
+          %td
+
+  .samskip_label_line-1_container
+    Transporten udføres i henhold til Lov om Fragtaftaler ved internationale Vejtransporter (CMR-loven), også for så vidt angår transporter, der alene sker mellem destinationer i Danmark. Samskip gor opmærksom på, at erstatningens størrelse for bortkomst eller beskadigelse ifolge CMR-Iovens §29 er begrænset til maks. 8,33 SDR pr. kg. beskadiget eller manglende bruttovægt.

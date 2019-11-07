@@ -1,0 +1,42 @@
+%header.page_header
+  %h1
+    Autobook Request
+    %small= "##{@autobook_request.uuid}"
+
+  %ul.page_actions
+    %li= link_to "Back", companies_shipment_path(@shipment), class: "secondary-btn"
+
+%h2
+  Shipment
+  = "##{@shipment.unique_shipment_id}"
+
+%table.shipments
+  %tr
+    %th Date
+    %th Product
+    %th Packages
+    %th AWB
+    %th State
+  %tr
+    %td= l(@shipment.shipping_date, format: :long)
+    %td= @shipment.carrier_product.name
+    %td= @shipment.number_of_packages
+    %td= render("components/shared/carrier_products/awb", shipment: @shipment)
+    %td.state{ class: @shipment.state }= ViewHelper::Shipments.state_name(@shipment.state)
+  - if @shipment.description.present?
+    %tr
+      %td{ colspan: "5" }= @shipment.description
+
+%h2 Request info
+
+%table.autobooking_requests.request_info
+  %tr
+    %th Date
+    %th State
+  %tr
+    %td= l(@autobook_request.created_at, format: :long)
+    %td.state{ class: @autobook_request.state }= ViewHelper::CarrierProductAutobookRequests.state_name(@autobook_request.state)
+  - if @autobook_request.info.present?
+    %tr
+      %td{ colspan: "2" }
+        = newline_html_formatted(@autobook_request.info)

@@ -1,0 +1,20 @@
+.billing_configuration_enable_container
+  %label.inline_label
+    = form.check_box :enabled, class: "boolean", data: { behavior: "billing_configuration_enable" }
+    Enable automatic billing
+
+.billing_configuration_settings_container{ data: { behavior: "billing_configuration_settings" } }
+  .billing_configuration_setting_container
+    %label.inline_label
+      Invoice
+      %strong= form.object.customer_recording.customer_name
+      every
+      = form.input_field :day_interval, as: :integer, class: "billing_configuration_day_interval_input", data: { behavior: "billing_configuration_day_interval_input" }
+      days.
+
+  .billing_configuration_setting_container
+    %label.inline_label
+      = form.check_box :with_detailed_pricing, class: "boolean"
+      With detailed pricing
+
+= form.submit "Save", class: "primary-btn"

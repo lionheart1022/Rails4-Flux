@@ -1,0 +1,12 @@
+%header.page_header
+  %h1 Edit Contact
+
+  %ul.page_actions
+    %li= link_to "Cancel", url_for(action: "show", id: @contact.id), class: "secondary-btn"
+
+= simple_form_for(@contact, url: url_for(action: "update", id: @contact.id), method: :put) do |form|
+  = render "form_fields", form: form
+
+  %ul.actions
+    %li.primary
+      = form.submit "Update"

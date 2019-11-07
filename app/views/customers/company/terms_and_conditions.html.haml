@@ -1,0 +1,16 @@
+- company = @view_model.company
+%h1 Terms and Conditions
+
+%table.files
+  %tr
+    %th Description
+    %th File
+    %th
+  - @view_model.company_assets.each do |asset|
+
+    %tr.file
+      %td= asset.description
+      %td= link_to(asset.attachment_file_name, asset.attachment.url, target: "_blank")
+      %td.delete_link
+      %td.loading_indicator{hidden: true}
+        = image_tag("admin/loading_indicator.gif", alt: "")

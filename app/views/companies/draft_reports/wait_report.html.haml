@@ -1,0 +1,7 @@
+%header.page_header
+  %h1
+    Create Report
+    %small Generating
+
+%div{ data: { behavior: "poll_and_redirect", behavior_config: JSON.generate(poll_url: in_progress_companies_draft_report_path(@draft_report, format: "json"), redirect_url: companies_draft_report_path(@draft_report)) } }
+  = image_tag("admin/loading_indicator.gif", alt: "")

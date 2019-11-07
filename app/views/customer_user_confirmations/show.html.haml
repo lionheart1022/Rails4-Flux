@@ -1,0 +1,15 @@
+%h1 Complete registration
+
+.padded You just need to pick a password before you can access CargoFlux.
+
+= simple_form_for @form, as: "user", url: customer_user_confirmation_path, method: :put, html: { class: "user_confirmation_password_form" } do |f|
+  = hidden_field_tag "confirmation_token", params[:confirmation_token]
+  = f.input :email do
+    = @user.email
+
+  .user_confirmation_password_form__password_inputs
+    = f.input :password
+    = f.input :password_confirmation
+
+  %ul.actions
+    %li.primary= f.submit "Done"

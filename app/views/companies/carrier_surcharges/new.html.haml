@@ -1,0 +1,15 @@
+%header.page_header
+  %h1
+    Surcharges
+    %small= @carrier.suffixed_name
+
+= simple_form_for @surcharge, as: :surcharge, url: companies_carrier_surcharges_path(@carrier), method: :post do |form|
+  = form.input :description, label: "Name", autofocus: true
+  = form.input :charge_value, label: "Value", input_html: { class: "cf_input surcharges_table__value_input" }
+  = form.input :calculation_method, as: :select, collection: Surcharge.calculation_method_options, label: "Value type", input_html: { class: "cf_input surcharges_table__value_type_input" }
+
+  %ul.actions
+    %li
+      = link_to "Cancel", companies_carrier_surcharges_path(@carrier)
+    %li.primary
+      = form.submit "Create"

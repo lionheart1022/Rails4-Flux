@@ -1,0 +1,4 @@
+%nav.nav-pills-container
+  %ul.nav-pills-list
+    %li= link_to "Users", companies_users_path, class: (active_nav == :company_users ? "nav-pill-active" : nil)
+    %li= link_to "Customer users", companies_all_customer_users_path, class: (active_nav == :customer_users ? "nav-pill-active" : nil)

@@ -1,0 +1,15 @@
+%tr.economic_product_row{ id: "economic_product_#{carrier_product.id}_row" }
+  %td= suffixed_name(name: carrier_product.name, company: carrier_product.owner_carrier_product.company)
+  %td
+    = select_tag(nil, options_from_collection_for_select(product_mapping.available_economic_products, "number", "option_name", product_mapping.product_number_incl_vat), include_blank: true, id: nil, data: { behavior: "replicate_on_change economic_product_select", replicate_value_to: "##{product_mapping.product_number_incl_vat_digest}" })
+    = economic_refresh_button
+  %td
+    = select_tag(nil, options_from_collection_for_select(product_mapping.available_economic_products, "number", "option_name", product_mapping.product_number_excl_vat), include_blank: true, id: nil, data: { behavior: "replicate_on_change economic_product_select", replicate_value_to: "##{product_mapping.product_number_excl_vat_digest}" })
+    = economic_refresh_button
+  %td.economic_product_row_actions
+    = form_for product_mapping, url: companies_v2_economic_carrier_product_path(carrier_product.id), method: :put, remote: true, html: { id: nil, class: "economic_product_submit_form" } do |f|
+      = f.hidden_field :product_number_incl_vat, id: product_mapping.product_number_incl_vat_digest
+      = f.hidden_field :product_number_excl_vat, id: product_mapping.product_number_excl_vat_digest
+      = f.button "Save", class: "primary-btn"
+    %span.economic_product_row_action_gap
+    = link_to "Cancel", cancel_edit_companies_v2_economic_carrier_product_path(carrier_product.id), remote: true, class: "economic_product_row_action_link"

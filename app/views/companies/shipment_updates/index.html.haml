@@ -1,0 +1,35 @@
+%header.page_header
+  %h1 Shipment Updates
+
+  - if Rails.env.development?
+    %ul.page_actions
+      %li= link_to "Upload new updates", new_companies_shipment_update_path, class: "primary-btn"
+
+= render "companies/shipment_updates/subnav", active_nav: :updates
+
+%table
+  %thead
+    %tr
+      %th{ width: "20%" } Created at
+      %th{ width: "15%" } Type
+      %th{ width: "40%" } File
+      %th Account
+  %tbody
+    - @carrier_feedback_files.each do |carrier_feedback_file|
+      %tr
+        %td= l carrier_feedback_file.created_at, format: :long
+        %td
+          - if carrier_feedback_file.configuration
+            = carrier_feedback_file.configuration.carrier_name
+          - else
+            = carrier_feedback_file.model_name.human
+        %td
+          = link_to carrier_feedback_file.original_filename.presence || "N/A", url_for(action: "show", id: carrier_feedback_file.id)
+        %td
+          - if carrier_feedback_file.configuration
+            = carrier_feedback_file.configuration.account_label
+          - else
+            \-
+
+.pagination
+  = paginate(@carrier_feedback_files)

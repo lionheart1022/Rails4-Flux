@@ -1,0 +1,17 @@
+@import "admin/mixins";
+
+button.link_button {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  color: $blue;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}

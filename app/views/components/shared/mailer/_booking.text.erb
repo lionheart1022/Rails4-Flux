@@ -1,0 +1,24 @@
+Date: <%= shipment.shipping_date.to_s %>
+Product: <%= shipment.carrier_product.name %>
+Shipment: #<%= shipment.unique_shipment_id %>
+
+Sender:
+<%= shipment.sender.as_text %>
+
+Recipient:
+<%= shipment.recipient.as_text %>
+
+<% if shipment.reference.present? %>Reference: <%= shipment.reference %><% end %>
+<% if shipment.remarks.present? %>Remarks: <%= shipment.remarks %><% end %>
+<% if shipment.description.present? %>Description: <%= shipment.description %><% end %>
+
+Packages: <%= shipment.package_dimensions.number_of_packages %>
+Total weight: <%= shipment.package_dimensions.total_weight %>kg
+Total volume weight: <%= shipment.package_dimensions.total_aggregated_and_rounded_volume_weight(3) %><%= shipment.carrier_product.volume_weight? ? "" : "ldm" %>
+
+Package dimensions:
+<% shipment.as_goods.tap do |goods| %>
+<% goods.ordered_lines.each_with_index do |line, index| %>
+#<%= index + 1 %>: <%= text_formatted_goods_line(line: line, goods: goods) %>
+<% end %>
+<% end %>

@@ -1,0 +1,9 @@
+%h2
+  Prices
+  %small
+    = "(#{rate_sheet.rate_snapshot["currency"]})"
+
+- if rate_sheet.rate_snapshot["version"] == "v2"
+  = render "admin/rate_sheets/detail_v2", rate_sheet: rate_sheet
+- else
+  = render "admin/rate_sheets/detail_v1", rate_sheet: rate_sheet # The initial view partial before zone groups were introduced

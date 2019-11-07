@@ -1,0 +1,19 @@
+- content_for :secondary_nav do
+  %ul.user_actions
+    %li= link_to("Sign out", destroy_user_session_path, method: :delete)
+
+%h1 Select account
+
+%ul
+  - if current_user.is_executive?
+    %li
+      %strong= link_to "EXEC", exec_path
+
+  - @user_access_list.customer_accesses.each do |customer_access|
+    %li
+      = link_to customers_shipments_path(current_customer_identifier: customer_access.params_identifier) do
+        %span= customer_access.customer.name
+        %span= "(#{customer_access.company.name})"
+
+  - if company = @user_access_list.company
+    %li= link_to company.name, companies_dashboard_path

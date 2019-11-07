@@ -1,0 +1,60 @@
+<header class="page-header">
+  <h1>
+    Carrier:
+    <strong><%= @carrier.name %></strong>
+    / Copy
+    <%= link_to "Cancel", url_for(action: "show"), class: "page-header-back-btn" %>
+  </h1>
+</header>
+
+<%= form_tag url_for(action: "create_copy") do %>
+  <div class="form-input-group">
+    <%= label_tag "carrier_copy_name", "Carrier name" %>
+    <%= text_field_tag "carrier_copy[name]", @carrier_copy.name, autofocus: true %>
+
+    <% @carrier_copy.errors.full_messages.each do |message| %>
+      <div class="form-input-error"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-input-group">
+    <%= label_tag "carrier_copy_company_id", "Company" %>
+    <%= select_tag "carrier_copy[company_id]", options_from_collection_for_select(available_companies_for_select, "id", "name", @carrier_copy.company_id), include_blank: true %>
+    <div class="form-input-hint">Select a company if the copy is only for a specific company.</div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="10%"></th>
+        <th width="40%"><%= @carrier_copy.name %> Product</th>
+        <th>Code</th>
+        <th></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @carrier_products.each_with_index do |carrier_product, index| %>
+        <% copy = @carrier_products_copy.fetch(index) %>
+        <tr>
+          <td></td>
+          <td>
+            <%= hidden_field_tag "carrier_copy[products][#{index}][original_product_id]", carrier_product.id, id: nil %>
+            <%= text_field_tag "carrier_copy[products][#{index}][name]", copy.name, class: "plain-form-input" %>
+          </td>
+          <td>
+            <%= text_field_tag "carrier_copy[products][#{index}][product_code]", copy.product_code, class: "plain-form-input" %>
+          </td>
+          <td>
+            <% copy.errors.full_messages.each do |message| %>
+              <div class="plain-form-input-error"><%= message %></div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="form-actions form-actions--without-border">
+    <%= button_tag "Copy", type: "submit", class: "form-primary-submit-btn" %>
+  </div>
+<% end %>

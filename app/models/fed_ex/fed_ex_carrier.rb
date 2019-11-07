@@ -1,0 +1,2 @@
+class FedExCarrier < Carrier
+end

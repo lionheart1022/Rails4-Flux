@@ -1,0 +1,96 @@
+.page_header.with_table_below
+  %h1
+    %span= "Shipment ##{@view_model.unique_shipment_id}"
+    %small= @view_model.customer_name if @view_model.show_customer_name?
+
+  %ul.page_actions
+    - if @view_model.editable?
+      %li.primary= link_to("Cancel booking", url_for(action: "cancel", controller: "ferry_bookings"), class: "primary-btn", method: :patch, data: { confirm: "Are you sure you want to cancel this ferry booking?" })
+      %li.primary= link_to("Edit booking", url_for(action: "edit", controller: "shipments"), class: "primary-btn")
+    - elsif @view_model.in_progress?
+      %li
+        %em Booking is in progress&hellip;
+
+%table.shipments
+  %tr
+    %th State
+    %th Date
+    %th Product
+    %th Route
+    - if @view_model.show_price?
+      %th Price
+    %th Waybill
+
+  %tr
+    %td.state{ :class => @view_model.shipment_state }= ViewHelper::Shipments.state_name(@view_model.shipment_state)
+    %td= @view_model.shipping_date
+    %td= @view_model.carrier_product_name
+    %td= @view_model.route_name
+    - if @view_model.show_price?
+      %td= @view_model.price_with_currency
+    %td
+      %div= @view_model.waybill
+      - if @view_model.additional_info_from_response.present?
+        %div
+          %strong Additional info
+          %em= @view_model.additional_info_from_response
+
+%h2 Truck
+
+%table
+  %tr
+    %th Type
+    %th Length (m)
+    %th Truck reg. no
+    %th Trailer reg. no
+    %th With driver
+
+  %tr
+    %td= @view_model.truck_type
+    %td= @view_model.truck_length
+    %td= @view_model.truck_registration_number
+    %td= @view_model.trailer_registration_number
+    %td
+      - if @view_model.with_driver?
+        ✓
+
+%h2 Cargo
+
+%table
+  %tr
+    %th Goods
+    %th Cargo weight
+
+  %tr
+    %td= @view_model.description_of_goods
+    %td
+      - if @view_model.empty_cargo?
+        Empty
+      - else
+        = @view_model.formatted_cargo_weight
+
+- if @view_model.additional_info.present?
+  %h3 Additional info
+  .padded.reset_font_size
+    = simple_format @view_model.additional_info
+
+- if @view_model.reference.present?
+  %h3 Reference
+  .padded
+    = @view_model.reference
+
+%h2 Events
+
+%table
+  %tr
+    %th{ width: 200 } Date
+    %th{ width: 200 } Event
+    %th Details
+
+  - @view_model.events.each do |event|
+    %tr
+      %td= local_time(event.created_at, format: "%e %B - %Y - %H:%M (%Z)")
+      %td= event.human_friendly_label
+      %td
+        %div.event_details= ferry_booking_event_details(event)
+        %div.event_initiator= event.initiator_label

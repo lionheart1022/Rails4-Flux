@@ -1,0 +1,21 @@
+%header.page_header
+  %h1
+    Invoice validation
+  %ul.page_actions
+    %li= link_to "Back", new_companies_invoice_validation_path
+
+.flex-column
+  .half-width-column
+    = form_for @invoice_validation, url: companies_invoice_validation_path, method: :put, html: { class: 'simple_form' } do |f|
+      = f.label :name, 'File name'
+      = f.text_field :name, multiple: false, class: "string", disabled: true
+      .invoice-validation-column-field
+        = f.label :shipment_id_column, '*ID (Shipment ID or tracking number)'
+        = f.select :shipment_id_column, @invoice_validation.header_row.compact.invert.to_a, { include_blank: false }
+      .invoice-validation-column-field
+        = f.label :cost_column, '* Actual cost'
+        = f.select :cost_column, @invoice_validation.header_row.compact.invert.to_a, { include_blank: false }
+      = f.submit "Validate", class: "primary-btn"
+
+  .half-width-column
+    = render "instructions_text"

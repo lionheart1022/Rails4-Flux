@@ -1,0 +1,40 @@
+.page_actions
+  %h1 Configure e-conomic
+
+%h3 Note: CargoFlux are now creating E-Conomic invoices based on your e-conomic configuration. If you want to configure terms of payment or invoice layout you need to do it in your E-Conomic account.
+
+%h2 Product for shipments excluding VAT
+
+%table
+  %tr
+    %th Id
+    %th Name
+    %th{ colspan: 2 } Product Group
+  - @view_model.products.each do |obj|
+    %tr
+      %td.id= obj.id
+      %td= obj.name
+      %td= obj.product_group
+      %td.actions
+        - if obj.id.to_i == @view_model.setting.product_number_ex_vat.to_i
+          Active
+        - else
+          = link_to("Choose", companies_economic_path(product_number_ex_vat: obj.id, product_name_ex_vat: obj.name), method: :patch)
+
+%h2 Product for shipments including VAT
+
+%table
+  %tr
+    %th Id
+    %th Name
+    %th{ colspan: 2 } Product Group
+  - @view_model.products.each do |obj|
+    %tr
+      %td.id= obj.id
+      %td= obj.name
+      %td= obj.product_group
+      %td.actions
+        - if obj.id.to_i == @view_model.setting.product_number_inc_vat.to_i
+          Active
+        - else
+          = link_to("Choose", companies_economic_path(product_number_inc_vat: obj.id, product_name_inc_vat: obj.name), method: :patch)

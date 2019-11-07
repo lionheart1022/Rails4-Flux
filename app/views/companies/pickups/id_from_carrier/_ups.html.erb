@@ -1,0 +1,7 @@
+<form action="https://wwwapps.ups.com/pickup/processpending?loc=da_DK" method="post" target="_blank">
+  <input type="hidden" name="ordernumber" value="<%= pickup.response_from_carrier['prn'] %>">
+  <button type="submit" name="SUBMIT_BUTTON_PRN" value="Send" class="button-as-plain-link">
+    <span class="with-underline"><%= pickup.response_from_carrier['prn'] %></span>
+    <span>↗</span>
+  </button>
+</form>

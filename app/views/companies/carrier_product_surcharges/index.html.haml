@@ -1,0 +1,35 @@
+%header.page_header
+  %h1
+    Surcharges
+    %small= @carrier_product.suffixed_name
+
+= form_tag bulk_update_companies_carrier_product_surcharges_path(@carrier_product), method: :patch, class: "surcharges_table__form" do
+  %table.surcharges_table
+    %tbody
+      - @carrier_product.list_all_surcharges.each_with_index do |surcharge, index|
+        = fields_for "bulk_update[surcharges]", surcharge, index: index do |surcharge_fields|
+          %tr
+            %td.surcharges_table__toggle_switch_cell
+              = surcharge_fields.hidden_field :id
+              = surcharge_fields.hidden_field :parent_id
+
+              %label.toggle-switch
+                = surcharge_fields.check_box :enabled
+                %span.toggle-switch-slider
+            %td.surcharges_table__name_cell
+              - if surcharge_fields.object.surcharge.default_surcharge?
+                = surcharge_fields.object.description
+              - else
+                %em= surcharge_fields.object.description
+
+              - if surcharge_fields.object.surcharge.carrier_feedback_surcharge?
+                %span{ title: "Applied once updates are received from carrier." } ℹ
+            %td.surcharges_table__value_cell
+              = surcharge_fields.text_field :charge_value, class: "cf_input surcharges_table__value_input"
+              = surcharge_fields.select :calculation_method, Surcharge.calculation_method_options, {}, { class: "cf_input surcharges_table__value_type_input", disabled: surcharge_fields.object.surcharge.calculated_method_locked_to.present? }
+
+  %ul.actions
+    %li
+      = link_to "Cancel", companies_carrier_surcharges_path(@carrier)
+    %li.primary
+      = submit_tag "Save"

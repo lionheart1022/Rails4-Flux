@@ -1,0 +1,180 @@
+@import "admin/mixins";
+
+.dashboard_filters {
+  border-radius: 4px;
+  height: 50px;
+
+  .filter_container {
+    display: inline-block;
+    width: 33.3%;
+    vertical-align: top;
+  }
+
+  .filter {
+    background: #fff;
+    border-radius: 4px;
+    margin-right: 2px;
+    box-sizing: border-box;
+    position: relative;
+
+    .filter_label {
+      color: #0b1338;
+      font-weight: bold;
+      cursor: pointer;
+      height: 50px;
+      line-height: 50px;
+      position: relative;
+
+      .text {
+        margin-left: 10px;
+
+        .option_label {
+          margin-right: 4px;
+        }
+      }
+
+      .arrow {
+        background: image-url("admin/up-down-arrows-14.png") no-repeat right center;
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 0;
+        height: 50px;
+        width: 14px;
+      }
+    }
+
+    .filter_options {
+      display: none;
+    }
+
+    &.active {
+      border-right: none;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #888888;
+      z-index: 4;
+
+      .filter_options {
+        display: block;
+      }
+
+      .filter_label .arrow {
+        background-position: left center;
+      }
+    }
+  }
+
+  .filter_container:last-child .filter {
+    margin-right: 0;
+  }
+
+  .period_filter {
+    ul.predefined_periods {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        cursor: default;
+        line-height: 32px;
+        padding: 0 10px;
+      }
+
+      li:hover {
+        background: #ffb;
+      }
+    }
+
+    .custom_period {
+      border-top: 2px solid #888;
+      padding: 10px;
+
+      .explanation {
+        margin: 0 0 10px;
+      }
+    }
+
+    .date_field {
+      label {
+        display: block;
+        margin: 10px 0 0;
+        position: relative;
+      }
+
+      label,
+      .date_field_label,
+      .date_field_input_container input {
+        height: 24px;
+        line-height: 24px;
+      }
+
+      .date_field_label {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60px;
+      }
+
+      .date_field_input_container {
+        display: block;
+        padding-left: 70px;
+      }
+
+      .date_field_input_container span.date_range_picker_wrapper {
+        display: block;
+      }
+
+      .date_field_input_container input {
+        @include font_maven_pro;
+
+        background: #f3f3f5;
+        border: none;
+        box-sizing: border-box;
+        display: block;
+        margin: 0;
+        padding: 0 4px;
+        width: 100%;
+      }
+    }
+  }
+
+  .autocomplete_filter {
+    .search_field {
+      background: #f3f3f5;
+
+      input {
+        @include font_maven_pro;
+
+        border: none;
+        box-sizing: border-box;
+        background: none;
+        font-size: 14px;
+        line-height: 32px;
+        padding: 0 10px;
+        height: 32px;
+        width: 100%;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    ul.autocomplete_options {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        cursor: default;
+        line-height: 32px;
+        padding: 0 10px;
+      }
+
+      li:hover {
+        background: #ffb;
+      }
+    }
+  }
+}

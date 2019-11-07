@@ -1,0 +1,2 @@
+class DHLSubCarrierProductAutobookRequest < CarrierProductAutobookRequest
+end

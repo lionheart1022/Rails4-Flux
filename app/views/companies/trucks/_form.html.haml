@@ -1,0 +1,6 @@
+= simple_form_for [:companies, truck] do |form|
+  = form.input :name, autofocus: true
+  = form.association :default_driver, collection: form.object.available_truck_drivers
+
+  %ul.actions
+    %li.primary= form.submit

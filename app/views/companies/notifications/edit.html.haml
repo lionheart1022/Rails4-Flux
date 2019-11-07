@@ -1,0 +1,99 @@
+%h1 Email Settings
+
+.padded Control which emails you receive, when something changes on a shipment or a pickup.
+
+= simple_form_for(@email_settings, as: :email_settings, url: companies_notification_path, method: :patch) do |f|
+  %h2 Shipments
+  %table.notification_settings
+    %tr
+      %th.event Event
+      %th.description Description
+      %th.enable
+        %label.checkbox
+          = check_box_tag nil, "1", false, class: "boolean", data: { behavior: "toggle_all_notifications" }, style: "display: none"
+    %tr
+      %td Created
+      %td A shipment is created and ready to be booked
+      %td.enable= f.input_field :create, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Booked
+      %td A shipment has been booked with the carrier
+      %td.enable= f.input_field :book, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Booked with warnings
+      %td A shipment was automatically booked, but there were one or more warnings
+      %td.enable= f.input_field :autobook_with_warnings, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td In Transit
+      %td A shipment is in transit to the destination
+      %td.enable= f.input_field :ship, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Delivered
+      %td A shipment has been delivered at the destination
+      %td.enable= f.input_field :delivered, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Problem
+      %td There was a problem with a shipment
+      %td.enable= f.input_field :problem, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Canceled
+      %td The shipment has been cancelled
+      %td.enable= f.input_field :cancel, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Comment
+      %td There’s a new comment regarding the shipment
+      %td.enable= f.input_field :comment, as: :boolean, data: { behavior: "notification_setting" }
+
+  - if current_company.ferry_routes_available?
+    %h2 Ferry bookings
+
+    %table.notification_settings
+      %tr
+        %th.event Event
+        %th.description Description
+        %th.enable
+      %tr
+        %td Booked
+        %td Ferry booking was successfully booked
+        %td.enable= f.input_field :ferry_booking_booked, as: :boolean, data: { behavior: "notification_setting" }
+      %tr
+        %td Failed
+        %td Ferry booking failed
+        %td.enable= f.input_field :ferry_booking_failed, as: :boolean, data: { behavior: "notification_setting" }
+
+  %h2 RFQ
+  %table.notification_settings
+    %tr
+      %th.event Event
+      %th.description Description
+      %th.enable
+    %tr
+      %td Created
+      %td RFQ has been created
+      %td.enable= f.input_field :rfq_create, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Accepted
+      %td RFQ has been accepted
+      %td.enable= f.input_field :rfq_accept, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Declined
+      %td RFQ has been declined
+      %td.enable= f.input_field :rfq_decline, as: :boolean, data: { behavior: "notification_setting" }
+    %tr
+      %td Canceled
+      %td RFQ has been canceled
+      %td.enable= f.input_field :rfq_cancel, as: :boolean, data: { behavior: "notification_setting" }
+
+  %h2 Pickups
+  %table.notification_settings
+    %tr
+      %th.event Event
+      %th.description Description
+      %th.enable
+    %tr
+      %td Created
+      %td A Pickup is created and ready to be booked
+      %td.enable= f.input_field :pickup_create, as: :boolean, data: { behavior: "notification_setting" }
+
+  %ul.actions
+    %li.primary= f.submit "Save"

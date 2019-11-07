@@ -1,0 +1,42 @@
+<header class="page-header">
+  <h1>Users</h1>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td></td>
+      <td>
+        <%= form_for @user_search, as: :search, url: url_for(), method: :get, html: { id: nil, class: "inline-form" } do |form| %>
+          <%= form.text_field :email, placeholder: "Find by email", size: 50 %>
+          <%= form.submit "Search", name: nil %>
+        <% end %>
+      </td>
+      <td></td>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td>
+          <%= user.email %>
+          <% if user.is_executive? %>
+            <span class="label_user-is-executive">EXEC</span>
+          <% end %>
+        </td>
+        <td class="show-btn-cell">
+          <%= link_to "Show", exec_user_path(user), class: "show-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>

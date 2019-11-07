@@ -1,0 +1,2 @@
+class GeodisCarrier < Carrier
+end

@@ -1,0 +1,10 @@
+%tr.economic_product_row{ id: "economic_product_#{carrier_product.id}_row" }
+  %td= suffixed_name(name: carrier_product.name, company: carrier_product.owner_carrier_product.company)
+  %td
+    = product_mapping.product_number_incl_vat if product_mapping.product_number_incl_vat?
+    = product_mapping.product_name_incl_vat if product_mapping.product_name_incl_vat?
+  %td
+    = product_mapping.product_number_excl_vat if product_mapping.product_number_excl_vat?
+    = product_mapping.product_name_excl_vat if product_mapping.product_name_excl_vat?
+  %td.economic_product_row_actions
+    = link_to "Edit", edit_companies_v2_economic_carrier_product_path(carrier_product.id), remote: true, class: "economic_product_row_action_link"

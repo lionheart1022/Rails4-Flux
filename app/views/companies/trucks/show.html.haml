@@ -1,0 +1,17 @@
+%header.page_header
+  %h1
+    Truck
+    %small= @truck.name
+
+  %ul.page_actions
+    %li= link_to("All trucks", companies_trucks_path)
+
+= render "form", truck: @truck
+
+%hr.dashed-separator
+
+.destroy_btn_container
+  - if @truck.enabled?
+    = link_to "Delete truck", companies_truck_path(@truck), method: :delete, data: { confirm: "Are you sure?" }, class: "destroy_btn"
+  - else
+    This truck has been deleted.

@@ -1,0 +1,30 @@
+.margin_config__weight_header,
+.margin_config__weight_cell {
+  background: #F5F3F6;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.margin_config__weight_header {
+  width: 100px;
+}
+
+.margin_config__cost_header,
+.margin_config__margin_header {
+  width: 250px;
+}
+
+.margin_config__weight_cell {
+  .weight_value {
+    font-weight: bold;
+  }
+}
+
+.margin_config__value_input {
+  width: 50px;
+  text-align: right;
+}
+
+.margin_config__select_zone_countries {
+  margin: 20px 0;
+}

@@ -1,0 +1,8 @@
+#company_logo__attachment_container.company_settings__logo_container
+  - if current_company.asset_logo.present?
+    .company_settings__logo_img_container
+      = image_tag current_company.asset_logo.attachment.url
+    %div
+      = link_to(current_company.asset_logo.attachment_file_name, current_company.asset_logo.attachment.url, target: "_blank", class: "company_settings__logo_link")
+  - else
+    %em.company_settings__no_logo You haven't uploaded a company logo yet.

@@ -1,0 +1,52 @@
+%h2 Items
+
+- view_model.shipment.as_goods.tap do |goods|
+  %table.shipment_view_goods_lines__table
+    %tr
+      %th.shipment_view_goods_lines__index_cell
+      %th Amount
+      %th
+      %th Length
+      %th Width
+      %th Height
+      %th= view_model.shipment.carrier_product.volume_weight? ? "Volume weight" : "Loading meter"
+      %th Weight
+      %th{ width: 100 }
+    - goods.ordered_lines.each_with_index do |line, idx|
+      %tr
+        %td.shipment_view_goods_lines__index_cell
+          = "# #{idx+1}"
+        %td
+          = line.quantity
+          = line.goods_identifier
+        %td.shipment_view_goods_lines__times_cell
+          &times;
+        %td
+          = number_with_precision(line.length, precision: 2, strip_insignificant_zeros: true)
+          = goods.dimension_unit
+        %td
+          = number_with_precision(line.width, precision: 2, strip_insignificant_zeros: true)
+          = goods.dimension_unit
+        %td
+          = number_with_precision(line.height, precision: 2, strip_insignificant_zeros: true)
+          = goods.dimension_unit
+        %td
+          - if line.volume_weight
+            = number_with_precision(line.volume_weight, precision: 3)
+            = "ldm" if goods.volume_type == "loading_meter"
+        %td
+          = number_with_precision(line.weight, precision: 2)
+          = goods.weight_unit
+        %td
+          - if line.non_stackable?
+            ✔ Do not stack
+    %tr.shipment_view_goods_lines__total_row
+      %td.shipment_view_goods_lines__index_cell Total
+      %td{ colspan: 5 }
+      %td
+        = number_with_precision(goods.total_volume_weight, precision: 3)
+        = "ldm" if goods.volume_type == "loading_meter"
+      %td
+        = number_with_precision(goods.total_weight, precision: 2)
+        = goods.weight_unit
+      %td

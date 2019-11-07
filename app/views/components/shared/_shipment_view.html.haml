@@ -1,0 +1,46 @@
+.shipment
+  .page_actions
+    %h1.main_header= "Shipment ##{@view_model.shipment.unique_shipment_id}"
+    %div.shipment_company_name_container
+      %h3.shipment_company_name= @view_model.shipment.customer_name_for_company(company_id: current_company.id) if @view_model.show_customer_name
+
+      - if @view_model.show_action
+        %ul.actions
+          %li.primary= link_to(@view_model.cancel_button_text, @view_model.cancel_url, method: :put, confirm: @view_model.cancel_confirmation_text) if @view_model.can_retry
+          %li.primary= link_to(@view_model.action_text, @view_model.action_url)
+      - if @view_model.show_search
+        = render partial: "components/shared/search_view", locals: { view_model: @view_model }
+
+      - if @view_model.show_edit?
+        %ul.actions
+          %li.primary= link_to("Edit Shipment", edit_companies_shipment_path(@view_model.shipment))
+
+
+  = render partial: "components/shared/shipments/shipment_and_state_change", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/errors", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/warnings", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/autobook", locals: { view_model: @view_model }
+  - if @view_model.show_price
+    = render partial: "components/shared/shipments/pricing", locals: { view_model: @view_model, rfq: false }
+    = render partial: "components/shared/shipments/advanced_pricing", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/dangerous_goods", locals: { view_model: @view_model } if @view_model.shipment.dangerous_goods?
+  = render partial: "components/shared/shipments/customs", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/files", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/addresses", locals: { view_model: @view_model, heading: 'Addresses', sender: @view_model.shipment.sender, recipient: @view_model.shipment.recipient }
+  = render partial: "components/shared/shipments/truck_and_driver", locals: { view_model: @view_model } if @view_model.allow_truck_and_driver_editing
+  = render partial: "components/shared/shipments/internal_note", locals: { shipment: @view_model.shipment }
+
+  - if @view_model.allow_history_references
+    = render(partial: "components/shared/history_with_references", locals: { view_model: @view_model, heading: 'History', data: @view_model.shipment_events, event_formatter: ViewHelper::Shipments })
+  - else
+    = render(partial: "components/shared/history", locals: { view_model: @view_model, heading: 'History', data: @view_model.shipment_events, event_formatter: ViewHelper::Shipments })
+
+  = render partial: "components/shared/shipments/items", locals: { view_model: @view_model }
+
+// Progressbar template begin
+%script#template-upload{ type: "text/x-tmpl" }
+  .upload{ :id => "upload_{%=o.unique_id%}" }
+    %h5= "{%=o.name%}"
+    .progress.progress-striped.active
+      .bar{ style: "width: 0%" }
+// Progressbar template end

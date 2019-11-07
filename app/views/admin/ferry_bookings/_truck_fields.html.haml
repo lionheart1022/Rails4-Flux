@@ -1,0 +1,12 @@
+%h2 Truck
+.form_pane
+  = form.input :truck_type, as: :select, collection: form.object.truck_type_options, input_html: { class: "truck_type_select", data: { behavior: "ferry_booking_truck_type_select", behavior_config: { truck_type_default_lengths: form.object.truck_type_default_lengths } } }
+
+  .multi_field_group.truck_length_field
+    = form.input :truck_length, label: "Length (m)", input_html: { data: { behavior: "ferry_booking_truck_length" } }
+
+  .multi_field_group.truck_reg_number_fields
+    = form.input :truck_registration_number
+    = form.input :trailer_registration_number
+
+  = form.input :with_driver, as: :boolean

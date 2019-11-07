@@ -1,0 +1,55 @@
+%header.page_header
+  %h1 Contact
+
+  %ul.page_actions
+    %li
+      = link_to("All contacts", url_for(action: "index"))
+    %li
+      = link_to "Edit", url_for(action: "edit", id: @contact.id), class: "secondary-btn"
+
+.padded
+  Last modified
+  = time_ago_in_words(@contact.updated_at)
+  ago.
+
+%dl
+  %dt Company name
+  %dd= @contact.company_name
+
+  %dt Attention
+  %dd= @contact.attention
+
+  %dt Address line 1
+  %dd= @contact.address_line1
+
+  %dt Address line 2
+  %dd= @contact.address_line2
+
+  %dt Address line 3
+  %dd= @contact.address_line3
+
+  %dt Zip code
+  %dd= @contact.zip_code
+
+  %dt City
+  %dd= @contact.city
+
+  %dt Country
+  %dd= @contact.country_name
+
+  - if @contact.state_name
+    %dt State
+    %dd= @contact.state_name
+
+  %dt Email
+  %dd= @contact.email
+
+  %dt Phone number
+  %dd= @contact.phone_number
+
+  - if @contact.residential?
+    %dt Residential
+    %dd ✔
+
+.detail_page_delete_section
+  = link_to("Delete", url_for(action: "destroy", id: @contact.id), method: :delete, data: { confirm: "Are you sure? This cannot be undone." }, class: "detail_page_delete_button")

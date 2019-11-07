@@ -1,0 +1,42 @@
+%header.page_header
+  %h1
+    Truck drivers
+    %small= @truck_driver.name
+
+  %ul.page_actions
+    %li= link_to("All truck drivers", companies_truck_drivers_path)
+
+%h2 Sessions
+
+%table
+  %thead
+    %tr
+      %th #
+      %th Created at
+      %th Expired at
+      %th Platform
+  %tbody
+    - @token_sessions.each do |token_session|
+      %tr
+        %td
+          = token_session.id
+        %td
+          = l token_session.created_at, format: :long
+        %td
+          - if token_session.expired_at?
+            = l token_session.expired_at, format: :long
+            \-
+            %em
+              = token_session.expiration_reason
+          - else
+            \-
+        %td
+          = token_session.metadata["platform"]
+
+%hr.dashed-separator
+
+.destroy_btn_container
+  - if @truck_driver.user
+    = link_to "Delete user #{@truck_driver.user.email}", companies_truck_driver_user_path(@truck_driver), method: :delete, data: { confirm: "Are you sure?" }, class: "destroy_btn"
+  - else
+    This truck driver has no user associated.

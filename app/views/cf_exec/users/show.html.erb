@@ -1,0 +1,75 @@
+<header class="page-header">
+  <h1>User: <strong><%= @user.email %></strong></h1>
+</header>
+
+<h2>Feature flags</h2>
+
+<table>
+  <tbody>
+    <% FeatureFlag.all_options_for_user(@user).each do |feature_flag| %>
+      <tr>
+        <td class="feature-flag-identifier-cell"><%= feature_flag.identifier %></td>
+        <td class="feature-flag-toggler-cell">
+          <% if feature_flag.persisted? %>
+            <%= form_tag exec_user_feature_path(@user, feature_flag.identifier), method: :delete, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+              <%= hidden_field_tag "feature[identifier]", feature_flag.identifier, id: nil %>
+
+              <label class="toggle-switch">
+                <%= check_box_tag nil, "1", true %>
+                <span class="toggle-switch-slider"></span>
+              </label>
+            <% end %>
+          <% else %>
+            <%= form_tag exec_user_features_path(@user), method: :post, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+              <%= hidden_field_tag "feature[identifier]", feature_flag.identifier, id: nil %>
+
+              <label class="toggle-switch">
+                <%= check_box_tag nil, "1", false %>
+                <span class="toggle-switch-slider"></span>
+              </label>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Notifications</h2>
+
+<% if @user_view.email_settings %>
+  <table class="user-notification-table">
+    <tbody>
+      <% @user_view.notifications.each do |key, value| %>
+        <tr>
+          <td class="user-notification-key-cell">
+            <span title="<%= key %>"><%= key.humanize %></span>
+          </td>
+          <td class="user-notification-toggler-cell">
+            <% if value %>
+              <%= form_tag exec_user_notification_setting_path(@user, key), method: :delete, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+                <label class="toggle-switch">
+                  <%= check_box_tag nil, "1", true %>
+                  <span class="toggle-switch-slider"></span>
+                </label>
+              <% end %>
+            <% else %>
+              <%= form_tag exec_user_notification_settings_path(@user), method: :post, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+                <%= hidden_field_tag "key", key, id: nil %>
+
+                <label class="toggle-switch">
+                  <%= check_box_tag nil, "1", false %>
+                  <span class="toggle-switch-slider"></span>
+                </label>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @user_view.any_notifications? %>
+    <p><%= link_to "Disable all notifications", exec_user_notification_path(@user), method: :delete, class: "delete-btn", data: { confirm: "Are you sure?" }  %></p>
+  <% end %>
+<% end %>

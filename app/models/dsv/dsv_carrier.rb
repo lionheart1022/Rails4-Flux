@@ -1,0 +1,2 @@
+class DSVCarrier < Carrier
+end

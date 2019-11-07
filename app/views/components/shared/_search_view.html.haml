@@ -1,0 +1,11 @@
+.search
+  .page-actions
+    - if @view_model.show_header
+      %h1 Shipments - Search
+
+    = simple_form_for :search, { url: @view_model.search_url, method: :get } do |f|
+      = f.input :query, label: false, placeholder: 'AWB, reference or shipment ID'
+      %ul.actions
+        %li.primary
+          = f.submit 'Search'
+

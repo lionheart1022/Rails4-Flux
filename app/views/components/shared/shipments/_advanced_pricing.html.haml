@@ -1,0 +1,51 @@
+- if view_model.show_price_calculation?
+  %h2 Pricing
+
+  %table.advanced_pricing
+    %tr
+      %th #
+      %th Description
+      %th Parameters
+      - if view_model.show_admin_price
+        %th Cost price
+      %th Sales price
+      - if view_model.show_admin_price
+        %th Profit
+      - if view_model.show_manual_pricing?
+        %th
+    - view_model.sorted_prices.each_with_index do |line_item, idx|
+      %tr
+        %input.id{:type => "hidden", value: line_item.id}
+        %input.shipment_id{:type => "hidden", value: view_model.shipment.id}
+        %input.description{:type => "hidden", value: line_item.description}
+        - if view_model.show_admin_price
+          %input.cost_price_amount{:type => "hidden", value: line_item.cost_price_amount}
+        %input.sales_price_amount{:type => "hidden", value: line_item.sales_price_amount}
+
+        %td= idx+1
+        %td
+          = view_model.format_line_item(line_item)
+        %td
+          = view_model.format_line_item_parameters(line_item.parameters) unless line_item.parameters.empty?
+        - if view_model.show_admin_price
+          %td= number_to_currency(line_item.cost_price_amount, unit: view_model.advanced_price.cost_price_currency || '', format: '%u %n')
+
+        %td= number_to_currency(line_item.sales_price_amount, unit: view_model.advanced_price.sales_price_currency || '', format: '%u %n')
+
+        - if view_model.show_admin_price
+          %td= number_to_currency(line_item.profit_amount, unit: view_model.advanced_price.sales_price_currency || '', format: '%u %n')
+        - if view_model.show_manual_pricing?
+          %td
+            %a.edit_shipment_price_line{ data: { update_url: set_sales_price_companies_shipment_price_path(view_model.shipment.id, line_item.id) } } Edit
+            = link_to 'Remove', companies_shipment_price_path(view_model.shipment.id, view_model.advanced_price.id, line_item_id: line_item.id), method: :delete, :data => {:confirm => 'Removing price line. Are you sure?'}
+    %tr
+      %td
+      %td Total
+      %td
+      - if view_model.show_admin_price
+        %td= number_to_currency(view_model.advanced_price.total_cost_price_amount, unit: view_model.advanced_price.cost_price_currency || '', format: '%u %n')
+      %td= number_to_currency(view_model.advanced_price.total_sales_price_amount, unit: view_model.advanced_price.sales_price_currency || '', format: '%u %n')
+      - if view_model.show_admin_price
+        %td= number_to_currency(view_model.advanced_price.total_profit_amount, unit: view_model.advanced_price.sales_price_currency || '', format: '%u %n')
+      - if view_model.show_manual_pricing?
+        %td

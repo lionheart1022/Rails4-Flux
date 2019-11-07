@@ -1,0 +1,46 @@
+:javascript
+  window.rfq = true
+
+.shipment
+  .page_actions
+    %h1.main_header= "RFQ ##{@view_model.shipment.unique_shipment_id}"
+    %div.shipment_company_name_container
+      %h3.shipment_company_name= "#{@view_model.shipment.customer.name}" if @view_model.show_customer_name
+
+      / Customer actions
+      = button_to("Accept", customers_shipment_request_path(@view_model.shipment.shipment_request), method: :put, params: { "shipment_request[state]" => ShipmentRequest::States::ACCEPTED }, class: "primary-btn") if @view_model.show_accept?
+      = button_to("Decline", customers_shipment_request_path(@view_model.shipment.shipment_request), method: :put, params: { "shipment_request[state]" => ShipmentRequest::States::DECLINED }, class: "primary-btn") if @view_model.show_decline?
+      = button_to("Cancel", customers_shipment_request_path(@view_model.shipment.shipment_request), method: :put, params: { "shipment_request[state]" => ShipmentRequest::States::CANCELED }, class: "primary-btn") if @view_model.show_customer_cancel?
+      - if @view_model.current_customer_id
+        %span.new_rfq_based_on_this_container
+          = link_to("New RFQ based on this", new_customers_shipment_request_path(existing_shipment_id: @view_model.shipment.id), class: "primary-btn")
+      - else
+        %span.new_rfq_based_on_this_container
+          = link_to("New RFQ based on this", new_companies_shipment_request_path(existing_shipment_id: @view_model.shipment.id), class: "primary-btn")
+
+      / Company actions
+      = button_to("Propose", companies_shipment_request_path(@view_model.shipment.shipment_request), method: :put, params: { "shipment_request[state]" => ShipmentRequest::States::PROPOSED }, class: "primary-btn") if @view_model.show_propose?
+      = button_to("Cancel", companies_shipment_request_path(@view_model.shipment.shipment_request), method: :put, params: { "shipment_request[state]" => ShipmentRequest::States::CANCELED }, class: "primary-btn") if @view_model.show_company_cancel?
+      = button_to("Book", book_companies_shipment_request_path(@view_model.shipment.shipment_request), method: :put, class: "primary-btn") if @view_model.show_book?
+
+  = render partial: "components/shared/shipment_requests/shipment_and_state_change", locals: { view_model: @view_model }
+  - if @view_model.show_price
+    = render partial: "components/shared/shipments/pricing", locals: { view_model: @view_model, rfq: true }
+    = render partial: "components/shared/shipments/advanced_pricing", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/customs", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/files", locals: { view_model: @view_model }
+  = render partial: "components/shared/shipments/addresses", locals: { view_model: @view_model, heading: 'Addresses', sender: @view_model.shipment.sender, recipient: @view_model.shipment.recipient }
+
+  = render partial: "components/shared/shipments/internal_note", locals: { shipment: @view_model.shipment }
+
+  = render(partial: "components/shared/history", locals: { view_model: @view_model, heading: 'History', data: @view_model.events, event_formatter: ViewHelper::ShipmentRequests })
+
+  = render partial: "components/shared/shipments/items", locals: { view_model: @view_model }
+
+// Progressbar template begin
+%script#template-upload{ type: "text/x-tmpl" }
+  .upload{ :id => "upload_{%=o.unique_id%}" }
+    %h5= "{%=o.name%}"
+    .progress.progress-striped.active
+      .bar{ style: "width: 0%" }
+// Progressbar template end

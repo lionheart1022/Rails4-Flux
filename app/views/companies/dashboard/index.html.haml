@@ -1,0 +1,24 @@
+= react_component("CompanyDashboard", Jbuilder.new { |json| json.initialDashboard @view_model.to_builder; json.initialCarrierOptions @carrier_list.to_builder; json.initialCustomerOptions @customer_list.to_builder; json.remoteDashboardDataURL companies_dashboard_data_path(format: "json"); json.remoteCarrierAutocompleteURL companies_autocomplete_carriers_path(format: "json"); json.remoteCustomerAutocompleteURL companies_autocomplete_customers_path(format: "json") }.target!)
+
+#dashboard_chart_container
+  .chart_labels
+  .loading_indicator{ :style => "display: none" }
+    .loading_indicator_wrapper
+      = image_tag("admin/loading_indicator.gif")
+  %svg{ :id => "dashboard_chart", :width => "100%", :height => "300" }
+
+.dashboard_separator
+
+.dashboard_tabs
+  = render(partial: 'shipment_tab', locals: { collection: @view_model.problem_shipments, header: 'Problems', tab: 'problems', active: true })
+  = render(partial: 'shipment_tab', locals: { collection: @view_model.created_shipments, header: 'Created', tab: 'created', active: false })
+  = render(partial: 'shipment_tab', locals: { collection: @view_model.rfq_shipments, header: 'RFQ', tab: 'requests', active: false })
+  = render(partial: 'shipment_tab', locals: { collection: @view_model.pickup_requests, header: 'Pickup request', tab: 'pickups', active: false })
+  = render(partial: 'shipment_panel', locals: { partial: 'shipment_row_for_panel', as: :shipment, tab: 'problems', collection: @view_model.problem_shipments, empty_state: 'No problems at the moment', hidden: false })
+  = render(partial: 'shipment_panel', locals: { partial: 'shipment_row_for_panel', as: :shipment, tab: 'created', collection: @view_model.created_shipments, empty_state: 'No requests at the moment', hidden: true })
+  = render(partial: 'shipment_panel', locals: { partial: 'shipment_request_row_for_panel', as: :shipment_request, tab: 'requests', collection: @view_model.rfq_shipments, empty_state: 'No requests at the moment', hidden: true })
+  = render(partial: 'shipment_panel', locals: { partial: 'pickup_row_for_panel', as: :pickup, tab: 'pickups', collection: @view_model.pickup_requests, empty_state: 'No requests at the moment', hidden: true })
+
+
+
+

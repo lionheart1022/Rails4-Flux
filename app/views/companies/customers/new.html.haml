@@ -1,0 +1,32 @@
+%h1 Customer
+
+= simple_form_for(@view_model.form, as: :customer, url: companies_customers_path, method: :post) do |f|
+  = f.input :name, label: "Company name", autofocus: true
+  = f.input :attention
+  = f.input :address_line1
+  = f.input :address_line2
+  = f.input :address_line3
+  = f.input :zip_code
+  = f.input :city
+  %div{ data: { behavior: "country_and_state_inputs__container" } }
+    = f.input :country_code, iso_codes: true, label: "Country", input_html: { data: { behavior: "country_and_state_inputs__country" } }
+    = f.input :state_code, as: :states_grouped_by_country, label: "State", input_html: { data: { behavior: "country_and_state_inputs__state" } }
+  = f.input :phone_number
+  = f.input :cvr_number
+  = f.input :note
+
+  %h2 User
+
+  = f.input :email
+  = f.input :send_invitation_email, as: :boolean
+  = f.input :enable_user_notifications, as: :boolean, label: "Notifications"
+
+  %h2 Accounting
+
+  = f.input :external_accounting_number
+
+  %ul.actions
+    %li
+      = link_to("Cancel", companies_customer_recordings_path)
+    %li.primary
+      = f.submit("Save")

@@ -1,0 +1,557 @@
+@import "elements/toggle_switch";
+@import "elements/checkmark";
+@import "admin/app_header";
+@import "admin/state_indicator";
+
+$brand-color: #27565e;
+$brand-alt-color: #275e47;
+
+/******************************************************************************
+ ** Reset
+ *****************************************************************************/
+
+th {
+  text-align: left;
+}
+
+/******************************************************************************
+ ** Typography
+ *****************************************************************************/
+
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:400,700);
+
+body,
+input,
+button,
+select {
+  font-family: "Maven Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Verdana, sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  color: #888;
+  font-weight: normal;
+}
+
+a {
+  color: $brand-color;
+}
+
+/******************************************************************************
+ ** Layout
+ *****************************************************************************/
+
+body {
+  margin: 20px;
+  padding: 0;
+}
+
+/******************************************************************************
+ ** Util classes
+ *****************************************************************************/
+
+form.inline-form {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-flag-identifier-cell {
+  padding-right: 12px;
+  font-family: monospace;
+}
+
+.feature-flag-checkmark-cell {
+  padding-left: 12px;
+}
+
+.addon-identifier-cell {
+  padding-right: 12px;
+}
+
+.user-notification-table {
+  td {
+    vertical-align: middle;
+  }
+}
+
+.user-notification-key-cell {
+  padding-right: 12px;
+}
+
+.feature-flag-toggler-cell,
+.user-notification-toggler-cell {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+a.delete-btn {
+  color: #b00;
+  font-size: 14px;
+}
+
+span.muted {
+  color: #aaa;
+}
+
+.label_user-is-executive {
+  border: 1px solid #D2D39E;
+  border-radius: 3px;
+  display: inline-block;
+  font-weight: bold;
+  color: #666;
+  padding: 0 6px;
+  line-height: 18px;
+  font-size: 12px;
+  background: #ffb;
+}
+
+.table-cell-delete-btn {
+  color: #b00;
+  font-size: 13px;
+}
+
+table.table tbody td.table-cell-delete {
+  text-align: right;
+  padding-right: 6px;
+}
+
+.add-customer-form,
+.add-carrier-product-form,
+.add-carrier-form,
+.add-invoicing-method-form,
+.add-feedback-configuration-form {
+  margin: 20px 0;
+}
+
+.w600,
+table.table.w600 {
+  width: 600px;
+}
+
+a.partially_underlined {
+  color: lighten($brand-color, 40%);
+  text-decoration: none;
+
+  .underline_this {
+    color: $brand-color;
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+table.table.table_valign_top {
+  th,
+  td {
+    vertical-align: top;
+  }
+}
+
+.filter-input-item--match-with-custom-select {
+  padding-top: 20px;
+}
+
+.shipment_row__state_indicator_cell {
+  white-space: nowrap;
+  min-width: 100px;
+  padding-left: 24px !important;
+}
+
+.shipment_row__main td {
+  border-bottom: none !important;
+  border-top: 1px solid #ccc;
+}
+
+.shipment_row__description td {
+  border-bottom: none !important;
+  border-top: 1px solid #eee;
+  color: #666;
+}
+
+/******************************************************************************
+ ** Component: App Header
+ *****************************************************************************/
+
+.app-header {
+  margin: -20px -20px 0;
+  position: relative;
+}
+
+.app-header--title {
+}
+
+.app-header--user-actions {
+  color: #fff;
+  position: absolute;
+  font-size: 14px;
+  line-height: 22px;
+  right: 50px;
+  top: 0;
+  padding-top: 20px;
+  text-decoration: none;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/******************************************************************************
+ ** Component: App Navigation
+ *****************************************************************************/
+
+.app-nav {
+  background: #eee;
+  font-size: 13px;
+  margin: 0 -20px 20px -20px;
+  padding: 10px;
+}
+
+.app-nav a {
+  color: #666;
+  text-decoration: none;
+}
+
+.app-nav-section {
+  padding: 6px 12px;
+}
+
+.app-nav-section.active {
+  background: #fff;
+  box-shadow: 0 0 4px #888;
+
+  a {
+    color: #000;
+  }
+}
+
+.app-nav-section-label {
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 120px;
+}
+
+ul.app-nav-section-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.app-nav-section-links,
+ul.app-nav-section-links li {
+  display: inline-block;
+}
+
+ul.app-nav-section-links li {
+  margin-right: 16px;
+}
+
+ul.app-nav-section-links a:hover {
+  text-decoration: underline;
+}
+
+/******************************************************************************
+ ** Component: Page Header
+ *****************************************************************************/
+
+.page-header {
+  overflow: auto;
+  margin-bottom: 10px;
+
+  h1 {
+    color: $brand-color;
+    float: left;
+    font-size: 42px;
+    height: 60px;
+    line-height: 60px;
+    font-weight: normal;
+    margin: 0;
+  }
+}
+
+.page-header-controls {
+  box-sizing: border-box;
+  float: right;
+  height: 60px;
+  padding-top: 12px;
+}
+
+a.page-header-new-btn {
+  background: #0080FF;
+  color: #fff;
+  display: inline-block;
+  line-height: 36px;
+  height: 36px;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+a.page-header-cancel-btn {
+  background: #aaa;
+  color: #fff;
+  display: inline-block;
+  line-height: 36px;
+  height: 36px;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+a.page-header-edit-btn {
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+a.page-header-back-btn {
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/******************************************************************************
+ ** Component: Table (basic style)
+ *****************************************************************************/
+
+table.table {
+  border-collapse: collapse;
+  margin: 0;
+  width: 100%;
+
+  th,
+  tbody td {
+    padding: 12px 0 12px 6px;
+  }
+
+  th {
+    border-bottom: 2px solid #ccc;
+    border-top: 1px solid #ccc;
+    color: #666;
+    font-size: 16px;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+  }
+}
+
+/******************************************************************************
+ ** Component: Pagination
+ *****************************************************************************/
+
+nav.pagination {
+  margin: 20px 0 40px;
+  text-align: center;
+}
+
+/******************************************************************************
+ ** Component: Show Button + wrapping cell
+ *****************************************************************************/
+
+table.table tbody td.show-btn-cell {
+  padding-right: 12px;
+  text-align: right;
+}
+
+a.show-btn {
+  background: $brand-color;
+  color: #fff;
+  display: inline-block;
+  line-height: 24px;
+  padding: 0 6px;
+  text-decoration: none;
+}
+
+/******************************************************************************
+ ** Component: Form Input Group
+ *****************************************************************************/
+
+.form-input-group {
+  margin: 16px 0;
+
+  input[type=text] {
+    font-size: 14px;
+    margin: 0;
+    padding: 4px;
+    width: 300px;
+  }
+
+  input[type=text].small-input {
+    width: 80px;
+  }
+
+  & > label {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  & > label:after {
+    content: "\A";
+    white-space: pre;
+  }
+}
+
+input.plain-form-input {
+  font-size: 14px;
+  margin: 0;
+  padding: 4px;
+  width: 300px;
+}
+
+.form-input-multigroup {
+  font-size: 0;
+  margin: 16px 0;
+
+  .form-input-group {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 6px 0 0;
+    vertical-align: top;
+  }
+}
+
+.form-input-hint {
+  color: #888;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.form-actions {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  margin: 20px 0;
+}
+
+.form-actions--without-border {
+  border-top: none;
+}
+
+.form-actions--without-padding {
+  padding-top: 0;
+}
+
+.form-primary-submit-btn {
+  background: #0080FF;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+.form-input-error {
+  color: #b00;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.plain-form-input-error {
+  color: #b00;
+  font-size: 13px;
+}
+
+.plain-form-select--wrapper {
+  display: inline-block;
+  position: relative;
+
+  &:after {
+    font-family: Font Awesome\ 5 Free;
+    font-weight: 900;
+    content: '\f107';
+    color: #37404e;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    pointer-events: none;
+    font-size: 14px;
+  }
+}
+
+select.plain-form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  cursor: pointer;
+  text-align: left;
+
+  color: #37404e;
+  background-color: #eff0f3;
+
+  display: inline-block;
+  margin: 0;
+  padding: 0 40px 0 12px;
+  height: 35px;
+  line-height: 33px;
+  border-radius: 2px;
+  border: 1px solid #dce0e5;
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  &:focus {
+    outline: 0;
+    border-color: darken(#dce0e5, 20%);
+  }
+}
+
+.plain-form-submit {
+  color: #37404e;
+  background-color: lighten(#eff0f3, 3%);
+
+  margin: 0;
+  padding: 0 12px;
+  height: 35px;
+  line-height: 33px;
+  border-radius: 2px;
+  border: 1px solid #dce0e5;
+
+  font: inherit;
+  font-size: 14px;
+
+  &:focus {
+    outline: 0;
+    border-color: darken(#dce0e5, 20%);
+  }
+}
+
+/******************************************************************************
+ ** Component: Filter Input Group
+ *****************************************************************************/
+
+.filter-input-group {
+  margin-bottom: 24px;
+  overflow: auto;
+}
+
+.filter-input-item {
+  float: left;
+}
+
+.form-input-group.filter-input-item {
+  margin: 0;
+  margin-right: 12px;
+}
+
+.filter-input-item--input-group-aligned {
+  padding-top: 26px;
+}

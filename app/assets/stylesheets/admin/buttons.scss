@@ -1,0 +1,53 @@
+@import "admin/mixins";
+
+button.secondary-btn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+  margin-top: -2px;
+  margin-bottom: -1px;
+}
+
+a.secondary-btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+button.secondary-btn,
+a.secondary-btn {
+  @include bg_gradient(#f2f2f3, #e0e1e2);
+  @include font_maven_pro;
+
+  color: $secondary_text;
+  border: 1px solid $secondary_border;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px 0 #fff;
+  cursor: pointer;
+  vertical-align: top;
+  padding: 9px 12px 10px 12px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.highlight-indicator::before {
+  content: "";
+  display: inline-block;
+  background: $green;
+  border: 1px solid #ffb;
+  box-shadow: 0 0 10px #fff;
+  box-sizing: border-box;
+  border-radius: 10px;
+  height: 10px;
+  width: 10px;
+  margin-right: 8px;
+}
+
+button.primary-btn,
+a.primary-btn,
+button.secondary-btn,
+a.secondary-btn {
+  &.btn--small {
+    font-size: 12px;
+    padding: 6px 8px 7px 8px;
+  }
+}

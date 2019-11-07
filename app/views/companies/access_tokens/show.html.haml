@@ -1,0 +1,19 @@
+%h1 API Access
+
+%h2= @view_model.title
+
+%table
+  %thead
+    %tr
+      %th Last modified
+      %th Token
+  %tbody
+    %tr
+      %td
+        = time_ago_in_words(@view_model.updated_at)
+        ago
+      %td
+        = @view_model.token_value
+
+%br
+= link_to("Back", companies_access_tokens_path)

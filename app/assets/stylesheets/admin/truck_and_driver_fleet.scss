@@ -1,0 +1,18 @@
+.truck_and_driver_fields_column {
+  float: left;
+  width: 300px;
+
+  select {
+    width: 200px;
+  }
+  label {
+    display: block;
+    padding: 0 0 2px 0;
+  }
+}
+
+.truck_and_driver_fields:after {
+  content: "";
+  display: table;
+  clear: both;
+}

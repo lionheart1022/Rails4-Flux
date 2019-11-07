@@ -1,0 +1,33 @@
+<header class="page-header">
+  <h1>Login pages</h1>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="12"></th>
+      <th></th>
+      <th>Domain</th>
+      <th>Companies</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @login_pages.each do |login_page| %>
+      <tr>
+        <% if login_page.primary_company.primary_brand_color? %>
+          <td style="background-color: <%= raw login_page.primary_company.primary_brand_color %>;" title="<%= login_page.primary_company.primary_brand_color %>"></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td></td>
+        <td><%= login_page.domain %></td>
+        <td>
+          <% login_page.items.ordered.each do |item| %>
+            <%= item.company_name %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

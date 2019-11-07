@@ -1,0 +1,84 @@
+@import "admin/mixins";
+
+.state_indicator_v2 {
+  display: inline-block;
+  font-weight: bold;
+
+  .state_indicator_updateable {
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+
+    &::after {
+      display: inline-block;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid #f00;
+
+      position: relative;
+      top: -1px;
+    }
+  }
+}
+
+td.state_indicator_v2_cell,
+th.state_indicator_v2_header_cell {
+  padding-left: 15px;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+@mixin build_state_indicator_v2($color) {
+  color: $color;
+
+  .state_indicator_updateable {
+    border-bottom-color: $color;
+
+    &::after {
+      border-top-color: $color;
+    }
+  }
+}
+
+@mixin yellow_state_indicator_v2 { @include build_state_indicator_v2($yellow) }
+@mixin blue_state_indicator_v2   { @include build_state_indicator_v2($blue)   }
+@mixin purple_state_indicator_v2 { @include build_state_indicator_v2($purple) }
+@mixin green_state_indicator_v2  { @include build_state_indicator_v2($green)  }
+@mixin gray_state_indicator_v2   { @include build_state_indicator_v2(#dedede); color: #888; }
+@mixin red_state_indicator_v2    { @include build_state_indicator_v2($red)    }
+
+.shipment_state_indicator_v2 {
+  &.shipment_state_created,
+  &.shipment_state_waiting_for_booking,
+  &.shipment_state_booking_initiated,
+  &.shipment_state_booked_awb_in_progress,
+  &.shipment_state_booked_consignment_note_in_progress {
+    @include yellow_state_indicator_v2;
+  }
+
+  &.shipment_state_booked,
+  &.shipment_state_booked_waiting_awb_document,
+  &.shipment_state_booked_waiting_consignment_note {
+    @include blue_state_indicator_v2;
+  }
+
+  &.shipment_state_in_transit {
+    @include purple_state_indicator_v2;
+  }
+
+  &.shipment_state_delivered_at_destination {
+    @include green_state_indicator_v2;
+  }
+
+  &.shipment_state_cancelled {
+    @include gray_state_indicator_v2;
+  }
+
+  &.shipment_state_booking_failed,
+  &.shipment_state_problem {
+    @include red_state_indicator_v2;
+  }
+}

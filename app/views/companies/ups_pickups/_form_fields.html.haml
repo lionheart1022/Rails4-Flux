@@ -1,0 +1,23 @@
+.padded
+  .field_with_errors= f.error :base
+
+= f.input :pickup_date, as: :date, autofocus: true
+
+.pickup_time_period_wrapper
+  = f.input :from_time, input_html: { data: { behavior: "masked_time_input" } }, wrapper_html: { class: "pickup_from_time_wrapper" }
+  = f.input :to_time, input_html: { data: { behavior: "masked_time_input" } }, wrapper_html: { class: "pickup_to_time_wrapper" }
+
+= f.input :description, as: :text, label: "Pickup point"
+
+= f.input :company_name
+= f.input :attention, label: "Contact name"
+= f.input :address_line1, label: "Address line 1"
+= f.input :address_line2, label: "Address line 2"
+= f.input :address_line3, label: "Address line 3"
+= f.input :phone_number
+
+.zip_code_and_city
+  = f.input :zip_code, wrapper_html: { class: "zip_code" }
+  = f.input :city, wrapper_html: { class: "city" }
+
+= f.input :country_code, iso_codes: true, label: "Country"

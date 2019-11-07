@@ -1,0 +1,121 @@
+.custom_label
+  .custom_label_inner
+    %table
+      %tr
+        %td.custom_label__meta_container{ colspan: 2 }
+          .custom_label__unique_shipment_id
+            = "#{@shipment.product_responsible.name} - Reference ##{@shipment.unique_shipment_id}"
+
+      %tr
+        %td.custom_label__invoice_header_container{ colspan: 2 }
+          %h2 Proforma Invoice
+
+      %tr
+        %td.custom_label__customer_cell{ colspan: 2 }
+          %strong Customer:
+          = @shipment.customer.name
+          - if @shipment.customer.address
+            \-
+            = @shipment.customer.address.city
+
+      %tr
+        %td.custom_label__sender_container
+          %h1 Sender
+          %div
+            = truncate(@shipment.sender.company_name, length: 50)
+          %div
+            = truncate(@shipment.sender.address_line1, length: 50)
+          %div
+            = truncate(@shipment.sender.address_line2, length: 50)
+          %div
+            = truncate(@shipment.sender.address_line3, length: 50)
+          %div
+            = truncate(@shipment.sender.city, length: 50)
+          %div
+            = truncate(@shipment.sender.zip_code, length: 50)
+          %div
+            = truncate(@shipment.sender.country_name, length: 50)
+          %div
+            %strong
+              Attention:
+            = truncate(@shipment.sender.attention, length: 30)
+          %div
+            %strong
+              Phone
+            = truncate(@shipment.sender.phone_number, length: 30)
+
+        %td.custom_label__recipient_container
+          %h1 Recipient
+          %div
+            = truncate(@shipment.recipient.company_name, length: 50)
+          %div
+            = truncate(@shipment.recipient.address_line1, length: 50)
+          %div
+            = truncate(@shipment.recipient.address_line2, length: 50)
+          %div
+            = truncate(@shipment.recipient.address_line3, length: 50)
+          %div
+            = truncate(@shipment.recipient.city, length: 50)
+          %div
+            = truncate(@shipment.recipient.zip_code, length: 50)
+          %div
+            = truncate(@shipment.recipient.country_name, length: 50)
+          %div
+            %strong
+              Attention:
+            = truncate(@shipment.recipient.attention, length: 30)
+          %div
+            %strong
+              Phone
+            = truncate(@shipment.recipient.phone_number, length: 30)
+
+      %tr
+        %td{ colspan: 2 }
+          %h1
+            Shipment -
+            = @shipment.package_dimensions.total_rounded_weight(2)
+            KG
+
+      %tr
+        %td.custom_label__shipment_details_container
+          %div
+            %strong
+              Service:
+            = truncate(@shipment.carrier_product_name, length: 100)
+          %div
+            %strong
+              Shipping Date:
+            = truncate(@shipment.shipping_date.to_s, length: 100)
+          %div
+            %strong
+              Description:
+            = truncate(@shipment.description, length: 100)
+          %div
+            %strong
+              Customer Reference:
+            = @shipment.reference
+        %td
+
+      %tr
+        %td{ colspan: 2 }
+          %h1
+            Customs
+
+      %tr
+        %td.custom_label__customs_container
+          %div
+            %strong
+              Dutiable:
+            - if @shipment.dutiable?
+              ✓
+            - else
+              \-
+          %div
+            %strong
+              Amount:
+            = number_to_currency(@shipment.customs_amount, unit: @shipment.customs_currency.try(:upcase), format: '%u %n')
+          %div
+            %strong
+              Customs code:
+            = @shipment.customs_code
+        %td

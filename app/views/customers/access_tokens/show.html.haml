@@ -1,0 +1,18 @@
+%header.page_header
+  %h1 API Access
+
+%p
+  You can use the API to programmatically book shipments in CargoFlux.
+  To use the API you must generate an API access token.
+  If you are concerned that a third party has obtained your access token, you can generate a new one, which automatically invalidates the old token.
+  %br
+  %br
+  The most current documentation for the API is
+  #{link_to("available as a PDF", "/documentation/customer_api.pdf")}.
+  Contact your CargoFlux representative to learn more.
+
+.padded
+  = simple_form_for(@token, url: customers_access_token_path, method: :put, data: { confirm: "Your existing access token will be invalidated if you generate a new one. Are you sure?" }) do |f|
+    = f.input :value, label: "API Access Token" do
+      = f.input_field :value, disabled: true, required: false
+      = f.submit "Generate", class: "primary-btn"

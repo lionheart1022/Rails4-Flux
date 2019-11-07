@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<AccessRequest xml:lang='en-US'>
+  <AccessLicenseNumber><%= credentials.access_token %></AccessLicenseNumber>
+  <UserId><%= credentials.company %></UserId>
+  <Password><%= credentials.password %></Password>
+</AccessRequest>
+
+<TrackRequest>
+  <Request>
+    <TransactionReference>
+      <CustomerContext>Customer Comment</CustomerContext>
+    </TransactionReference>
+    <RequestAction>Track</RequestAction>
+  </Request>
+  <TrackingNumber><%= awb %></TrackingNumber>
+</TrackRequest>

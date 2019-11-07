@@ -1,0 +1,6 @@
+%h2
+  = ViewHelper.group_name(name: group.name, reference: group.reference)
+- if group.data.size > 0
+  %table.shipments
+    = render partial: @view_model.table_columns_view
+    = render partial: @view_model.table_content_view, collection: group.data, as: :data, locals: {current_company: @view_model.current_company}

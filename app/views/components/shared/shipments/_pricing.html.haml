@@ -1,0 +1,28 @@
+- if view_model.show_manual_pricing? && view_model.show_price
+  %h2 Manual Pricing
+  = simple_form_for(AdvancedPrice.new, :url => companies_shipment_prices_path(view_model.shipment, rfq: rfq), html: { :method => :post, id: "update_price" }) do |f| # Move to view model
+    %table.pricing.form
+      %tr
+        %td
+          = f.fields_for :advanced_price_line_item do |ff|
+            = ff.input :description, label: false, required: false, placeholder: 'Description', input_html: { class: 'new_price_line_description' }
+
+        - if view_model.show_cost_price?
+          %td.company_price
+            = f.fields_for :advanced_price_line_item do |ff|
+              = ff.input :cost_price_amount, label: false, required: false, as: :integer, placeholder: "Cost", input_html: { class: 'new_price_line_cost_price' }, disabled: !view_model.show_cost_price?
+              = f.input :cost_price_currency, as: :currency_select, label: false, selected: view_model.default_cost_currency, disabled: !view_model.show_cost_price? || view_model.lock_cost_currency?
+
+        %td.customer_price
+          = f.fields_for :advanced_price_line_item do |ff|
+            = ff.input :sales_price_amount, label: false, required: false, as: :integer, placeholder: "Sales", input_html: { class: 'new_price_line_sales_price' }
+          = f.input :sales_price_currency, as: :currency_select, label: false, selected: view_model.default_sales_currency, disabled: view_model.lock_sales_currency?
+
+        %td.save
+          %ul.actions
+            %li.secondary
+              %a.reset_new_price_line{ data: { create_url: companies_shipment_prices_path(view_model.shipment.id) } } Cancel
+
+            %li.primary
+              = f.submit "Add", class: 'submit_new_price_line'
+

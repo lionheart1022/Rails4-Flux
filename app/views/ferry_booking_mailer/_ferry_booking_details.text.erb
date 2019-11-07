@@ -1,0 +1,8 @@
+Date: <%= shipment.shipping_date.to_s %>
+Product: <%= shipment.carrier_product.name %>
+Route: <%= ferry_booking.route.name %> @ <%= ferry_booking.product.time_of_departure %>
+ID: #<%= shipment.unique_shipment_id %>
+Waybill: <%= shipment.awb %><% if ferry_booking.additional_info_from_response? %> [Additional info: <%= ferry_booking.additional_info_from_response %>]<% end %>
+Truck length: <%= ferry_booking.truck_length %>
+Truck reg. number: <%= ferry_booking.truck_registration_number %>
+Trailer reg. number: <%= ferry_booking.trailer_registration_number %>

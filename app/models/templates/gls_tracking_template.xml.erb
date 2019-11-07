@@ -1,0 +1,17 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:trac="http://gls-group.eu/Tracking/">
+   <soap:Header/>
+   <soap:Body>
+      <trac:TuDetailsRequest>
+         <trac:RefValue><%= awb %></trac:RefValue>
+         <trac:Credentials>
+            <trac:UserName><%= credentials.username %></trac:UserName>
+            <trac:Password><%= credentials.password %></trac:Password>
+         </trac:Credentials>
+         <!--Zero or more repetitions:-->
+         <trac:Parameters>
+            <trac:ParamCode>LangCode</trac:ParamCode>
+            <trac:ParamValue>EN</trac:ParamValue>
+         </trac:Parameters>
+      </trac:TuDetailsRequest>
+   </soap:Body>
+</soap:Envelope>

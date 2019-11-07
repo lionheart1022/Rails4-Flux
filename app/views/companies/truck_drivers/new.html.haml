@@ -1,0 +1,7 @@
+%header.page_header
+  %h1 Create truck driver
+
+  %ul.page_actions
+    %li= link_to("Cancel", companies_truck_drivers_path, class: "secondary-btn")
+
+= render "form", truck_driver: @truck_driver

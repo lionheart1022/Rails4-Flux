@@ -1,0 +1,23 @@
+%h1 Edit profile
+
+.padded= current_user.email
+
+%h2 Change password
+
+= simple_form_for @change_password_form, as: :user, url: companies_user_profile_path, method: :patch do |form|
+  = form.input :current_password, required: true, input_html: { class: "user_profile__password" }
+  .input{ class: form.object.errors.include?(:new_password) || form.object.errors.include?(:new_password_confirmation) ? "field_with_errors" : nil }
+    = form.label :new_password
+
+    = form.input_field :new_password, as: :password, placeholder: "New password", class: "user_profile__password"
+    = form.error :new_password
+
+    = form.input_field :new_password_confirmation, as: :password, placeholder: "Repeat new password", class: "user_profile__password"
+    = form.error :new_password_confirmation
+
+  .user_profile_password__actions
+    %ul.horizontal_button_list
+      %li.horizontal_button_list__item
+        = form.submit "Update password", class: "primary-btn"
+      %li.horizontal_button_list__item
+        = link_to "Cancel", :back, class: "secondary-btn"

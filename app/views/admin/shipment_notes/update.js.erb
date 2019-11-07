@@ -1,0 +1,2 @@
+$("#shipment_view__internal_note").replaceWith('<%= j render("components/shared/shipments/internal_note", shipment: @shipment) %>')
+$("#shipment_view__internal_note").trigger("shipment_view__internal_note:init")

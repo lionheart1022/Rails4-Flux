@@ -1,0 +1,15 @@
+.page_header
+  %h1= @customer.name
+
+= render "companies/customers/subnav", active_nav: :users, customer_id: params[:customer_id]
+
+= simple_form_for(@user, as: :user, url: companies_customer_users_path, method: :post) do |f|
+  = f.input :email, autofocus: true
+  = f.input :send_invitation_email, as: :boolean
+  = f.input :enable_user_notifications, as: :boolean, label: "Notifications"
+
+  %ul.actions
+    %li
+      = link_to("Cancel", companies_customer_users_path)
+    %li.primary
+      = f.submit("Add user")

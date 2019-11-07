@@ -1,0 +1,43 @@
+%header.page_header
+  %h1 Export Triggers
+
+.padded
+  Select what states will schedule a shipment for export.
+  Shipments scheduled for export will only be retrieved when the corresponding API endpoint has been called.
+  See API documentation for more information.
+
+= form_for(current_company.shipment_export_setting_for_editing, as: :shipment_export_setting, url: url_for(action: "update"), method: :patch) do |form|
+  %table.shipment_export_configuration__table
+    %thead
+      %tr
+        %th{ width: "10" }
+        %th.shipment_export_configuration__label_cell Trigger
+
+    %tbody
+      %tr
+        %td= form.check_box :trigger_when_created
+        %td.shipment_export_configuration__label_cell
+          = form.label :trigger_when_created, "Created"
+      %tr.shipment_export_configuration__table_row
+        %td= form.check_box :booked
+        %td.shipment_export_configuration__label_cell
+          = form.label :booked, "Booked"
+      %tr.shipment_export_configuration__table_row
+        %td= form.check_box :in_transit
+        %td.shipment_export_configuration__label_cell
+          = form.label :in_transit, "In transit"
+      %tr.shipment_export_configuration__table_row
+        %td= form.check_box :delivered
+        %td.shipment_export_configuration__label_cell
+          = form.label :delivered, "Delivered"
+      %tr.shipment_export_configuration__table_row
+        %td= form.check_box :problem
+        %td.shipment_export_configuration__label_cell
+          = form.label :problem, "Problem"
+      %tr.shipment_export_configuration__table_row
+        %td= form.check_box :trigger_when_cancelled
+        %td.shipment_export_configuration__label_cell
+          = form.label :trigger_when_cancelled, "Cancelled"
+
+  %ul.actions
+    %li.primary= form.submit "Save"

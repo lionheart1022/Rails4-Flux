@@ -1,0 +1,4 @@
+- if @prebook_check.estimated_arrival_date
+  %p
+    %strong Estimated arrival date:
+    %span= l(@prebook_check.estimated_arrival_date, format: :long)

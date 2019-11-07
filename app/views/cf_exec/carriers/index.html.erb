@@ -1,0 +1,27 @@
+<header class="page-header">
+  <h1>Carriers</h1>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="10%">#</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carriers.each do |carrier| %>
+      <tr>
+        <td><%= carrier.id %></td>
+        <td><%= carrier.name %></td>
+        <td class="show-btn-cell">
+          <%= link_to "Show", exec_carrier_path(carrier), class: "show-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @carriers %>

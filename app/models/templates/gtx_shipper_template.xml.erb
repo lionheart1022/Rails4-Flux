@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <Booking xmlns="http://gtx.nu/ShipmentPortalV3/">
+      <accessUsername><%= credentials.username %></accessUsername>
+      <accessPassword><%= credentials.password%></accessPassword>
+      <request>
+        <OperationCode>Live</OperationCode> <!-- Live flag is set. It is fine as long as labels are not used. DONT book pickups -->
+        <Username><%= credentials.username %></Username>
+        <Password><%= credentials.password %></Password>
+        <AccountId>3343</AccountId>
+        <% if shipment.carrier_product.gtx_shipment_type %>
+          <ShipmentType><%= shipment.carrier_product.gtx_shipment_type %></ShipmentType>
+        <% end %>
+        <SalesproductId><%= shipment.carrier_product.service %></SalesproductId>
+        <ShippingDate><%= shipment.shipping_date %></ShippingDate>
+        <Description><%= shipment.description %></Description>
+        <% shipment.package_dimensions.dimensions.each do |dimension| %>
+          <ParcelList>
+            <Length><%= format_dimension(dimension.length) %></Length>
+            <Width><%= format_dimension(dimension.width) %></Width>
+            <Height><%= format_dimension(dimension.height) %></Height>
+            <Weight><%= format_weight(dimension.weight) %></Weight>
+          </ParcelList>
+          <% end %>
+        <ImageEncoding>PDF</ImageEncoding>
+        <WaybillImageFormat>LabelPrint</WaybillImageFormat>
+        <WaybillReturnCode>Immediately</WaybillReturnCode>
+        <NotifyReceiver>true</NotifyReceiver>
+        <AddressPickup/>
+        <AddressReceiver>
+          <Name><%= recipient.company_name %></Name>
+          <Attention><%= recipient.attention %></Attention>
+          <Street1><%= recipient.address_line1 %></Street1>
+          <Street2><%= recipient.address_line2 %></Street2>
+          <ZipCode><%= recipient.zip_code %></ZipCode>
+          <City><%= recipient.city %></City>
+          <CountryCode><%= format_country(recipient.country_code) %></CountryCode>
+          <Phone><%= recipient.phone_number%></Phone>
+          <Email><%= recipient.email %></Email>
+        </AddressReceiver>
+        <AddressSender>
+          <Name><%= sender.company_name %></Name>
+          <Attention><%= sender.attention %></Attention>
+          <Street1><%= sender.address_line1 %></Street1>
+          <Street2><%= sender.address_line2 %></Street2>
+          <ZipCode><%= sender.zip_code %></ZipCode>
+          <City><%= sender.city %></City>
+          <CountryCode><%= format_country(sender.country_code) %></CountryCode>
+          <Phone><%= sender.phone_number%></Phone>
+          <Email><%= sender.email %></Email>
+          <Reference><%= shipment.reference %></Reference>
+        </AddressSender>
+      </request>
+    </Booking>
+  </soap12:Body>
+</soap12:Envelope>

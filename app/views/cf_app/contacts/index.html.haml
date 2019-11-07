@@ -1,0 +1,26 @@
+%header.page_header.with_table_below
+  %h1
+    .inline_block_container Contacts
+
+    .header_select2_container.inline_block_container.initially_hidden
+      %select{ data: { "behavior" => "select_redirect", "ajax--url" => url_for(controller: "autocomplete_contacts", action: "index", format: "json", variant: "select2"), "width" => "300px", placeholder: "Find contact" } }
+
+  %ul.page_actions
+    %li= link_to("Import", url_for(controller: "contact_imports", action: "new"), class: "primary-btn")
+    %li= link_to("New Contact", url_for(action: "new"), class: "primary-btn")
+
+- if @contacts && @contacts.size > 0
+  %table
+    %tr
+      %th Company
+      %th Attention
+      %th Phone number
+      %th Email
+    - @contacts.each do |contact|
+      %tr
+        %td= link_to(contact.company_name.presence || content_tag(:em, "Unnamed company"), url_for(action: "show", id: contact.id))
+        %td= contact.attention
+        %td= contact.phone_number
+        %td= contact.email
+- else
+  %p.no_results No contacts

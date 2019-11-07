@@ -1,0 +1,20 @@
+#shipment_view__internal_note
+  %h2
+    Internal Notes
+    = button_tag("Add", type: "button", class: "primary-btn", data: { behavior: "shipment_view__internal_note__add_btn" }) unless current_context.shipment_note?(shipment)
+
+  - (current_context.find_shipment_note(shipment) || Note.new).tap do |note|
+    = simple_form_for(note, url: url_for(controller: "shipment_notes", action: "update", shipment_id: shipment.id), method: :put, remote: true, html: { id: nil, class: nil, data: { behavior: "shipment_view__internal_note__form" } }) do |form|
+      = form.input :text, as: :text, label: false
+
+      %div
+        = button_tag("Cancel", type: "button", class: "secondary-btn", id: nil, data: { behavior: "shipment_view__internal_note__cancel_btn" })
+        = button_tag("Save", type: "submit", class: "primary-btn", id: nil)
+
+    - if note.persisted?
+      %div{ data: { behavior: "shipment_view__internal_note__display" } }
+        .panel
+          = newline_html_formatted(note.text)
+
+        %div
+          = button_tag("Edit", class: "primary-btn", data: { behavior: "shipment_view__internal_note__edit_btn" })

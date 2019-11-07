@@ -1,0 +1,14 @@
+table.notification_settings {
+  th.event {
+    width: 30%;
+  }
+
+  th.description {
+    width: 50%;
+  }
+
+  th.enable,
+  td.enable {
+    text-align: right;
+  }
+}

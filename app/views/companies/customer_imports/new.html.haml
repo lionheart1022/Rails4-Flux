@@ -1,0 +1,24 @@
+%header.page_header
+  %h1 Import Customers
+
+.padded Upload an XLSX file with column headers as below. Note that the same email can only be used for one customer.
+
+.padded
+  %p
+    %strong Required columns
+  %p
+    = %w(company_name email address_1 country_code).join(", ")
+
+.padded
+  %p
+    %strong Optional columns
+  %p
+    = %w(address_2 address_3 zip_code city attention phone account_number).join(", ")
+
+= form_tag bg_companies_customer_imports_path, multipart: true do
+  %div
+    = file_field_tag "customer_import[file]", id: nil
+
+  %ul.actions
+    %li.primary= submit_tag "Upload"
+    %li= link_to "Cancel", companies_customers_path

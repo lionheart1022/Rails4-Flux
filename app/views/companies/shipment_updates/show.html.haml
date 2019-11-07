@@ -1,0 +1,78 @@
+%header.page_header
+  %h1
+    Shipment Updates
+    %small= @carrier_feedback_file.header_label
+
+  %ul.page_actions
+    %li= link_to "Back", url_for(action: "index")
+
+= render "companies/shipment_updates/subnav", active_nav: :updates
+
+%table.shipments
+  %thead
+    %tr
+      %th{ width: "60" } State
+      %th Customer
+      %th ID
+      %th Date
+      %th AWB
+      %th Package ID
+      %th Weight
+      %th
+  %tbody
+    - @package_updates.each do |package_update|
+      %tr
+        %td
+          %span.state_indicator.shipment_state_indicator{ class: "shipment_state_#{package_update.package.shipment.state}" }
+            %span= ViewHelper::Shipments.state_name(package_update.package.shipment.state)
+        %td
+          = package_update.package.shipment.customer_name_for_company(company_id: current_company.id)
+        %td
+          = link_to(package_update.package.shipment.unique_shipment_id, companies_shipment_path(package_update.package.shipment))
+        %td
+          = package_update.package.shipment.shipping_date
+        %td.awb
+          = render(partial: "components/shared/carrier_products/awb", locals: { shipment: package_update.package.shipment })
+        %td
+          = package_update.package.unique_identifier
+        %td
+          - if package_update.applied?
+            = package_update.package.active_recording.weight_value
+            = package_update.package.active_recording.weight_unit
+          - else
+            %span
+              = package_update.package.active_recording.weight_value
+              = package_update.package.active_recording.weight_unit
+            \&nbsp;
+            %span
+              →
+            \&nbsp;
+            %span
+              = package_update.package_recording.weight_value
+              = package_update.package_recording.weight_unit
+        %td
+          - if package_update.can_apply?
+            = link_to "Apply change", apply_companies_shipment_update_package_update_path(shipment_update_id: @carrier_feedback_file.id, id: package_update.id), method: :post, class: "primary-btn"
+          - elsif package_update.applied?
+            ✅
+          - elsif package_update.failed_to_apply?
+            %span.error_text= package_update.failure_text
+
+.pagination
+  = paginate(@package_updates)
+
+- @carrier_feedback_file.not_found_packages.count.tap do |c|
+  - if c > 0
+    .padded
+      %strong
+        = pluralize(c, "package")
+        could not be found.
+
+.padded
+  %small
+    Uploaded
+    - if @carrier_feedback_file.file_uploaded_by
+      by
+      = @carrier_feedback_file.file_uploaded_by.email
+      \-
+    = l(@carrier_feedback_file.created_at, format: :long)

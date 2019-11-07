@@ -1,0 +1,11 @@
+= form.input :name, autofocus: true
+= form.input :track_trace_method, as: :select, collection: form.object.track_trace_method_options, label: "Track & Trace"
+= form.input :basis, as: :select, collection: form.object.basis_options
+= form.input :volume_weight_type, as: :select, collection: form.object.volume_weight_type_options
+= form.input :custom_volume_weight_enabled, as: :boolean, label: "Custom Factor"
+= form.input :volume_weight_factor, label: "Factor"
+%div{ "data-dependent-input-disabling-group" => "true" }
+  = form.input :custom_label, as: :boolean, input_html: { "data-behavior" => "dependent-input-disabling" }
+  = form.input :custom_label_variant, input_html: { "data-input-to-disable" => "true" }
+= form.input :truck_driver, as: :boolean if current_context.company_feature_flag_enabled?("truck-driver-db")
+= form.input :import, as: :boolean

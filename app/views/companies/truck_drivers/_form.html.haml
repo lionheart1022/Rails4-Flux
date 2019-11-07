@@ -1,0 +1,5 @@
+= simple_form_for [:companies, truck_driver] do |form|
+  = form.input :name, autofocus: true
+
+  %ul.actions
+    %li.primary= form.submit

@@ -1,0 +1,80 @@
+.dashboard_tabs {
+  .dashboard_tab {
+    background-color: #d9dcdd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: inline-block;
+    padding: 1px 15px;
+
+    h2,
+    .badge {
+      display: inline;
+    }
+
+    &.active,
+    &:hover {
+      background-color: #fff;
+    }
+
+    .dashboard_tab {
+      margin-left: 6px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .badge {
+      background: #50d991;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 6px;
+
+      &.danger {
+        background-color: #c84e4f;
+      }
+
+      &.empty {
+        background-color: #7999B2;
+      }
+    }
+  }
+
+  .dashboard_tab,
+  .dashboard_tab h2 {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.dashboard_panel {
+  &.hidden {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+.dashboard_panel_body {
+  background: #fff;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  padding: 20px 0;
+
+  table {
+    border: none;
+  }
+
+  td {
+    padding: 15px;
+  }
+
+  .empty {
+    line-height: 2;
+    opacity: .7;
+    text-align: center;
+  }
+}

@@ -1,0 +1,18 @@
+- if @view_model.is_ungrouped?
+  - if @view_model.ungrouped_shipments.size > 0
+    %table.shipments
+      = render "list_view_shipment_columns"
+      = render partial: "list_view_shipment_row", collection: @view_model.ungrouped_shipments, as: :data
+  - else
+    %p.no_results No shipments found
+
+- else
+  - @view_model.grouped_shipments.each do |group|
+    %h2= group.name
+    - if group.data.size > 0
+      %table.shipments
+        = render "list_view_shipment_columns"
+        = render partial: "list_view_shipment_row", collection: group.data, as: :data
+
+  - if @view_model.grouped_shipments.size < 1
+    %p.no_results No shipments found

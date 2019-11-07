@@ -1,0 +1,50 @@
+.page_header.with_table_below
+  %h1= "Report ##{@view_model.scoped_report_id}"
+
+  %ul.page_actions
+    - if @view_model.show_export_to_economic_button?
+      %li= link_to("Create e-conomic invoices", export_economic_companies_report_path(@view_model.report), method: :post, class: "primary-btn")
+    - if @view_model.show_v2_export_to_economic_button?
+      %li= link_to("Create e-conomic invoices (v2)", companies_report_economic_invoice_export_path(@view_model.report), method: :post, class: "primary-btn highlight-indicator")
+    - if @view_model.show_v2_economic_invoices_button?
+      %li= link_to("Show e-conomic invoices", companies_report_economic_invoices_path(@view_model.report, auto_redirect: "1"))
+
+    - if @view_model.show_loading_indicator?
+      %li
+        %span{ data: { behavior: "poll_and_refresh", behavior_config: JSON.generate(poll_url: companies_report_excel_export_status_path(@view_model.report)) } }
+          = image_tag("admin/loading_indicator.gif", alt: "")
+    - elsif @view_model.show_download_button?
+      %li= link_to("Download Report", @view_model.download_url, target: "_blank", class: "primary-btn")
+    - else
+      %li= link_to("Export Excel", companies_report_excel_exports_path(@view_model.report), method: :post, class: "primary-btn")
+
+%table
+  %tr
+    %th State
+    %th ID
+    %th Product
+    %th AWB
+    %th Recipient
+    %th City
+    %th Zip code
+    %th Country
+    %th Packages
+    %th Weight
+  - @view_model.shipments.each do |shipment|
+    %tr
+      %td
+        %span.state_indicator.shipment_state_indicator{ class: "shipment_state_#{shipment.state}" }
+          = ViewHelper::Shipments.state_name(shipment.state)
+      %td.unique_shipment_id
+        = link_to shipment.unique_shipment_id, companies_shipment_path(shipment)
+      %td= shipment.carrier_product.name
+      %td= shipment.awb
+      %td= shipment.recipient.company_name
+      %td= shipment.recipient.city
+      %td= shipment.recipient.zip_code
+      %td= shipment.recipient.country_name
+      %td= shipment.number_of_packages
+      %td= shipment.total_weight
+
+.pagination
+  = paginate @view_model.shipments

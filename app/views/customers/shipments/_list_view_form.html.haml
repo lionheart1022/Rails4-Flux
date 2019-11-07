@@ -1,0 +1,9 @@
+.scope_inputs
+  = form.input :carrier_id, as: :carrier_autocomplete_select, label: false, input_html: { name: "filter_carrier_id", id: nil, placeholder: "All carriers", data: { :"allow-clear" => true, :width => "300px" } }
+  = form.input :shipping_start_date, label: false, placeholder: "Start date", required: false, wrapper_html: { class: "shipment-filter-start-date" }, input_html: { class: "range-input", name: CargofluxConstants::Filter::RANGE_START, id: "scope_filter_range_start", autocomplete: "off" }
+  = form.input :shipping_end_date, label: false, placeholder: "End date", required: false, wrapper_html: { class: "shipment-filter-end-date" }, input_html: { class: "range-input", name: CargofluxConstants::Filter::RANGE_END, id: "scope_filter_range_end", autocomplete: "off" }
+
+.scope_inputs
+  = form.input :grouping, collection: form.object.grouping_options, label: false, input_html: { name: "grouping" }, include_blank: false
+  = form.input :sorting, collection: form.object.sorting_options, label: false, input_html: { name: "sorting" }, include_blank: false
+  = form.input :state, collection: form.object.state_options, label: false, input_html: { name: CargofluxConstants::Filter::STATE }, include_blank: form.object.state_blank_option

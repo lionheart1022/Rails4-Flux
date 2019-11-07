@@ -1,0 +1,27 @@
+body {
+  background: #fff;
+}
+
+#body {
+  margin: 0 auto;
+  width: 600px;
+  padding-top: 30px;
+}
+
+ul.shared {
+  margin-top: 25px;
+}
+
+div.alert {
+  margin: 20px 0;
+}
+
+#company_logo {
+  width: 420px;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

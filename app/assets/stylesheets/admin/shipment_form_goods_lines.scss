@@ -1,0 +1,138 @@
+@import "admin/mixins";
+
+.shipment_form_goods_lines__container {
+  .cf_input {
+    text-align: right;
+    width: 50px;
+  }
+
+  select.shipment_form_goods_line__unit_input {
+    height: 34px;
+    width: auto;
+  }
+
+  .cf_input.shipment_form_goods_line__unit_input {
+    text-align: left;
+  }
+
+  .cf_input.shipment_form_goods_line__amount_input {
+    width: 25px;
+  }
+}
+
+.shipment_form_goods_lines__table {
+  border: none;
+  border-radius: 0;
+  width: auto;
+
+  th {
+    font-weight: normal;
+    font-size: 14px;
+  }
+
+  th, td {
+    border: none;
+    color: $text_dark_gray;
+    vertical-align: middle;
+  }
+
+  th {
+    padding: 0 0 6px 0;
+    cursor: default;
+  }
+
+  td {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:first-child td {
+    padding-top: 0;
+  }
+
+  .shipment_form_goods_lines__total_weight_row td {
+    border-bottom: none;
+  }
+
+  td.shipment_form_goods_line__amount_cell {
+    padding-right: 4px;
+  }
+
+  .shipment_form_goods_line__remove_cell {
+    padding-left: 20px;
+  }
+
+  td.shipment_form_goods_line__non_stackable_cell {
+    padding-left: 16px;
+  }
+}
+
+.shipment_form_goods_line_header__unit {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.shipment_form_goods_line__multiplier,
+.shipment_form_goods_line__spacer,
+.shipment_form_goods_line__equals {
+  cursor: default;
+  width: 20px;
+  text-align: center;
+}
+
+.shipment_form_goods_lines__total_weight_label {
+  cursor: default;
+  text-align: right;
+}
+
+.shipment_form_goods_line__remove_btn {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  color: $blue;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+select.shipment_form_goods_line__new_line_select {
+  @include font_maven_pro;
+
+  -webkit-appearance: menulist-button;
+
+  background: white;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  box-sizing: border-box;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 8px 0 0;
+  padding: 0 6px;
+}
+
+button.shipment_form_goods_line__new_line_btn {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  color: $blue;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.simple_form label.shipment_form_goods_line__checkbox_wrapped_in_label {
+  display: inline-block;
+  padding: 0;
+
+  input[type=checkbox] {
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,95 @@
+- @view_model.shipment.package_dimensions.dimensions.each_with_index do |dimension, idx|
+  .custom_label
+    %table
+      %tr
+        %td.meta
+          .unique_shipment_id
+            %strong
+              = @view_model.label_header
+          .label_number
+            %strong
+              = @view_model.label_number(idx)
+
+      %tr.contact
+        %td.sender
+          %h1 Sender
+          .company_name
+            = @view_model.truncate(@view_model.sender.company_name, 50)
+          .address_line1
+            = @view_model.truncate(@view_model.sender.address_line1, 50)
+          .address_line2
+            = @view_model.truncate(@view_model.sender.address_line2, 50)
+          .address_line3
+            = @view_model.truncate(@view_model.sender.address_line3, 50)
+          .city
+            = @view_model.truncate(@view_model.sender.city, 50)
+          .zip_code
+            = @view_model.truncate(@view_model.sender.zip_code, 50)
+          .country_name
+            = @view_model.truncate(@view_model.sender.country_name, 50)
+          .attention
+            %strong
+              Attention:
+            = @view_model.truncate(@view_model.sender.attention, 30)
+          .phone_number
+            %strong
+              Phone
+            = @view_model.truncate(@view_model.sender.phone_number, 30)
+        %td.recipient
+          %h1 Recipient
+          .company_name
+            = @view_model.truncate(@view_model.recipient.company_name, 50)
+          .address_line1
+            = @view_model.truncate(@view_model.recipient.address_line1, 50)
+          .address_line2
+            = @view_model.truncate(@view_model.recipient.address_line2, 50)
+          .address_line3
+            = @view_model.truncate(@view_model.recipient.address_line3, 50)
+          .city
+            = @view_model.truncate(@view_model.recipient.city, 50)
+          .zip_code
+            = @view_model.truncate(@view_model.recipient.zip_code, 50)
+          .country_name
+            = @view_model.truncate(@view_model.recipient.country_name, 50)
+          .attention
+            %strong
+              Attention:
+            = @view_model.truncate(@view_model.recipient.attention, 30)
+          .phone_number
+            %strong
+              Phone
+            = @view_model.truncate(@view_model.recipient.phone_number, 30)
+      %tr.shipment
+        %td
+          %h1
+            Shipment -
+            = @view_model.truncate(@view_model.weight_with_metric(dimension.weight), 100)
+          .carrier_product
+            %strong
+              Service:
+            = @view_model.truncate(@view_model.carrier_product_name, 100)
+          .shipping_date
+            %strong
+              Shipping Date:
+            = @view_model.truncate(@view_model.shipment.shipping_date.to_s, 100)
+          .description
+            %strong
+              Description:
+            = @view_model.truncate(@view_model.shipment.description, 100)
+          .dimensions
+            %strong
+              Dimensions:
+            = @view_model.truncate(@view_model.format_dimension(dimension), 100)
+          .reference
+            %strong
+              Customer Reference:
+            = @view_model.shipment.reference
+          .remarks
+            %strong
+              Remarks:
+            = truncate(@view_model.shipment.remarks, length: 200)
+        %td
+          - if @view_model.logo_url.present?
+            %img.company_logo{:src => @view_model.logo_url, :alt => ""}/
+
+

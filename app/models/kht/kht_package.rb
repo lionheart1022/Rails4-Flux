@@ -1,0 +1,2 @@
+class KHTPackage < Package
+end

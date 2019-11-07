@@ -1,0 +1,28 @@
+%tr{ id: "list_view_shipment_#{data.id}" }
+  %td.state_indicator_v2_cell
+    %span.state_indicator_v2.shipment_state_indicator_v2{ class: "shipment_state_#{data.state}" }
+      - if data.product_responsible == current_company
+        - if data.carrier_product.type.nil?
+          = check_box_tag(nil, data.id, false, id: nil, class: "shipment_bulk_update__shipment_id_checkbox", data: { behavior: "shipment_bulk_update__shipment_id_checkbox" }, style: "display:none")
+        %span.state_indicator_updateable{ data: { behavior: "shipment_state_updating", state_form_html: render("companies/shipments/state_update_form", shipment: data) } }
+          = ViewHelper::Shipments.state_name(data.state)
+      - else
+        %span= ViewHelper::Shipments.state_name(data.state)
+  %td
+    = data.customer_name_for_company(company_id: current_company.id)
+  %td.id
+    = link_to(data.unique_shipment_id, companies_shipment_path(data))
+  %td.date
+    = data.shipping_date
+  %td
+    = data.carrier_product.suffixed_name
+  %td
+    = render("components/shared/contact", contact: data.sender)
+  %td
+    = render("components/shared/contact", contact: data.recipient)
+  %td.awb
+    = render(partial: "components/shared/carrier_products/awb", locals: { shipment: data })
+
+- if data.description.present?
+  %tr.shipment_description_row{ id: "list_view_shipment_#{data.id}-description" }
+    %td{ :colspan => '8' }= data.description

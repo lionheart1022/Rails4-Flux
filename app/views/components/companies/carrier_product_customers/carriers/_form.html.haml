@@ -1,0 +1,35 @@
+.page_actions
+  %h1= @view_model.header_text
+
+- if @view_model.show_table?
+  = simple_form_for(:carriers, url: companies_carrier_product_customer_carrier_product_customer_carriers_path, html: { :method => :post }) do |f|
+    %table.carrier_products
+      %tr
+        %th Carrier
+        %th
+          %input{:type => 'checkbox', id: 'check-all-carriers'}
+          Add Carrier
+        %th
+          %input{:type => 'checkbox', id: 'check-all-products'}
+          Add All Products
+
+      - @view_model.carriers.each do |carrier|
+        = f.simple_fields_for "[#{carrier.id}" do |ff|
+          %tr
+            %td.carrier_product
+              = carrier.suffixed_name
+
+              %td.carrier
+                = ff.input_field :add_carrier, as: :boolean
+              %td.product
+                = ff.input_field :add_products, as: :boolean
+    %ul.actions
+      %li.secondary
+        = link_to("Back", companies_carrier_product_customer_carrier_product_customer_carriers_path(@view_model.customer.id))
+      %li.primary
+        = f.submit 'Add Selected'
+- else
+  Available carriers have already been added
+  %ul.actions
+    %li.secondary
+      = link_to("Back", companies_carrier_product_customer_carrier_product_customer_carriers_path(@view_model.customer.id))

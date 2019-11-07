@@ -1,0 +1,11 @@
+%header.page_header
+  %h1
+    Invoice validation
+  %ul.page_actions
+    %li= link_to "Back", new_companies_invoice_validation_path
+
+.flex-column
+  .half-width-column
+    = message
+  .half-width-column
+    = render "instructions_text"

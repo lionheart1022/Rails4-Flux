@@ -1,0 +1,14 @@
+@import "admin/mixins";
+
+.alert.alert_success {
+  color: $green;
+}
+
+.alert.alert_error {
+  color: $red;
+}
+
+.alert.alert_info,
+.alert.alert_notice {
+  color: $blue;
+}

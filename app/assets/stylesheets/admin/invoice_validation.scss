@@ -1,0 +1,75 @@
+@import "./mixins";
+
+.flex-column {
+  display: flex;
+}
+
+.half-width-column {
+  flex: 50%;
+}
+
+.no-border-table {
+  border: none;
+  tr, td {
+    border: none;
+    padding: 5px;
+  }
+}
+
+.right-details {
+  text-align: right;
+  font-weight: bold;
+}
+
+.invoice-validation-details {
+  margin: 30px 0px;
+  th, td {
+    text-align: right;
+    &:first-child {
+      text-align: left;
+    }
+  }
+  .difference {
+    font-weight: bold;
+    color: $red;
+  }
+}
+
+.float-right-btn {
+  float: right;
+}
+
+.alert-box {
+  margin-top: 30px;
+  padding: 20px;
+  .alert-message {
+    display: inline-block;
+  }
+  img {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+  }
+}
+
+.alert-danger {
+  @extend .alert-box;
+  background-color: #FAECEC;
+}
+
+.alert-success {
+  @extend .alert-box;
+  background-color: #EDF8EB;
+}
+
+.invoice-validation-column-field {
+  width: 300px;
+  margin: 30px 0;
+  select {
+    width: 200px;
+  }
+  label {
+    display: block;
+    padding: 0 0 2px 0;
+  }
+}

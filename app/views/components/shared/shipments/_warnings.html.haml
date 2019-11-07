@@ -1,0 +1,10 @@
+- if !view_model.shipment_warnings.nil? && !view_model.shipment_warnings.empty?
+  %h2 Warnings
+  %table
+    %tr
+      %th Code
+      %th Description
+    - view_model.shipment_warnings.each do |warning|
+      %tr
+        %td= warning.code
+        %td= warning.description

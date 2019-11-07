@@ -1,0 +1,22 @@
+%table.packages
+  %tr
+    %th #
+    %th Product
+    %th Awb
+    %th Recipient
+    %th City
+    %th Zip code
+    %th Country
+    %th Packages
+    %th Weight
+  - shipments.each do |shipment|
+    %tr
+      %td= shipment.shipment_id
+      %td= shipment.carrier_product.name
+      %td= shipment.awb
+      %td= shipment.recipient.company_name
+      %td= shipment.recipient.city
+      %td= shipment.recipient.zip_code
+      %td= shipment.recipient.country_name
+      %td= shipment.number_of_packages
+      %td= shipment.total_weight

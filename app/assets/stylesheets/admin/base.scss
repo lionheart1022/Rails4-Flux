@@ -1,0 +1,1261 @@
+@import "admin/mixins";
+
+* {
+  margin: 0;
+}
+
+[hidden] { display: none; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #fff url(image_path("admin/bg_body.png")) repeat-y;
+  color: $text_dark_gray;
+  @include font_maven_pro;
+  font-weight: 300;
+}
+
+#page {
+  min-height: 100%;
+  min-width: 960px;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px;
+}
+
+#page_inner {
+  padding-bottom: 50px;
+}
+
+#header {
+  height: 80px;
+  background: url(image_path("admin/bg_header.png")) repeat-x;
+  position: relative;
+  z-index: 50;
+}
+
+#header_inner {
+  position: relative;
+}
+
+#secondary_nav {
+  position: absolute;
+  top: 0;
+  right: 25px;
+}
+
+#navigation {
+  float: left;
+  width: 259px;
+  margin-top: -14px;
+  z-index: 30;
+}
+
+#body {
+  margin: 0 50px 0 300px;
+}
+
+#footer {
+  height: 50px;
+}
+
+#loading_indicator {
+  width: 100px;
+  margin: auto;
+  text-align: center;
+}
+
+ul.actions .loading_indicator {
+  > img {
+    position: relative;
+    top: 5px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+form {
+  display: inline;
+}
+
+img {
+  border: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+ul, ol, dl {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid $table_border;
+  // border-spacing: 0;
+  border-radius: 4px;
+}
+
+table tr.error { border-left: 2px solid red; }
+table tr td.error { color: red; }
+
+.panel {
+  padding: 15px;
+  border: 1px solid $table_border;
+  border-spacing: 0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+p, li, dt, dd, th, td, label, div.input span {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+th, td {
+  margin: 0;
+  padding: 15px;
+  border-top: 1px solid $table_border;
+  line-height: 17px;
+}
+
+a {
+  color: $blue;
+}
+
+// ========== //
+
+h1 {
+  font-size: 30px;
+  line-height: 42px;
+  font-weight: 500;
+  margin: 20px 0 26px 0;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 400;
+  margin: 27px 0 6px 0;
+}
+
+h3 {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
+  margin: 23px 0 8px 0;
+}
+
+h4, h5, h6 {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 400;
+  margin: 8px 0 0 0;
+}
+
+p {
+
+}
+
+li {
+
+}
+
+dt {
+  float: left;
+  width: 160px;
+  font-weight: 400;
+}
+
+dt:after {
+  content: ":";
+}
+
+dd {
+  margin: 0 0 0 170px;
+}
+
+// Line break after dd to ensure empty dd's are cleared to new line
+dd:after {
+  content: '\A';
+  white-space: pre;
+}
+
+th {
+  border-top: none;
+  text-align: left;
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
+td {
+  color: $text_light_gray;
+  vertical-align: top;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 30px;
+  border-left: none;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 25px;
+}
+
+// ========== Header styles ========== //
+
+#header h1 {
+  margin: 0;
+  font-size: 23px;
+  line-height: 33px;
+
+  a {
+    display: inline-block;
+    padding: 14px 0 0 25px;
+
+    color: #fff;
+    text-decoration: none;
+    text-shadow: -1px 0 1px #1065c9, 0 1px 1px #1065c9, 1px 0 1px #1065c9, 0 -1px 1px #1065c9;
+  }
+}
+
+#secondary_nav {
+
+  ul {
+    font-size: 0;
+  }
+
+  li {
+    display: inline-block;
+    padding: 20px 25px 0 25px;
+    color: #fff;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    text-shadow: -1px 0 1px #1065c9, 0 1px 1px #1065c9, 1px 0 1px #1065c9, 0 -1px 1px #1065c9;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+}
+
+// ========== Navigation styles ========== //
+
+#navigation {
+
+  h3 {
+    margin: 0;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: $text_light_gray;
+    font-weight: 600;
+
+    background: #e3e5e7;
+    border-bottom: 1px solid #c6c6c7;
+    padding: 10px 0 10px 12px;
+  }
+
+  a {
+    display: block;
+    font-size: 16px;
+    line-height: 26px;
+    color: #717476;
+    text-decoration: none;
+    border-bottom: 1px solid #c6c6c7;
+    padding: 11px 22px 11px 22px;
+  }
+
+  li.sel a,
+  a:hover {
+    background: #fff;
+    color: $blue;
+  }
+
+  li.sel a {
+    font-weight: 600;
+  }
+
+}
+
+// ========== Footer styles ========== //
+
+#footer {
+  p {
+    width: 260px;
+    padding-top: 13px;
+
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: $text_light_gray;
+    font-weight: 600;
+  }
+}
+
+// ========== Flash messages ========== //
+
+div.alert {
+  margin: 20px 0 0 0;
+  font-weight: bold;
+}
+
+div.alert.alert_success {
+  color: $green;
+}
+
+div.alert.alert_error {
+  color: $red;
+}
+
+div.alert.alert_info,
+div.alert.alert_notice {
+  color: $blue;
+}
+
+// ========== Index pages (actions + tables + pagination) ========== //
+
+.page_actions {
+  position: relative;
+
+  h1:first-child {
+    margin-right: 14px;
+  }
+
+  ul.actions {
+    // position: absolute;
+    // top: 2px;
+    // right: 0;
+    margin: 0;
+
+    li:not(.search) {
+      padding-right: 0;
+      padding-left: 20px;
+    }
+  }
+
+  .ranges {
+    margin-bottom: 14px;
+
+    input {
+      width: 100px !important;
+    }
+  }
+
+  .select2.select2-container.select2-container--default {
+    // &:not(:first-child) { margin-left: 14px; }
+    margin-bottom: 10px;
+  }
+
+  .scopes {
+    font-size: 0;
+    border-top: 1px solid #bebebe;
+    padding-top: 25px;
+    margin: -10px 0 15px 0;
+
+    .range-input {
+      width: 100px;
+    }
+
+    .simple_form {
+      div.input {
+        display: inline-block;
+        margin: 0 25px 10px 0;
+      }
+    }
+  }
+
+}
+
+.page_actions .scopes .simple_form div.input {
+  &.shipment-filter-start-date,
+  &.shipment-filter-end-date {
+    margin-bottom: 20px;
+  }
+}
+
+p.no_results,
+p.noresults {
+  font-style: italic;
+}
+
+// All tables
+table {
+
+  td.unique_shipment_id {
+    min-width: 80px;
+  }
+
+  td.date {
+    width: 80px;
+  }
+
+  td.id {
+    width: 40px;
+    white-space: nowrap;
+  }
+
+  td.awb {
+    white-space: nowrap;
+  }
+
+  // Action column with buttons
+  td.actions {
+    text-align: right;
+  }
+
+  // Dashed border to show it belongs to parent in list view
+  tr.description td {
+    border-style: dashed none none none;
+  }
+
+}
+
+// Form panes (Rounded border)
+.form_pane {
+  border: 1px solid $table_border;
+  border-radius: 4px;
+  padding: 32px 40px 27px 40px;
+}
+
+// Text panes (Rounded border)
+.text_pane {
+  border: 1px solid $table_border;
+  border-radius: 4px;
+  padding: 0 30px 0 30px;
+}
+
+// Shipment + pickup tables
+table.shipments,
+table.autobooking_requests {
+  td.state span.state {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+table.pickups {
+  td.state span.state {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+table.shipments,
+table.pickups,
+table.autobooking_requests {
+
+  td.state {
+    background: url(image_path("admin/bg_states.png")) no-repeat 15px 16px;
+    padding-left: 30px;
+    white-space: nowrap;
+    width: 100px;
+  }
+
+  // Yellow
+  td.state.created,
+  td.state.request,
+  td.state.waiting_for_booking,
+  td.state.booking_initiated,
+  td.state.booked_awb_in_progress,
+  td.state.booked_consignment_note_in_progress,
+  td.state.waiting {
+    background-position: -1190px 16px;
+    color: $yellow;
+  }
+
+  // Blue
+  td.state.proposed,
+  td.state.booked,
+  td.state.booked_waiting_awb_document,
+  td.state.booked_waiting_consignment_note {
+    background-position: -290px 16px;
+    color: $blue;
+  }
+
+  // Purple
+  td.state.in_transit,
+  td.state.in_progress {
+    background-position: -1505px 16px;
+    color: $purple;
+  }
+
+  // Green
+  td.state.accepted,
+  td.state.delivered_at_destination,
+  td.state.picked_up,
+  td.state.completed {
+    background-position: -590px 16px;
+    color: $green;
+  }
+
+  // Gray
+  td.state.canceled,
+  td.state.cancelled {
+    background-position: 10px 16px;
+  }
+
+  // Red
+  td.state.declined,
+  td.state.booking_failed,
+  td.state.problem,
+  td.state.error {
+    background-position: -890px 16px;
+    color: $red;
+  }
+
+  // Tooltip popup action forms
+  div.state_actions {
+    display: none;
+  }
+
+  // AWB Links
+  .awb_track_and_trace_link,
+  .awb_document_link {
+    display: inline-block;
+    vertical-align: middle;
+
+    img {
+      display: block;
+    }
+  }
+
+  .awb_track_and_trace_link {
+    padding-right: 4px;
+  }
+
+}
+
+table.autobooking_requests {
+  td.state {
+    span.state {
+      text-decoration: none;
+      cursor: text;
+    }
+  }
+
+  td.id {
+    width: 150px;
+  }
+}
+
+table.autobooking_requests.request_info {
+  td.date {
+    width: 100%;
+  }
+
+  td.state {
+    min-width: 100px;
+  }
+}
+
+// Pagination
+div.pagination {
+  padding-top: 36px;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  span {
+    display: inline-block;
+    padding: 2px;
+  }
+
+  span.current {
+    font-weight: bold;
+    color: #696969;
+  }
+
+  span.prev {
+    padding-right: 30px;
+  }
+
+  span.next {
+    padding-left: 30px;
+  }
+}
+
+// ========== Show pages ========== //
+
+// Company shipment page
+//
+
+
+.page_actions h1 {
+  display: inline-block;
+}
+
+.page_actions ul.actions {
+  display: inline-block;
+  float: right;
+  margin-top: 25px;
+}
+
+div.shipment {
+  position: relative;
+  overflow: hidden;
+
+  // .page_actions {
+  //   position: static;
+  // }
+
+  .shipment_company_name_container {
+    margin: 20px 0;
+    float: right;
+    vertical-align: middle;
+
+    > * {
+      margin: 0;
+      vertical-align: middle;
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .section_header {
+    position: relative;
+
+    .left {
+      display: inline-block;
+    }
+
+    .right {
+      position: absolute;
+      right: 0;
+      bottom: 6px;
+      display: inline-block;
+    }
+  }
+
+  .shipment_note_display {
+    position: relative;
+    font-size: 14px;
+
+    .actions {
+      display: inline-block;
+      margin-top: 0px;
+    }
+
+    .add_note {
+      position: absolute;
+      top: -41px;
+      left: 155px;
+    }
+  }
+
+  .shipment_note_field {
+    .actions {
+      margin-top: 15px;
+    }
+  }
+
+  // notes
+  .note_text {
+    position: relative;
+
+    textarea {
+      padding: 15px;
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+      box-sizing: border-box; /* Make sure that width doesnt extend beyond padding */
+      width: 100%;
+      // min-height: 140px;
+      resize: vertical;
+    }
+
+    input[type="submit"] {
+      position: relative;
+      float: right;
+    }
+  }
+
+  table.files {
+
+    #upload_loading_indicator {
+      padding-right: 25px;
+      img {
+        margin: auto;
+      }
+    }
+
+    .delete_link a {
+      display: inline-block;
+      height: 22px;
+    }
+
+    .loading_indicator {
+      padding: 0 0 0 30px;
+
+      img {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    tr.new_file {
+      vertical-align: middle;
+
+      .input {
+        margin: 0px;
+      }
+
+      .actions {
+        margin: 0px;
+      }
+    }
+  }
+
+  .history {
+    td.date {
+      min-width: 200px;
+    }
+
+    td.event_name {
+      min-width: 200px;
+    }
+  }
+
+  table.packages {
+    tr:last-child {
+      font-weight: bold;
+    }
+  }
+
+  // Auto-book
+  .autobook {
+    padding-top: 30px;
+
+    .autobook_inner {
+      background: #f3f4f5;
+      border: 1px solid #dfdfe0;
+      border-radius: 4px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    p.intro {
+      display: inline-block;
+      font-size: 18px;
+      padding-top: 6px;
+    }
+
+    form {
+      float: right;
+    }
+
+    ul.actions {
+      margin-top: 0;
+      // position: absolute;
+      // top: 2px;
+      // right: 0;
+
+
+      li.primary {
+        padding-right: 0;
+
+        input[type="submit"] {
+          @include bg_gradient_and_image(#1ca7e0, #1065c9, image_path("admin/ic_autobook.png"));
+          background-repeat: no-repeat, repeat;
+          background-position: 12px 3px, 0 0;
+          padding-left: 47px;
+        }
+      }
+    }
+  }
+
+  // AWB document upload
+  td.awb {
+    div.attachment {
+      .filename {
+        margin-bottom: 0;
+      }
+
+      form {
+        margin-top: 20px;
+        margin-bottom: 0;
+      }
+
+      .upload {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  // AWB + Invoice + Consignment uploads
+  td div.attachment {
+    form,
+    .upload .progress {
+      margin-bottom: 0;
+    }
+
+    .upload {
+      margin-top: 30px;
+    }
+  }
+
+  // State change
+  td.state_change {
+      .simple_form {
+      font-size: 0;
+
+      select,
+      input.string,
+      input.fake {
+        @include box_model_border_box;
+        width: 175px;
+      }
+
+      div,
+      ul.actions {
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 12px;
+        margin: 0;
+      }
+
+      ul.actions li {
+        padding: 0;
+      }
+    }
+
+    .simple_form.hide_awb_number {
+      div.shipment_awb {
+        display: none;
+      }
+
+      div.shipment_comment {
+        input.fake {
+          width: 362px;
+        }
+      }
+    }
+
+    .simple_form div.pickup_comment {
+      input.fake {
+        width: 362px;
+      }
+    }
+
+  }
+
+  // Pricing text (customer)
+  .pricing.text_pane {
+    h3 {
+      margin-bottom: 23px;
+
+      span {
+        font-weight: 300;
+      }
+    }
+  }
+
+  // Pricing form (company)
+  .simple_form {
+    table.pricing {
+      tr {
+        td {
+          font-size: 0;
+          border-top: 0;
+          padding-top: 24px;
+          padding-bottom: 17px;
+
+          div {
+            display: inline-block;
+            padding-right: 12px;
+          }
+        }
+
+        td.company_price,
+        td.customer_price {
+          padding-right: 0;
+          white-space: nowrap;
+
+          input.numeric {
+            width: 64px;
+          }
+
+          select {
+            @include box_model_border_box;
+            width: 157px;
+          }
+        }
+
+        td.customer_price {
+          padding-left: 18px;
+        }
+
+        td.save {
+          width: 100%;
+          padding-left: 0;
+        }
+      }
+
+      ul.actions {
+        margin: 0 0 0 0;
+
+        li {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  span.bold {
+    font-weight: bold;
+  }
+
+  h3.shipment_company_name:not(:last-child) {
+    padding-right: 10px;
+  }
+
+}
+
+div.attachment {
+  min-width: 200px;
+
+  .filename {
+    font-size: 14px;
+    margin-bottom: 20px;
+
+    .filename_inner {
+      p {
+        display: inline-block;
+        margin-left: -5px;
+        padding: 0 5px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  form {
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+
+  h5 {
+    margin-top: -20px;
+  }
+
+  .upload {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+
+    h5 {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 300;
+    }
+
+    .progress {
+      margin: 0 0 20px 0;
+
+      .bar {
+        background: $blue;
+      }
+    }
+  }
+
+}
+
+// Company customer page
+#body_companies {
+
+  .simple_form {
+
+    // Carrier products table
+    table.carrier_products {
+
+      div.input.boolean {
+        margin: 0;
+      }
+
+      td.disabled {
+        color: #cdcdcd;
+      }
+
+      td.carrier_product {
+        input {
+          margin-right: 8px;
+        }
+      }
+
+      td.margin {
+        input {
+          width: 55px;
+          padding: 5px;
+        }
+      }
+
+    }
+  }
+}
+
+#body_companies_dashboard {
+  background-color: #e6e6ea;
+
+  #body {
+    margin: 10px 20px 0 280px;
+  }
+
+  div.alert {
+    margin: 0 0 20px;
+  }
+}
+
+// ========== Price documents ========== //
+table.price_document_parsing_errors {
+  tr.warning td {
+    color: $yellow;
+  }
+
+  tr.fatal td {
+    color: $red;
+  }
+}
+
+// ========== State tooltip popups ========== //
+.qtip {
+
+  .simple_form {
+    input.string,
+    textarea {
+      width: 300px;
+    }
+  }
+
+  ul.actions {
+    margin-top: 18px;
+  }
+
+}
+
+.qtip-content {
+  padding: 10px;
+}
+
+.shipment {
+  .search {
+    input[type="submit"] {
+      // display: inline-block;
+      // position: absolute;
+      // top: -26px;
+      // left: 12px;
+    }
+  }
+}
+
+.search {
+  position: relative;
+  input[type="submit"] {
+    // position: absolute;
+    // left: 262px;
+    // top: -24px;
+  }
+
+  ul.actions {
+    padding-right: 0 !important;
+  }
+
+  div.input {
+    margin-bottom: 0 !important;
+  }
+
+  .simple_form {
+      font-size: 0;
+
+      select,
+      input.string,
+      input.fake {
+        @include box_model_border_box;
+        width: 250px;
+      }
+
+      div,
+      ul.actions {
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 12px;
+        margin: 0;
+      }
+
+      ul.actions li {
+        padding: 0;
+      }
+    }
+}
+
+.tokens {
+  .input {
+    display : inline-block;
+
+    input {
+      width: 302px !important;
+    }
+  }
+
+  .actions {
+    display  : inline-block;
+    position : relative;
+    top      : -7px;
+    left     : 8px;
+  }
+}
+
+.upload-customers ul.actions {
+  margin-bottom: 16px;
+}
+
+.simple_form.new_end_of_day_manifest li.primary input {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+
+form.shipment-search {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.date-picker-wrapper {
+  z-index: 9999 !important;
+}
+
+.page_actions ul.actions.fix_right_alignment li {
+  padding-right: 0;
+  padding-left: 20px;
+}
+
+div.padded {
+  margin: 18px 0;
+}
+
+.new_rfq_based_on_this_container {
+  border-left: 1px solid #ddd;
+  margin-left: 10px;
+  padding-left: 16px;
+}
+
+.reset_font_size {
+  p {
+    font-size: initial;
+  }
+}
+
+hr.dashed-separator {
+  display: block;
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 20px 0;
+}
+
+.page_actions .scopes .simple_form .scope_inputs div.input {
+  vertical-align: top;
+}
+
+.inline_block_container {
+  display: inline-block;
+}
+
+.initially_hidden {
+  display: none;
+}
+
+.text-right {
+  text-align: right;
+}
+
+h2.no-t-margin {
+  margin-top: 0;
+}
+
+.error_text {
+  color: $red;
+}
+
+button.button-as-plain-link {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  color: $green;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.p-t-6 {
+  padding-top: 6px
+}
+
+.with-underline {
+  text-decoration: underline;
+}
+
+.blank-dimmed {
+  color: #bbb;
+}
+
+.w400_px,
+.simple_form select.w400_px {
+  box-sizing: border-box;
+  width: 426px;
+}
+
+.overflow-x-box {
+  display: block !important;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ok-color {
+  color: $green;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.clear-fix {
+  overflow: auto;
+}
+
+.shipment_description_row td {
+  border-style: dashed none none none;
+
+  &:first-child {
+    padding-left: 15px;
+  }
+}

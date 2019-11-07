@@ -1,0 +1,13 @@
+%tr
+  %td.state{ :class => data.state }
+    = ViewHelper::Pickups.state_name(data.state)
+  %td.id
+    = link_to(data.unique_pickup_id, customers_pickup_path(data))
+  %td.date
+    = data.pickup_date
+  %td
+    = data.from_time
+  %td
+    = data.to_time
+  %td
+    = data.description

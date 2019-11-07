@@ -1,0 +1,11 @@
+%tr
+  %td.state{ class: request.state }
+    %span.state= ViewHelper::CarrierProductAutobookRequests.state_name(request.state)
+  %td.id
+    = link_to(request.uuid, companies_autobooking_request_path(request))
+  %td.date
+    = request.created_at
+  %td
+    = request.shipment.carrier_product.suffixed_name
+  %td
+    = link_to("#{request.shipment.unique_shipment_id}", companies_shipment_path(request.shipment))

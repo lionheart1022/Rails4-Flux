@@ -1,0 +1,101 @@
+- price_document = rate_sheet.carrier_product.price_document
+- rate_sheet.rate_snapshot["prices_per_zone_groups"].each do |zone_group|
+  %table.rate_sheet_price_table
+    %thead
+      %tr
+        %th
+        %th
+        - zone_group["zones"].each do |zone|
+          %th= zone["name"]
+    %tbody
+      - zone_group["prices"].each do |price|
+        - if price["charge_type"] == "FlatWeightCharge"
+          %tr
+            %td.rate_sheet_price_table__scale
+              - if price_document.calculation_basis.to_s.casecmp("pallet") == 0
+                = fractional_formatted(price["charge_data"]["weight"])
+                pll
+              - elsif rate_sheet.carrier_product.options.basis == "weight"
+                = price["charge_data"]["weight"]
+                kg
+              - else
+                = price["charge_data"]["weight"]
+            %td
+            - price["zone_prices"].each do |zone_price|
+              %td= zone_price["amount"]
+        - elsif price["charge_type"] == "WeightRangeCharge"
+          %tr
+            %td.rate_sheet_price_table__scale
+              %span
+                - if price_document.calculation_basis.to_s.casecmp("pallet") == 0
+                  = fractional_formatted(price["charge_data"]["weight_low"])
+                  pll
+                - elsif rate_sheet.carrier_product.options.basis == "weight"
+                  = price["charge_data"]["weight_low"]
+                  kg
+                - else
+                  = price["charge_data"]["weight_low"]
+              \-
+              %span
+                - if price_document.calculation_basis.to_s.casecmp("pallet") == 0
+                  = fractional_formatted(price["charge_data"]["weight_high"])
+                  pll
+                - elsif rate_sheet.carrier_product.options.basis == "weight"
+                  = price["charge_data"]["weight_high"]
+                  kg
+                - else
+                  = price["charge_data"]["weight_high"]
+            %td
+            - price["zone_prices"].each do |zone_price|
+              %td
+                - if zone_price["price_low"].present?
+                  = zone_price["price_low"]
+                - if zone_price["price_per_interval"].present?
+                  +
+                  = zone_price["price_per_interval"]
+                  \/
+                  %span
+                    - if price_document.calculation_basis.to_s.casecmp("pallet") == 0
+                      = fractional_formatted(price["charge_data"]["interval"])
+                      pll
+                    - elsif rate_sheet.carrier_product.options.basis == "weight"
+                      = price["charge_data"]["interval"]
+                      kg
+                    - else
+                      = price["charge_data"]["interval"]
+        - elsif price["charge_type"] == "RangeCharge"
+          %tr
+            %td.rate_sheet_price_table__scale From price
+            %td
+            - price["zone_prices"].each do |zone_price|
+              %td= zone_price["price_low"]
+          %tr
+            %td.rate_sheet_price_table__scale To price
+            %td
+            - price["zone_prices"].each do |zone_price|
+              %td= zone_price["price_high"]
+          %tr
+            %td.rate_sheet_price_table__scale
+            %td.rate_sheet_price_table__secondary_scale
+              = price["charge_data"]["interval"]
+              - if rate_sheet.carrier_product.options.basis == "distance"
+                km
+            - price["zone_prices"].each do |zone_price|
+              %td= zone_price["price_per_interval"]
+
+%h2.rate_sheet__zones_heading Zones
+
+%table
+  %thead
+    %tr
+      %th Zone
+      %th Country
+  %tbody
+    - rate_sheet.rate_snapshot["grouped_zones"].each do |group|
+      - group.each do |zone|
+        %tr
+          %td= zone["name"]
+          %td
+            - zone["regions"].each do |region|
+              %span.rate_sheet__region
+                = "#{region['country_code']}&nbsp;#{region['country_name']}".html_safe

@@ -1,0 +1,23 @@
+.billing_configuration_enable_container {
+  margin-bottom: 20px;
+}
+
+.billing_configuration_settings_container {
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border-left: 2px solid #eee;
+}
+
+.simple_form .billing_configuration_settings_container label {
+  font-size: inherit;
+}
+
+.billing_configuration_setting_container {
+  margin-bottom: 6px;
+}
+
+.simple_form input.billing_configuration_day_interval_input {
+  width: 45px;
+  text-align: right;
+}

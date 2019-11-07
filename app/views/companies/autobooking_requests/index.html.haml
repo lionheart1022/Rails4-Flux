@@ -1,0 +1,9 @@
+.page_header
+  %h1 Booking Requests
+
+= render "companies/autobooking_requests/filter_form", form_object: @filter
+
+= render "companies/autobooking_requests/list_view"
+
+.pagination
+  = paginate(@filter.requests)

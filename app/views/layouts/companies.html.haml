@@ -1,0 +1,10 @@
+- content_for :secondary_nav do
+  %ul.user_actions
+    %li= link_to("What's new!", companies_whats_new_path)
+    %li= link_to("Edit Profile", companies_user_profile_path)
+    %li= link_to("Sign out", destroy_user_session_path, method: :delete)
+
+- content_for :primary_nav do
+  = render "shared/admin_navigation"
+
+= render template: "layouts/application"

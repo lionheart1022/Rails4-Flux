@@ -1,0 +1,31 @@
+.page_header.with_table_below
+  %h1= @delivery.truck.name
+
+  %ul.page_actions
+    - if @delivery.in_transit?
+      %td= link_to "Empty truck", companies_delivery_path(@delivery), method: :delete, class: "primary-btn", data: { confirm: 'Are you sure?' }
+
+%table
+  %tr
+    %th ID
+    %th State
+    %th Date
+    %th Shipments
+    %th Total weight
+    %th Driver
+  %tr
+    %td= @delivery.unique_delivery_number
+    %td= @delivery.human_readable_state
+    %td= local_time @delivery.created_at, '%Y-%m-%d'
+    %td= @delivery.shipments_count
+    %td= "#{@delivery.shipments_total_weight} Kg"
+    %td= @delivery.truck_driver ? @delivery.truck_driver.name : "-"
+
+%h2 Shipments
+
+- if @delivery_shipments.size > 0
+  %table.shipments
+    = render "companies/shipments/list_view_shipment_columns"
+    = render partial: "companies/shipments/list_view_shipment_row", collection: @delivery_shipments, as: :data
+- else
+  %p.no_results No shipments found

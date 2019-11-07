@@ -1,0 +1,2 @@
+class KHTCarrier < Carrier
+end

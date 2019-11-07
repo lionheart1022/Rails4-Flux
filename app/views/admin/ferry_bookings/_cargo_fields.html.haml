@@ -1,0 +1,7 @@
+%h2 Cargo
+.form_pane
+  = form.input :description_of_goods, as: :text, label: "Short description of goods"
+
+  .multi_field_group.cargo_weight_fields
+    = form.input :cargo_weight, label: "Weight (kg)", input_html: { class: "cargo_weight_input" }
+    = form.input :empty_cargo, as: :boolean

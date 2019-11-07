@@ -1,0 +1,4 @@
+<%= "A problem occurred auto booking #{@customer.name} shipment ##{@shipment.unique_shipment_id} with #{@shipment.carrier_product.name}" %>
+<%= ViewHelper::Shipments.company_email_shipment_url_with_common_or_company_domain(shipment: @shipment, company: @company) %>
+
+<%= render "/components/shared/mailer/booking", shipment: @shipment %>

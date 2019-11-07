@@ -1,0 +1,18 @@
+- if @filter.is_ungrouped?
+  - if @filter.ungrouped_requests.size > 0
+    %table.autobooking_requests
+      = render "companies/autobooking_requests/list_view_header"
+      = render partial: "companies/autobooking_requests/list_view_row", collection: @filter.ungrouped_requests, as: :request
+  - else
+    %p.no_results No booking requests found
+
+- else
+  - @filter.grouped_requests.each do |group|
+    %h2= group.name
+    - if group.data.size > 0
+      %table.autobooking_requests
+        = render "companies/autobooking_requests/list_view_header"
+        = render partial: "companies/autobooking_requests/list_view_row", collection: group.data, as: :request
+
+  - if @filter.grouped_requests.size < 1
+    %p.no_results No booking requests found

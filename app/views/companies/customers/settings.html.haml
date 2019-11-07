@@ -1,0 +1,30 @@
+%header.page_header
+  %h1= @customer.name
+
+= render "companies/customers/subnav", active_nav: :settings, customer_id: params[:id]
+
+%h2 Detailed pricing
+
+- if @customer.show_detailed_prices?
+  %p Detailed pricing is enabled for this customer.
+
+  %div.padded
+    = button_to "Disable detailed pricing for this customer", companies_customer_detailed_pricing_path(@customer), method: :delete, class: "primary-btn"
+- else
+  %p Detailed pricing is disabled for this customer.
+
+  %div.padded
+    = button_to "Enable detailed pricing for this customer", companies_customer_detailed_pricing_path(@customer), method: :post, class: "primary-btn"
+
+%h2 Dangerous goods
+
+- if @customer.allow_dangerous_goods?
+  %p This customer is currently allowed to make DGR shipments.
+
+  %div.padded
+    = button_to "Disable DGR for this customer", companies_customer_dgr_path(@customer), method: :delete, class: "primary-btn", data: { confirm: "This customer will no longer be able to book DGR shipments. Are you sure you want to do this?" }
+- else
+  %p This customer is currently not allowed to make DGR shipments.
+
+  %div.padded
+    = button_to "Enable DGR for this customer", companies_customer_dgr_path(@customer), method: :post, class: "primary-btn"

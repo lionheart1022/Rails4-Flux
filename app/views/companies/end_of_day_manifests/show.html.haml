@@ -1,0 +1,13 @@
+%header.page_header
+  %h1= "End of Day Manifest ##{@end_of_day_manifest.owner_scoped_id}"
+
+  %ul.page_actions
+    %li= link_to("All manifests", url_for(action: "index"))
+    %li= link_to("Print", url_for(action: "print", id: @end_of_day_manifest.id), target: "_blank", class: "primary-btn")
+
+%h2.packages Packages
+
+= render "packages", shipments: @shipments
+
+.pagination
+  = paginate(@shipments)

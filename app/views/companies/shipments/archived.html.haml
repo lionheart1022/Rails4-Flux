@@ -1,0 +1,15 @@
+.page_actions
+  %h1 Shipments - Archived
+
+  %ul.actions.fix_right_alignment
+    %li= button_tag("Bulk edit state", type: "button", data: { behavior: "shipment_bulk_update__toggle_button" }, class: "secondary-btn")
+
+  %div.scopes
+    = simple_form_for(@view_model, url: archived_companies_shipments_path, method: :get, as: :scope) do |form|
+      = render "list_view_form", form: form
+
+= render "state_bulk_update_form"
+= render "list_view_shipments"
+
+.pagination
+  = paginate(@view_model.shipments)

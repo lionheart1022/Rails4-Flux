@@ -1,0 +1,26 @@
+%header.page_header.with_table_below
+  %h1 End of Day Manifests
+
+  %ul.page_actions
+    %li= link_to("New Manifest", url_for(action: "new"), class: "primary-btn")
+
+- if @end_of_day_manifests.size > 0
+  %table
+    %tr
+      %th #
+      %th{ width: "25%" } Created
+      %th Number of shipments
+      %th Number of packages
+      %th Total weight
+    - @end_of_day_manifests.each do |end_of_day_manifest|
+      %tr
+        %td= end_of_day_manifest.end_of_day_manifest_id
+        %td= link_to(l(end_of_day_manifest.created_at, format: :long), url_for(action: "show", id: end_of_day_manifest.id))
+        %td= end_of_day_manifest.number_of_shipments
+        %td= end_of_day_manifest.number_of_packages
+        %td= end_of_day_manifest.total_weight
+- else
+  %p.no_results No end of day manifests found.
+
+.pagination
+  = paginate(@end_of_day_manifests)

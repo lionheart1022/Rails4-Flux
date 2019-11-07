@@ -1,0 +1,62 @@
+%h2 Customs
+
+%table
+  %tr
+    %th Dutiable
+    %th Amount
+    %th Customs code
+    %th Invoice
+    %th Consignment note
+  %tr
+    %td= check_box_tag(:dutiable, 1, view_model.shipment.dutiable, {disabled: true})
+    %td= number_to_currency(view_model.shipment.customs_amount, unit: view_model.shipment.customs_currency.try(:upcase), format: '%u %n')
+    %td= view_model.shipment.customs_code
+    %td
+      #invoice_attachment.attachment
+        .filename
+          .filename_inner
+            - if view_model.shipment.asset_invoice.present?
+              %p= link_to(view_model.shipment.asset_invoice.attachment_file_name, view_model.shipment.asset_invoice.attachment.url, target: "_blank")
+            - elsif view_model.shipment.dutiable?
+              %p
+                - if current_customer
+                  = link_to("Proforma Invoice", customers_shipment_proforma_invoice_path(view_model.shipment), target: "_blank")
+                - else
+                  = link_to("Proforma Invoice", companies_shipment_proforma_invoice_path(view_model.shipment), target: "_blank")
+            - else
+              %p No Invoice
+
+        - if view_model.allow_inline_invoice_upload
+          = s3_uploader_form(callback_url:   view_model.invoice_upload_callback_url,
+                             data:           { bucket_name: Rails.configuration.aws[:bucket], drop_zone: "null", paste_zone: "null" },
+                             id:             's3_invoice_attachment_uploader',
+                             key:            "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file",
+                             callback_param: 'file[direct_attachment_url]',
+                             expiration:     24.hours.from_now.utc.iso8601,
+                             max_file_size:  500.megabytes) do |f|
+
+            = file_field_tag :file, multiple: false
+
+          #invoice_attachment_uploads.attachment
+
+    %td
+      #consignment_note_attachment.attachment
+        .filename
+          .filename_inner
+            - if view_model.shipment.asset_consignment_note.present?
+              %p= link_to(view_model.shipment.asset_consignment_note.attachment_file_name, view_model.shipment.asset_consignment_note.attachment.url, target: "_blank")
+            - else
+              %p No consignment note
+
+        - if view_model.allow_inline_consignment_note_upload
+          = s3_uploader_form(callback_url:   view_model.consignment_note_upload_callback_url,
+                             data:           { bucket_name: Rails.configuration.aws[:bucket], drop_zone: "null", paste_zone: "null" },
+                             id:             's3_consignment_note_attachment_uploader',
+                             key:            "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file",
+                             callback_param: 'file[direct_attachment_url]',
+                             expiration:     24.hours.from_now.utc.iso8601,
+                             max_file_size:  500.megabytes) do |f|
+
+            = file_field_tag :file, multiple: false
+
+          #consignment_note_attachment_uploads.attachment

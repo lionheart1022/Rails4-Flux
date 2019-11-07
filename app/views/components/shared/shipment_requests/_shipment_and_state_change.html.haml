@@ -1,0 +1,73 @@
+%table.shipments
+  %tr
+    %th State
+    %th Date
+    %th Product
+    - if view_model.show_price
+      %th Price
+    %th Packages
+    - if view_model.show_route
+      %th Route
+
+  %tr
+    %td.state{ :class => view_model.shipment.shipment_request.state }= ViewHelper::ShipmentRequests.state_name(view_model.shipment.shipment_request.state)
+    %td.date
+      - if view_model.show_shipment_link?
+        = link_to view_model.shipment.shipping_date, view_model.shipment_url
+      - else
+        = view_model.shipment.shipping_date
+
+    %td= view_model.shipment.carrier_product.name
+    - if view_model.show_price
+      %td= view_model.price_with_currency
+    %td= view_model.shipment.number_of_packages
+
+    - if view_model.show_route
+      %td
+        #map.company
+        .company.map_status
+        = link_to('Show Route', '#', class: "company route_link")
+
+  - if view_model.shipment.description.present?
+    %tr
+      %td{ :colspan => 3 }
+        %span.bold Description:
+        = view_model.shipment.description
+      - if view_model.show_price
+        %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.reference.present?
+    %tr
+      %td{ :colspan => 3 }
+        %span.bold Customer reference:
+        = view_model.shipment.reference
+      - if view_model.show_price
+        %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.remarks.present?
+    %tr
+      %td{ :colspan => 3 }
+        %span.bold Remarks:
+        = view_model.shipment.remarks
+      - if view_model.show_price
+        %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.delivery_instructions.present?
+    %tr
+      %td{ :colspan => 3 }
+        %span.bold Delivery Instructions:
+        = "Deposit"
+      - if view_model.show_price
+        %td
+      %td
+      - if view_model.show_route
+        %td

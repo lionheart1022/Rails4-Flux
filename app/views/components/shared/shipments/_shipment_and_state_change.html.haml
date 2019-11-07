@@ -1,0 +1,128 @@
+%table.shipments
+  %tr
+    %th State
+    %th Date
+    %th ETA
+    %th Product
+    - if view_model.show_price
+      %th Price
+    %th Packages
+    %th AWB
+    - if view_model.show_route
+      %th Route
+
+  %tr
+    %td.state{ :class => view_model.shipment.state }= ViewHelper::Shipments.state_name(view_model.shipment.state)
+    %td.date= view_model.shipment.shipping_date
+    %td
+      - if view_model.shipment.estimated_arrival_date
+        %div= l(view_model.shipment.estimated_arrival_date, format: :long)
+      - else
+        %div N/A
+      - if view_model.shipment.carrier_product.transit_time?
+        %div
+          %strong Time in Transit:
+          = view_model.shipment.carrier_product.transit_time
+    %td
+      = view_model.shipment.carrier_product.name
+    - if view_model.show_price
+      %td= view_model.price_with_currency
+    %td= view_model.shipment.number_of_packages
+    %td.awb
+      #awb_attachment.attachment
+        .filename
+          .filename_inner
+            = render(partial: "components/shared/carrier_products/awb", locals: {shipment: view_model.shipment})
+
+        - if view_model.awb_upload_allowed?
+          = s3_uploader_form(callback_url:   view_model.awb_upload_callback_url,
+                             data:           { bucket_name: Rails.configuration.aws[:bucket], drop_zone: "null", paste_zone: "null" },
+                             id:             's3_awb_attachment_uploader',
+                             key:            "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file",
+                             callback_param: 'file[direct_attachment_url]',
+                             expiration:     24.hours.from_now.utc.iso8601,
+                             max_file_size:  500.megabytes) do |f|
+
+            = file_field_tag :file, multiple: false
+
+      #awb_attachment_uploads.attachment
+    - if view_model.show_route
+      %td
+        #map.company
+        .company.map_status
+        = link_to('Show Route', '#', class: "company route_link")
+
+  - if view_model.state_editable?
+    %tr
+      %td.state_change{ :colspan => 6 }
+        = simple_form_for(ShipmentStateForm.build_for_shipment(view_model.shipment), url: companies_shipment_state_changes_path(view_model.shipment), method: :post, as: "shipment", html: { id: "shipment_state_change", class: nil }) do |f|
+          = f.input :state, collection: f.object.available_state_options, include_blank: false, label: false
+          = f.input :awb, label: false, input_html: { placeholder: "AWB no." }
+          = f.input :comment, label: false, input_html: { placeholder: "Comment" }
+
+          %ul.actions
+            %li.primary= f.submit "Save"
+      - if view_model.show_price
+        %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.truck_driver_editable
+    %tr
+      %td{ :colspan => 6 }
+        = form_tag companies_shipment_truck_driver_path(view_model.shipment.id), method: :put, class: "simple_form shipment_truck_driver_form" do
+          = label_tag "shipment_truck_driver_id", "Driver"
+          = select_tag "shipment[truck_driver_id]", options_from_collection_for_select(view_model.available_truck_drivers, "id", "name", view_model.shipment.truck_driver.try(:id)), include_blank: true, id: "shipment_truck_driver_id"
+          = submit_tag "Save", class: "primary-btn"
+      - if view_model.show_price
+        %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.description.present?
+    %tr
+      %td{ :colspan => 4 }
+        %span.bold Description:
+        = view_model.shipment.description
+      - if view_model.show_price
+        %td
+      %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.reference.present?
+    %tr
+      %td{ :colspan => 4 }
+        %span.bold Customer reference:
+        = view_model.shipment.reference
+      - if view_model.show_price
+        %td
+      %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.remarks.present?
+    %tr
+      %td{ :colspan => 4 }
+        %span.bold Remarks:
+        = view_model.shipment.remarks
+      - if view_model.show_price
+        %td
+      %td
+      %td
+      - if view_model.show_route
+        %td
+
+  - if view_model.shipment.delivery_instructions.present?
+    %tr
+      %td{ :colspan => 4 }
+        %span.bold Delivery Instructions:
+        = "Deposit"
+      - if view_model.show_price
+        %td
+      %td
+      %td
+      - if view_model.show_route
+        %td

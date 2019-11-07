@@ -1,0 +1,2 @@
+class DAOTracking < Tracking
+end

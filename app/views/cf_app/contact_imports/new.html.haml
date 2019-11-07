@@ -1,0 +1,24 @@
+%header.page_header
+  %h1 Import Contacts
+
+.padded Upload an XLSX file with column headers as below.
+
+.padded
+  %p
+    %strong Required columns
+  %p
+    company_name, address_1, country_code
+
+.padded
+  %p
+    %strong Optional columns
+  %p
+    address_2, address_3, zip_code, city, state_code/state, attention, phone, account_number
+
+= simple_form_for :import, method: :post, url: url_for(action: "create") do |f|
+  = hidden_field_tag "state", "show_parsed", id: nil
+  = f.input :file, as: :file, label: false
+
+  %ul.actions
+    %li.primary= f.submit "Upload"
+    %li= link_to "Cancel", url_for(controller: "contacts", action: "index")

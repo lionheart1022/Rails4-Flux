@@ -1,0 +1,13 @@
+- content_for(:body_pre_flash) do
+  - if @login_page.primary_company && @login_page.primary_company.asset_logo
+    .app_brand_logo__centered
+      = image_tag(@login_page.primary_company.asset_logo.attachment.url)
+
+%h2 Sign in
+
+= simple_form_for(:user, url: login_page_redirect_path(id: @login_page.id), html: { id: nil, class: "sign_in_form" }) do |f|
+  .sign_in_form__inputs
+    = f.input :email, :required => false, :autofocus => true
+
+  .sign_in_form__actions
+    = f.button(:submit, "Sign in", class: "primary-btn")

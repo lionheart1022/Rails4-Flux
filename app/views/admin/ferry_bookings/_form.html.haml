@@ -1,0 +1,14 @@
+= simple_form_for view_model.form, url: view_model.form_url, as: :ferry_booking, method: view_model.form_method, html: { class: "ferry_booking_form" } do |form|
+  .form_base_error_wrapper
+    = form.error :base
+
+  = form.input :customer_id, as: :customer_autocomplete_select, placeholder: "Select customer", input_html: { data: { :"allow-clear" => "true", :width => "300px" } } if form.object.customer_selectable?
+
+  = render "admin/ferry_bookings/travel_fields", form: form
+  = render "admin/ferry_bookings/truck_fields", form: form
+  = render "admin/ferry_bookings/cargo_fields", form: form
+  = render "admin/ferry_bookings/additional_info_fields", form: form
+
+  %ul.actions
+    %li= link_to view_model.cancel_text, view_model.cancel_url
+    %li.primary= form.submit view_model.submit_text

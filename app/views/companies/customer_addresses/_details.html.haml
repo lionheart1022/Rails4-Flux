@@ -1,0 +1,69 @@
+%dl
+  %dt
+    Attention
+  %dd
+    = customer_address.attention
+
+  %dt
+    Address line 1
+  %dd
+    = customer_address.address_line1
+
+  %dt
+    Address line 2
+  %dd
+    = customer_address.address_line2
+
+  %dt
+    Address line 3
+  %dd
+    = customer_address.address_line3
+
+  %dt
+    Zip code
+  %dd
+    = customer_address.zip_code
+
+  %dt
+    City
+  %dd
+    = customer_address.city
+
+  %dt
+    Country
+  %dd
+    = customer_address.country_name
+
+  - if customer_address.state_code.present?
+    %dt
+      State
+    %dd
+      = customer_address.state_name_and_code
+
+  %dt
+    Email
+  %dd
+    = mail_to(customer_address.email)
+
+  %dt
+    Phone number
+  %dd
+    = customer_address.phone_number
+
+  - if customer.external_accounting_number.present?
+    %dt
+      External accounting no.
+    %dd
+      = customer.external_accounting_number
+
+  - if customer_address.cvr_number.present?
+    %dt
+      CVR
+    %dd
+      = customer_address.cvr_number
+
+  - if customer_address.note.present?
+    %dt
+      Note
+    %dd
+      = simple_format(customer_address.note)

@@ -1,0 +1,21 @@
+%tr
+  %td.state{ class: data.state }
+    = ViewHelper::ShipmentRequests.state_name(data.state)
+  %td.id
+    = link_to(data.shipment.unique_shipment_id, url_for(action: "show", id: data.id))
+  %td.date
+    = data.shipment.shipping_date
+  %td
+    = "#{data.shipment.sender_company_name},"
+    %br/
+    = data.shipment.sender.country_name
+  %td
+    = "#{data.shipment.recipient_company_name},"
+    %br/
+    = data.shipment.recipient.country_name
+  %td
+    = suffixed_name(name: data.shipment.carrier_product.name, company: data.shipment.company)
+
+- if data.shipment.description.present?
+  %tr.description
+    %td{ colspan: "6" }= data.shipment.description

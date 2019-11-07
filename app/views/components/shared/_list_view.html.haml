@@ -1,0 +1,40 @@
+.page_actions
+  %h1
+    = @view_model.heading
+    = "- #{@view_model.subheading}" unless @view_model.subheading.blank?
+
+  - if @view_model.show_action
+    %ul.actions
+      %li.primary= link_to(@view_model.action_text, @view_model.action_url)
+
+  %div.scopes
+    = simple_form_for(:scope, url: @view_model.scope_url, method: :get) do |f|
+      - @view_model.search_filters.each do |filter|
+        = f.input filter.filter, collection: filter.filter_select_values, placeholder: filter.filter_placeholder, selected: filter.filter_selected_value, label: false, input_html: { name: filter.filter }
+      - @view_model.range_filters.each do |filter|
+        = f.input filter.filter, value: filter.filter_value, label: false, placeholder: filter.filter_label, required: false, input_html: { class: 'range-input', name: filter.filter, value: filter.filter_value, autocomplete: 'off' }
+
+      %br
+      = f.input :grouping, collection: @view_model.scope_group_values, selected: @view_model.scope_group_selected_value, label: false, input_html: { name: :grouping }
+      = f.input :sorting, collection: @view_model.scope_sort_values, selected: @view_model.scope_sort_selected_value, label: false, input_html: { name: :sorting }
+      - @view_model.scope_filters.each do |filter|
+        = f.input filter.filter, collection: filter.filter_select_values, selected: filter.filter_selected_value, label: false, input_html: { name: filter.filter }
+
+- if !@view_model.is_grouped
+  - if @view_model.ungrouped_data.size > 0
+    %table{ class: @view_model.table_class_name }
+      = render partial: @view_model.table_columns_view
+      = render partial: @view_model.table_content_view, collection: @view_model.ungrouped_data, as: :data, locals: {current_company: @view_model.current_company}
+
+  - else
+    %p.noresults= @view_model.no_results
+
+- else
+  = render partial: @view_model.table_content_group_view, collection: @view_model.data_groups, as: :group
+
+  - if @view_model.data_groups.size < 1
+    %p.noresults= @view_model.no_results
+
+
+.pagination
+  = paginate(@view_model.paginated_data)

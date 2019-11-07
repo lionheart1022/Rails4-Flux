@@ -1,0 +1,35 @@
+<header class="page-header">
+  <h1>Company tokens</h1>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Company</th>
+      <th>SSL required</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tokens.each do |token| %>
+      <tr>
+        <td><%= token.id %></td>
+        <td><%= token.owner.name %></td>
+        <td>
+          <% if token.force_ssl? %>
+            ✓
+          <% else %>
+            No, HTTP is allowed.
+          <% end %>
+        </td>
+        <td class="show-btn-cell">
+          <%= link_to "Show", exec_company_token_path(token), class: "show-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tokens %>

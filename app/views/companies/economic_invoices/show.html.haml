@@ -1,0 +1,73 @@
+%header.page_header
+  %h1
+    e-conomic invoices
+    %small= link_to "Report ##{@report.report_id}", companies_report_path(@report)
+
+  %ul.page_actions
+    - if @report.economic_invoices.count != 1
+      %li= link_to "All invoices", companies_report_economic_invoices_path(@report, no_redirect: "1")
+
+%h2
+  - if @view_model.invoice.http_request_succeeded?
+    %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_success
+  - elsif @view_model.invoice.http_request_failed?
+    %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_failed
+  - elsif @view_model.invoice.looks_valid?
+    %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_valid
+  - elsif @view_model.invoice.looks_invalid?
+    %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_invalid
+
+  Invoice
+
+= form_for :bulk_update, method: :put, url: bulk_update_companies_report_economic_invoices_path(@report), html: { class: nil, id: nil } do |form|
+  - @view_model.invoice.tap do |invoice|
+    = form.fields_for :invoices, invoice, index: 0 do |invoice_fields|
+      = invoice_fields.hidden_field :id, disabled: invoice.no_longer_editable?
+
+      %table
+        %thead
+          %tr
+            %th{ width: "40%" } Customer
+            %th External acc. number
+            %th.right_aligned_cell Currency
+        %tbody
+          %tr
+            %td= invoice.buyer.name
+            %td{ class: invoice.external_accounting_number.blank? ? "economic_invoice_external_acc_missing" : nil }
+              = invoice_fields.text_field :external_accounting_number, disabled: invoice.no_longer_editable?
+            %td.right_aligned_cell= invoice.currency
+
+      %table.padded_table
+        %thead
+          %tr
+            %th{ width: "40%" } Description
+            %th Product number
+            %th Quantity
+            %th.right_aligned_cell Unit price
+        %tbody
+          - @view_model.paginated_invoice_lines.each_with_index do |invoice_line, invoice_line_index|
+            %tr
+              %td{ title: invoice_line.description }
+                %div= invoice_line.description
+                - if !invoice_line.includes_vat.nil?
+                  %div
+                    %small= invoice_line.includes_vat? ? "VAT incl." : "VAT excl."
+              %td{ class: invoice_line.product_number.blank? ? "economic_invoice_line_product_missing" : nil }
+                = invoice_fields.fields_for :invoice_lines, invoice_line, index: invoice_line_index do |invoice_line_fields|
+                  = invoice_line_fields.hidden_field :id, disabled: invoice.no_longer_editable?
+                  = invoice_line_fields.collection_select :product_number, @view_model.available_economic_products, "number", "option_name", { include_blank: true }, { disabled: invoice.no_longer_editable? }
+              %td
+                = invoice_line.quantity
+              %td.right_aligned_cell
+                = number_with_precision invoice_line.unit_price, precision: 2
+
+  - if @view_model.show_submit_buttons?
+    = hidden_field_tag "current_invoice_id", @view_model.invoice.id
+    = hidden_field_tag "next_page", @view_model.paginated_invoice_lines.next_page
+
+    .right-aligned-btn-container
+      = form.button "Only save invoice", class: "secondary-btn"
+      = form.button "Send invoice to e-conomic", name: "send_to_economic", value: "1", class: "primary-btn"
+
+.pagination
+  = paginate @view_model.paginated_invoice_lines

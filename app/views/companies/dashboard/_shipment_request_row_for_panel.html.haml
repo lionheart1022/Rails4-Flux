@@ -1,0 +1,19 @@
+%tr
+  %td
+    = link_to(shipment_request.shipment.unique_shipment_id, companies_shipment_request_path(shipment_request))
+  %td
+    = shipment_request.shipment.shipping_date
+  %td
+    = "#{shipment_request.shipment.sender.company_name},"
+    %br/
+    = shipment_request.shipment.sender.country_name
+  %td
+    = "#{shipment_request.shipment.recipient.company_name},"
+    %br/
+    = shipment_request.shipment.recipient.country_name
+  %td
+    = suffixed_name(name: shipment_request.shipment.carrier_product.name, company: shipment_request.shipment.company)
+
+- if shipment_request.shipment.description.present?
+  %tr.description
+    %td{ :colspan => "5" }= shipment_request.shipment.description

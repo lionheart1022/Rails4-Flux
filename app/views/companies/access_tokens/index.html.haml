@@ -1,0 +1,52 @@
+%h1 API Access
+
+%p
+  You can use the API to programmatically book shipments in CargoFlux.
+  To use the API you must generate an API access token.
+  If you are concerned that a third party has obtained your access token, you can generate a new one, which automatically invalidates the old token.
+
+%h2 Documentation
+
+%ul
+  %li
+    Looking for API documentation for your company?
+    %a{ href: "/documentation/company_api.pdf" } Get PDF version here.
+  %li
+    Looking for API documentation for your customers?
+    %a{ href: "/documentation/customer_api.pdf" } Get PDF version here.
+
+%h2 Tokens
+
+%table
+  %tbody
+    - if @view_model.show_company?
+      %tr.api_access_token_for_company
+        %td.api_access_token_owner_name= @view_model.company_name
+        - if @view_model.company_token?
+          %td
+            %div
+              ✓
+              = link_to("Show token", companies_access_token_path(@view_model.company_token), remote: true)
+            %div.api_access_token_value{ id: "api_access_token_#{@view_model.company_token.id}" }
+          %td.api_access_token_regenerate_button
+            = button_to("Regenerate", companies_access_tokens_path, method: :post, class: "primary-btn", data: { confirm: "Your existing access token will be invalidated if you generate a new one. Are you sure?" }, params: { "token[owner_type]" => "Company", "token[owner_id]" => current_company.id })
+        - else
+          %td{ colspan: 2 }
+            = button_to("Generate", companies_access_tokens_path, method: :post, class: "primary-btn", params: { "token[owner_type]" => "Company", "token[owner_id]" => current_company.id })
+    - @view_model.customers.each do |customer|
+      %tr.api_access_token_for_customer
+        %td.api_access_token_owner_name= customer.name
+        - if customer.token?
+          %td
+            %div
+              ✓
+              = link_to("Show token", companies_access_token_path(customer.token_id), remote: true)
+            %div.api_access_token_value{ id: "api_access_token_#{customer.token_id}" }
+          %td.api_access_token_regenerate_button
+            = button_to("Regenerate", companies_access_tokens_path, method: :post, class: "primary-btn", data: { confirm: "The existing access token for this customer will be invalidated if you generate a new one. Are you sure?" }, params: { "token[owner_type]" => "Customer", "token[owner_id]" => customer.id })
+        - else
+          %td{ colspan: 2 }
+            = button_to("Generate", companies_access_tokens_path, method: :post, class: "primary-btn", params: { "token[owner_type]" => "Customer", "token[owner_id]" => customer.id })
+
+.pagination
+  = paginate(@view_model.customers_relation)

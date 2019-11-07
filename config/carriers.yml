@@ -1,0 +1,34 @@
+gls:
+  surcharges:
+    gls_not_system_conformal:
+      klass: "GLSSurcharges::NotSystemConformal"
+      description: "Not System Conform"
+      calculation_method: "price_fixed"
+    gls_over_size:
+      klass: "GLSSurcharges::OverSize"
+      description: "Over-Size"
+      calculation_method: "price_fixed"
+tnt:
+  surcharges:
+    tnt_non_stackable_surcharge:
+      klass: "NonStackableSurcharge"
+      description: "Non-stackable"
+      calculation_method: "price_fixed"
+ups:
+  surcharges:
+    # ups_remote_area_delivery:
+    #   klass: "UPSSurcharges::RemoteAreaDelivery"
+    #   description: "Remote Area Delivery"
+    #   calculation_method: "price_fixed"
+    # ups_extended_area_delivery:
+    #   klass: "UPSSurcharges::ExtendedAreaDelivery"
+    #   description: "Extended Area Delivery"
+    #   calculation_method: "price_fixed"
+    ups_area_delivery:
+      klass: "UPSSurcharges::AreaDelivery"
+      description: "Area Delivery"
+      calculation_method: "price_fixed"
+    ups_additional_handling:
+      klass: "UPSSurcharges::AdditionalHandling"
+      description: "Additional Handling"
+      calculation_method: "price_fixed"

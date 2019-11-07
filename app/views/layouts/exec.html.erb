@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CF EXEC</title>
+    <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.0.4/css/all.css" %>
+    <%= stylesheet_link_tag "exec" %>
+    <style><%= raw(layout_config.custom_css) %></style>
+    <%= javascript_include_tag "exec" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header id="app_header" class="app-header">
+      <div id="app_header_inner" class="app-header-inner">
+        <div class="app_header_title_container">
+          <h1 id="app_header_title" class="app-header--title">
+            <%= link_to layout_config.title, exec_path %>
+          </h1>
+
+          <% if user_access_symbol == :multiple %>
+            <%= link_to "Switch account", account_selector_path, class: "app_header__switch_account_link" %>
+          <% end %>
+        </div>
+
+        <div id="secondary_nav" class="app-header--user-actions">
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "app-header--sign-out" %>
+        </div>
+      </div>
+    </header>
+
+    <nav class="app-nav">
+      <%= exec_nav_section(:shipments) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Shipments", exec_shipments_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse shipments", exec_shipments_path %></li>
+        </ul>
+      <% end %>
+
+      <%= exec_nav_section(:companies) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Companies", exec_companies_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse companies", exec_companies_path %></li>
+          <li><%= link_to "Login pages", exec_login_pages_path %></li>
+        </ul>
+      <% end %>
+
+      <%= exec_nav_section(:invoicing) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Invoicing", exec_invoicing_methods_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse types", exec_invoicing_methods_path %></li>
+          <li><%= link_to "Report", exec_invoicing_report_path %></li>
+        </ul>
+      <% end %>
+
+      <%= exec_nav_section(:carriers) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Carriers", exec_carriers_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse carriers", exec_carriers_path %></li>
+        </ul>
+      <% end %>
+
+      <%= exec_nav_section(:users) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Users", exec_users_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse users", exec_users_path %></li>
+        </ul>
+      <% end %>
+
+      <%= exec_nav_section(:tokens) do %>
+        <div class="app-nav-section-label">
+          <%= link_to "Tokens", exec_company_tokens_path %>
+        </div>
+        <ul class="app-nav-section-links">
+          <li><%= link_to "Browse company tokens", exec_company_tokens_path %></li>
+        </ul>
+      <% end %>
+    </nav>
+
+    <%= yield %>
+  </body>
+</html>

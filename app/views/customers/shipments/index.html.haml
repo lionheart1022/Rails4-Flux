@@ -1,0 +1,15 @@
+.page_actions
+  %h1 Shipments - Current
+
+  %ul.actions.fix_right_alignment
+    %li.primary= link_to("New ferry booking", new_customers_ferry_booking_path) if current_customer.ferry_booking_enabled?
+    %li.primary= link_to("New shipment", new_customers_shipment_path)
+
+  %div.scopes
+    = simple_form_for(@view_model, url: customers_shipments_path, method: :get, as: :scope) do |form|
+      = render "list_view_form", form: form
+
+= render "list_view_shipments"
+
+.pagination
+  = paginate(@view_model.shipments)

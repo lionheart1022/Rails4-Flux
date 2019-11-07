@@ -1,0 +1,24 @@
+- carrier_product = shipment.carrier_product
+
+- if carrier_product.supports_track_and_trace?
+  - if carrier_product.track_and_trace_has_complex_view?
+    %span.awb_track_and_trace_link= render(partial: carrier_product.track_and_trace_view, locals: {awb: shipment.awb})
+  - elsif !shipment.awb.blank?
+    %span.awb_track_and_trace_link= link_to(shipment.awb, carrier_product.track_and_trace_url(awb: shipment.awb, shipment: shipment), target: "_blank")
+- elsif !shipment.awb.blank?
+  %span.awb_track_and_trace_link= shipment.awb
+
+- if shipment.asset_awb.present?
+  %span.awb_document_link
+    = link_to(image_tag('admin/ic_awb_blue.png'), shipment.asset_awb.attachment.url, target: "_blank")
+- elsif shipment.external_awb_asset.present?
+  %span.awb_document_link
+    = link_to(image_tag('admin/ic_awb_blue.png'), carrier_product.external_awb_asset_url(external_awb_asset: shipment.external_awb_asset), target: "_blank")
+
+- if carrier_product.custom_label?
+  = shipment.unique_shipment_id if shipment.awb.blank?
+  - if current_customer
+    = link_to(image_tag('admin/ic_awb_blue.png'), customers_shipment_custom_label_path(shipment.id), target: "_blank")
+  - else
+    = link_to(image_tag('admin/ic_awb_blue.png'), companies_shipment_custom_label_path(shipment.id), target: "_blank")
+

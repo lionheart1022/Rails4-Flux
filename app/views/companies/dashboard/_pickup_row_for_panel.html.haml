@@ -1,0 +1,13 @@
+%tr
+  %td
+    = pickup.customer_name
+  %td.id
+    = link_to(pickup.unique_pickup_id, companies_pickup_path(pickup))
+  %td.date
+    = pickup.pickup_date
+  %td
+    = pickup.from_time
+  %td
+    = pickup.to_time
+  %td
+    = pickup.description

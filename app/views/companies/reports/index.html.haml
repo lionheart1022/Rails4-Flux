@@ -1,0 +1,38 @@
+.page_header.with_table_below
+  %h1 Reports
+
+  %ul.page_actions
+    %li= link_to("New Report", new_companies_draft_report_path, class: "primary-btn")
+
+- if @reports.size > 0
+  %table
+    %tr
+      %th{ width: "10%" } #
+      %th{ width: "20%" } Created
+      %th Customer
+      %th Number of shipments
+      - if current_company.economic_v2_access?
+        %th e-conomic status
+    - @reports.each do |report|
+      %tr
+        %td= report.report_id
+        %td= link_to(l(report.created_at, format: :long), companies_report_path(report))
+        %td
+          - if report.customer_recording
+            = link_to report.customer_recording.customer_name, build_path_for_customer_recording(report.customer_recording)
+        %td= report.number_of_shipments
+        - if current_company.economic_v2_access?
+          %td
+            - if report.all_economic_invoices_succeeded?
+              %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_success
+              e-conomic invoices have been transferred
+            - elsif report.some_economic_invoice_are_in_progress?
+              %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_valid
+              e-conomic invoices are being transferred
+            - elsif report.any_economic_invoices?
+              = link_to("Show e-conomic invoices", companies_report_economic_invoices_path(report, auto_redirect: "1"))
+- else
+  %p No reports found.
+
+.pagination
+  = paginate(@reports)

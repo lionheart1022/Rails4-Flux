@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:m0="http://fedex.com/ws/openship/v11">
+  <SOAP-ENV:Body>
+    <CreateOpenShipmentRequest xmlns="http://fedex.com/ws/openship/v11">
+      <WebAuthenticationDetail>
+        <UserCredential>
+          <Key><%= developer_key %></Key>
+          <Password><%= developer_password %></Password>
+        </UserCredential>
+      </WebAuthenticationDetail>
+      <ClientDetail>
+        <AccountNumber><%= account_number %></AccountNumber>
+        <MeterNumber><%= meter_number %></MeterNumber>
+      </ClientDetail>
+      <Version>
+        <ServiceId>ship</ServiceId>
+        <Major>11</Major>
+        <Intermediate>0</Intermediate>
+        <Minor>0</Minor>
+      </Version>
+      <Index><%= shipment.unique_shipment_id %></Index>
+      <Actions>CONFIRM</Actions>
+      <RequestedShipment>
+        <ShipTimestamp><%= shipping_date %></ShipTimestamp>
+        <ServiceType><%= service %></ServiceType>
+        <PackagingType>YOUR_PACKAGING</PackagingType>
+        <TotalWeight>
+          <Units><%= weight_unit %></Units>
+          <Value><%= total_weight_in_proper_unit %></Value>
+        </TotalWeight>
+        <Shipper>
+          <AccountNumber><%= account_number %></AccountNumber>
+          <Contact>
+            <PersonName><%= transliterate(sender_attention) %></PersonName>
+            <CompanyName><%= transliterate(sender_company_name) %></CompanyName>
+            <PhoneNumber><%= sender_phone_number %></PhoneNumber>
+            <EMailAddress><%= sender_email %></EMailAddress>
+          </Contact>
+          <Address>
+            <StreetLines><%= transliterate(sender_address_line1) %></StreetLines>
+<% if sender_address_line2.present? %>
+            <StreetLines><%= transliterate(sender_address_line2) %></StreetLines>
+<% end %>
+            <City><%= transliterate(sender_city) %></City>
+<% if sender_state_code.present? %>
+            <StateOrProvinceCode><%= sender_state_code %></StateOrProvinceCode>
+<% end %>
+            <PostalCode><%= sender_zip_code %></PostalCode>
+            <CountryCode><%= sender_country_code %></CountryCode>
+            <CountryName><%= transliterate(sender_country_name) %></CountryName>
+          </Address>
+        </Shipper>
+        <Recipient>
+          <Contact>
+            <PersonName><%= transliterate(recipient_attention) %></PersonName>
+            <CompanyName><%= transliterate(recipient_company_name) %></CompanyName>
+            <PhoneNumber><%= recipient_phone_number %></PhoneNumber>
+            <EMailAddress><%= recipient_email %></EMailAddress>
+          </Contact>
+          <Address>
+            <StreetLines><%= transliterate(recipient_address_line1) %></StreetLines>
+<% if recipient_address_line2.present? %>
+            <StreetLines><%= transliterate(recipient_address_line2) %></StreetLines>
+<% end %>
+            <City><%= transliterate(recipient_city) %></City>
+<% if recipient_state_code.present? %>
+            <StateOrProvinceCode><%= recipient_state_code %></StateOrProvinceCode>
+<% end %>
+            <PostalCode><%= recipient_zip_code %></PostalCode>
+            <CountryCode><%= recipient_country_code %></CountryCode>
+            <CountryName><%= transliterate(recipient_country_name) %></CountryName>
+          </Address>
+        </Recipient>
+        <ShippingChargesPayment>
+          <PaymentType>SENDER</PaymentType>
+          <Payor>
+            <ResponsibleParty>
+              <AccountNumber><%= account_number %></AccountNumber>
+            </ResponsibleParty>
+          </Payor>
+        </ShippingChargesPayment>
+        <% if dutiable? %>
+          <CustomsClearanceDetail>
+            <DutiesPayment>
+              <PaymentType>RECIPIENT</PaymentType>
+              <Payor>
+                <ResponsibleParty>
+                  <AccountNumber></AccountNumber>
+                </ResponsibleParty>
+              </Payor>
+            </DutiesPayment>
+            <CustomsValue>
+              <Currency><%= customs_currency %></Currency>
+              <Amount><%= customs_amount %></Amount>
+            </CustomsValue>
+            <Commodities>
+              <NumberOfPieces>1</NumberOfPieces>
+              <Description><%= transliterate(description) %></Description>
+              <CountryOfManufacture>DK</CountryOfManufacture>
+              <HarmonizedCode><%= customs_code %></HarmonizedCode>
+              <Weight>
+                <Units><%= weight_unit %></Units>
+                <Value><%= total_weight_in_proper_unit %></Value>
+              </Weight>
+              <Quantity>1</Quantity>
+              <QuantityUnits><%= dimension_unit %></QuantityUnits>
+              <UnitPrice>
+                <Currency><%= customs_currency %></Currency>
+                <Amount><%= customs_amount %></Amount>
+              </UnitPrice>
+            </Commodities>
+          </CustomsClearanceDetail>
+        <% end %>
+        <LabelSpecification>
+          <LabelFormatType>COMMON2D</LabelFormatType>
+          <ImageType>PDF</ImageType>
+          <LabelStockType>PAPER_8.5X11_TOP_HALF_LABEL</LabelStockType>
+        </LabelSpecification>
+        <PackageCount><%= package_dimension_list.size %></PackageCount>
+        <% package_dimension_list.each_with_index do |dimension, index| %>
+          <RequestedPackageLineItems>
+            <SequenceNumber><%= index + 1 %></SequenceNumber>
+            <Weight>
+              <Units><%= weight_unit %></Units>
+              <Value><%= dimension.weight %></Value>
+            </Weight>
+            <Dimensions>
+              <Length><%= dimension.length %></Length>
+              <Width><%= dimension.width %></Width>
+              <Height><%= dimension.height %></Height>
+              <Units><%= dimension_unit %></Units>
+            </Dimensions>
+            <% if reference.present? %>
+              <CustomerReferences>
+                <CustomerReferenceType>CUSTOMER_REFERENCE</CustomerReferenceType>
+                <Value><%= reference %></Value>
+              </CustomerReferences>
+            <% end %>
+          </RequestedPackageLineItems>
+        <% end %>
+      </RequestedShipment>
+    </CreateOpenShipmentRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

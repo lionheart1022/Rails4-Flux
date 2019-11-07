@@ -1,0 +1,6 @@
+%header.page_header
+  %h1= @customer.name
+
+= render "companies/customers/subnav", active_nav: :carriers, customer_id: params[:customer_id]
+
+= render "companies/customer_carriers/bulk_edit", customer: @customer, view_model: @view_model, redirect_url: url_for()

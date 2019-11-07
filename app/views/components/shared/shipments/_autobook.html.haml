@@ -1,0 +1,23 @@
+- if view_model.allow_autobook
+  .autobook
+    .autobook_inner
+      %p.intro This shipment can be auto-booked with the carrier
+      = simple_form_for(:shipment, url: autobook_companies_shipment_path(view_model.shipment)) do |f|
+        %ul.actions
+          %li.primary= f.submit "Auto-book"
+
+- if view_model.allow_retry_awb_document
+  .autobook
+    .autobook_inner
+      %p.intro You can fetch the AWB document
+      = simple_form_for(:shipment, url: retry_awb_document_companies_shipment_path(view_model.shipment)) do |f|
+        %ul.actions
+          %li.primary= f.submit "Fetch AWB document"
+
+- if view_model.allow_retry_consignment_note
+  .autobook
+    .autobook_inner
+      %p.intro You can fetch the consignment note
+      = simple_form_for(:shipment, url: retry_consignment_note_companies_shipment_path(view_model.shipment)) do |f|
+        %ul.actions
+          %li.primary= f.submit "Fetch consignment note"

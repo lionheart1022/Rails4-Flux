@@ -1,0 +1,90 @@
+@import "admin/mixins";
+@import "admin/base";
+@import "admin/forms";
+@import "admin/print";
+
+
+#body {
+  margin: 0;
+	padding: 0;
+  width: 900px;
+  font-size: 12px;
+}
+
+.custom_label {
+	position: relative;
+	border: solid 1px;
+	page-break-inside: avoid;
+	h1 {
+		font-weight: bold;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+
+	page-break-after: always;
+
+	.meta {
+		padding: 0px;
+		padding-left: 30px;
+		padding-top: 10px;
+	}
+
+	.unique_shipment_id {
+		float: left;
+		font-size: 1.2em;
+	}
+
+	.label_number {
+		float: right;
+	}
+
+	margin-top: 50px;
+	margin-bottom: 50px;
+
+	table {
+
+		td {
+			font-size: 1.2em;
+			line-height: 20px;
+			border: none;
+		}
+
+	}
+
+	.contact {
+		float: left;
+
+		.sender {
+			display: inline-block;
+			width: 375px;
+		}
+
+		.recipient {
+			display: inline-block;
+			width: 375px;
+			padding-left: 30px;
+		}
+
+	}
+
+	.weight {
+		margin: 0px;
+	}
+
+	.shipment {
+	}
+
+	img.company_logo {
+		position: absolute;
+		bottom: 15px;
+		right: 30px;
+
+		display: block;
+	  max-width: 300px !important;
+	  max-height: 120px !important;
+	  width: auto !important;
+	  height: auto !important;
+	}
+
+
+}

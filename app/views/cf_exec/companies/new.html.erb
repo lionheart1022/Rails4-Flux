@@ -1,0 +1,15 @@
+<header class="page-header">
+  <h1>New company</h1>
+
+  <div class="page-header-controls">
+    <%= link_to "Cancel", exec_companies_path, class: "page-header-cancel-btn" %>
+  </div>
+</header>
+
+<%= form_for(@company, as: :company, url: exec_companies_path, method: :post) do |form| %>
+  <%= render "form", form: form %>
+
+  <div class="form-actions">
+    <%= form.submit "Create company", class: "form-primary-submit-btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+%tr.file.shipment_view_other_asset{ id: "shipment_view_other_asset_#{asset.id}" }
+  %td= asset.description
+  %td= check_box_tag 'asset_private', 'private', asset.private, disabled: true
+  %td= link_to(asset.attachment_file_name, asset.attachment.url, target: "_blank")
+  %td.delete_link
+    - if view_model.allow_additional_files_upload
+      = link_to("Remove", url_for(controller: "attachments", action: "destroy", shipment_id: view_model.shipment.id, id: asset.id), method: :delete, remote: true, data: { confirm: "Removing attachment - are you sure?" })
+      .loading_indicator{ style: "display: none" }
+        = image_tag("admin/loading_indicator.gif", alt: "")

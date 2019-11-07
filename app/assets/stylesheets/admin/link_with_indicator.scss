@@ -1,0 +1,27 @@
+@import "admin/mixins";
+
+.link-with-indicator {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link-with-indicator--inner-text {
+  text-decoration: underline;
+}
+
+.link-with-indicator--specified,
+.link-with-indicator--blank {
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 8px;
+  width: 8px;
+  height: 8px;
+}
+
+.link-with-indicator--specified {
+  background: $blue;
+}
+
+.link-with-indicator--blank {
+  border: 1px solid $blue;
+}

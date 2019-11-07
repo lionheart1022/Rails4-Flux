@@ -1,0 +1,12 @@
+%header.page_header
+  %h1= @user.email
+
+= simple_form_for(@user, url: companies_user_path(@user), as: :user, method: :put, html: { id: nil, class: nil }) do |f|
+  = f.input :email, input_html: { disabled: true }
+  = f.input :is_admin, as: :boolean, label: "Is administrator"
+
+  %ul.actions
+    %li
+      = link_to("Cancel", companies_users_path)
+    %li.primary
+      = f.submit "Save"

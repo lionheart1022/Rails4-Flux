@@ -1,0 +1,61 @@
+// Shared
+$blue: #1384e4;
+$red: #e41313;
+$yellow: #f1b208;
+$green: #69ae18;
+$purple: #8c51b6;
+
+$text_dark_gray: #444435;
+$text_light_gray: #696969;
+
+// Tables
+$table_border: #dedede;
+
+// Forms
+$input_border: #bebebe;
+$input_text: #323131;
+
+$submit_border: #085494;
+$submit_text: #fff;
+$secondary_border: #7a7f80;
+$secondary_text: #54595b;
+
+@mixin font_helvetica {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Verdana, sans-serif;
+}
+
+@mixin font_maven_pro {
+  font-family: "Maven Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Verdana, sans-serif;
+}
+
+@mixin bg_gradient($from, $to) {
+  background-color: $from;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background-image: -webkit-linear-gradient(top, $from, $to);
+  background-image: -moz-linear-gradient(top, $from, $to);
+  background-image: -ms-linear-gradient(top, $from, $to);
+  background-image: -o-linear-gradient(top, $from, $to);
+  background-image: linear-gradient(to bottom, $from, $to);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#{ie-hex-str($from)}', endColorstr='#{ie-hex-str($to)}');
+}
+
+@mixin bg_gradient_and_image($from, $to, $image) {
+  background-color: $from;
+  background-image: url($image), -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background-image: url($image), -webkit-linear-gradient(top, $from, $to);
+  background-image: url($image), -moz-linear-gradient(top, $from, $to);
+  background-image: url($image), -ms-linear-gradient(top, $from, $to);
+  background-image: url($image), -o-linear-gradient(top, $from, $to);
+  background-image: url($image), linear-gradient(to bottom, $from, $to);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#{ie-hex-str($from)}', endColorstr='#{ie-hex-str($to)}');
+}
+
+@mixin box_model_border_box {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin light_box_shadow {
+  box-shadow: 0 3px 15px -4px;
+}

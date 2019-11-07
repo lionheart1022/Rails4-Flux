@@ -1,0 +1,50 @@
+= form_for customer_carrier_product, url: companies_customer_carrier_product_path(customer_carrier_product.customer, customer_carrier_product.carrier_product), method: :patch, html: { id: nil, class: "customer_product__table__row", data: { behavior: "customer_product__row" } } do |product_fields|
+  = hidden_field_tag("redirect_url", redirect_url) if local_assigns[:redirect_url].present?
+
+  .customer_product__table__cell.customer_product__name_cell
+    %span.customer_product__enabled_container
+      = product_fields.check_box :is_enabled, id: "cpp_#{index}_is_enabled", data: { behavior: "customer_product__input_enable" }
+    %span.customer_product__name_container
+      = product_fields.label :is_enabled, product_fields.object.carrier_product.suffixed_name, for: "cpp_#{index}_is_enabled", class: "inline_label"
+
+      - if current_context.company_feature_flag_enabled?("rate-sheets") && customer_carrier_product.persisted? && !customer_carrier_product.carrier_product.references_price_document? && customer_carrier_product.is_enabled?
+        %div
+          = link_to "Show rate sheet", companies_customer_rate_sheets_path(customer_carrier_product.customer, customer_carrier_product_id: customer_carrier_product.id), method: :post, data: { behavior: "customer_product__rate_sheet_btn" }
+
+  .customer_product__table__cell.customer_product__enable_autobooking_cell
+    - if customer_carrier_product.carrier_product.supports_shipment_auto_booking?
+      %label.inline_label.customer_product__config_label
+        = product_fields.check_box :enable_autobooking, id: nil, data: { behavior: "customer_product__input_enable_autobooking" }
+        Auto booking
+  .customer_product__table__cell.customer_product__automatically_autobook_cell
+    - if customer_carrier_product.carrier_product.supports_shipment_auto_booking?
+      %label.inline_label.customer_product__config_label
+        = product_fields.check_box :automatically_autobook, id: nil, data: { behavior: "customer_product__input_autobook" }
+        Auto book shipments
+
+  .customer_product__table__cell.customer_product__allow_auto_pickup_cell
+    - if customer_carrier_product.carrier_product.supports_auto_pickup?
+      %label.inline_label.customer_product__config_label
+        = product_fields.check_box :allow_auto_pickup, id: nil
+        Pickup by carrier
+
+  .customer_product__table__cell.customer_product__test_cell
+    - if customer_carrier_product.carrier_product.supports_test_mode?
+      %label.inline_label.customer_product__config_label
+        = product_fields.check_box :test, id: nil
+        Test
+
+  .customer_product__table__cell.customer_product__margin_cell
+    %div{ data: { behavior: "customer_product__margin_state" } }
+      %div.customer_product__margin_field_container
+        - if current_context.company_feature_flag_enabled?("interval-margins")
+          = product_fields.select :margin_type, [["Percentage", "percentage"], ["Intervals", "intervals"]], {}, { data: { behavior: "customer_product__margin_type_select" }, id: nil, class: "customer_product__margin_select" }
+        - else
+          = product_fields.select :margin_type, [["Percentage", "percentage"]], {}, { data: { behavior: "customer_product__margin_type_select" }, id: nil, class: "customer_product__margin_select" }
+        %span.customer_product__margin_percentage_field_container
+          = product_fields.number_field :margin_percentage, data: { behavior: "customer_product__input_margin_percentage" }, id: nil, class: "customer_carriers_table__margin_input cf_input cf_input__compact"
+          %span.customer_carriers_table__margin_input_sign %
+        %span.customer_product__margin_intervals_field_container
+          = product_fields.button("Set", name: nil, id: nil, class: "customer_carriers_table__margin_save")
+      %div.customer_product__margin_save_container
+        = product_fields.button("Save", name: nil, id: nil, class: "customer_carriers_table__margin_save")

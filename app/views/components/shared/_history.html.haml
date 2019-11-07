@@ -1,0 +1,12 @@
+%h2= heading
+
+%table.history
+  %tr
+    %th Date
+    %th Event
+    %th Note
+  - data.each do |event|
+    %tr
+      %td.date= local_time(event.created_at, format: '%e %B - %Y - %H:%M (%Z)')
+      %td.event_name= event_formatter.event_name(event.event_type)
+      %td= event.references_tracking? ? view_model.format_tracking_event_description(event) : event.description

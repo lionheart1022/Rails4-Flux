@@ -1,0 +1,592 @@
+@import "admin/mixins";
+
+.simple_form {
+
+  div.input {
+    margin-bottom: 13px;
+  }
+
+  // http://social.msdn.microsoft.com/Forums/ie/en-US/f4d2a698-2ae0-4a13-8893-2e96a1e54c43/ie10-right-aligned-input-cuts-off-text?forum=iewebdevelopment
+  input::-ms-clear {
+    display: none;
+  }
+
+  div.input.hidden {
+    margin: 0;
+  }
+
+  div.input.date {
+    font-size: 0;
+
+    select {
+      margin-right: 10px;
+    }
+  }
+
+  label {
+    display: block;
+    padding: 0 0 2px 0;
+
+    abbr {
+      border: none;
+    }
+  }
+
+  label.inline_label {
+    display: inline-block;
+  }
+
+  input#check-all {
+    margin-right: 5px;
+  }
+
+  div.input.boolean,
+  div.input.check_boxes {
+    margin: 17px 0 9px 0;
+
+    label {
+      line-height: normal;
+    }
+  }
+
+  div.input.check_boxes label {
+    margin: 5px 0;
+  }
+
+  input.string,
+  input.password,
+  input.numeric,
+  input.fake,
+  textarea {
+    @include font_maven_pro;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 15px; // Hard-coded in FF
+    color: $input_text;
+
+    width: 400px;
+    padding: 8px 12px 9px 12px;
+
+    border: 1px solid $input_border;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px 0 #ddd;
+    background: #fff;
+  }
+
+  select {
+    @include font_maven_pro;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: normal;
+    color: $input_text;
+
+    padding: 4px 4px 4px 8px;
+
+    border: 1px solid $input_border;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px 0 #ddd;
+  }
+
+  input.string:disabled,
+  input.password:disabled,
+  input.numeric:disabled,
+  input.fake:disabled,
+  textarea:disabled,
+  select:disabled {
+    background-color: #f3f4f5;
+  }
+
+  textarea {
+    line-height: 17px;
+    height: 100px;
+  }
+
+  input.boolean,
+  input.check_boxes {
+    margin: -2px 5px 0 0;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  input.string:focus,
+  input.password:focus,
+  input.numeric:focus,
+  input.fake:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border: 1px solid $blue;
+  }
+
+  span.hint {
+    display: block;
+  }
+
+  // Field errors
+  .field_with_errors {
+
+    label, span.error {
+      color: $red;
+    }
+
+    span.error {
+      display: block;
+    }
+
+    input, input:focus, select:focus {
+      border: 1px solid $red;
+    }
+  }
+
+  .zip_code_and_city {
+    font-size: 0;
+
+    div.zip_code {
+      display: inline-block;
+      width: 110px;
+
+      input {
+        width: 64px;
+      }
+    }
+
+    div.city {
+      display: inline-block;
+      width: 290px;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+
+  .from_and_to_time {
+    font-size: 0;
+
+    div.from_time,
+    div.to_time {
+      display: inline-block;
+      width: 110px;
+
+      input {
+        width: 64px;
+      }
+    }
+  }
+
+  // New shipment form
+  .recipient_and_sender {
+    font-size: 0;
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .recipient,
+    .sender {
+      @include box_model_border_box;
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+    }
+
+    .recipient {
+      margin-right: 0;
+    }
+
+    .sender .sender_inner {
+      margin-right: 15px;
+    }
+
+    .recipient .recipient_inner {
+      margin-left: 15px;
+    }
+
+
+    input.string, input.password, input.numeric, input.fake, textarea, select {
+      @include box_model_border_box;
+      width: 100%;
+    }
+
+    .zip_code_and_city {
+      div.zip_code {
+        @include box_model_border_box;
+        display: inline-block;
+        width: 35%;
+        padding-right: 12px;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      div.city {
+        display: inline-block;
+        float: right;
+        width: 65%;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+
+  .shipping_information {
+
+    .top_actions {
+      position: relative;
+      height: 100%;
+
+      .shipment_shipping_date {
+        display: inline-block;
+        width: 267px;
+
+      }
+
+      .right {
+        position: absolute;
+        right: 5px;
+        bottom: 13px;
+
+        a.route_link, .map_error {
+          display: inline-block;
+        }
+
+      }
+
+    }
+
+    .shipment_carrier_product {
+      display: inline-block;
+
+      select {
+        @include box_model_border_box;
+        width: 100%;
+      }
+    }
+  }
+
+  .truck_and_driver {
+    .input.shipment_select_truck_and_driver {
+      margin-top: 0;
+    }
+  }
+
+  .packages {
+    div.input.shipment_number_of_packages {
+      input {
+        width: 43px;
+      }
+    }
+  }
+
+  .add {
+    float: left;
+    margin-left: 15px;
+    display: inline-block;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .package_dimensions {
+    font-size: 0;
+
+    .dimensions_text {
+      color: #848585;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .remove_package_row {
+      margin-left: 15px;
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    div.input {
+      display: inline-block;
+      width: 69px;
+
+      input {
+        width: 43px;
+        text-align: right;
+      }
+    }
+
+    div.input.fake {
+      margin-right: 0px;
+    }
+
+    label,
+    .math_label,
+    .total_label {
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    label {
+      width: 89px;
+    }
+
+    .math_label {
+      width: 20px;
+      text-align: center;
+    }
+
+    .total_label {
+      width: 439px;
+      margin-right: 6px;
+      text-align: left;
+//      overflow: hidden;
+
+      .total_text {
+        float: right;
+      }
+    }
+  }
+
+  .pickup {
+    .input.shipment_request_pickup {
+      margin-top: 0;
+    }
+  }
+
+  .customs {
+    font-size: 0;
+
+    div.input.boolean {
+      margin-top: 0;
+    }
+
+    .shipment_customs_currency,
+    .shipment_customs_amount,
+    .shipment_customs_code {
+      display: inline-block;
+      width: 148px;
+
+      select,
+      input.numeric,
+      input.string {
+        @include box_model_border_box;
+        width: 128px;
+      }
+    }
+  }
+
+}
+
+// Action buttons
+
+ul.actions {
+  font-size: 0;
+  margin-top: 29px;
+
+  li {
+    display: inline-block;
+    padding-right: 20px;
+  }
+
+  input[type="submit"],
+  a {
+    vertical-align: top;
+    padding: 9px 12px 10px 12px;
+
+    color: $secondary_text;
+    border: 1px solid $secondary_border;
+    box-shadow: inset 0 1px 1px 0 #fff;
+    @include bg_gradient(#f2f2f3, #e0e1e2);
+
+    @include font_maven_pro;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px; // Hard-coded in FF
+    border-radius: 3px;
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+  }
+
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+    margin-top: -2px;
+    margin-bottom: -1px;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  li.primary {
+    a,
+    input[type="submit"] {
+      color: $submit_text;
+      text-shadow: 0 0 2px rgba(1, 1, 1, 0.3);
+      border: 1px solid $submit_border;
+      box-shadow: inset 0 1px 1px 0 #ddd;
+      @include bg_gradient(#1ca7e0, #1065c9);
+    }
+  }
+
+}
+
+// Action buttons in tables
+table {
+  ul.actions {
+    margin: 0;
+  }
+
+  td.actions {
+    ul.actions {
+      margin-top: -5px;
+      margin-bottom: -6px;
+      margin: 0;
+      padding: 0;
+
+      div.input  {
+        margin: 0;
+      }
+
+      li {
+        padding-right: 0;
+        padding-left: 10px;
+      }
+
+      input[type="submit"],
+      a {
+        padding: 5px 12px 6px 12px;
+        font-size: 11px;
+        line-height: 15px;
+      }
+
+      input[type="submit"],
+      a {
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+
+      input::-moz-focus-inner {
+        margin-top: -1px;
+      }
+
+      li.primary {
+        a,
+        input[type="submit"] {
+          box-shadow: inset 0 1px 1px 0 #ccc;
+        }
+      }
+    }
+  }
+}
+
+
+// List with form errors above form
+div.error_explanation {
+  margin-bottom: 27px;
+
+  li {
+    padding: 0 0 0 13px;
+    background: url(image_path("admin/ic_list.png")) no-repeat 3px 10px;
+  }
+
+}
+
+.select2-container--default .select2-selection--single {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 15px; // Hard-coded in FF
+  color: $input_text;
+  box-shadow: inset 0 1px 2px 0 #ddd;
+  height: 34px;
+  padding: 2px 5px 2px 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 32px;
+  right: 5px;
+}
+
+input.primary-btn::-moz-focus-inner,
+button.primary-btn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+  margin-top: -2px;
+  margin-bottom: -1px;
+}
+
+a.primary-btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+input[type="submit"].primary-btn,
+button.primary-btn,
+a.primary-btn {
+  @include bg_gradient(#1ca7e0, #1065c9);
+  @include font_maven_pro;
+
+  color: $submit_text;
+  text-shadow: 0 0 2px rgba(1, 1, 1, 0.3);
+  border: 1px solid $submit_border;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px 0 #ddd;
+  cursor: pointer;
+  vertical-align: top;
+  padding: 9px 12px 10px 12px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.check_box_collection_item {
+  margin-bottom: 5px;
+}
+
+label.with_check_box_inside input[type=checkbox] {
+  margin-right: 10px;
+}
+
+.right-aligned-btn-container {
+  margin: 40px 0 20px;
+  text-align: right;
+}
+
+.shipment_truck_driver_form {
+  display: block;
+
+  label {
+    font-weight: bold;
+    color: dimgrey;
+    margin-right: 6px;
+  }
+
+  select {
+    margin-right: 10px;
+  }
+
+  label,
+  select,
+  input[type="submit"].primary-btn {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.form_base_error_wrapper {
+  margin-bottom: 12px;
+
+  .error {
+    color: $red;
+    font-weight: bold;
+  }
+}

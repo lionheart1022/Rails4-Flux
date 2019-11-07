@@ -1,0 +1,42 @@
+%header.page_header
+  %h1 Create End of Day Manifest
+
+  %ul.page_actions
+    %li= button_tag("Create Manifest with selected shipments", type: "button", class: "primary-btn", data: { behavior: "proxy_submit_form", target: "#create_eod_manifest_form" })
+
+= simple_form_for(@view_model.shipment_filter_form, url: url_for(), method: :get, html: { id: nil, class: "filter_form" }) do |f|
+  .filter_form_line
+    %span.filter_form__input
+      = f.input_field :carrier_id, as: :carrier_autocomplete_select, name: "filter_carrier_id", id: nil, placeholder: "All carriers", data: { :"allow-clear" => true, :width => "300px" }
+
+  .filter_form_line
+    %span.filter_form__input
+      = f.select :manifest_inclusion, f.object.manifest_inclusion_options, { include_blank: false }, { name: "filter_not_in_manifest", id: nil }
+    %span.filter_form__input
+      = f.select :shipment_state, f.object.state_options, { include_blank: false }, { name: "filter_has_been_booked_or_in_state", id: nil }
+
+  .filter_form_line
+    = button_tag "Search", name: nil, type: "submit", class: "primary-btn"
+
+= form_tag url_for(action: "create"), method: :post, id: "create_eod_manifest_form" do
+  %table.shipments
+    %th
+    %th State
+    %th #
+    %th Date
+    %th Recipient
+    %th Country
+    %th Product
+    %th Awb
+    %th Description
+    - @view_model.shipments.each do |shipment|
+      %tr
+        %td= check_box_tag("manifest[shipment_ids][]", shipment.id, true, id: nil)
+        %td.state{ :class => shipment.state }= ViewHelper::Shipments.state_name(shipment.state)
+        %td= link_to(shipment.unique_shipment_id, companies_shipment_path(shipment))
+        %td= shipment.shipping_date
+        %td= shipment.recipient.company_name
+        %td= shipment.recipient.country_name
+        %td= shipment.carrier_product.name
+        %td= render(partial: "components/shared/carrier_products/awb", locals: {shipment: shipment})
+        %td= shipment.description

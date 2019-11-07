@@ -1,0 +1,33 @@
+table.without_wrapping_border {
+  border: none;
+
+  th:first-child,
+  td:first-child {
+    border-left: 1px solid #dedede;
+  }
+
+  th:last-child,
+  td:last-child {
+    border-right: 1px solid #dedede;
+  }
+
+  th,
+  td {
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+    border-left: none;
+    border-right: none;
+  }
+
+  tr.without_borders td {
+    border: none;
+  }
+}
+
+.padded_table {
+  margin: 20px 0;
+}
+
+.right_aligned_cell {
+  text-align: right;
+}

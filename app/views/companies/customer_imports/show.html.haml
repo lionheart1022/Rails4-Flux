@@ -1,0 +1,71 @@
+%header.page_header
+  %h1 Import Customers
+
+  %ul.page_actions
+    %li= link_to "Back", companies_customers_path, class: "secondary-btn"
+
+- if @import.parsing_completed?
+  - if @import.creating_completed?
+    .padded
+      %p
+        Imported completed on
+        = l(@import.perform_completed_at, format: :long)
+
+        - if @import.created_by
+          %br
+          Import was performed by user
+          %strong
+            = @import.created_by.email
+
+        %br
+        Invitation emails to customers:
+        - if @import.send_invitation_email?
+          ✓ Enabled
+        - else
+          ✗ Disabled
+  - else
+    = simple_form_for @import, url: bg_companies_customer_import_path, method: :post do |form|
+      .padded
+        = form.input :send_invitation_email, as: :boolean, label: "Send e-mail invitations to imported customers"
+
+      %ul.horizontal_button_list
+        %li.horizontal_button_list__item
+          = link_to("Cancel", new_companies_customer_import_path, class: "secondary-btn")
+        %li.horizontal_button_list__item
+          = form.submit "Import", name: nil, class: "primary-btn"
+
+%table
+  %tr
+    %th
+    %th Company
+    %th Attention
+    %th Address 1
+    %th Zip
+    %th City
+    %th Country
+    %th Email
+    %th Phone
+  - @import.validated_plain_rows.each_with_index do |customer_row, index|
+    %tr{ class: customer_row.errors.any? ? "error" : nil }
+      %td{ class: customer_row.errors.any? ? "error" : nil }
+        - if customer_row.errors.any?
+          - customer_row.errors.full_messages.each do |message|
+            %p= message
+        - else
+          = index + 1
+      %td
+        = customer_row.company_name
+      %td
+        = customer_row.attention
+      %td{ class: customer_row.errors.include?(:address_1) ? "error" : nil }
+        = customer_row.address_1.presence || content_tag(:em, "Blank")
+      %td
+        = customer_row.zip_code
+      %td
+        = customer_row.city
+      %td{ class: customer_row.errors.include?(:country_code) ? "error" : nil }
+        = customer_row.country_code.presence || content_tag(:em, "Blank")
+      %td{ class: customer_row.errors.include?(:email) ? "error" : nil }
+        = customer_row.email.presence || content_tag(:em, "Blank")
+      %td
+        = customer_row.phone

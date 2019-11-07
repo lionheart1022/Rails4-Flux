@@ -1,0 +1,8 @@
+= form_tag("https://wwwapps.ups.com/WebTracking/track", target: "_blank", authenticity_token: false) do
+  = hidden_field_tag('trackNums', awb)
+  = hidden_field_tag('loc', "en_US")
+  = hidden_field_tag("HTMLVersion", "5.0")
+  = hidden_field_tag("track.x", "Track")
+
+  - unless awb.nil?
+    = button_tag(awb, class: "link_button")

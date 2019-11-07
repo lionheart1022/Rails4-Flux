@@ -1,0 +1,14 @@
+(function() {
+  var checkmarkSelector = "[data-checkmark-for-feature-flag='<%= @feature_flag_identifier %>']"
+  var toggleSwitchSelector = "[data-toggle-switch-for-feature-flag='<%= @feature_flag_identifier %>']"
+
+  $(checkmarkSelector).show()
+
+  setTimeout(function() {
+    // Hide the checkmark indicating success.
+    $(checkmarkSelector).hide()
+
+    // This update is delayed so the toggle switch animation can finish in time.
+    $(toggleSwitchSelector).html('<%= j render("cf_exec/company_features/toggle_switch", feature_flag: @updated_feature_flag) %>')
+  }, 1000)
+})()

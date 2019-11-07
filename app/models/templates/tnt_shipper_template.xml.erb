@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<ESHIPPER>
+  <LOGIN>
+    <COMPANY><%= credentials.company %></COMPANY>
+    <PASSWORD><%= credentials.password %></PASSWORD>
+    <APPID>EC</APPID>
+    <APPVERSION>2.2</APPVERSION>
+  </LOGIN>
+  <CONSIGNMENTBATCH>
+    <SENDER>
+      <COMPANYNAME><%= transform_to_tnt_char_set(sender.company_name) %></COMPANYNAME>
+      <STREETADDRESS1><%= transform_to_tnt_char_set(sender.address_line1) %></STREETADDRESS1>
+      <STREETADDRESS2><%= transform_to_tnt_char_set(sender.address_line2) %></STREETADDRESS2>
+      <STREETADDRESS3><%= transform_to_tnt_char_set(sender.address_line3) %></STREETADDRESS3>
+      <CITY><%= transform_to_tnt_char_set(sender.city) %></CITY>
+      <PROVINCE><%= sender.state_code.nil? ? "" : transform_to_tnt_char_set(sender.state_code) %></PROVINCE>
+      <POSTCODE><%= xml_escape(sender.zip_code) %></POSTCODE>
+      <COUNTRY><%= xml_escape(sender.country_code.upcase) %></COUNTRY>
+      <% unless shipping_options.import %>
+        <ACCOUNT><%= credentials.account %></ACCOUNT>
+      <% else %>
+        <ACCOUNT/>
+      <% end %>
+      <CONTACTNAME><%= transform_to_tnt_char_set(sender.attention) %></CONTACTNAME>
+      <CONTACTDIALCODE><%= transform_to_tnt_char_set(sender.phone_number_dial_code) %></CONTACTDIALCODE>
+        <CONTACTTELEPHONE><%= transform_to_tnt_char_set(sender.phone_number_number) %></CONTACTTELEPHONE>
+      <CONTACTEMAIL><%= xml_escape(sender.email) %></CONTACTEMAIL>
+      <COLLECTION>
+        <COLLECTIONADDRESS>
+          <COMPANYNAME><%= transform_to_tnt_char_set(collection_info.company_name) %></COMPANYNAME>
+          <STREETADDRESS1><%= transform_to_tnt_char_set(collection_info.address_line1) %></STREETADDRESS1>
+          <STREETADDRESS2><%= transform_to_tnt_char_set(collection_info.address_line2) %></STREETADDRESS2>
+          <STREETADDRESS3><%= transform_to_tnt_char_set(collection_info.address_line3) %></STREETADDRESS3>
+          <CITY><%= transform_to_tnt_char_set(collection_info.city) %></CITY>
+          <PROVINCE><%= collection_info.state_code.nil? ? "" : transform_to_tnt_char_set(collection_info.state_code) %></PROVINCE>
+          <POSTCODE><%= xml_escape(collection_info.zip_code) %></POSTCODE>
+          <COUNTRY><%= xml_escape(collection_info.country_code.upcase) %></COUNTRY>
+          <CONTACTNAME><%= transform_to_tnt_char_set(collection_info.attention) %></CONTACTNAME>
+          <CONTACTDIALCODE><%= transform_to_tnt_char_set(collection_info.dial_code) %></CONTACTDIALCODE>
+          <CONTACTTELEPHONE><%= transform_to_tnt_char_set(collection_info.telephone) %></CONTACTTELEPHONE>
+          <CONTACTEMAIL><%= collection_info.email ? xml_escape(collection_info.email) : "" %></CONTACTEMAIL>
+        </COLLECTIONADDRESS>
+        <SHIPDATE><%= shipment.shipping_date.strftime('%d/%m/%Y') %></SHIPDATE>
+        <PREFCOLLECTTIME>
+          <FROM><%= transform_to_tnt_char_set(collection_info.from_time) %></FROM>
+          <TO><%= transform_to_tnt_char_set(collection_info.to_time) %></TO>
+        </PREFCOLLECTTIME>
+        <COLLINSTRUCTIONS><%= transform_to_tnt_char_set(collection_info.instructions) %></COLLINSTRUCTIONS>
+      </COLLECTION>
+    </SENDER>
+    <CONSIGNMENT>
+      <CONREF><%= shipment.shipment_id %></CONREF>
+      <DETAILS>
+        <RECEIVER>
+          <COMPANYNAME><%= transform_to_tnt_char_set(recipient.company_name) %></COMPANYNAME>
+          <STREETADDRESS1><%= transform_to_tnt_char_set(recipient.address_line1) %></STREETADDRESS1>
+          <STREETADDRESS2><%= transform_to_tnt_char_set(recipient.address_line2) %></STREETADDRESS2>
+          <STREETADDRESS3><%= transform_to_tnt_char_set(recipient.address_line3) %></STREETADDRESS3>
+          <CITY><%= transform_to_tnt_char_set(recipient.city) %></CITY>
+          <PROVINCE><%= recipient.state_code.nil? ? "" : transform_to_tnt_char_set(recipient.state_code) %></PROVINCE>
+          <POSTCODE><%= xml_escape(recipient.zip_code) %></POSTCODE>
+          <COUNTRY><%= xml_escape(recipient.country_code.upcase) %></COUNTRY>
+          <CONTACTNAME><%= transform_to_tnt_char_set(recipient.attention) %></CONTACTNAME>
+          <CONTACTDIALCODE><%= transform_to_tnt_char_set(recipient.phone_number_dial_code) %></CONTACTDIALCODE>
+          <CONTACTTELEPHONE><%= transform_to_tnt_char_set(recipient.phone_number_number) %></CONTACTTELEPHONE>
+          <CONTACTEMAIL><%= xml_escape(recipient.email) %></CONTACTEMAIL>
+          <% if shipping_options.import %>
+            <ACCOUNT><%= credentials.account %></ACCOUNT>
+            <ACCOUNTCOUNTRY><%= xml_escape(recipient.country_code.upcase) %></ACCOUNTCOUNTRY>
+          <% end %>
+        </RECEIVER>
+        <DELIVERY>
+          <COMPANYNAME><%= transform_to_tnt_char_set(recipient.company_name) %></COMPANYNAME>
+          <STREETADDRESS1><%= transform_to_tnt_char_set(recipient.address_line1) %></STREETADDRESS1>
+          <STREETADDRESS2><%= transform_to_tnt_char_set(recipient.address_line2) %></STREETADDRESS2>
+          <STREETADDRESS3><%= transform_to_tnt_char_set(recipient.address_line3) %></STREETADDRESS3>
+          <CITY><%= transform_to_tnt_char_set(recipient.city) %></CITY>
+          <PROVINCE><%= recipient.state_code.nil? ? "" : transform_to_tnt_char_set(recipient.state_code) %></PROVINCE>
+          <POSTCODE><%= xml_escape(recipient.zip_code) %></POSTCODE>
+          <COUNTRY><%= xml_escape(recipient.country_code.upcase) %></COUNTRY>
+          <CONTACTNAME><%= transform_to_tnt_char_set(recipient.attention) %></CONTACTNAME>
+          <CONTACTDIALCODE><%= transform_to_tnt_char_set(recipient.phone_number_dial_code) %></CONTACTDIALCODE>
+          <CONTACTTELEPHONE><%= transform_to_tnt_char_set(recipient.phone_number_number) %></CONTACTTELEPHONE>
+          <CONTACTEMAIL><%= xml_escape(recipient.email) %></CONTACTEMAIL>
+        </DELIVERY>
+        <CUSTOMERREF><%= xml_escape(shipment.minimized_reference) %></CUSTOMERREF>
+        <CONTYPE><%= shipping_options.contype %></CONTYPE>
+        <PAYMENTIND><%= shipping_options.import ? 'R' : 'S' %></PAYMENTIND>
+        <ITEMS><%= shipment.number_of_packages %></ITEMS>
+        <TOTALWEIGHT><%= shipment.package_dimensions.total_weight %></TOTALWEIGHT>
+        <% if shipping_options.service == TNTShipperLib::ServiceCodes::International::EXPRESS_DOCUMENT %>
+          <TOTALVOLUME>0.0</TOTALVOLUME>
+        <% else %>
+          <TOTALVOLUME><%= "%.10f" % (shipment.package_dimensions.total_volume / 1000000.0) %></TOTALVOLUME>
+        <% end %>
+        <% if shipment.dutiable %>
+          <CURRENCY><%= shipment.customs_currency %></CURRENCY>
+          <GOODSVALUE><%= ActiveSupport::NumberHelper.number_to_rounded(shipment.customs_amount, precision: 2) %></GOODSVALUE>
+        <% end %>
+        <SERVICE><%= shipping_options.service %></SERVICE>
+        <OPTION></OPTION>
+        <DESCRIPTION><%= xml_escape(shipment.description) %></DESCRIPTION>
+        <DELIVERYINST></DELIVERYINST>
+        <% unless shipping_options.service == TNTShipperLib::ServiceCodes::International::EXPRESS_DOCUMENT %>
+          <% shipment.package_dimensions.dimensions.each do |dimension| %>
+            <PACKAGE>
+              <ITEMS>1</ITEMS>
+              <DESCRIPTION><%= xml_escape(shipment.description) %></DESCRIPTION>
+              <LENGTH><%= dimension.length / 100.0 %></LENGTH>
+              <HEIGHT><%= dimension.height / 100.0 %></HEIGHT>
+              <WIDTH><%= dimension.width / 100.0 %></WIDTH>
+              <WEIGHT><%= dimension.weight %></WEIGHT>
+            </PACKAGE>
+          <% end %>
+        <% end %>
+      </DETAILS>
+    </CONSIGNMENT>
+  </CONSIGNMENTBATCH>
+  <ACTIVITY>
+    <CREATE>
+      <CONREF><%= shipment.shipment_id %></CONREF>
+    </CREATE>
+    <% if collection_info.book? %>
+      <BOOK ShowBookingRef="Y">
+        <CONREF><%= shipment.shipment_id %></CONREF>
+      </BOOK>
+    <% end %>
+    <SHIP>
+      <CONREF><%= shipment.shipment_id %></CONREF>
+    </SHIP>
+    <PRINT>
+      <CONNOTE>
+        <CONREF><%= shipment.shipment_id %></CONREF>
+      </CONNOTE>
+      <LABEL>
+        <CONREF><%= shipment.shipment_id %></CONREF>
+      </LABEL>
+      <MANIFEST>
+        <CONREF><%= shipment.shipment_id %></CONREF>
+      </MANIFEST>
+      <INVOICE>
+        <CONREF><%= shipment.shipment_id %></CONREF>
+      </INVOICE>
+    </PRINT>
+  </ACTIVITY>
+</ESHIPPER>

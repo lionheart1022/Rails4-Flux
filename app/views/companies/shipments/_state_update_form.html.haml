@@ -1,0 +1,7 @@
+= simple_form_for(ShipmentStateForm.build_for_shipment(shipment), url: companies_shipment_state_changes_path(shipment), method: :post, as: "shipment", remote: true, html: { id: nil, class: nil, data: { shipment_state_change_form: true } }) do |f|
+  = f.input :state, collection: f.object.available_state_options, include_blank: false, label: false, hint: false
+  = f.input :awb, label: "AWB number (when booking)"
+  = f.input :comment, as: :text
+
+  %div
+    = f.submit "Save", class: "primary-btn"

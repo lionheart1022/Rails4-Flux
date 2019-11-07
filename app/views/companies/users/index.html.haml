@@ -1,0 +1,36 @@
+%header.page_header
+  %h1 Users
+
+  %ul.page_actions
+    %li= link_to("New User", new_companies_user_path, class: "primary-btn")
+
+= render "companies/users/subnav", active_nav: :company_users
+
+%table
+  %thead
+    %tr
+      %th{ width: "40%" } Email
+      %th{ width: "20%" } Permissions
+      %th Last sign in
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = user.email
+        %td
+          - if user.is_admin?
+            %div
+              %strong Administrator
+          - if user == current_user
+            %div
+              %em This is your user
+          - else
+            %div
+              = link_to "Edit permissions", edit_companies_user_path(user)
+        %td
+          - if user.last_sign_in_at?
+            = l(user.last_sign_in_at, format: :long)
+        %td.text-right
+          - if user != current_user
+            = link_to "Remove", companies_user_path(user), method: :delete

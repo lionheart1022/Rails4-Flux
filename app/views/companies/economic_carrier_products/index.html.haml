@@ -1,0 +1,19 @@
+%header.page_header.with_table_below
+  %h1
+    e-conomic
+    %small= @carrier.suffixed_name
+
+  %ul.page_actions
+    %li
+      = link_to("All carriers", companies_v2_economic_carriers_path)
+
+%table
+  %thead
+    %tr
+      %th{ width: "30%" } Carrier product
+      %th{ width: "25%" } e-conomic product, VAT incl.
+      %th{ width: "25%" } e-conomic product, VAT excl.
+      %th
+  %tbody
+    - @carrier_products.each do |carrier_product|
+      = render("companies/economic_carrier_products/row", carrier_product: carrier_product, product_mapping: carrier_product.product_mapping)

@@ -1,0 +1,122 @@
+* {
+  background: transparent !important; 
+  color: black !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -ms-filter: none !important;
+}
+
+@page {
+  margin: 2cm;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  page-break-after: avoid;
+}
+
+table {
+  width: 100% !important;
+}
+
+img,
+table {
+  max-width: 100% !important;
+}
+
+ul, img {
+  page-break-inside: avoid;
+}
+
+a {
+  text-decoration: underline !important;
+}
+
+#page_inner,
+#body {
+  margin: 0;
+  padding: 0;
+}
+
+// ========== EOD manifest ========== //
+
+.eod_manifest {
+  
+  table.header {
+    padding-left: 30px;
+    border: 0;
+    
+    td {
+      padding: 0;
+      vertical-align: bottom;
+      border: 0;
+    }
+  
+    h1 {
+      margin: 0;
+    }
+  
+    .meta_data {
+      padding-bottom: 4px;
+    
+      dl {
+        float: right;
+      }
+    
+      dt {
+        width: 60px;
+      }
+  
+      dd {
+        margin-left: 70px;
+        font-weight: 400;
+      }
+    }
+  }
+  
+  h2.packages {
+    padding: 30px 30px 10px 30px;
+  }
+  
+  table.summary,
+  table.date_signature {
+    width: auto;
+    border: 0;
+    margin-top: 55px;
+    
+    td {
+      border: 0;
+      padding-bottom: 0;
+    }
+  }
+  
+  h2.signature {
+    padding: 55px 30px 0 30px;
+  }
+  
+  table.date_signature {
+    div {
+      font-style: italic;
+      padding-top: 10px;
+      border-top: 2px solid #000;
+    }
+    
+    .date div {
+      width: 200px;
+    }
+    
+    .signature div {
+      width: 500px;
+    }
+  }
+  
+}
+
+
+
+

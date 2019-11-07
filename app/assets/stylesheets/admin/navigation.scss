@@ -1,0 +1,30 @@
+@import "mixins";
+
+.navigation .navigation_badge {
+  float: right;
+  margin-top: 2px;
+}
+
+.navigation_badge {
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  background: $blue;
+  color: white;
+  padding: 4px;
+  line-height: 15px;
+  min-width: 15px;
+  height: 15px;
+}
+
+.highlight_navigation_item {
+  a::before {
+    content: "";
+    display: inline-block;
+    background: $blue;
+    border-radius: 10px;
+    height: 10px;
+    width: 10px;
+    margin-right: 8px;
+  }
+}

@@ -1,0 +1,10 @@
+%h1
+  UPS pickup
+  %small= selected_customer.name
+
+= simple_form_for(@pickup, as: :carrier_pickup, method: :post, url: confirm_companies_customer_scoped_ups_pickups_path) do |f|
+  = render "form_fields", f: f
+
+  %ul.actions
+    %li= link_to("Cancel", companies_pickups_path)
+    %li.primary= f.submit "Book UPS pickup"

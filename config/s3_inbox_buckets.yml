@@ -1,0 +1,17 @@
+defaults: &defaults
+  access_key_id: <%=ENV["AWS_INBOX_ACCESS_KEY_ID"]%>
+  secret_access_key: <%=ENV["AWS_INBOX_SECRET_ACCESS_KEY"]%>
+development:
+  <<: *defaults
+  bucket: "cargoflux-inbox-development"
+  access_key_id: "AKIAJO5AZUFCXSMO3QTQ"
+  secret_access_key: "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"
+test:
+  <<: *defaults
+  bucket: "cargoflux-inbox-development"
+staging:
+  <<: *defaults
+  bucket: "cargoflux-inbox-staging"
+production:
+  <<: *defaults
+  bucket: "cargoflux-inbox-production"

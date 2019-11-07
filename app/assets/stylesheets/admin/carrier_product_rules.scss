@@ -1,0 +1,44 @@
+.carrier_product_rule__description_text {
+  font-size: 16px;
+  margin: 24px 0;
+}
+
+.carrier_product_rule__container {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 32px 32px 1px;
+}
+
+.carrier_product_rule__enable_label_container {
+  margin-bottom: 24px;
+
+  label {
+    font-size: 16px;
+  }
+}
+
+.carrier_product_rule__from_label_container,
+.carrier_product_rule__to_label_container {
+  margin-bottom: 4px;
+}
+
+.carrier_product_rule__from_input_container,
+.carrier_product_rule__to_input_container {
+  margin-bottom: 24px;
+}
+
+.carrier_product_rule__from_input_container,
+.carrier_product_rule__to_input_container {
+  input.cf_input {
+    width: 50px;
+  }
+}
+
+.carrier_product_rule__inclusive_label {
+  margin-left: 12px;
+}
+
+.carrier_product_rule__default_container {
+  margin-bottom: 24px;
+}

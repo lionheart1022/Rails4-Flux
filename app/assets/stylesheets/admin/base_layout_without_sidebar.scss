@@ -1,0 +1,15 @@
+body#body_without_sidebar {
+  background-image: none;
+}
+
+#body_without_sidebar {
+  #body {
+    margin: 0 auto;
+    padding-top: 30px;
+    width: 500px;
+  }
+
+  #footer p {
+    width: auto;
+  }
+}

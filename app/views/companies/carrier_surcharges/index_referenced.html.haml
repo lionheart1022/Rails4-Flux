@@ -1,0 +1,11 @@
+%header.page_header
+  %h1
+    Surcharges
+    %small= @carrier.suffixed_name
+
+  %ul.page_actions
+    %li
+      = link_to("← All carriers", companies_surcharges_path)
+
+.padded
+  Only the owner of these products can edit the surcharges.

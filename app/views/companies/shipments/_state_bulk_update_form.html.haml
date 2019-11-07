@@ -1,0 +1,9 @@
+= form_tag bulk_update_companies_shipment_state_changes_path, method: :patch, data: { behavior: "shipment_bulk_update__form" }, class: "shipment_bulk_update_form", style: "display:none" do
+  = hidden_field_tag "redirect_url", request.original_fullpath, id: nil
+
+  %div{ data: { behavior: "shipment_bulk_update__hidden_fields" } }
+
+  %span.shipment_bulk_update__shipment_count{ data: { behavior: "shipment_bulk_update__shipment_count" } }
+  = select_tag "bulk_update[state]", options_for_select(ViewHelper::Shipments.states_for_select), include_blank: "Change state", id: nil, class: "shipment_bulk_update__state_select"
+  = button_tag "Apply", name: nil, class: "primary-btn"
+  = button_tag "Cancel", type: "button", name: nil, class: "secondary-btn", data: { behavior: "shipment_bulk_update__toggle_button" }

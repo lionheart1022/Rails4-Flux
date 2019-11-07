@@ -1,0 +1,17 @@
+.page_actions
+  %h1 Shipments - Current
+
+  %ul.actions.fix_right_alignment
+    %li= button_tag("Bulk edit state", type: "button", data: { behavior: "shipment_bulk_update__toggle_button" }, class: "secondary-btn")
+    %li.primary= link_to("New ferry booking", new_companies_ferry_booking_path) if current_company.ferry_booking_enabled?
+    %li.primary= link_to("New shipment", new_companies_shipment_path)
+
+  %div.scopes
+    = simple_form_for(@view_model, url: companies_shipments_path, method: :get, as: :scope) do |form|
+      = render "list_view_form", form: form
+
+= render "state_bulk_update_form"
+= render "list_view_shipments"
+
+.pagination
+  = paginate(@view_model.shipments)

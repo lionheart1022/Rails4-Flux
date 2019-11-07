@@ -1,0 +1,40 @@
+- if !view_model.hide_attachments?
+  %h2 Attachments
+
+
+  %table.files
+    %tr
+      %th Note
+      %th Private
+      %th File
+      %th
+    - view_model.other_assets.each do |asset|
+      = render "admin/attachments/other_asset", asset: asset, view_model: view_model
+
+    - if view_model.allow_additional_files_upload
+      %tr.new_file.simple_form
+        = simple_form_for view_model.other_upload_callback_url do |f|
+          %td
+            = f.input :description, as: :string, label: false, placeholder: 'Add note', input_html: { id: 'file_description' }
+          %td
+            = f.input :private, as: :boolean, label: false, input_html: { id: 'file_is_private' }
+
+        %td
+          #other_attachment.attachment
+          = s3_uploader_form(callback_url: view_model.other_upload_callback_url,
+                                           data:  { bucket_name: Rails.configuration.aws[:bucket], drop_zone: "null", paste_zone: "null" },
+                                           id: 's3_other_attachment_uploader',
+                                           key: "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file",
+                                           callback_param: 'file[direct_attachment_url]',
+                                           expiration:  24.hours.from_now.utc.iso8601,
+                                           max_file_size:  500.megabytes) do |f|
+            = file_field_tag :file, multiple: false
+            #other_attachment_uploads.attachment
+        %td
+          %ul.actions
+            %li.primary
+              = submit_tag 'Upload', id: 'upload_other_file'
+              #upload_loading_indicator{hidden: true}
+                = image_tag("admin/loading_indicator.gif", alt: "")
+
+= #f.input :private, as: :boolean, label: "Private", input_html: { id: 'file_private' }

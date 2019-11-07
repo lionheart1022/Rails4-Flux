@@ -1,0 +1,3 @@
+var container = $("#list_view_pickup_<%= @pickup.id %>")
+container.find("*[data-behavior~=pickup_state_updating]").qtip("hide")
+container.replaceWith('<%= j render("companies/pickups/list_view_row", pickup: @pickup) %>')

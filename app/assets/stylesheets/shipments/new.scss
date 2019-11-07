@@ -1,0 +1,73 @@
+@import "admin/mixins";
+
+.packages {
+  .left_col {
+    width: 442px;
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  .right_col {
+    width: 442px;
+    vertical-align: top;
+    display: inline-block;
+
+    textarea {
+      height: 40px;
+    }
+  }
+}
+
+.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.dgr_fields_wrapper {
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.select_or_type_other button.bring_back_select {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.predefined_package_size__container {
+  margin-bottom: 24px;
+}
+
+select.predefined_package_size {
+  @include font_maven_pro;
+
+  -webkit-appearance: menulist-button;
+
+  background: white;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  box-sizing: border-box;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 8px 0 0;
+  padding: 0 6px;
+}
+
+button.add_package_row {
+  @include font_maven_pro;
+
+  background: none;
+  border: none;
+  color: $blue;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}

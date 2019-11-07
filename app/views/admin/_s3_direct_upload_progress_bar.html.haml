@@ -1,0 +1,5 @@
+%script#template-upload{ type: "text/x-tmpl" }
+  .upload{ :id => "upload_{%=o.unique_id%}" }
+    %h5= "{%=o.name%}"
+    .progress.progress-striped.active
+      .bar{ style: "width: 0%" }

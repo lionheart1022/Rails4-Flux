@@ -1,0 +1,28 @@
+%tr.shipment_row__main
+  %td.shipment_row__state_indicator_cell
+    %span.state_indicator.shipment_state_indicator{ class: "shipment_state_#{shipment.state}" }
+      %span= ViewHelper::Shipments.state_name(shipment.state)
+  %td
+    = shipment.company.name
+  %td
+    = shipment.customer.name
+  %td
+    = link_to(companies_shipment_path(shipment), class: "partially_underlined", target: "_blank") do
+      %span.underline_this
+        = shipment.unique_shipment_id
+      ↗
+  %td
+    = shipment.shipping_date
+  %td
+    = shipment.carrier_product.suffixed_name
+  %td
+    = render("components/shared/contact", contact: shipment.sender)
+  %td
+    = render("components/shared/contact", contact: shipment.recipient)
+  %td
+    = render("components/shared/carrier_products/awb", shipment: shipment, current_customer: nil)
+
+- if shipment.description.present?
+  %tr.shipment_row__description
+    %td{ colspan: "9" }
+      = shipment.description

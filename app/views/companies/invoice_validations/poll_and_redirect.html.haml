@@ -1,0 +1,10 @@
+%header.page_header
+  %h1
+    Invoice validation
+    %small Processing
+
+.cf-modal-show-spinner
+  .spinner--wrapper-size60
+    .spinner
+
+%div{ data: { behavior: "poll_and_redirect", behavior_config: JSON.generate(poll_url: in_progress_companies_invoice_validation_path(@invoice_validation, format: "json"), redirect_url: companies_invoice_validation_path(@invoice_validation)) } }

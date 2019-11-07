@@ -1,0 +1,17 @@
+%header.page_header
+  %h1 Carriers
+
+  %ul.page_actions
+    %li= link_to("New carrier", new_companies_carrier_path, class: "primary-btn")
+
+%ul.box_list
+  - @carriers.each do |carrier|
+    %li.box_list_item
+      .box_list_item__inner
+        = link_to(carrier.name, companies_carrier_path(carrier.id), class: "box_list_item__primary_label", title: carrier.name)
+        - if carrier.owner_carrier
+          .box_list_item__secondary_label{ title: carrier.owner_carrier.company.name }
+            = carrier.owner_carrier.company.name
+        - else
+          .box_list_item__secondary_label
+            N/A

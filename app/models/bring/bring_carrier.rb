@@ -1,0 +1,2 @@
+class BringCarrier < Carrier
+end

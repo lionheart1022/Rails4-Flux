@@ -1,0 +1,2 @@
+class AccessToken < Token
+end

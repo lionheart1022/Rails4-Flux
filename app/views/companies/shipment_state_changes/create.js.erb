@@ -1,0 +1,5 @@
+$("#list_view_shipment_<%= @shipment.id %>-description").remove();
+
+var container = $("#list_view_shipment_<%= @shipment.id %>");
+container.find("*[data-behavior~=shipment_state_updating]").qtip("hide");
+container.replaceWith('<%= j render("companies/shipments/list_view_shipment_row", data: @shipment) %>');

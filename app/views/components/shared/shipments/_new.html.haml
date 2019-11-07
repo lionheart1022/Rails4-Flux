@@ -1,0 +1,175 @@
+:javascript
+  window.priceEndpoint = "#{@view_model.price_endpoint}"
+  window.customerId = "#{@view_model.shipment.customer_id}"
+  window.editingShipment = "#{@view_model.editing}"
+
+- if @view_model.update?
+  %h1= @view_model.title
+- elsif @view_model.is_rfq
+  %h1 Create RFQ
+- else
+  %h1 Create Shipment
+
+= render 'components/shared/form_error_messages', :target => @view_model.shipment
+
+- if @view_model.is_rfq
+  = content_tag(:div, "", id: "shipment_form_config", data: { shipment_form_config: { shipmentPriceURLKey: "shipmentRequestPriceURL" } })
+
+= simple_form_for([:customers, @view_model.shipment], :url => @view_model.endpoint, html: { :method => @view_model.method, id: "new_shipment" }) do |f|
+  - if @view_model.show_customer_selection
+    = f.input :customer_id, as: :select, collection: f.object.customer.present? ? [[f.object.customer.name, f.object.customer_id]] : [], wrapper_html: { class: "simple_form customer_id validate" }, input_html: { id: "shipment_customer_id_select", class: "price_required", data: { :"ajax--url" => companies_autocomplete_direct_customers_path(format: "json", variant: "select2"), :width => "300px", :"container-css-class" => "input string", :placeholder => "Select customer" } }
+
+  = f.input :shipment_type, collection: @view_model.shipment_types, :selected => 'selected_shipment_type'
+  = f.input :rfq, as: :hidden, input_html: { value: @view_model.is_rfq }
+
+  #shipment_type{ data: { shipment_type: @view_model.shipment.shipment_type } }
+  .recipient_and_sender
+    .sender
+      .sender_inner.form_pane.validate
+        %h2 Sender
+        = f.fields_for :sender do |ff|
+          - if @view_model.sender_autocomplete_url
+            = ff.input :company_name, required: true, input_html: { data: { behavior: "autocomplete_sender", behavior_config: { remote_url: @view_model.sender_autocomplete_url } } }
+          - else
+            = ff.input :company_name, required: true
+          = ff.input :attention
+          = ff.input :address_line1, required: true
+          = ff.input :address_line2
+          = ff.input :address_line3
+          .zip_code_and_city
+            = ff.input :zip_code, wrapper_html: { class: 'zip_code' }
+            = ff.input :city, required: true, wrapper_html: { class: 'city' }
+          = ff.input :country_code, required: true, iso_codes: true, label: "Country"
+          = ff.input :state_code, as: :states_grouped_by_country
+          = ff.input :phone_number
+          = ff.input :email
+          = ff.input :residential, as: :boolean
+          - if @view_model.show_save_contact?
+            = ff.input :save_sender_in_address_book, as: :boolean
+
+    .recipient
+      .recipient_inner.form_pane.validate
+        %h2 Recipient
+        = f.fields_for :recipient do |ff|
+          - if @view_model.recipient_autocomplete_url
+            = ff.input :company_name, required: true, autofocus: true, input_html: { data: { behavior: "autocomplete_recipient", behavior_config: { remote_url: @view_model.recipient_autocomplete_url } } }
+          - else
+            = ff.input :company_name, required: true, autofocus: true
+          = ff.input :attention, required: true
+          = ff.input :address_line1, required: true
+          = ff.input :address_line2
+          = ff.input :address_line3
+          .zip_code_and_city
+            = ff.input :zip_code, wrapper_html: { class: 'zip_code' }, input_html: { class: 'price_observe'}
+            = ff.input :city, required: true, wrapper_html: { class: 'city' }
+          = ff.input :country_code, required: true, iso_codes: true, label: "Country", input_html: { class: 'price_observe price_required'}
+          = ff.input :state_code, as: :states_grouped_by_country
+          = ff.input :phone_number
+          = ff.input :email
+          = ff.input :residential, as: :boolean, input_html: { class: "price_observe" }
+          - if @view_model.show_save_contact?
+            = ff.input :save_recipient_in_address_book, as: :boolean
+
+  %h2 Items
+
+  .form_pane
+    = shipment_form_goods_lines_react_component(shipment: f.object)
+
+  %h2 Contents
+  .packages.form_pane
+    .validate
+      .left_col
+        = f.input :description, as: :string
+        = f.input :reference
+      .right_col
+        = f.input :remarks, as: :text, input_html: { rows: 2 }
+
+    - if @view_model.dgr_fields?
+      .dgr_fields_wrapper
+        .enable_dgr
+          = f.input :dangerous_goods, as: :boolean, input_html: { class: "price_observe" }
+
+        .dgr_fields
+          = f.input :dangerous_goods_predefined_option, label: "Type", collection: @view_model.dangerous_goods_predefined_options
+
+          .dgr_actual_fields
+            = f.input :dangerous_goods_description, as: :select_or_type_other, collection: @view_model.dangerous_goods_description_options, label: "Description"
+            = f.input :un_number, label: "UN number"
+            = f.input :dangerous_goods_class, as: :select_or_type_other, collection: @view_model.dangerous_goods_class_options
+            = f.input :un_packing_group, as: :select_or_type_other, collection: @view_model.un_packing_group_options, label: "Packing group"
+            = f.input :packing_instruction, as: :select_or_type_other, collection: @view_model.packing_instruction_options
+
+  #map
+
+  %h2 Shipping information
+  .shipping_information.form_pane
+    .top_actions
+      = f.input :shipping_date, input_html: { class: "price_observe" }
+
+      .right.map_section
+        .map_disclaimer
+          Routing is for informal use only and are subject to change based on traffic and logistcal circumstances -
+        .map_status.customer
+        = link_to('Show Route', '#', class: "customer route_link")
+
+    - if @view_model.show_product_selection?
+      #loading_indicator
+        = image_tag("admin/loading_indicator.gif", alt: "Loading prices...")
+        %p Loading prices
+      #incomplete_information
+        = render(partial: 'components/customers/shipments/incomplete_information', locals: { message: @view_model.incomplete_information_text })
+      #invalid_information
+        = label_tag 'Invalid input'
+      #shipping_carrier_products
+
+  - if @view_model.truck_and_driver_enabled
+    %h2 Truck and Driver
+    .truck_and_driver.form_pane
+      = f.input :select_truck_and_driver, as: :boolean, label: "Select Truck and driver"
+      .truck_and_driver_fields
+        .truck_and_driver_fields_column
+          = f.label :truck
+          = f.collection_select :truck_id, @view_model.trucks, :id, :name, { include_blank: true }, { data: { behavior: "shipment_form_truck_select" , behavior_config: { default_drivers: @view_model.truck_and_driver_mapping } } }
+
+        .truck_and_driver_fields_column
+          = f.label :driver
+          = f.collection_select :driver_id, @view_model.drivers, :id, :name, { include_blank: true }, { data: { behavior: "shipment_form_driver_select" } }
+  - if @view_model.pickup
+    %h2 Pickup
+    .pickup.form_pane
+      = f.input :request_pickup, as: :boolean, label: "Request pickup"
+
+      .pickup_fields
+        = f.simple_fields_for :pickup_options, @view_model.pickup do |pickup_fields|
+          .from_and_to_time
+            = pickup_fields.input :from_time, wrapper_html: { class: 'from_time validate' }, input_html: { data: { behavior: "masked_time_input" } }
+            = pickup_fields.input :to_time, wrapper_html: { class: 'to_time validate' }, input_html: { data: { behavior: "masked_time_input" } }
+
+          = pickup_fields.input :description, hint: "This field is mandatory for DHL shipments", input_html: { maxlength: "35", class: "validate" }
+
+          = pickup_fields.simple_fields_for :contact do |contact_fields|
+            = contact_fields.input :company_name, required: true, input_html: { class: "validate" }
+            = contact_fields.input :attention, required: true, input_html: { class: "validate" }
+            = contact_fields.input :address_line1, required: true
+            = contact_fields.input :address_line2
+            = contact_fields.input :address_line3
+
+            .zip_code_and_city
+              = contact_fields.input :zip_code, wrapper_html: { class: 'zip_code' }
+              = contact_fields.input :city, wrapper_html: { class: 'city' }
+
+            = contact_fields.input :country_code, iso_codes: true, input_html: { class: "w400_px" }
+            = contact_fields.input :state_code, as: :states_grouped_by_country, input_html: { class: "w400_px" }
+
+  %h2 Customs
+  .customs.form_pane
+    = f.input :dutiable, label: "Shipment is dutiable"
+    = f.input :customs_amount, label: "Amount"
+    = f.input :customs_currency, as: :currency_select, label: "Currency"
+    = f.input :customs_code
+
+  %ul.actions
+    %li
+      = link_to_cancel_shipment
+    %li.primary
+      = f.submit @view_model.submit_text, id: 'create_shipment', class: 'validate-form'

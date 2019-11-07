@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO 8859-1"?>
+<AccessRequest>
+  <AccessLicenseNumber><%= credentials.access_token %></AccessLicenseNumber>
+  <UserId><%= credentials.company %></UserId>
+  <Password><%= credentials.password %></Password>
+</AccessRequest>
+<?xml version="1.0" encoding="ISO 8859-1"?>
+<ShipmentAcceptRequest>
+    <Request>
+        <TransactionReference>
+            <CustomerContext>Customer Comment</CustomerContext>
+        </TransactionReference>
+        <RequestAction>ShipAccept</RequestAction>
+        <RequestOption><%= "validate" %></RequestOption>
+    </Request>
+    <ShipmentDigest><%= digest %></ShipmentDigest>
+</ShipmentAcceptRequest>

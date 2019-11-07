@@ -1,0 +1,2 @@
+class UnifaunTracking < Tracking
+end

@@ -1,0 +1,2 @@
+class DHLCarrier < Carrier
+end

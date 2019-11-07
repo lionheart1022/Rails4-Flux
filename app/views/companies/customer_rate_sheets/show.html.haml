@@ -1,0 +1,12 @@
+%header.page_header
+  %h1
+    Rate sheet
+    %small= @rate_sheet.carrier_product.suffixed_name
+
+  %ul.page_actions
+    %li
+      = link_to(@rate_sheet.carrier_product.carrier.suffixed_name, companies_customer_carrier_path(@rate_sheet.customer_recording.recordable_id, @rate_sheet.carrier_product.carrier))
+    %li
+      = link_to("Print", url_for(action: "print"), class: "primary-btn", target: "_blank")
+
+= render "admin/rate_sheets/detail", rate_sheet: @rate_sheet

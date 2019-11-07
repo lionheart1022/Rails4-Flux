@@ -1,0 +1,9 @@
+<header class="page-header">
+  <h1>Invoicing report</h1>
+</header>
+
+<%= form_for @invoicing_report, method: :get, url: exec_invoicing_report_path(format: "csv"), html: { target: "_blank" } do |form| %>
+  <%= form.collection_select :month, form.object.available_months, :index, :name, {}, { id: nil, name: "month" } %>
+  <%= form.collection_select :year, form.object.available_years, :index, :name, {}, { id: nil, name: "year" } %>
+  <%= form.submit "Generate CSV" %>
+<% end %>

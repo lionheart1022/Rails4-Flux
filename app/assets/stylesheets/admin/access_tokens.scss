@@ -1,0 +1,17 @@
+td.api_access_token_owner_name {
+  width: 40%;
+}
+
+.api_access_token_for_company td.api_access_token_owner_name {
+  font-weight: bold;
+}
+
+td .api_access_token_value {
+  margin-top: 4px;
+  font-weight: 10px !important;
+}
+
+td.api_access_token_regenerate_button {
+  text-align: right;
+  width: 20%;
+}

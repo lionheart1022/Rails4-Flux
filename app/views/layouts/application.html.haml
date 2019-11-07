@@ -1,0 +1,45 @@
+!!! 5 utf-8
+%html
+  %head
+    %title= layout_config.title
+    %meta{ "http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8" }
+    %meta{ "http-equiv" => "X-UA-Compatible", "content" => "IE=Edge" }
+    %meta{ "name" => "viewport", "content" => "width=device-width, initial-scale=1.0" }
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Maven+Pro:400,700"
+    = stylesheet_link_tag "admin"
+    %style{ "data-custom-css-definition" => "true" }= raw layout_config.custom_css
+    :javascript
+      var cargoflux = new function() {};
+    = javascript_include_tag "https://d3js.org/d3.v4.min.js"
+    = javascript_include_tag "admin"
+    = csrf_meta_tags
+  %body.with_base_layout{ id: layout_config.body_class ? "body_#{layout_config.body_class}" : nil }
+    #page
+      #page_inner
+        #app_header
+          #app_header_inner
+            .app_header_title_container
+              %h1#app_header_title= link_to(layout_config.title, layout_config.root_path)
+
+              - if user_signed_in? && user_access_symbol == :multiple
+                = link_to "Switch account", account_selector_path(current_customer_identifier: nil), class: "app_header__switch_account_link"
+
+            - if content_for?(:secondary_nav)
+              #secondary_nav
+                #secondary_nav_inner
+                  = content_for :secondary_nav
+
+        - if content_for(:primary_nav)
+          #navigation
+            #navigation_inner
+              = content_for :primary_nav
+
+        #body
+          #body_inner
+            = content_for?(:body_pre_flash) ? content_for(:body_pre_flash) : nil
+            = render "shared/flash"
+            = content_for?(:body) ? content_for(:body) : yield
+
+    #footer
+      #footer_inner
+        %p= copyright_text

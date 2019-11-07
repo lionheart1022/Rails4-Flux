@@ -1,0 +1,109 @@
+- @view_model.package_dimensions.dimensions.each_with_index do |dimension, idx|
+  .custom_label
+    .custom_label_inner
+      %table
+        %tr
+          %td.custom_label__meta_container{ colspan: 2 }
+            .custom_label__unique_shipment_id
+              = @view_model.label_header
+            .custom_label__label_number
+              = @view_model.label_number(idx)
+
+        - if @view_model.logo_url.present?
+          %tr
+            %td.custom_label__company_logo_container{ colspan: 2 }
+              = image_tag(@view_model.logo_url, alt: "", class: "custom_label__company_logo")
+
+        %tr
+          %td.custom_label__customer_cell{ colspan: 2 }
+            %strong Customer:
+            = @view_model.customer.name
+            - if @view_model.customer.address
+              \-
+              = @view_model.customer.address.city
+
+        %tr
+          %td.custom_label__sender_container
+            %h1 Sender
+            %div
+              = truncate(@view_model.sender.company_name, length: 50)
+            %div
+              = truncate(@view_model.sender.address_line1, length: 50)
+            %div
+              = truncate(@view_model.sender.address_line2, length: 50)
+            %div
+              = truncate(@view_model.sender.address_line3, length: 50)
+            %div
+              = truncate(@view_model.sender.city, length: 50)
+            %div
+              = truncate(@view_model.sender.zip_code, length: 50)
+            %div
+              = truncate(@view_model.sender.country_name, length: 50)
+            %div
+              %strong
+                Attention:
+              = truncate(@view_model.sender.attention, length: 30)
+            %div
+              %strong
+                Phone
+              = truncate(@view_model.sender.phone_number, length: 30)
+
+          %td.custom_label__recipient_container
+            %h1 Recipient
+            %div
+              = truncate(@view_model.recipient.company_name, length: 50)
+            %div
+              = truncate(@view_model.recipient.address_line1, length: 50)
+            %div
+              = truncate(@view_model.recipient.address_line2, length: 50)
+            %div
+              = truncate(@view_model.recipient.address_line3, length: 50)
+            %div
+              = truncate(@view_model.recipient.city, length: 50)
+            %div
+              = truncate(@view_model.recipient.zip_code, length: 50)
+            %div
+              = truncate(@view_model.recipient.country_name, length: 50)
+            %div
+              %strong
+                Attention:
+              = truncate(@view_model.recipient.attention, length: 30)
+            %div
+              %strong
+                Phone
+              = truncate(@view_model.recipient.phone_number, length: 30)
+
+        %tr
+          %td{ colspan: 2 }
+            %h1
+              Shipment -
+              = dimension.weight
+              KG
+
+        %tr
+          %td
+            %div
+              %strong
+                Service:
+              = truncate(@view_model.carrier_product_name, length: 100)
+            %div
+              %strong
+                Shipping Date:
+              = truncate(@view_model.shipping_date.to_s, length: 100)
+            %div
+              %strong
+                Description:
+              = truncate(@view_model.description, length: 100)
+            %div
+              %strong
+                Dimensions:
+              = "Length: #{dimension.length} cm, Width: #{dimension.width} cm, Height: #{dimension.height} cm"
+            %div
+              %strong
+                Customer Reference:
+              = @view_model.reference
+            %div
+              %strong
+                Remarks:
+              = truncate(@view_model.remarks, length: 200)
+          %td

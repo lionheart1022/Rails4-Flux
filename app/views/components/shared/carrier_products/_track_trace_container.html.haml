@@ -1,0 +1,5 @@
+- if awb.present?
+  = form_tag("http://www.track-trace.com/container", target: "_blank", authenticity_token: false) do
+    = hidden_field_tag("number", awb)
+    = hidden_field_tag("v", "C")
+    = button_tag(awb, class: "link_button", name: nil)

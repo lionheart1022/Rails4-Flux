@@ -1,0 +1,46 @@
+.recipient
+  - if contact.company_name.present?
+    = contact.company_name
+    %br
+
+  - if contact.attention.present?
+    = contact.attention
+    %br
+
+  - if contact.address_line1.present?
+    = contact.address_line1
+    %br
+
+  - if contact.address_line2.present?
+    = contact.address_line2
+    %br
+
+  - if contact.address_line3.present?
+    = contact.address_line3
+    %br
+
+  - if contact.zip_code.present? && contact.city.present?
+    = "#{contact.zip_code} #{contact.city}"
+    %br
+  - elsif contact.zip_code.present?
+    = contact.zip_code
+    %br
+  - elsif contact.city.present?
+    = contact.city
+    %br
+
+  - if contact.country_name.present?
+    = contact.country_name
+    %br
+
+  - if contact.state_name.present?
+    = contact.state_name
+    %br
+
+  - if contact.email.present?
+    = contact.email
+    %br
+
+  - if contact.phone_number.present?
+    = contact.phone_number
+    %br

@@ -1,0 +1,2 @@
+class DAOCarrier < Carrier
+end

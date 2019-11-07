@@ -1,0 +1,51 @@
+.with_base_layout {
+  #navigation {
+    margin-top: 0;
+  }
+
+  form.sign_in_form {
+    display: block;
+  }
+
+  .sign_in_form__actions {
+    margin: 24px 0;
+  }
+
+  .sign_in_form__help_links {
+    text-align: center;
+  }
+
+  .simple_form.sign_in_form {
+    .sign_in_form__inputs {
+      .input.user_email,
+      .input.user_password {
+        label {
+          display: inline-block;
+        }
+      }
+
+      .input.user_remember_me label.control-label {
+        display: inline-block;
+      }
+
+      input.email,
+      input.password {
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.with_base_layout {
+  #body {
+    padding-top: 14px;
+  }
+}
+
+#body_companies_dashboard.with_base_layout  {
+  #body {
+    margin-top: 24px;
+    padding-top: 0;
+  }
+}

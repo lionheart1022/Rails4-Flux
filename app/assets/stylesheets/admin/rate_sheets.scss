@@ -1,0 +1,37 @@
+.rate_sheet_price_table {
+  text-align: right;
+  margin-bottom: 24px;
+
+  th {
+    text-align: right;
+  }
+
+  th, td {
+    padding: 8px 12px 8px 6px;
+  }
+}
+
+.rate_sheet_price_table__scale {
+  font-weight: bold;
+  width: 200px;
+}
+
+.rate_sheet_price_table__secondary_scale {
+  width: 100px;
+}
+
+.rate_sheet__company_logo {
+  margin: 0 0 24px;
+}
+
+.rate_sheet__region {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+@media print {
+  .rate_sheet__zones_heading {
+    page-break-before: always;
+  }
+}

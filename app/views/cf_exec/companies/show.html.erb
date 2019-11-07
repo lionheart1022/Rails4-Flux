@@ -1,0 +1,149 @@
+<header class="page-header">
+  <h1>
+    Company:
+    <strong><%= @company.name %></strong>
+    <%= link_to "Edit", edit_exec_company_path(@company), class: "page-header-edit-btn" %>
+  </h1>
+</header>
+
+<h2>Color theme</h2>
+
+<p>
+  <% if @company.primary_brand_color? %>
+    <span style="display: inline-block; width: 24px; height: 24px; background-color: <%= raw @company.primary_brand_color %>;" title="<%= @company.primary_brand_color %>">
+    </span>
+    <br>
+  <% end %>
+
+  <%= link_to "Change color", exec_company_color_theme_path(@company) %>
+</p>
+
+<h2>Add-ons</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="addon-identifier-cell">e-conomic</td>
+      <td>
+        <%= render "addon_form", identifier: "economic" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="addon-identifier-cell">Company End-Of-Day manifest</td>
+      <td>
+        <%= render "addon_form", identifier: "company_eod_manifest" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="addon-identifier-cell">Company new pickup</td>
+      <td>
+        <%= render "addon_form", identifier: "pickup" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Feature flags</h2>
+
+<table>
+  <tbody>
+    <% FeatureFlag.all_options_for_company(@company).each do |feature_flag| %>
+      <tr>
+        <td class="feature-flag-identifier-cell"><%= feature_flag.identifier %></td>
+        <td data-toggle-switch-for-feature-flag="<%= feature_flag.identifier %>">
+          <%= render "cf_exec/company_features/toggle_switch", feature_flag: feature_flag %>
+        </td>
+        <td class="feature-flag-checkmark-cell">
+          <span class="checkmark" style="display:none" data-checkmark-for-feature-flag="<%= feature_flag.identifier %>">✔</span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Carriers</h2>
+
+<% if (enabled_carriers = @view_model.enabled_carriers) && enabled_carriers.size > 0 %>
+  <table class="table w600">
+    <thead>
+      <tr>
+        <th width="70%">Carrier</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% enabled_carriers.each do |carrier| %>
+        <tr>
+          <td>
+            <%= link_to carrier.name, exec_company_carrier_path(carrier) %>
+          </td>
+          <td class="table-cell-delete">
+            <%= link_to "Delete", exec_company_carrier_path(carrier), method: :delete, class: "table-cell-delete-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= form_tag exec_company_carriers_path(@company), method: :post, class: "add-carrier-form" do %>
+  <%= select_tag "parent_carrier_id", options_from_collection_for_select(@view_model.available_carriers, "id", "name"), include_blank: "Select carrier" %>
+  <%= button_tag "Add carrier", type: "submit" %>
+<% end %>
+
+<h2>Customers</h2>
+
+<% if (buying_customers = @customer_view_model.ordered_buying_customers) && buying_customers.size > 0 %>
+  <table class="table w600">
+    <thead>
+      <tr>
+        <th>Customer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% buying_customers.each do |customer| %>
+        <tr>
+          <td>
+            <%= link_to customer.name, exec_company_path(customer) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= form_tag exec_company_customers_path(@company), method: :post, class: "add-customer-form" do %>
+  <%= hidden_field_tag "customer[recording_type]", "Company" %>
+  <%= select_tag "customer[recording_id]", options_from_collection_for_select(@customer_view_model.ordered_available_buying_customers, "id", "name"), include_blank: "Select customer" %>
+  <%= button_tag "Add customer", type: "submit" %>
+<% end %>
+
+<h2>Shipment updates / GLS</h2>
+
+<% if @company.gls_feedback_configurations.size > 0 %>
+  <table class="table w600">
+    <thead>
+      <tr>
+        <th width="20%">Carrier</th>
+        <th>Account</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @company.gls_feedback_configurations.each do |configuration| %>
+        <tr>
+          <td>
+            <%= configuration.carrier_name %>
+          </td>
+          <td>
+            <%= configuration.account_label %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= form_tag exec_company_gls_feedback_configurations_path(@company), method: :post, class: "add-feedback-configuration-form" do %>
+  <%= text_field_tag "config[account_no]", nil, placeholder: "GLS account no." %>
+  <%= button_tag "Add", type: "submit" %>
+<% end %>

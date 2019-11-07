@@ -1,0 +1,20 @@
+%h1
+  UPS pickup
+  %small= selected_customer.name
+
+- if (c = @pickup.matching_shipment_count) && c > 0
+  .padded
+    A pickup will be booked for
+    %strong= pluralize(c, "UPS shipment")
+    %em= "(from #{l(@pickup.pickup_date, format: :long)})"
+
+  = simple_form_for(@pickup, as: :carrier_pickup, method: :post, url: companies_customer_scoped_ups_pickups_path) do |f|
+    %div{ style: "display:none" }
+      = render "form_fields", f: f
+
+    %ul.actions
+      %li= link_to("Cancel", companies_pickups_path)
+      %li.primary= f.submit "Book UPS pickup"
+- else
+  .padded
+    %em This pickup cannot booked because no matching shipments were found.

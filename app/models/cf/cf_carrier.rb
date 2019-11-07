@@ -1,0 +1,2 @@
+class CFCarrier < Carrier
+end

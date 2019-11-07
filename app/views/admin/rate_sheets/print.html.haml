@@ -1,0 +1,13 @@
+- if current_company && current_company.asset_logo
+  .rate_sheet__company_logo
+    = image_tag(current_company.asset_logo.attachment.url)
+
+%h1= @rate_sheet.carrier_product.name
+
+= render "admin/rate_sheets/detail", rate_sheet: @rate_sheet
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      window.print()
+    })

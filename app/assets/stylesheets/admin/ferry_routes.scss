@@ -1,0 +1,14 @@
+.ferry_time_of_departure {
+  color: #aaa;
+  display: inline-block;
+  margin-right: 10px;
+  width: 60px;
+
+  &.ready {
+    color: #000;
+
+    .checkmark {
+      color: #0B0;
+    }
+  }
+}

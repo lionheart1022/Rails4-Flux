@@ -1,0 +1,35 @@
+.page_actions
+  %h1= @view_model.header_text
+  %ul.actions
+    %li.primary= link_to("Add Products", new_companies_carrier_product_customer_carrier_product_customer_carrier_carrier_product_customer_carrier_product_path)
+
+- if @view_model.show_product_table?
+  = simple_form_for :carrier_products, url: set_carrier_products_and_sales_prices_companies_carrier_product_customer_carrier_product_customer_carrier_carrier_product_customer_carrier_products_path, method: :patch do |f|
+    %table.carrier_products
+      %tr
+        %th Carrier Product
+        %th Margin %
+        %th
+          Enabled
+
+      - @view_model.carrier_products.each do |cp|
+        = f.simple_fields_for "[#{cp.id}]" do |ff|
+          %tr
+            %td.carrier_product
+              = cp.suffixed_name
+            %td.margin
+              = ff.simple_fields_for :sales_price do |sp|
+                = sp.input :margin_percentage, as: :integer, label: false, input_html: { value: cp.margin_percentage }
+            %td.is_disabled
+              = ff.input :is_disabled, as: :boolean, label: false, input_html: { checked: !cp.is_disabled }
+
+    %ul.actions
+      %li.secondary
+        = link_to("Back", companies_carrier_product_customer_carrier_product_customer_carriers_path(@view_model.customer.id))
+      %li.primary
+        = f.submit 'Save'
+- else
+  %p No products available
+  %ul.actions
+    %li.secondary
+      = link_to("Back", companies_carrier_product_customer_carrier_product_customer_carriers_path(@view_model.customer.id))

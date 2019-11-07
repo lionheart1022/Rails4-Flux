@@ -1,0 +1,43 @@
+<header class="page-header">
+  <h1>Companies</h1>
+
+  <div class="page-header-controls">
+    <%= link_to "New company", new_exec_company_path, class: "page-header-new-btn" %>
+  </div>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="12"></th>
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Initials</th>
+      <th>Domain</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <% if company.primary_brand_color? %>
+          <td style="background-color: <%= raw company.primary_brand_color %>;" title="<%= company.primary_brand_color %>"></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td></td>
+        <td><%= company.id %></td>
+        <td><%= company.name %></td>
+        <td><%= company.initials %></td>
+        <td><%= company.domain %></td>
+        <td class="show-btn-cell">
+          <%= link_to "Show", exec_company_path(company), class: "show-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @companies %>

@@ -1,0 +1,50 @@
+.ferry_booking_form {
+  .multi_field_group {
+    overflow: auto;
+
+    div.input {
+      float: left;
+      margin-right: 20px;
+    }
+
+    div.input.boolean {
+      margin-top: 24px;
+      margin-bottom: 0;
+
+      label {
+        line-height: 32px;
+      }
+    }
+  }
+
+  .truck_length_field {
+    div.input {
+      width: 200px;
+    }
+  }
+
+  .truck_reg_number_fields {
+    div.input {
+      width: 200px;
+    }
+  }
+
+  input.cargo_weight_input {
+    width: 160px;
+  }
+
+  select.truck_type_select {
+    width: 160px;
+  }
+}
+
+.simple_form.ferry_booking_form .multi_field_group {
+  input.string,
+  input.password,
+  input.numeric,
+  input.fake,
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}

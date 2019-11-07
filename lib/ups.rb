@@ -1,0 +1,3 @@
+class UPS
+  VOLUME_WEIGHT_FACTOR = 5000
+end

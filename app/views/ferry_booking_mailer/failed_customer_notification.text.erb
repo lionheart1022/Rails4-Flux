@@ -1,0 +1,5 @@
+Ferry booking #<%= @shipment.unique_shipment_id %> failed.
+
+<%= CurrentContextUrls.new(company: @company, customer: @customer).customers_shipment_url(@shipment) %>
+
+<%= render "ferry_booking_details", shipment: @shipment, ferry_booking: @ferry_booking %>

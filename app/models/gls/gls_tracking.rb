@@ -1,0 +1,2 @@
+class GLSTracking < Tracking
+end

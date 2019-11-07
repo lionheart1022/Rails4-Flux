@@ -1,0 +1,14 @@
+%header.page_header
+  %h1 New User
+
+= simple_form_for(@form, url: companies_users_path, as: :user, method: :post, html: { id: nil, class: nil }) do |f|
+  = f.input :email, autofocus: true
+  = f.input :is_admin, as: :boolean, label: "Is administrator"
+  = f.input :send_invitation_email, as: :boolean
+  = f.input :enable_user_notifications, as: :boolean, label: "Notifications"
+
+  %ul.actions
+    %li
+      = link_to("Cancel", companies_users_path)
+    %li.primary
+      = f.submit "Create User"

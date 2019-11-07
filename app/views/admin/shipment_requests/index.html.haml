@@ -1,0 +1,27 @@
+.page_actions
+  %h1 Shipments - RFQ
+
+  %ul.actions.fix_right_alignment
+    %li.primary= link_to("New RFQ", url_for(action: "new"))
+
+  .scopes
+    = simple_form_for(@view_model, url: url_for(action: "index"), method: :get, as: :scope) do |form|
+      .scope_inputs
+        = form.input :sorting, collection: form.object.sorting_options, label: false, input_html: { name: "sorting" }, include_blank: false
+        = form.input :state, collection: form.object.state_options, label: false, input_html: { name: "filter_active_or_in_state" }, include_blank: false
+
+- @view_model.output_relation_with_pagination.tap do |shipment_requests|
+  - if shipment_requests.size > 0
+    %table.shipments
+      %thead
+        %tr
+          %th State
+          %th ID
+          %th Date
+          %th Sender
+          %th Recipient
+          %th Carrier
+      %tbody
+        = render partial: "admin/shipment_requests/row", collection: shipment_requests, as: :data
+  - else
+    %p.noresults No RFQs found

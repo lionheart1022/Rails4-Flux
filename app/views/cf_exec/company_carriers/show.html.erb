@@ -1,0 +1,35 @@
+<header class="page-header">
+  <h1>
+    Company:
+    <strong><%= @company.name %></strong>
+    <%= link_to "Back", exec_company_path(@company), class: "page-header-back-btn" %>
+  </h1>
+</header>
+
+<h2><%= @carrier.name %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="70%"><%= @carrier.name %> Product</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @view_model.enabled_carrier_products.each do |carrier_product| %>
+      <tr>
+        <td>
+          <%= carrier_product.name %>
+        </td>
+        <td class="table-cell-delete">
+          <%= link_to "Delete", exec_company_carrier_product_path(@carrier, carrier_product), method: :delete, class: "table-cell-delete-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag exec_company_carrier_products_path(@carrier), method: :post, class: "add-carrier-product-form" do %>
+  <%= select_tag "parent_carrier_product_id", options_from_collection_for_select(@view_model.available_carrier_products, "id", "name"), include_blank: "Select carrier product" %>
+  <%= button_tag "Add carrier product", type: "submit" %>
+<% end %>

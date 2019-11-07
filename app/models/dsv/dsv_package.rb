@@ -1,0 +1,2 @@
+class DSVPackage < Package
+end

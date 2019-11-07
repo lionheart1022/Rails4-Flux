@@ -1,0 +1,7 @@
+%header.page_header
+  %h1
+    Import Customers
+    %small Importing
+
+%div{ data: { behavior: "poll_and_redirect", behavior_config: JSON.generate(poll_url: progress_companies_customer_import_path(@import, stage: "creating", format: "json"), redirect_url: url_for()) } }
+  = image_tag("admin/loading_indicator.gif", alt: "")

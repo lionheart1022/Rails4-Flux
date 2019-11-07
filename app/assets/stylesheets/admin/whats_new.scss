@@ -1,0 +1,11 @@
+.whats_new {
+  li {
+    padding-left: 1em;
+    text-indent: -.7em;
+  }
+
+  li::before {
+    content: "• ";
+    color: #bbb;
+  }
+}

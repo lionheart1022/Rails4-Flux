@@ -1,0 +1,8 @@
+= simple_form_for(form_object, url: url_for(nil), method: :get, html: { class: "filter_form", data: { behavior: "auto_submit_on_change" } }) do |form|
+  .filter_form_line
+    = form.input_field :customer_id, as: :customer_autocomplete_select, placeholder: "Filter customers", name: "filter_customer_id", data: { :"allow-clear" => "true", :width => "300px" }
+
+  .filter_form_line
+    = form.select :state, form.object.state_options, { include_blank: form.object.state_blank_option }, { class: "secondary_filter", name: "filter_state" }
+    = form.select :grouping, form.object.grouping_options, { include_blank: false }, { class: "secondary_filter", name: "grouping" }
+    = form.select :sorting, form.object.sorting_options, { include_blank: false }, { class: "secondary_filter", name: "sorting" }

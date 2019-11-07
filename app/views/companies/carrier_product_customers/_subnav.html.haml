@@ -1,0 +1,5 @@
+%nav.nav-pills-container
+  %ul.nav-pills-list
+    %li= link_to "Settings", companies_carrier_product_customer_carrier_product_customer_carriers_path(carrier_product_customer_id), class: (active_nav == :settings ? "nav-pill-active" : nil)
+    - if current_context.company_feature_flag_enabled?("automated-billing")
+      %li= link_to "Billing", companies_carrier_product_customer_billing_configuration_path(carrier_product_customer_id), class: (active_nav == :billing ? "nav-pill-active" : nil)

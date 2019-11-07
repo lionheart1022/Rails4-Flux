@@ -1,0 +1,84 @@
+.carrier_product_fuel_charge_form {
+  display: block;
+
+  &.simple_form input.numeric {
+    width: 75px;
+  }
+}
+
+.surcharges_table {
+  border: none;
+  width: 50%;
+
+  td {
+    border: none;
+    height: 34px;
+    line-height: normal;
+    padding: 0 0 8px 0;
+    vertical-align: bottom;
+  }
+}
+
+.surcharges_table td.surcharges_table__toggle_switch_cell {
+  width: 60px;
+  padding-bottom: 4px;
+}
+
+.surcharges_table td.surcharges_table__name_cell {
+  color: black;
+  font-size: 16px;
+  padding-left: 8px;
+  padding-bottom: 6px;
+  line-height: 34px;
+}
+
+.surcharges_table__value_cell {
+  text-align: right;
+}
+
+.surcharges_table__value_input,
+.simple_form input.surcharges_table__value_input {
+  width: 80px;
+  text-align: right;
+}
+
+.surcharges_table__monthly_value_input,
+.simple_form input.surcharges_table__monthly_value_input {
+  width: 25px;
+  text-align: right;
+}
+
+.surcharges_table__value_type_input {
+  -webkit-appearance: menulist-button;
+
+  box-sizing: border-box;
+  width: 50px;
+  height: 34px;
+}
+
+.surcharges_table__form {
+  display: block;
+  margin-bottom: 24px;
+
+  ul.actions {
+    margin-top: 12px;
+  }
+}
+
+.surcharges_table__monthly_value_input_wrapper {
+  display: inline-block;
+
+  label {
+    display: block;
+    font-size: 12px;
+    text-align: left;
+  }
+}
+
+.surcharge_product_level_override_link__inherit {
+  color: #aaa;
+
+  &:hover {
+    color: #444;
+  }
+}

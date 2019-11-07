@@ -1,0 +1,13 @@
+.shipment .pricing input.new_price_line_description {
+  width: 200px !important;
+}
+
+.shipment .reset_new_price_line {
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.shipment .edit_shipment_price_line {
+  cursor: pointer;
+  text-decoration: underline;
+}

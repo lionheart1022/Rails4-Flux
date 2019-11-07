@@ -1,0 +1,9 @@
+.page_header
+  %h1 Pickups - Archived
+
+= render "companies/pickups/filter_form", form_object: @filter
+
+= render "companies/pickups/list_view"
+
+.pagination
+  = paginate(@filter.pickups)

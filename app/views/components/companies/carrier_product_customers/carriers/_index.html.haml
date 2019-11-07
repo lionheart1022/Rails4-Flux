@@ -1,0 +1,34 @@
+%header.page_header
+  %h1= @view_model.customer.name
+
+  %ul.page_actions
+    %li= link_to("Add Carriers", new_companies_carrier_product_customer_carrier_product_customer_carrier_path(@view_model.customer.id), class: "primary-btn")
+
+= render "companies/carrier_product_customers/subnav", active_nav: :settings, carrier_product_customer_id: params[:carrier_product_customer_id]
+
+%h2 Accounting
+
+= simple_form_for(@view_model.entity_relation, url: update_economic_companies_carrier_product_customer_path(@view_model.customer), method: :put) do |f|
+  = f.input :external_accounting_number
+  %ul.actions
+    %li.primary= f.submit 'Save'
+
+
+%h2= "Carriers"
+= simple_form_for(:carriers, url: batch_disable_companies_carrier_product_customer_carrier_product_customer_carriers_path(@view_model.customer), html: { :method => :put }) do |f|
+  %table.carrier_products
+    %tr
+      %th Carrier
+      %th Enabled
+    - @view_model.carriers.each do |carrier|
+      = f.simple_fields_for "[#{carrier.id}" do |ff|
+        %tr
+          %td.carrier_product
+            - name = carrier.suffixed_name
+            = link_to(name, companies_carrier_product_customer_carrier_product_customer_carrier_carrier_product_customer_carrier_products_path(@view_model.customer.id, carrier.id))
+          %td
+            = ff.check_box :disabled, as: :boolean, label: false, checked: !carrier.disabled
+
+
+  %ul.actions
+    %li.primary= f.submit 'Save'

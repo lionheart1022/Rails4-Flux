@@ -1,0 +1,16 @@
+%header.page_header
+  %h1
+    e-conomic
+    %small All carriers
+
+%ul.box_list
+  - @carriers.each do |carrier|
+    %li.box_list_item
+      .box_list_item__inner
+        = link_to(carrier.name, companies_v2_economic_carrier_path(carrier.id), class: "box_list_item__primary_label", title: carrier.name)
+        - if carrier.product_responsible
+          .box_list_item__secondary_label{ title: carrier.product_responsible.name }
+            = carrier.product_responsible.name
+        - else
+          .box_list_item__secondary_label
+            N/A

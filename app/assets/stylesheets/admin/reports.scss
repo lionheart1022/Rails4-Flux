@@ -1,0 +1,67 @@
+.report_pagination {
+  margin: 40px 0;
+  text-align: center;
+
+  p {
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+}
+
+.report_generating_excel_loading {
+  display: inline-block;
+
+  img {
+    margin-right: 10px;
+  }
+
+  * {
+    vertical-align: middle;
+  }
+}
+
+.new_report_buttons {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.new_report_submit_button_container {
+  display: inline-block;
+  line-height: 36px;
+}
+
+.new_report_submit_button_container {
+  margin: 0 12px;
+}
+
+.new_report_submit_button_container input.primary-btn {
+  font-size: 16px;
+}
+
+#set_options_and_create_report {
+  margin: 20px -10px 0;
+  padding: 1px 0;
+}
+
+.report_options_container {
+  background: #f1fcff;
+  font-size: 16px;
+  padding: 10px 10px 1px;
+  margin: 10px;
+
+  label {
+    font-size: inherit;
+  }
+
+  label.check_box_option {
+    display: inline-block;
+  }
+
+  .report_option_container {
+    margin: 8px 0;
+  }
+
+  h2 {
+    margin: 0 0 20px;
+  }
+}

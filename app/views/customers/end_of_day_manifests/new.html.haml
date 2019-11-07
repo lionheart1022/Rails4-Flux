@@ -1,0 +1,45 @@
+%header.page_header
+  %h1 Create End of Day Manifest
+
+  %ul.page_actions
+    %li= button_tag("Create Manifest with selected shipments", type: "button", class: "primary-btn", data: { behavior: "proxy_submit_form", target: "#create_eod_manifest_form" })
+
+= simple_form_for(@end_of_day_manifest.shipment_filter_form, url: url_for(), method: :get, html: { id: nil, class: "filter_form" }) do |f|
+  .filter_form_line
+    %span.filter_form__input
+      = f.input_field :carrier_id, as: :carrier_autocomplete_select, name: "filter_carrier_id", id: nil, placeholder: "All carriers", data: { :"allow-clear" => true, :width => "300px" }
+
+  .filter_form_line
+    %span.filter_form__input
+      = f.select :manifest_inclusion, f.object.manifest_inclusion_options, { include_blank: false }, { name: "filter_not_in_manifest", id: nil }
+    %span.filter_form__input
+      = f.select :shipment_state, f.object.state_options, { include_blank: false }, { name: "filter_has_been_booked_or_in_state", id: nil }
+
+  .filter_form_line
+    = button_tag "Search", name: nil, type: "submit", class: "primary-btn"
+    = link_to "Cancel", url_for(action: "index"), class: "secondary-btn"
+
+= form_tag url_for(action: "create"), method: :post, id: "create_eod_manifest_form" do
+  %table
+    %th
+    %th State
+    %th #
+    %th Date
+    %th Recipient
+    %th Country
+    %th Product
+    %th AWB
+    %th Description
+    - @end_of_day_manifest.shipments_by_filter.each do |shipment|
+      %tr
+        %td= check_box_tag("manifest[raw_shipment_ids][]", shipment.id, true, id: nil)
+        %td
+          %span.state_indicator.shipment_state_indicator{ class: "shipment_state_#{shipment.state}" }
+            = ViewHelper::Shipments.state_name(shipment.state)
+        %td= link_to(shipment.unique_shipment_id, customers_shipment_path(shipment))
+        %td= shipment.shipping_date
+        %td= shipment.recipient.company_name
+        %td= shipment.recipient.country_name
+        %td= shipment.carrier_product.name
+        %td= render("components/shared/carrier_products/awb", shipment: shipment)
+        %td= shipment.description

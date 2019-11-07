@@ -1,0 +1,20 @@
+<h1>Color theme</h1>
+
+<div class="padded">This page is an example of how the selected theme color will look like.</div>
+
+<div class="exec_company_color_theme_forms">
+  <%= form_for @color_theme_form, as: :color_theme, url: try_exec_company_color_theme_path(@company), remote: true, method: :post, html: { id: nil, class: "exec_company_color_theme_try_form" } do |form| %>
+    <%= form.text_field :primary_brand_color, id: nil, class: "cf_input", autofocus: true, placeholder: "#137bd0", data: { behavior: "replicate_on_input", replicate_value_to: "#company_color_theme__primary_brand_color_input" } %>
+    <%= form.button "Try color", class: "primary-btn" %>
+  <% end %>
+
+  <%= form_for @color_theme_form, as: :color_theme, url: exec_company_color_theme_path(@company), method: :put, html: { id: nil, class: "exec_company_color_theme_update_form" } do |form| %>
+    <%= form.hidden_field :primary_brand_color, id: "company_color_theme__primary_brand_color_input" %>
+    <%= form.button "Update", class: "primary-btn" %>
+    <%= link_to "Cancel", exec_company_path(@company), class: "secondary-btn" %>
+  <% end %>
+</div>
+
+<div class="padded">
+  Find a color code <a href="http://htmlcolorcodes.com/color-picker/" target="_blank">here</a>.
+</div>

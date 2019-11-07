@@ -1,0 +1,101 @@
+%ul.navigation
+  - if current_context.is_customer?
+    %li.shipments
+      %h3 Shipments
+      %ul
+        = nav_link("shipments", "Shipments", customers_shipments_path)
+        = nav_link("shipments_archived", "Archived", archived_customers_shipments_path)
+        = nav_link("shipments_search", "Search", search_customers_shipments_path)
+        = nav_link("eod_manifests", "End-Of-Day Manifests", customers_end_of_day_manifests_path)
+        = nav_link_with_badge("shipment_requests", "RFQ", customers_shipment_requests_path, badge_count: navigation.shipment_request_action_required_count)
+
+    %li.pickups
+      %h3 Pickups
+      %ul
+        = nav_link("pickups", "Pickups", customers_pickups_path)
+        = nav_link("pickups_archived", "Archived", archived_customers_pickups_path)
+
+    %li.address_book
+      %h3 Address Book
+      %ul
+        = nav_link("contacts", "Contacts", customers_contacts_path)
+
+    %li.settings
+      %h3 Settings
+      %ul
+        = nav_link("company_address", "Company address", customers_address_path)
+        = nav_link("rate_sheets", "Rate sheets", customers_rate_sheets_path) if current_context.company_feature_flag_enabled?("rate-sheets")
+        = nav_link("notifications", "Notifications", customers_notification_path)
+        = nav_link("tokens", "API Access", customers_access_token_path)
+        = nav_link("terms_and_conditions", "Terms and Conditions", customers_terms_and_conditions_path)
+
+  - else
+    %li.dashboard
+      = nav_link("dashboard", "Dashboard", companies_dashboard_path)
+
+    %li.shipments
+      %h3 Shipments
+      %ul
+        = nav_link_with_badge("shipments", "Shipments", companies_shipments_path, badge_count: navigation.shipment_action_required_count)
+        = nav_link("shipments_archived", "Archived", archived_companies_shipments_path)
+        = nav_link("shipments_search", "Search", search_companies_shipments_path)
+        = nav_link("eod_manifests", "End-Of-Day Manifests", companies_end_of_day_manifests_path) if current_context.addon_enabled?("company_eod_manifest")
+        = nav_link_with_badge("shipment_requests", "RFQ", companies_shipment_requests_path, badge_count: navigation.shipment_request_action_required_count)
+        = nav_link("shipments_updates", "Shipment Updates", companies_shipment_updates_path) if current_context.is_admin? && current_context.company_feature_flag_enabled?("shipment-updates")
+
+    %li.pickups
+      %h3 Pickups
+      %ul
+        = nav_link_with_badge("pickups", "Pickups", companies_pickups_path, badge_count: navigation.pickup_action_required_count)
+        = nav_link("pickups_archived", "Archived", archived_companies_pickups_path)
+
+    - if current_context.is_admin? && (current_context.company_feature_flag_enabled?("truck-driver-db") || current_context.company_feature_flag_enabled?("truck-fleet"))
+      %li
+        %h3 Truck fleet
+        %ul
+          = nav_link("truck_fleet", "Deliveries", companies_truck_fleet_path) if current_context.company_feature_flag_enabled?("truck-fleet")
+          = nav_link("trucks", "Trucks", companies_trucks_path) if current_context.company_feature_flag_enabled?("truck-fleet")
+          = nav_link("truck_drivers", "Drivers", companies_truck_drivers_path) if current_context.company_feature_flag_enabled?("truck-driver-db") || current_context.company_feature_flag_enabled?("truck-fleet")
+
+    %li
+      %h3 Address Book
+      %ul
+        = nav_link("contacts", "Contacts", companies_contacts_path)
+
+    - if current_context.is_admin?
+      %li.customers
+        %h3 Customers
+        %ul
+          = nav_link(%w(customers carrier_product_customers customer_recordings), "Customers", companies_customer_recordings_path)
+
+      %li.pricing
+        %h3 Pricing
+        %ul
+          = nav_link("price_documents", "Price Documents", companies_price_documents_path)
+          = nav_link("carrier_surcharges", "Surcharges", companies_surcharges_path)
+
+      %li
+        %h3 Billing
+        %ul
+          = nav_link("customers_reports", "Reports", companies_reports_path)
+          = nav_link("company_unbilled_shipments", "Unpriced shipments", companies_unbilled_shipments_path)
+          = nav_link("invoice_validation", "Invoice validation", new_companies_invoice_validation_path) if current_context.company_feature_flag_enabled?("invoice-validation")
+
+      %li.settings
+        %h3 Settings
+        %ul
+          = nav_link("users", "Users", companies_users_path)
+          = nav_link("carriers", "Carriers and products", companies_carriers_path)
+          = nav_link("ferry_routes", "Ferry routes", companies_ferry_routes_path) if navigation.ferry_routes?
+          = nav_link("company_settings", "Company settings", companies_setting_path)
+          = nav_link("notifications", "Notifications", companies_notification_path)
+          = nav_link("tokens", "API Access", companies_access_tokens_path)
+          = nav_link("terms_and_conditions", "Terms and Conditions", companies_terms_and_conditions_path)
+          = nav_link("economic", "Configure e-conomic", edit_companies_economic_path) if navigation.economic?
+          = nav_link("economic_v2", "Configure e-conomic v2", companies_v2_economic_path, class: "highlight_navigation_item") if current_context.company_feature_flag_enabled?("e-conomic-v2")
+          = nav_link("shipment_export_settings", "Export Triggers", companies_shipment_export_configuration_path)
+    - else
+      %li.settings
+        %h3 Settings
+        %ul
+          = nav_link("notifications", "Notifications", companies_notification_path)

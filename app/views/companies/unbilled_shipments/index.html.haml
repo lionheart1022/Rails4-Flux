@@ -1,0 +1,19 @@
+%header.page_header
+  %h1 Unpriced shipments
+
+= simple_form_for(@view_model.filter_form, url: url_for(), method: :get, as: :scope, html: { class: "filter_form", id: nil }) do |form|
+  %span.date_range_container{ data: { behavior: "date_range_input" } }
+    = form.input_field :start_date, placeholder: "Start date", data: { behavior: "date_range_input__start" }, class: "date_range__input", name: "filter_range_start", id: nil, autocomplete: "off"
+    = form.input_field :end_date, placeholder: "End date", data: { behavior: "date_range_input__end" }, class: "date_range__input", name: "filter_range_end", id: nil, autocomplete: "off"
+
+  = button_tag "Filter", type: "submit", name: nil, class: "filter_form_button__plain"
+
+- if @view_model.shipments.size > 0
+  %table.shipments
+    = render "companies/shipments/list_view_shipment_columns"
+    = render partial: "companies/shipments/list_view_shipment_row", collection: @view_model.shipments, as: :data
+- else
+  %p.no_results No unpriced shipments found
+
+.pagination
+  = paginate(@view_model.shipments)

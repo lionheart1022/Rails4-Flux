@@ -1,0 +1,71 @@
+.columns_container
+  .column_wspan4
+    .carrier_product_rule__container
+      %div.carrier_product_rule__enable_label_container
+        %label
+          = form.check_box :shipment_weight_interval_enabled, data: { behavior: "collapse_target", target: "#carrier_product_rule_section__shipment_weight" }
+          Shipment weight
+
+      #carrier_product_rule_section__shipment_weight
+        %div.carrier_product_rule__from_label_container
+          = form.label :shipment_weight_interval_from, "From"
+
+        %div.carrier_product_rule__from_input_container
+          = form.text_field :shipment_weight_interval_from, class: "cf_input"
+          %span kg
+          %label.carrier_product_rule__inclusive_label
+            = form.check_box :shipment_weight_interval_from_inclusive
+            Include this value
+
+        %div.carrier_product_rule__to_label_container
+          = form.label :shipment_weight_interval_to, "To"
+
+        %div.carrier_product_rule__to_input_container
+          = form.text_field :shipment_weight_interval_to, class: "cf_input"
+          %span kg
+          %label.carrier_product_rule__inclusive_label
+            = form.check_box :shipment_weight_interval_to_inclusive
+            Include this value
+
+  .column_wspan4
+    .carrier_product_rule__container
+      %div.carrier_product_rule__enable_label_container
+        %label
+          = form.check_box :number_of_packages_interval_enabled, data: { behavior: "collapse_target", target: "#carrier_product_rule_section__number_of_packages" }
+          Number of packages
+
+      #carrier_product_rule_section__number_of_packages
+        %div.carrier_product_rule__from_label_container
+          = form.label :number_of_packages_interval_from, "From"
+
+        %div.carrier_product_rule__from_input_container
+          = form.text_field :number_of_packages_interval_from, class: "cf_input"
+          %label.carrier_product_rule__inclusive_label
+            = form.check_box :number_of_packages_interval_from_inclusive
+            Include this value
+
+        %div.carrier_product_rule__to_label_container
+          = form.label :number_of_packages_interval_to, "To"
+
+        %div.carrier_product_rule__to_input_container
+          = form.text_field :number_of_packages_interval_to, class: "cf_input"
+          %label.carrier_product_rule__inclusive_label
+            = form.check_box :number_of_packages_interval_to_inclusive
+            Include this value
+
+  .column_wspan4
+    .carrier_product_rule__container
+      %div.carrier_product_rule__enable_label_container
+        %label
+          = form.check_box :recipient_match_enabled, data: { behavior: "collapse_target", target: "#carrier_product_rule_section__recipient" }
+          Shipment destination
+
+      #carrier_product_rule_section__recipient
+        %div.carrier_product_rule__default_container
+          = form.select :recipient_location_value, form.object.recipient_location_options, {}, { class: "cf_input" }
+
+%ul.actions
+  %li
+    = link_to("Cancel", companies_carrier_path(@carrier_product.carrier))
+  %li.primary
+    = submit_tag("Save")

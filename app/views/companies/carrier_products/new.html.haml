@@ -1,0 +1,7 @@
+%header.page_header
+  %h1
+    Create carrier product
+    %small= @view_model.carrier.name
+
+= simple_form_for(@view_model.form_object, url: companies_carrier_products_path(@view_model.carrier), method: :post, as: :carrier_product) do |form|
+  = render "form", form: form, view_model: @view_model

@@ -1,0 +1,4 @@
+<%= @company.name %> has booked your shipment with id: <%= @shipment.unique_shipment_id %>
+<%= ViewHelper::Shipments.customer_email_shipment_url_with_common_or_company_domain(shipment: @shipment, company: @company) %>
+
+<%= render "/components/shared/mailer/booking", shipment: @shipment %>

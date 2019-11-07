@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><env:Header xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><soapenv:Body><v11:CreateOpenShipmentReply xmlns:v11="http://fedex.com/ws/openship/v11"><v11:HighestSeverity>ERROR</v11:HighestSeverity><v11:Notifications><v11:Severity>ERROR</v11:Severity><v11:Source>ship</v11:Source><v11:Code>6647</v11:Code><v11:Message>ShippingChargesPayment - Payor country code must match either Origin or Destination country code</v11:Message><v11:LocalizedMessage>ShippingChargesPayment - Payor country code must match either Origin or Destination country code</v11:LocalizedMessage></v11:Notifications><m0:Version xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m0="http://fedex.com/ws/openship/v11">
+        <m0:ServiceId>ship</m0:ServiceId>
+        <m0:Major>11</m0:Major>
+        <m0:Intermediate>0</m0:Intermediate>
+        <m0:Minor>0</m0:Minor>
+      </m0:Version></v11:CreateOpenShipmentReply></soapenv:Body></soapenv:Envelope>

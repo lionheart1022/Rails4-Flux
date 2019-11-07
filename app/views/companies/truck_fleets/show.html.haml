@@ -1,0 +1,29 @@
+%header.page_header.with_table_below
+  %h1 Truck fleet
+
+  %ul.page_actions
+    %li= link_to("New truck", new_companies_truck_path, class: "primary-btn")
+
+%table
+  %tr
+    %th{ width: "28%" } Truck
+    %th{ width: "14%" } State
+    %th{ width: "14%" } ID
+    %th{ width: "14%" } Date
+    %th{ width: "14%" } Shipments
+    %th Total weight
+  - @trucks.each do |truck|
+    %tr
+      %td= truck.name
+      - if truck.active_delivery
+        %td= truck.active_delivery.human_readable_state
+        %td= link_to "D#{truck.active_delivery.unique_delivery_number}", companies_delivery_path(truck.active_delivery)
+        %td= local_time truck.active_delivery.created_at, '%Y-%m-%d'
+        %td= truck.active_delivery.shipments_count
+        %td= "#{truck.active_delivery.shipments_total_weight} Kg"
+      - else
+        %td Empty
+        %td -
+        %td -
+        %td -
+        %td -

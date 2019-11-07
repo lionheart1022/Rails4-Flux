@@ -1,0 +1,19 @@
+.search
+  .page-actions
+    %h1 Shipments - Search
+
+    = simple_form_for @view_model, url: search_customers_shipments_path, method: :get, as: :search, html: { class: "shipment-search" } do |f|
+      = f.input :query, label: false, placeholder: "AWB, reference or shipment ID"
+      %ul.actions
+        %li.primary
+          = f.submit "Search"
+
+- if @view_model.matches_multiple_shipments?
+  %table.shipments
+    = render "list_view_shipment_columns"
+    = render partial: "list_view_shipment_row", collection: @view_model.shipments, as: :data
+
+  .pagination
+    = paginate(@view_model.shipments)
+- elsif @view_model.matches_no_shipments?
+  %p.no_results No shipments found

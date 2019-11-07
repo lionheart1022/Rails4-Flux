@@ -1,0 +1,4 @@
+<%= "#{@customer.name} created new RFQ with id: #{@shipment.unique_shipment_id}" %>
+<%= ViewHelper::ShipmentRequests.company_email_shipment_request_url_with_common_or_company_domain(shipment_request: @shipment_request, company: @company) %>
+
+<%= render "/components/shared/mailer/booking", shipment: @shipment %>

@@ -1,0 +1,14 @@
+%header.page_header.with_table_below
+  %h1 Rate sheets
+
+%table
+  %thead
+    %tr
+      %th Carrier product
+      %th
+  %tbody
+    - @carrier_products.each do |carrier_product|
+      %tr
+        %td= carrier_product.suffixed_name
+        %td.text-right
+          = link_to "Print", print_customers_rate_sheet_path(carrier_product), class: "primary-btn", target: "_blank"

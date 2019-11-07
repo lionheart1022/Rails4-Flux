@@ -1,0 +1,28 @@
+%header.page_header
+  %h1 Create Pickup
+
+= simple_form_for(@pickup, url: customers_pickups_path, method: :post, html: { id: nil, class: nil }) do |f|
+  = f.input :pickup_date, autofocus: true
+
+  .from_and_to_time
+    = f.input :from_time, wrapper_html: { class: "from_time" }, input_html: { id: nil, data: { behavior: "masked_time_input" } }
+    = f.input :to_time, wrapper_html: { class: "to_time" }, input_html: { id: nil, data: { behavior: "masked_time_input" } }
+
+  = f.input :description
+
+  = f.fields_for(:contact) do |ff|
+    = ff.input :company_name
+    = ff.input :attention
+    = ff.input :address_line1
+    = ff.input :address_line2
+    = ff.input :address_line3
+
+    .zip_code_and_city
+      = ff.input :zip_code, wrapper_html: { class: "zip_code" }
+      = ff.input :city, wrapper_html: { class: "city" }
+
+    = ff.input :country_code, iso_codes: true
+
+  %ul.actions
+    %li= link_to("Cancel", customers_pickups_path)
+    %li.primary= f.submit "Create Pickup"

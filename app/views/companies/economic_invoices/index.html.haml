@@ -1,0 +1,17 @@
+.page_header.with_table_below
+  %h1
+    e-conomic invoices
+    %small= link_to "Report ##{@report.report_id}", companies_report_path(@report)
+
+- @view_model.invoices.each_with_index do |invoice, invoice_index|
+  %h2
+    - if invoice.http_request_succeeded?
+      %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_success
+    - elsif invoice.http_request_failed?
+      %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_failed
+    - elsif invoice.looks_valid?
+      %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_valid
+    - elsif invoice.looks_invalid?
+      %span.state_indicator.state_indicator__inline.economic_invoice_state_indicator.economic_invoice_state_invalid
+
+    = link_to "Invoice ##{invoice_index + 1}", companies_report_economic_invoice_path(@report, invoice)

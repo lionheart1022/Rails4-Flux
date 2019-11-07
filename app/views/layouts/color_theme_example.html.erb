@@ -1,0 +1,29 @@
+<% content_for :secondary_nav do  %>
+  <ul class="user_actions">
+    <li><%= link_to "Link 1", "#" %></li>
+    <li><%= link_to "Link 2", "#" %></li>
+    <li><%= link_to "Link 3", "#" %></li>
+  </ul>
+<% end %>
+
+<% content_for :primary_nav do %>
+  <ul class="navigation">
+    <li>
+      <h3>Section 1</h3>
+      <ul>
+        <%= nav_link("nav_item_1", "Item 1", "#") %>
+        <%= nav_link_with_badge("nav_item_2", "Item 2", "#", badge_count: 7) %>
+      </ul>
+    </li>
+
+    <li>
+      <h3>Section 2</h3>
+      <ul>
+        <%= nav_link("nav_item_3", "Item 3", "#") %>
+        <%= nav_link("nav_item_4", "Item 4", "#") %>
+      </ul>
+    </li>
+  </ul>
+<% end %>
+
+<%= render template: "layouts/application" %>

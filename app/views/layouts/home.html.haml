@@ -1,0 +1,21 @@
+!!! 5 utf-8
+%html
+  %head
+    %title= content_for(:title) || "CargoFlux"
+    %meta{ "http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8" }
+    %meta{ "http-equiv" => "X-UA-Compatible", "content" => "IE=Edge" }
+    %meta{ "name" => "viewport", "content" => "width=device-width, initial-scale=1.0" }
+    = stylesheet_link_tag "home"
+    = csrf_meta_tags
+  %body
+    .site
+      - unless flash.empty?
+        .flash_container
+          - flash.each do |name, msg|
+            %div{ class: "alert alert_#{name}" }
+              = msg
+
+      = yield
+
+      %footer.copyright_footer
+        = copyright_text

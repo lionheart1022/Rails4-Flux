@@ -1,0 +1,8 @@
+.dashboard_panel{ class: [hidden && 'hidden'], data: { tab: tab} }
+  .dashboard_panel_body
+    - if collection.try(:any?)
+      %table
+        %tbody
+          = render(partial: partial, collection: collection.limit(100), as: as)
+    - else
+      .empty= empty_state

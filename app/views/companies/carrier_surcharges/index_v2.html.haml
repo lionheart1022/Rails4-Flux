@@ -1,0 +1,77 @@
+%header.page_header
+  %h1
+    Surcharges
+    %small= @carrier.suffixed_name
+
+  %ul.page_actions
+    %li
+      = link_to("← All carriers", companies_surcharges_path)
+    %li
+      = link_to("Add new charge", new_companies_carrier_surcharge_path(@carrier), class: "primary-btn")
+
+.padded
+  Set the overall charges that apply to all your products. You can also override them in specific products.
+
+= form_tag bulk_update_v2_companies_carrier_surcharges_path(@carrier), method: :patch, class: "surcharges_table__form" do
+  = hidden_field_tag "redirect_url", v2_companies_carrier_surcharges_path(@carrier)
+
+  %table.surcharges_table
+    %tbody
+      - @view_model.all_surcharges.each_with_index do |surcharge, index|
+        = fields_for "bulk_update[surcharges]", surcharge, index: index do |surcharge_fields|
+          %tr
+            %td.surcharges_table__toggle_switch_cell
+              - surcharge_fields.object.include_hidden_fields.each do |field|
+                = surcharge_fields.hidden_field field
+
+              %label.toggle-switch
+                = surcharge_fields.check_box :enabled
+                %span.toggle-switch-slider
+            %td.surcharges_table__name_cell
+              = content_tag(surcharge_fields.object.default_surcharge? ? :span : :em) do
+                = surcharge_fields.object.description
+
+              - if surcharge_fields.object.carrier_feedback_surcharge?
+                %span{ title: "Applied once updates are received from carrier." } ℹ
+            %td.surcharges_table__value_cell
+              - if surcharge_fields.object.monthly_values?
+                - surcharge_fields.object.surcharges_for_this_and_next_month.each_with_index do |monthly_surcharge, monthly_index|
+                  = surcharge_fields.fields_for :monthly, monthly_surcharge, index: monthly_index do |monthly_fields|
+                    %div.surcharges_table__monthly_value_input_wrapper
+                      = monthly_fields.label :charge_value, monthly_fields.object.formatted_month
+                      = monthly_fields.hidden_field :valid_from
+                      = monthly_fields.hidden_field :expires_on
+                      = monthly_fields.text_field :charge_value, class: "cf_input surcharges_table__monthly_value_input"
+              - else
+                = surcharge_fields.text_field :charge_value, class: "cf_input surcharges_table__value_input"
+
+              = surcharge_fields.select :calculation_method, Surcharge.calculation_method_options, {}, { class: "cf_input surcharges_table__value_type_input", disabled: surcharge_fields.object.calculated_method_locked? }
+
+  %ul.actions
+    %li.primary= submit_tag "Save"
+
+%table
+  %thead
+    %tr
+      %th{ width: "30%" } Carrier product
+      - @view_model.enabled_surcharges.each do |surcharge|
+        %th= surcharge.description
+      %th
+  %tbody
+    - @view_model.carrier_product_surcharge_rows.each do |row|
+      %tr
+        %td
+          = suffixed_name(name: row.carrier_product.name, company: row.carrier_product.owner_carrier_product.company)
+        - row.surcharge_columns.each do |surcharge_column|
+          %td
+            - if surcharge_column.product_level_override?
+              - if surcharge_column.surcharge_on_product.enabled?
+                %strong= surcharge_column.surcharge.formatted_value
+              - else
+                \-
+
+              = link_to "Inherit", companies_carrier_product_surcharge_path(row.carrier_product, surcharge_column.surcharge_on_product), method: :delete, class: "surcharge_product_level_override_link__inherit", title: "Inherit the surcharge value from the carrier", data: { confirm: "Are you sure that you want to remove the product-level overridden surcharge?" }
+            - else
+              = surcharge_column.surcharge.formatted_value
+        %td
+          = link_to "Edit", v2_companies_carrier_product_surcharges_path(row.carrier_product)

@@ -1,0 +1,13 @@
+%header.page_header
+  %h1
+    Shipment Updates
+    %small UPS
+
+  %ul.page_actions
+    %li= link_to "Cancel", companies_shipment_updates_path, class: "secondary-btn"
+
+= form_tag companies_shipment_updates_ups_feedback_files_path, method: :post, multipart: true do |f|
+  %div.padded
+    = file_field_tag :file
+  %div.padded
+    = submit_tag "Upload", class: "primary-btn"

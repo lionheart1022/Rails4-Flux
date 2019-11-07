@@ -1,0 +1,19 @@
+<header class="page-header">
+  <h1>
+    Company:
+    <strong><%= @company.name %></strong>
+    <%= link_to "Back", exec_company_path(@company), class: "page-header-back-btn" %>
+  </h1>
+</header>
+
+<h2><%= @carrier.name %></h2>
+
+<p>
+  <%= @carrier.name %> products cannot be deleted because they are being sold to the following companies:
+</p>
+
+<ul>
+  <% @buying_companies.each do |buying_company| %>
+    <li><%= buying_company.name %></li>
+  <% end %>
+</ul>

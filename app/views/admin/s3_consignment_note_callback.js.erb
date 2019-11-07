@@ -1,0 +1,6 @@
+<%- if @error_message && @error_message != '' -%>
+  var errorMessage = '<%= escape_javascript(@error_message) %>';
+  alert(errorMessage);
+<%- else -%>
+  cargoflux.updateFilelink('#consignment_note_attachment', '<%= escape_javascript(link_to(@asset.attachment_file_name, @asset.attachment.url, target: "_blank")) %>');
+<%- end -%>

@@ -1,0 +1,6 @@
+Welcome to CargoFlux!
+
+You have been given access to the account for <%= @customer.name %> by <%= @company.name %>.
+
+Before you can access your account you need to choose a password by going to:
+<%= customer_user_confirmation_url(confirmation_token: @raw_confirmation_token) %>

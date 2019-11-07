@@ -1,0 +1,47 @@
+@import "admin/mixins";
+
+#map {
+  @include light_box_shadow;
+
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  border: 1px solid $table_border;
+  border-radius: 4px;
+}
+
+#map.customer {
+
+}
+
+#map.company {
+  position: absolute;
+  right: 1000px;
+}
+
+.map_wrapper {
+  position: relative;
+}
+
+.map-section {
+  position: relative;
+  display: inline-block;
+}
+
+.route_link, .map_status, .map_disclaimer {
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.map_disclaimer {
+  font-style: italic;
+}
+
+.map_status.customer {
+  font-weight: bold;
+}
+
+.map_status {
+  margin-right: 5px;
+}

@@ -1,0 +1,35 @@
+%header.page_header
+  %h1= @customer.name
+
+  %ul.page_actions
+    %li= link_to "Back", companies_customer_carriers_path(@customer), class: "secondary-btn"
+
+= render "companies/customers/subnav", active_nav: :carriers, customer_id: params[:customer_id]
+
+%h2.clear-fix
+  .float-left
+    = @carrier.suffixed_name
+
+  .float-right
+    - if @carrier.supports_override_credentials?
+      %small
+        = link_to(companies_customer_carrier_credential_configuration_path(@customer, @carrier), class: "product-credentials-link") do
+          - if @carrier.overrides_credentials_for_customer?(@customer)
+            %span.credentials-indicator--specified{ title: "Credentials provided" }
+          - else
+            %span.credentials-indicator--blank{ title: "Credentials not provided" }
+          %span.credentials-inner-text Override credentials
+
+.customer_product__table
+  .customer_product__table__header_group
+    .customer_product__table__row
+      .customer_product__table__cell.customer_product__name_cell_header Carrier Product
+      .customer_product__table__cell Auto booking
+      .customer_product__table__cell Auto book shipments
+      .customer_product__table__cell Pickup by carrier
+      .customer_product__table__cell Testmode
+      .customer_product__table__cell Margin
+
+  .customer_product__table__row_group
+    - @view_model.customer_carrier_products.each_with_index do |customer_carrier_product, index|
+      = render "companies/customer_carrier_products/row_fields", customer_carrier_product: customer_carrier_product, index: index, redirect_url: companies_customer_carrier_path(@customer, @carrier)

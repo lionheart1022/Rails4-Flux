@@ -1,0 +1,31 @@
+.customer_product__table
+  .customer_product__table__header_group
+    .customer_product__table__row
+      .customer_product__table__cell.customer_product__name_cell_header Carrier Product
+      .customer_product__table__cell Auto booking
+      .customer_product__table__cell Auto book shipments
+      .customer_product__table__cell Pickup by carrier
+      .customer_product__table__cell Testmode
+      .customer_product__table__cell Margin
+
+  .customer_product__table__row_group
+    - view_model.carriers.each do |carrier|
+      .customer_product__table__row.customer_carriers_table__carrier_heading_row
+        .customer_product__table__cell.customer_product__name_cell_header
+          %h2.customer_carriers_table__carrier_heading
+            = link_to(carrier.suffixed_name, companies_customer_carrier_path(customer, carrier))
+        .customer_product__table__cell
+        .customer_product__table__cell
+        .customer_product__table__cell
+        .customer_product__table__cell
+        .customer_product__table__cell
+          - if carrier.supports_override_credentials?
+            = link_to(companies_customer_carrier_credential_configuration_path(customer, carrier, redirect_url: local_assigns[:redirect_url]), class: "product-credentials-link") do
+              - if carrier.overrides_credentials_for_customer?(customer)
+                %span.credentials-indicator--specified{ title: "Credentials provided" }
+              - else
+                %span.credentials-indicator--blank{ title: "Credentials not provided" }
+              %span.credentials-inner-text Override credentials
+
+      - view_model.customer_carrier_products(carrier: carrier).each do |customer_carrier_product|
+        = render "companies/customer_carrier_products/row_fields", customer_carrier_product: customer_carrier_product, index: view_model.next_index, redirect_url: local_assigns[:redirect_url]

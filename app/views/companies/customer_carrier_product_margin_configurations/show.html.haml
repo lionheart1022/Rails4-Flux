@@ -1,0 +1,71 @@
+%header.page_header
+  %h1
+    = @carrier_product.name
+    %small= @customer.name
+
+  %ul.page_actions
+    %li= link_to "Back", companies_customer_carrier_path(@customer, @carrier_product.carrier)
+
+%nav.nav-pills-container
+  %ul.nav-pills-list.nav-pills-list--multiline
+    - @price_document.zones.each_with_index.sort_by { |zone, _zone_index| zone.name }.each do |zone, zone_index|
+      %li
+        = link_to url_for(zone: zone_index), class: (@table.selected_zone_index == zone_index ? "nav-pill-active" : nil) do
+          Zone
+          %strong= zone.name
+
+
+.margin_config__select_zone_countries
+  %h3 Zone details
+
+  %ul
+    - @table.selected_zone.countries.each do |country|
+      %li
+        %strong= Country.find_country_by_alpha2(country.country_code)
+        - if country.zip_codes.any?
+          = country.zip_codes.map(&:to_s).to_sentence
+
+= form_tag companies_customer_carrier_product_margin_configuration_path(@customer, @carrier_product), method: :put do
+  = hidden_field_tag "zone", @table.selected_zone_index
+
+  %table
+    %thead
+      %tr
+        %th.margin_config__weight_header Weight
+        - unless @carrier_product.references_price_document?
+          %th.margin_config__cost_header Cost price
+        %th.margin_config__margin_header Margin
+        - unless @carrier_product.references_price_document?
+          %th.margin_config__sales_header Sales price
+    %tbody
+      - @table.rows.each_with_index do |row, index|
+        = fields_for "table[rows]", row, index: index do |margin_fields|
+          %tr
+            %td.margin_config__weight_cell
+              %span.weight_value= margin_fields.object.formatted_weight_value
+              %span.weight_unit= margin_fields.object.weight_unit
+            - unless @carrier_product.references_price_document?
+              %td
+                = margin_fields.object.formatted_cost_price
+            %td
+              = margin_fields.hidden_field :charge_type, id: nil
+              = margin_fields.hidden_field :json_weight, id: nil
+              - if row.charge_type == "WeightRangeCharge"
+                = margin_fields.text_field :margin_amount, id: nil, class: "margin_config__value_input cf_input cf_input__compact"
+                = @price_document.currency
+                +
+                = margin_fields.text_field :interval_margin_amount, id: nil, class: "margin_config__value_input cf_input cf_input__compact"
+                = @price_document.currency
+                \/
+                = ActiveSupport::NumberHelper.number_to_rounded(row.charge.interval, precision: 2, strip_insignificant_zeros: true)
+                = row.weight_unit
+              - else
+                = margin_fields.text_field :margin_amount, id: nil, class: "margin_config__value_input cf_input cf_input__compact", data: { behavior: "margin_config_margin_input" }
+                = @price_document.currency
+            - unless @carrier_product.references_price_document?
+              %td
+                = text_field_tag nil, nil, id: nil, class: "margin_config__value_input cf_input cf_input__compact", data: { behavior: "margin_config_sales_price", base_cost_price: margin_fields.object.base_cost_price }
+                = @price_document.currency
+
+  .padded
+    = button_tag "Save", id: nil, name: nil, class: "primary-btn"

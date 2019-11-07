@@ -1,0 +1,16 @@
+.pickup_from_time_wrapper,
+.pickup_to_time_wrapper {
+  display: inline-block;
+  margin-right: 10px;
+  width: 100px;
+}
+
+.simple_form {
+  .pickup_from_time_wrapper,
+  .pickup_to_time_wrapper {
+    input {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+}

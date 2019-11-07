@@ -1,0 +1,6 @@
+= simple_form_for(PickupStateForm.build_for_pickup(pickup), as: :pickup, url: companies_pickup_state_changes_path(pickup), remote: local_assigns[:disable_remote] ? false : true) do |form|
+  = form.input :state, collection: form.object.available_state_options, include_blank: false, label: false
+  = form.input :comment, as: :text, required: false
+
+  %div
+    = form.submit "Save", class: "primary-btn"

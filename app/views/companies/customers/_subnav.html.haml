@@ -1,0 +1,8 @@
+%nav.nav-pills-container
+  %ul.nav-pills-list
+    %li= link_to "Carriers", companies_customer_carriers_path(customer_id), class: (active_nav == :carriers ? "nav-pill-active" : nil)
+    %li= link_to "Address", companies_customer_address_path(customer_id), class: (active_nav == :address ? "nav-pill-active" : nil)
+    - if current_context.company_feature_flag_enabled?("automated-billing")
+      %li= link_to "Billing", companies_customer_billing_configuration_path(customer_id), class: (active_nav == :billing ? "nav-pill-active" : nil)
+    %li= link_to "Users", companies_customer_users_path(customer_id), class: (active_nav == :users ? "nav-pill-active" : nil)
+    %li= link_to "Settings", settings_companies_customer_path(customer_id), class: (active_nav == :settings ? "nav-pill-active" : nil)

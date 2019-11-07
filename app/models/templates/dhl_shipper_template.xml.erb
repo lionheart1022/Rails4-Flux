@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<req:ShipmentRequest xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com ship-val-global-req.xsd" schemaVersion="6.2">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2002-08-20T11:28:56.000-08:00</MessageTime>
+      <MessageReference>1234567890123456789012345678901</MessageReference>
+      <SiteID><%= credentials.account%></SiteID>
+      <Password><%= credentials.password%></Password>
+    </ServiceHeader>
+    <MetaData>
+      <SoftwareName>CargoFlux</SoftwareName>
+      <SoftwareVersion>1.0</SoftwareVersion>
+    </MetaData>    
+  </Request>
+  <NewShipper>N</NewShipper>
+  <LanguageCode>en</LanguageCode>
+  <PiecesEnabled>Y</PiecesEnabled>
+  <Billing>
+    <ShipperAccountNumber><%= credentials.company %></ShipperAccountNumber>
+    <ShippingPaymentType><%= payment_type(carrier_product.import?) %></ShippingPaymentType>
+    <BillingAccountNumber><%= credentials.company %></BillingAccountNumber>
+  </Billing>
+  <Consignee>
+    <CompanyName><%= transform_charset(recipient.company_name) %></CompanyName>
+    <AddressLine><%= transform_charset(recipient.address_line1) %></AddressLine>
+    <AddressLine><%= transform_charset(recipient.address_line2) %></AddressLine>
+    <AddressLine><%= transform_charset(recipient.address_line3) %></AddressLine>
+    <City><%= transform_charset(recipient.city) %></City>
+    <Division><%= transform_charset(recipient.state_code) %></Division>
+    <DivisionCode><%= transform_charset(recipient.state_code) %></DivisionCode>
+    <PostalCode><%= transform_charset(recipient.zip_code) %></PostalCode>
+    <CountryCode><%= transform_charset(format_country_code(recipient.country_code)) %></CountryCode>
+    <CountryName><%= transform_charset(country_name(recipient.country_code)) %></CountryName>
+    <Contact>
+      <PersonName><%= transform_charset(recipient.attention) %></PersonName>
+      <PhoneNumber><%= transform_charset(recipient.phone_number) %></PhoneNumber>
+      <Email><%= transform_charset(recipient.email) %></Email>
+    </Contact>
+  </Consignee>
+  <% if shipment.dutiable %>
+    <% if shipment.customs_code.present? && shipment.customs_code.length > 0 %>
+      <Commodity>
+        <CommodityCode><%= shipment.customs_code %></CommodityCode>
+      </Commodity>
+    <% end %>
+    <Dutiable>
+      <DeclaredValue><%= format_customs_amount(shipment.customs_amount) %></DeclaredValue>
+      <DeclaredCurrency><%= format_customs_currency(shipment.customs_currency) %></DeclaredCurrency>
+    </Dutiable>
+  <% end %>
+  <% if dgr_mapping.found_mapping? %>
+    <Reference>
+      <ReferenceID><%= dgr_mapping.content_id %></ReferenceID>
+      <ReferenceType>DGC</ReferenceType>
+    </Reference>
+  <% end %>
+  <Reference>
+    <ReferenceID><%= transform_charset(shipment.reference) %></ReferenceID>
+  </Reference>
+  <ShipmentDetails>
+    <NumberOfPieces><%= shipment.number_of_packages %></NumberOfPieces>
+    <Pieces>
+      <% shipment.package_dimensions.dimensions.each do |dimension| %>
+        <Piece>
+          <Weight><%= dimension.weight.round(3) %></Weight>
+          <DimWeight><%= dimension.volume_weight.round(3) %></DimWeight>
+          <Width><%= dimension.width.ceil %></Width>
+          <Height><%= dimension.height.ceil %></Height>
+          <Depth><%= dimension.length.ceil %></Depth>
+        </Piece>
+      <% end %>
+    </Pieces>
+    <Weight><%= shipment.package_dimensions.total_rounded_weight(3) %></Weight>
+    <WeightUnit><%= DHLShipperLib::Codes::Metrics::KILOGRAMS %></WeightUnit>
+    <GlobalProductCode><%= carrier_product.service(sender: sender, recipient: recipient)  %></GlobalProductCode>
+    <Date><%= format_date(shipment.shipping_date) %></Date>
+    <Contents><%= transform_charset(shipment.description) %></Contents>
+    <DoorTo><%= DHLShipperLib::Codes::DeliveryType::DOOR_TO_DOOR %></DoorTo>
+    <DimensionUnit><%= DHLShipperLib::Codes::Metrics::CENTIMETERS %></DimensionUnit>
+    <PackageType><%= carrier_product.packaging_code %></PackageType>
+    <IsDutiable><%= is_dutiable(shipment.dutiable) %></IsDutiable>
+    <CurrencyCode><%= format_customs_currency(shipment.customs_currency) %></CurrencyCode>
+  </ShipmentDetails>
+
+  <Shipper>
+    <ShipperID><%= transform_charset(credentials.company) %></ShipperID>
+    <CompanyName><%= transform_charset(sender.company_name) %></CompanyName>
+    <AddressLine><%= transform_charset(sender.address_line1) %></AddressLine>
+    <AddressLine><%= transform_charset(sender.address_line2) %></AddressLine>
+    <AddressLine><%= transform_charset(sender.address_line3) %></AddressLine>
+    <City><%= transform_charset(sender.city) %></City>
+    <Division><%= transform_charset(sender.state_code) %></Division>
+    <DivisionCode><%= transform_charset(sender.state_code) %></DivisionCode>
+    <PostalCode><%= transform_charset(sender.zip_code) %></PostalCode>
+    <CountryCode><%= transform_charset(format_country_code(sender.country_code)) %></CountryCode>
+    <CountryName><%= transform_charset(country_name(sender.country_code)) %></CountryName>
+    <Contact>
+      <PersonName><%= transform_charset(sender.attention) %></PersonName>
+      <PhoneNumber><%= transform_charset(sender.phone_number) %></PhoneNumber>
+      <Email><%= transform_charset(sender.email) %></Email>
+    </Contact>
+  </Shipper>
+
+  <% if dgr_mapping.found_mapping? %>
+    <SpecialService>
+      <SpecialServiceType><%= dgr_mapping.special_service_code %></SpecialServiceType>
+    </SpecialService>
+  <% end %>
+
+  <EProcShip>N</EProcShip>
+  <LabelImageFormat>PDF</LabelImageFormat>
+</req:ShipmentRequest>

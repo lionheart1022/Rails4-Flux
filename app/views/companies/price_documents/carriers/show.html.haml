@@ -1,0 +1,57 @@
+%header.page_header.with_table_below
+  %h1
+    Price Documents
+    %small= @carrier.suffixed_name
+
+  %ul.page_actions
+    %li
+      = link_to("All carriers", companies_price_documents_carriers_path)
+
+%table
+  %thead
+    %tr
+      %th{ width: "35%" } Carrier product
+      %th{ width: "15%" } State
+      %th{ width: "45%" } Price document
+      %th{ width: "5%" }
+  %tbody
+    - @view_model.carrier_product_rows.each do |carrier_product|
+      - if carrier_product.references_price_document?
+        %tr
+          %td
+            = suffixed_name(name: carrier_product.name, company: carrier_product.owner_carrier_product.company)
+          %td
+          %td Referenced
+          %td
+      - else
+        %tr
+          %td
+            = suffixed_name(name: carrier_product.name, company: carrier_product.owner_carrier_product.company)
+          %td
+            - if carrier_product.carrier_product_price
+              - if carrier_product.carrier_product_price.parsed_without_warnings?
+                = carrier_product.carrier_product_price.state.capitalize
+              - else
+                = link_to(carrier_product.carrier_product_price.state.capitalize, companies_price_documents_carrier_product_path(carrier_product))
+          %td
+            - if carrier_product.active_price_document_upload
+              %div.price_document_upload__download_btn_wrapper
+                = button_to download_companies_price_documents_carrier_product_path(carrier_product), method: :post, class: "link_button", form: { target: "_blank" } do
+                  Download
+              .padded
+                Uploaded
+                = l(carrier_product.active_price_document_upload.created_at, format: :short)
+                - if carrier_product.active_price_document_upload.created_by
+                  by
+                  = carrier_product.active_price_document_upload.created_by.email
+            %div{ data: { behavior: "price_document_upload__wrapper" } }
+              = form_tag companies_price_documents_carrier_product_path(carrier_product), method: :put, multipart: true, class: "price_document_upload__form", data: { behavior: "price_document_upload__form" } do |f|
+                %div.price_document_upload__form__file_input
+                  = file_field_tag :file
+                %div
+                  = submit_tag "Upload", class: "primary-btn"
+              = button_tag "Upload", type: "button", class: "primary-btn", data: { behavior: "price_document_upload__show_form_btn" }
+          %td.text-right
+            - if carrier_product.show_remove_btn?
+              = button_to companies_price_documents_carrier_product_path(carrier_product), method: :delete, class: "link_button", data: { confirm: "Are you sure?" } do
+                Remove

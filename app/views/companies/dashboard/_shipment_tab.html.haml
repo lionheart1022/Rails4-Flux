@@ -1,0 +1,4 @@
+.dashboard_tab{ class: [active && 'active'], data: { tab: tab } }
+  - count = collection.try(:count) || 0
+  %h2= header
+  .badge{ class: [count.zero? && 'empty', (tab == 'problems') && 'danger'] }= count

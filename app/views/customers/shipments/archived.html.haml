@@ -1,0 +1,11 @@
+.page_actions
+  %h1 Shipments - Archived
+
+  %div.scopes
+    = simple_form_for(@view_model, url: archived_customers_shipments_path, method: :get, as: :scope) do |form|
+      = render "list_view_form", form: form
+
+= render "list_view_shipments"
+
+.pagination
+  = paginate(@view_model.shipments)

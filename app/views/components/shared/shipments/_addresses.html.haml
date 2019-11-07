@@ -1,0 +1,20 @@
+.section_header
+  .full_sender_address{hidden: true, value: @view_model.full_sender_address}
+  .full_recipient_address{hidden: true, value: @view_model.full_recipient_address}
+
+  %h2.left= heading
+
+  - if @view_model.show_route
+    .right.map_section
+      .map_status
+      = link_to('Show Route', '#', class: "route_link")
+
+%table
+  %tr
+    %th Sender
+    %th Recipient
+  %tr
+    %td
+      = render("components/shared/contact", contact: sender)
+    %td
+      = render("components/shared/contact", contact: recipient)

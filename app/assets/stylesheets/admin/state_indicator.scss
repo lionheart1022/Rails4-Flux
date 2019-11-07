@@ -1,0 +1,136 @@
+@import "admin/mixins";
+
+td.state_indicator_cell {
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.state_indicator {
+  position: relative;
+  vertical-align: top;
+
+  .state_indicator_updateable {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &::before {
+    background: #888;
+    border-radius: 14px;
+    content: " ";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: -20px;
+    top: 1px;
+  }
+}
+
+.state_indicator__inline {
+  &::before {
+    position: static;
+  }
+}
+
+@mixin yellow_state_indicator {
+  color: $yellow;
+  &::before { background: $yellow; }
+}
+
+@mixin blue_state_indicator {
+  color: $blue;
+  &::before { background: $blue; }
+}
+
+@mixin purple_state_indicator {
+  color: $purple;
+  &::before { background: $purple; }
+}
+
+@mixin green_state_indicator {
+  color: $green;
+  &::before { background: $green; }
+}
+
+@mixin gray_state_indicator {
+  &::before { background: #dedede; }
+}
+
+@mixin red_state_indicator {
+  color: $red;
+  &::before { background: $red; }
+}
+
+.shipment_state_indicator {
+  &.shipment_state_created,
+  &.shipment_state_waiting_for_booking,
+  &.shipment_state_booking_initiated,
+  &.shipment_state_booked_awb_in_progress,
+  &.shipment_state_booked_consignment_note_in_progress {
+    @include yellow_state_indicator;
+  }
+
+  &.shipment_state_booked,
+  &.shipment_state_booked_waiting_awb_document,
+  &.shipment_state_booked_waiting_consignment_note {
+    @include blue_state_indicator;
+  }
+
+  &.shipment_state_in_transit {
+    @include purple_state_indicator;
+  }
+
+  &.shipment_state_delivered_at_destination {
+    @include green_state_indicator;
+  }
+
+  &.shipment_state_cancelled {
+    @include gray_state_indicator;
+  }
+
+  &.shipment_state_booking_failed,
+  &.shipment_state_problem {
+    @include red_state_indicator;
+  }
+}
+
+.economic_invoice_state_indicator {
+  &.economic_invoice_state_valid {
+    @include blue_state_indicator;
+  }
+
+  &.economic_invoice_state_invalid {
+    @include yellow_state_indicator;
+  }
+
+  &.economic_invoice_state_success {
+    @include green_state_indicator;
+  }
+
+  &.economic_invoice_state_failed {
+    @include red_state_indicator;
+  }
+}
+
+.pickup_state_indicator {
+  &.pickup_state_booked {
+    @include blue_state_indicator;
+  }
+
+  &.pickup_state_created {
+    @include yellow_state_indicator;
+  }
+
+  &.pickup_state_picked_up {
+    @include green_state_indicator;
+  }
+
+  &.pickup_state_problem {
+    @include red_state_indicator;
+  }
+
+  &.pickup_state_cancelled {
+    @include gray_state_indicator;
+  }
+}

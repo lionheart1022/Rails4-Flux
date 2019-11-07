@@ -1,0 +1,7 @@
+.page_header.with_table_below
+  %h1
+    e-conomic invoices
+    %small= link_to "Report ##{@report.report_id}", companies_report_path(@report)
+
+%div{ data: { behavior: "poll_and_redirect", behavior_config: JSON.generate(poll_url: in_progress_companies_report_economic_invoices_path(format: "json"), redirect_url: companies_report_economic_invoices_url) } }
+  = image_tag("admin/loading_indicator.gif", alt: "")

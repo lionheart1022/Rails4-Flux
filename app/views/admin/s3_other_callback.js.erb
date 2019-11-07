@@ -1,0 +1,4 @@
+<%- if @error_message && @error_message != '' -%>
+  var errorMessage = '<%= escape_javascript(@error_message) %>';
+  alert(errorMessage);
+<%- end -%>

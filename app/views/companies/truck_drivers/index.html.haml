@@ -1,0 +1,38 @@
+%header.page_header.with_table_below
+  %h1 Truck drivers
+
+  %ul.page_actions
+    %li= link_to("New truck driver", new_companies_truck_driver_path, class: "primary-btn")
+
+- if @truck_drivers.size > 0
+  %table
+    %tr
+      %th{ width: "25%" } Name
+      - if current_context.company_feature_flag_enabled?("truck-driver-app")
+        %th{ width: "40%" } User
+      %th Last modified
+    - @truck_drivers.each do |truck_driver|
+      %tr
+        %td= link_to(truck_driver.name, companies_truck_driver_path(truck_driver))
+        - if current_context.company_feature_flag_enabled?("truck-driver-app")
+          %td
+            - if truck_driver.user
+              %div
+                = link_to truck_driver.user.email, companies_truck_driver_sessions_path(truck_driver)
+              - if truck_driver.user.confirmed_at?
+                %div
+                  %em
+                    Confirmed
+                    = l truck_driver.user.confirmed_at, format: :long
+            - else
+              = link_to "Create user", new_companies_truck_driver_user_path(truck_driver), class: "primary-btn"
+        %td
+          = time_ago_in_words(truck_driver.updated_at)
+          ago
+- else
+  %p
+    There are no truck drivers -
+    = link_to "create one here", new_companies_truck_driver_path
+
+.pagination
+  = paginate(@truck_drivers)

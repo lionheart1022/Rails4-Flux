@@ -1,0 +1,23 @@
+%header.page_header.with_table_below
+  %h1 Trucks
+
+  %ul.page_actions
+    %li= link_to("New truck", new_companies_truck_path, class: "primary-btn")
+
+- if @trucks.size > 0
+  %table
+    %tr
+      %th{ width: "50%" } Name
+      %th Date created
+    - @trucks.each do |truck|
+      %tr
+        %td= link_to(truck.name, companies_truck_path(truck))
+        %td.date
+          = local_time(truck.created_at, format: '%Y-%m-%d')
+- else
+  %p
+    There are no trucks -
+    = link_to "create one here", new_companies_truck_path
+
+.pagination
+  = paginate(@trucks)

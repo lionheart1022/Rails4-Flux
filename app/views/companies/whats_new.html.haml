@@ -1,0 +1,2567 @@
+.whats_new
+
+  %h1 CargoFlux news
+
+  %h2= revision_title(426, "2018-12-27")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add GLS-shop support outside DK
+
+  %h2= revision_title(425, "2018-12-19")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add remarks to custom label
+
+  %h2= revision_title(424, "2018-12-14")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add DSV Danpack, Xpress, Road partload and road full load products
+
+  %h2= revision_title(423, "2018-12-03")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add DAO tracking
+
+  %h2= revision_title(422, "2018-11-14")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for parcelshop id for Bring integration in API
+
+  %h2= revision_title(421, "2018-11-05")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add non-stackable option + related TNT surcharge
+    %li
+      Bug fixes
+      %ul
+        %li Fix downloading price document with non-ASCII characters
+
+  %h2= revision_title(420, "2018-10-29")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add VAT incl./excl. data to Excel report
+
+  %h2= revision_title(419, "2018-10-26")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add units per item in shipment (package dimensions)
+    %li
+      Bug fixes
+      %ul
+        %li Fix incorrect package count for bookings via API
+
+  %h2= revision_title(418, "2018-10-16")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Upgrade to latest DHL Pickup API
+        %li Make customer list scrollable in shipment booking form
+
+  %h2= revision_title(417, "2018-10-03")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix distance calculation
+        %li Limit (DHL) CountryName to 35 characters
+        %li Fix broken customer autocomplete selects
+        %li Let product owner view autobook request
+        %li Support commas in weight interval rules
+        %li Fix use of default_sender option in API
+    %li
+      Improvements
+      %ul
+        %li Add Unifaun Groupage NO product
+        %li Register (temporary) XK Kosovo country code
+        %li Add support for monthly (fuel) surcharge
+        %li Accept number_of_pallets via API (only for DSV at the moment)
+
+  %h2= revision_title(416, "2018-09-05")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Use international DHL tracking URL
+
+  %h2= revision_title(415, "2018-09-03")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add KHT integration
+
+  %h2= revision_title(414, "2018-08-31")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add (default) proforma invoice
+        %li Get and display transit time for UPS shipments
+
+  %h2= revision_title(413, "2018-08-20")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add PostNord Pallet NO product
+    %li
+      Bug fixes
+      %ul
+        %li Fix availability of RFQ functionality for customers
+
+  %h2= revision_title(412, "2018-07-25")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add Bring Pickup Parcel
+
+  %h2= revision_title(411, "2018-07-23")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Only let product owner change shipment state in shipment view.
+
+  %h2= revision_title(410, "2018-07-12")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Filter shipments by shipping date in Shipments/Archived overview, not when the shipment itself was created
+
+  %h2= revision_title(409, "2018-07-11")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New UI for generating reports
+        %li Date filtering on reports now consider the shipping date, not when the shipment itself was created
+
+  %h2= revision_title(408, "2018-07-03")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add shipment-level VAT indicator to company API XML responses
+
+  %h2= revision_title(407, "2018-05-31")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add customer to new default label
+        %li Handle failed delivery of e-conomic (v2) invoices
+    %li
+      Bug fixes
+      %ul
+        %li Fix API-docs typo in endpoint URL
+        %li Exclude RFQs from dashboard stats
+        %li Fix new shipments being marked as updated when exporting
+
+  %h2= revision_title(406, "2018-05-04")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for bulk-updating shipment state
+        %li Add pallet size prefill option
+
+  %h2= revision_title(405, "2018-05-01")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for choosing Unifaun parcelshop (via API)
+
+  %h2= revision_title(404, "2018-04-26")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li UI for managing surcharges, not only the fuel charge
+        %li Auto-cancel old, failed auto-pickups (meaning pickups booked at carriers)
+
+  %h2= revision_title(403, "2018-04-25")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix UPS (recipient) notifications
+
+  %h2= revision_title(402, "2018-04-11")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add ability to override GLS-credentials for a specific customer
+
+  %h2= revision_title(401, "2018-04-04")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow setting custom product for import use
+
+  %h2= revision_title(400, "2018-03-23")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for price calculations of quarter and half pallets
+
+  %h2= revision_title(399, "2018-03-05")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add contact import
+
+  %h2= revision_title(398, "2018-03-02")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New UI for managing carriers & products
+
+  %h2= revision_title(397, "2018-02-28")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add FedEx Overnight Priority US product
+        %li Add FedEx Standard Priority US product
+
+  %h2= revision_title(396, "2018-02-22")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li General performance improvements after DB upgrade
+
+  %h2= revision_title(395, "2018-02-21")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Place A6 size label on A4 size page (UPS)
+
+  %h2= revision_title(394, "2018-02-20")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Show correct unit for rate sheets based on pallet price documents
+
+  %h2= revision_title(393, "2018-02-19")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix upload-issue when pasting something from Excel into the search field
+    %li
+      Improvements
+      %ul
+        %li Let company copy RFQ
+        %li Decrease pickup attention limit to 22 (to match UPS limit)
+
+  %h2= revision_title(392, "2018-02-17")
+  %ul
+    %li
+      Maintenance
+      %ul
+        %li Upgrade database infrastructure and version (20 minute downtime)
+
+  %h2= revision_title(391, "2018-02-16")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add state-code when requesting pickup
+        %li Let UPS Saver & Express be used for domestic shipments
+
+  %h2= revision_title(390, "2018-02-14")
+  %ul
+    %li
+      New ✨
+      %ul
+        %li Add auto-tracking support for PostNord shipments
+
+  %h2= revision_title(389, "2018-02-07")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Updated UPS labels with margin
+
+  %h2= revision_title(388, "2018-02-06")
+  %ul
+    %li
+      New ✨
+      %ul
+        %li Receive parcel weight updates from GLS 📦
+    %li
+      Improvements
+      %ul
+        %li Add link to UPS pickup tracking page
+
+  %h2= revision_title(387, "2018-02-05")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Multi-line notes on customer
+    %li
+      Bug fixes
+      %ul
+        %li Fix issue where "Auto-book shipments" was shown as checked even though it was not enabled
+
+  %h2= revision_title(386, "2018-02-02")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add UPS Saver Document product
+        %li Add UPS Saver Envelope product
+
+  %h2= revision_title(385, "2018-01-18")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Custom from-email for new customer notifications
+        %li Added new cancelled trigger
+    %li
+      Bug fixes
+      %ul
+        %li Already exported shipments would be exported again even though the trigger for the new state is disabled
+
+  %h2= revision_title(384, "2018-01-08")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Use correct volume factor calculation for PostNord
+    %li
+      Improvements
+      %ul
+        %li Geodis products are only for export
+        %li Set shippingmark (Geodis)
+        %li Handle differing charges across zones for rate sheets
+
+  %h2= revision_title(383, "2017-12-14")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Custom color theme
+
+  %h2= revision_title(382, "2017-12-12")
+  %ul
+    %li
+      New ✨
+      %ul
+        %li Rate sheets for customers
+
+  %h2= revision_title(381, "2017-12-06")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add "Created"-state export trigger
+        %li New UI for price documents
+        %li Retrieve the originally uploaded price documents (only for new uploads)
+        %li Show who uploaded and when the latest price document (only for new uploads)
+
+  %h2= revision_title(380, "2017-12-01")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New UI for creating users
+
+  %h2= revision_title(379, "2017-11-28")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New customer carrier/product overview
+
+  %h2= revision_title(378, "2017-11-17")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Limit pickup att. field due to UPS 27-character limit
+
+  %h2= revision_title(377, "2017-11-13")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add DAO PakkeShop Return
+
+  %h2= revision_title(376, "2017-11-07")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add auto-pickup booking via shipment API
+        %li Add option to configure fuel charge without editing price document
+        %li Add GLS ShopReturn
+
+  %h2= revision_title(375, "2017-11-06")
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Drag&drop on shipment page has been disabled to avoid the issue of the file being uploaded as label, consignment note etc.
+
+  %h2= revision_title(374, "2017-11-02")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Scale company logo down on login page
+
+  %h2= revision_title(373, "2017-11-01")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add address book for companies
+
+  %h2= revision_title(372, "2017-10-31")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add GTX Express Document (DHL) product
+
+  %h2= revision_title(371, "2017-10-10")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add priced/unpriced filter to report
+        %li Only include priced shipments in auto-billing
+        %li Order shipments on "Unpriced shipments" page
+        %li Set GLS customer reference from shipment reference
+        %li Add carrier filter to report
+    %li
+      Fixes
+      %ul
+        %li Handle e-conomic invoice generation in the background
+        %li Avoid creating the same e-conomic invoices multiple times
+
+  %h2= revision_title(370, "2017-10-09")
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Improve e-conomic invoice page performance with pagination
+
+  %h2= revision_title(369, "2017-10-06")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Show related shipment from pickups page
+        %li Add description to notification mails
+        %li Add and remove customer users
+
+  %h2= revision_title(368, "2017-10-05")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add ability to select/deselect all shipments when generating new report
+
+  %h2= revision_title(367, "2017-10-04")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New, unified list of customers (direct customers + carrier product customers)
+
+  %h2= revision_title(366, "2017-10-02")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Improved customer select-box (with paginated) in shipments overview.
+    %li
+      Fixes
+      %ul
+        %li Bring back e-conomic export button for old e-conomic integration
+
+  %h2= revision_title(365, "2017-09-21")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li New, faster way to create reports
+
+  %h2= revision_title(364, "2017-09-13")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Support booking DGR shipments via (customer) API
+
+  %h2= revision_title(363, "2017-09-11")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Set past shipping dates to today when using "New shipment based on this"
+
+  %h2= revision_title(362, "2017-08-25")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Show customer users
+
+  %h2= revision_title(361, "2017-08-15")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow booking pickup directly from UPS
+
+  %h2= revision_title(360, "2017-08-14")
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Fix description appearing multiple times when updating state of shipment
+
+  %h2= revision_title(359, "2017-08-01")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add new page with unbilled shipments
+
+  %h2= revision_title(358, "2017-07-27")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for managing attachments on RFQ
+        %li Add package dimensions to shipment mails
+
+  %h2= revision_title(357, "2017-07-26")
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Don't refresh products when updating pickup contact fields
+
+  %h2= revision_title(356, "2017-07-25")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to create RFQ on behalf of customer
+        %li Allow company to book pick-up while booking shipment
+
+  %h2= revision_title(355, "2017-07-19")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Enable email notifications for UPS
+
+  %h2= revision_title(354, "2017-07-14")
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Logo and barcode on TNT labels were not appearing on labels and consignment notes
+
+  %h2= revision_title(353, "2017-07-12")
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Use new Geodis Wilson service URL
+        %li Upgrade to TNT ECS v3
+
+  %h2 Release 352: Tuesday, July 11<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Show shipment warnings to company (if there are any)
+
+  %h2 Release 351: Wednesday, July 5<sup>th</sup> 2017
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Fix sending RFQ and pickup notifications to customer users
+        %li Allow all types of company users to update their notification settings
+
+  %h2 Release 350: Tuesday, July 4<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add support for multi-customer access
+
+  %h2 Release 349: Tuesday, June 20<sup>th</sup> 2017
+  %ul
+    %li
+      Fixes
+      %ul
+        %li Use correct DHL product code for express documents
+
+  %h2 Release 348: Monday, June 19<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Also look up shipment reference when searching
+
+  %h2 Release 347: Wednesday, June 14<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add "Pickups"-counter in navigation
+        %li Add new tracking option - track-trace.com/container
+        %li Allow specifying tracking method for custom products
+
+  %h2 Release 346: Friday, June 2<sup>nd</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Enable customers to fetch shipment prices via API
+
+  %h2 Release 345: Monday, May 29<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to manage API access on behalf of customers
+
+  %h2 Release 344: Tuesday, May 23<sup>rd</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix volume weight rounding
+        %li Support multi-line addresses for Geodis bookings
+        %li Include VAT for PostNord shipments (in e-conomic integration)
+
+  %h2 Release 343: Thursday, May 18<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Display detailed RFQ pricing (if enabled for customer)
+
+  %h2 Release 342: Tuesday, May 16<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Support for creating new RFQ based on another RFQ
+
+  %h2 Release 341: Monday, May 15<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Show per-product transit times
+
+  %h2 Release 340: Thursday, May 11<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to retry failed bookings on behalf of customer
+
+  %h2 Release 339: Tuesday, May 9<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Update PostNord track-and-trace URL
+
+  %h2 Release 338: Monday, May 8<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add carrier filtering
+    %li
+      Bug fixes
+      %ul
+        %li Fix carrier autocomplete
+
+  %h2 Release 337: Friday, May 5<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add DGR shipments with DHL
+
+  %h2 Release 336: Monday, Apr 10<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Handle missing cost/sales prices in detailed report
+
+  %h2 Release 335: Wednesday, Mar 29<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add DGR options to shipment which is connected with dgr_charge in price document
+
+  %h2 Release 334: Tuesday, Mar 28<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Handle FedEx tracking failures
+
+  %h2 Release 333: Monday, Mar 27<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add detailed pricing option for reports
+
+  %h2 Release 332: Tuesday, Mar 21<sup>st</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add UPS pickup-booking
+
+  %h2 Release 331: Tuesday, Mar 14<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Show FedEx tracking details
+        %li Show error message for missing email when importing customers
+
+  %h2 Release 330: Friday, Mar 10<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to create and edit all types of shipments on behalf of client
+
+  %h2 Release 329: Friday, Mar 3<sup>rd</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Company dashboard 📊 🎂 🎉
+
+  %h2 Release 328: Friday, Feb 24<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add shipment exports archive API endpoint
+
+  %h2 Release 327: Wednesday, Feb 8<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Show volume weight instead of volume in mails
+        %li Use company info mail as From-address for mails
+
+  %h2 Release 326: Tuesday, Feb 7<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to change status of auto-pickups
+
+  %h2 Release 325: Tuesday, Jan 31<sup>st</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow customers to filter shipments by date range
+        %li Enhance shipment text-search with partial matching and showing multiple results
+
+  %h2 Release 324: Thursday, Jan 26<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix setting volume factor and basis when creating carrier product
+
+  %h2 Release 323: Wednesday, Jan 25<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Improve performance of updating customer products
+
+  %h2 Release 322: Monday, Jan 23<sup>rd</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Request pickup when booking shipment
+
+  %h2 Release 321: Friday, Jan 20<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fix updating sender/recipient country
+
+  %h2 Release 320: Tuesday, Jan 17<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Specify required shipment fields
+        %li Click on ID to show shipment
+        %li Show created shipments count as badge on Shipments nav item
+    %li
+      Bug fixes
+      %ul
+        %li Fix creating shipment export setting
+
+  %h2 Release 319: Monday, Jan 16<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Improve performance of price calculation (by ~10x)
+    %li
+      Bug fixes
+      %ul
+        %li Fix Price Documents table overview
+
+  %h2 Release 318: Wednesday, Jan 11<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to cancel RFQ after proposal
+    %li
+      Bug fixes
+      %ul
+        %li Fix double cancel button bug
+        %li Fix shipment and state change UI bug
+
+  %h2 Release 317: Tuesday, Jan 10<sup>th</sup> 2017
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Do not auto-focus shipping date input
+        %li Do not override empty AWB
+        %li Fix e-conomic invoice sum rounding
+
+  %h2 Release 316: Monday, Jan 9<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Allow company to cancel RFQ after proposal
+    %li
+      Bug fixes
+      %ul
+        %li Fix editing customer contact country code
+        %li Fix importing customers with uppercase country codes
+
+  %h2 Release 315: Wednesday, Jan 4<sup>th</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Add pagination to reports and end-of-day manifests
+    %li
+      Bug fixes
+      %ul
+        %li Fix total volume weight rounding
+        %li Fix selected navigation item for company
+
+  %h2 Release 314: Tuesday, Jan 2<sup>nd</sup> 2017
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Show non-custom products for company
+
+  %h2 Release 313: Tuesday, Nov 17<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          It is now possible to import customers without sending e-mail invitations.
+          Just uncheck the box that says 'Send e-mail invitations to imported customers' after you've uploaded your customer document.
+
+  %h2 Release 312: Tuesday, Nov 13<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          E-Conomic invoices now use the configurations from E-Conomic when generating invoices.
+          This means terms of payment and invoice layout are set through the E-Conomic application instead of CargoFlux.
+
+
+  %h2 Release 312: Tuesday, Oct 27<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          PostNord shipments are automatically shipped as Flex delivery when delivery instructions are set in the API
+
+  %h2 Release 311: Tuesday, Oct 4<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Changed the label type for PostNord to termo-190
+        %li
+          Use new TNT-tracking website
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed price bug when updating distance based products
+        %li
+          Enabled advertising for PostNord shipments
+
+  %h2 Release 310: Monday, Aug 31<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added CVR-number and a notes field to contacts
+        %li
+          Sender can now be saved in address book when booking a shipment
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed bug with a email being sent for shipment creation, when an RFQ was created
+
+  %h2 Release 309: Monday, Aug 30<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added search to contact overview
+        %li
+          Added additional 'canceled' state to RFQs
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixes a crash caused when adding manual prices
+
+  %h2 Release 308: Monday, Aug 29<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added options for RFQ email notifications
+        %li
+          Added additional filter options for shipments
+        %li
+          Companies can now search for customers
+
+  %h2 Release 306-307: Friday, Aug 26<sup>th</sup> 2016
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Companies can now specify if a customer can view the entire price calculation
+
+  %h2 Release 302-305: Thursday, Aug 25<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added RFQ functionality
+
+    %li
+      Improvements
+      %ul
+        %li
+          Reports can now be filtered to be in a date range
+        %li
+          Removed booking request menu item as it not of use
+
+  %h2 Release 301: Friday, Aug 19<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed a bug that caused duplicate email entries in batch imports to cancel the entire import job. From now on only the first email entry will be used.
+
+  %h2 Release 300: Friday, Aug 18<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Company users can now edit shipments booked with custom products
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed a bug in which the shipment state always defaulted to 'created'
+
+  %h2 Release 299: Friday, Aug 12<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added the ability to export shipments via API.
+
+  %h2 Release 294-298: Wednesday, Aug 10<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added the ability to mass-import customers
+
+  %h2 Release 293: Monday, Aug 8<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Companies can now edit shipments booked with custom products
+
+  %h2 Release 291-292: Monday, Aug 2<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added additional pricing fields to company API
+
+  %h2 Release 290: Monday, Jul 25<sup>th</sup> 2016
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 289: Wednesday, Jul 14<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added GTX integration
+        %li
+          Carriers can now be disabled for customer companies.
+        %li
+          Now hides disabled products and carriers from customer companies
+
+  %h2 Release 287-288: Wednesday, Jul 6<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added product information in booking notification emails
+        %li
+          Deposit shipments are now properly marked as such in the interface and reports
+
+  %h2 Release 282-286: Tuesday, Jun 14<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug with custom labels
+
+  %h2 Release 281: Tuesday, Jun 6<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug with autocomplete scroll
+
+  %h2 Release 275-280: Tuesday, Jun 1<sup>st</sup> 2016
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Integrated with Unifaun
+
+  %h2 Release 274: Tuesday, May 24<sup>th</sup> 2016
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Added GLS private
+
+  %h2 Release 272-273: Tuesday, May 22<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Now correctly displaying local time
+
+  %h2 Release 268-271: Tuesday, May 17<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added company logo to custom labels
+        %li
+          Now using localized timestamps
+        %li
+          Added additional notification filters
+
+  %h2 Release 264-267: Wednesday, May 11<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added support for loading meter calculation
+
+  %h2 Release 263: Wednesday, May 4<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added show shipment endpoint to customer API
+
+  %h2 Release 262: Thursday, April 27<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Companies can now provide more detailed pricing for shipments
+
+  %h2 Release 261: Thursday, April 14<sup>th</sup> 2016
+  %ul
+    %li
+      Maintetance
+
+  %h2 Release 260: Thursday, April 10<sup>th</sup> 2016
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 257-259: Thursday, April 8<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved shipment filtering in reports and shipment overview
+        %li
+          Added deposit service (delivery instructions) for GLS
+
+
+  %h2 Release 256-257: Thursday, April 8<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added remarks field to booking API
+        %li
+          Added description and remarks field to GLS label
+
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed price calculations when booking through API
+
+  %h2 Release 255: Thursday, March 31<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Increases the size of remarks field
+
+  %h2 Release 254: Wednesday, March 30<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added company suffixes to carrier products
+
+  %h2 Release 253: Wednesday, March 30<sup>th</sup> 2016
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 252: Wednesday, March 23<sup>th</sup> 2016
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added remarks field to shipment creation
+
+  %h2 Release 250-251: Thursday, March 17<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Companies can now upload terms and conditions
+
+  %h2 Release 249: Tuesday, March 15<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash when accesing notifications
+
+  %h2 Release 248: Thursday, March 10<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Economic Integration
+    %li
+      Improvements
+      %ul
+        %li
+          Removed dutiable constraint on certain DHL products
+        %li
+          GLS now supports return labels
+
+  %h2 Release 246: Wednesday, March 9<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          It is now possible for companies to manage their own products
+
+  %h2 Release 245: Sunday, March 6<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added admin customer setup functionality
+
+  %h2 Release 242-244: Wednesday, March 2st<sup>th</sup> 2016
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Users can now control who can view the documents uploaded on a shipment
+
+  %h2 Release 240-241: Wednesday, March 2st<sup>th</sup> 2016
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 239: Wednesday, February 24<sup>th</sup> 2016
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          GLS automatic tracking
+
+  %h2 Release 238: Wednesday, February 17<sup>th</sup> 2016
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Now always choosing the shortest route for distance based shipments
+
+  %h2 Release 237: Thursday, February 11<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash when setting autotracking option on carrier products
+
+  %h2 Release 235-236: Wednesday, February 10<sup>th</sup> 2016
+  %ul
+    %li
+      Performance
+      %ul
+        %li
+          Internal performance optimizations related to booking times
+
+  %h2 Release 234: Wednesday, February 10<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash when filtering shipments when generating reports
+
+  %h2 Release 233: Monday, February 6<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed issue with margins on distance shipments not being applied properly
+
+  %h2 Release 232: Monday, February 1st<sup>th</sup> 2016
+  %ul
+    %li
+      New feature
+      %ul
+        %li
+          Added support for distance-based products
+
+  %h2 Release 231: Monday, January 18<sup>th</sup> 2016
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed retry shipment API endpoint not working as expected
+
+  %h2 Release 229-230: Thursday, December 31<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance release
+
+  %h2 Release 228: Wednesday, December 23<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed rare crash related to price calculations
+
+  %h2 Release 227: Friday, December 18<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added shipment pricing to shipment list API endpoint
+
+  %h2 Release 226: Tuesday, December 13<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added notifications for all Bring products
+        %li
+          Changed the format of DAO shipping labels
+
+  %h2 Release 225: Tuesday, December 10<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug with UPS tracking links
+        %li
+          Fix problem with some carrier product customer's shipments not being selected in filters
+
+  %h2 Release 223-224: Tuesday, December 4<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Report generation has been moved to the background to improve response times
+
+  %h2 Release 222: Tuesday, December 2<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Added notifications to Bring shipments
+
+  %h2 Release 220-221: Sunday, November 26<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Improved performance when generating large shipment reports
+
+  %h2 Release 219: Sunday, November 25<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 218: Sunday, November 15<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed problem when generating reports with a large amounts of shipments
+
+  %h2 Release 217: Thursday, October 31<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed problem with TNT bookings being stuck on fetching documents
+
+  %h2 Release 213-216: Thursday, October 29<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 212: Thursday, October 22<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed problem with pricing that occured on shipments booked through a long chain of companies
+
+  %h2 Release 203-211: Tuesday, October 20<sup>th</sup> 2015
+  %ul
+    %li
+      Added company API endpoint for fetching information on customer shipments
+
+  %h2 Release 202: Wednesday, October 7<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance
+
+  %h2 Release 201: Wednesday, October 7<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash that occured when viewing some tracking-enabled UPS shipments
+
+  %h2 Release 200: Monday, October 6<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          The correct sender is now shown on GLS shipments booked through other companies
+
+  %h2 Release 199: Thursday, September 30<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance release
+
+  %h2 Release 196-198: Thursday, September 24<sup>th</sup> 2015
+  %ul
+    %li
+      New Features
+      %ul
+        %li
+          Added returnlabel option when booking shipments through the API for GLS and Bring
+        %li
+          API consumers can now choose to use the address associated with their account as the default sender field
+        %li
+          API consumers can now specify parcelshop id
+
+  %h2 Release 195: Thursday, September 17<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Added GLS notifications for business service
+
+  %h2 Release 194: Tuesday, September 15<sup>th</sup> 2015
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added Bring integration
+
+  %h2 Release 192-193: Sunday, September 9<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash when uploading GLS price documents
+    %li
+      Improvements
+      %ul
+        %li
+          Improved generated GLS labels
+
+
+  %h2 Release 191: Sunday, August 30<sup>th</sup> 2015
+  %ul
+    %li
+      New Features
+      %ul
+        %li
+          Added test mode for GLS carrier products
+
+  %h2 Release 189-190: Monday, August 28<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          API requests now correctly formats boolean attributes
+
+  %h2 Release 188: Monday, August 24<sup>th</sup> 2015
+  %ul
+    %li
+      Added GLS carrier
+
+  %h2 Release 186-187: Tuesday, August 18<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          API documentation corrections
+
+  %h2 Release 182-185: Monday, August 17<sup>th</sup> 2015
+  %ul
+    %li
+      New Features
+      %ul
+        %li
+          Customers can now book DAO shipments through the Cargoflux API
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed problem with shipment's country name not being updated correctly for some.
+
+  %h2 Release 180-181: Wednesday, July 29<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed font on landing page
+
+  %h2 Release 178-179: Monday, July 27<sup>th</sup> 2015
+  %ul
+    %li
+      Updated landing page
+
+  %h2 Release 177: Wednesday, July 22<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug with UPS labels being cropped incorrectly
+
+  %h2 Release 176: Monday, July 20<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          DHL now support automatic shipment booking
+        %li
+          Added new DHL products
+
+  %h2 Release 174-175: Sunday, July 19<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed missing country names on shipment overview and reports
+    %li
+      Maintenance
+
+  %h2 Release 173: Friday, July 8<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash that occured when creating a contact without a country specified
+
+  %h2 Release 171-172: Monday, July 7<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved performance when viewing large shipment reports
+
+  %h2 Release 170: Monday, July 6<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved filtering for shipment reports
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed company logo dimensions on landing page
+
+  %h2 Release 166-169: Tuesday, July 1<sup>st</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improvement price calculations in some situations
+
+  %h2 Release 165: Tuesday, June 29<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash that sometimes occured when editing failed shipments
+
+  %h2 Release 162-164: Tuesday, June 26<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Customers can now add internal notes to shipments
+
+  %h2 Release 161: Tuesday, June 15<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed issue with default filters when creating end-of-day manifests
+
+  %h2 Release 160: Tuesday, June 10<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Made improvements to automatic tracking events data display
+
+  %h2 Release 159: Thursday, June 4<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added extra filtering options when generating end-of-day manifests
+
+
+  %h2 Release 158: Wednesday, June 3<sup>rd</sup> 2015
+  %ul
+    %li
+      New Feature
+      %ul
+        %li
+          Added automatic tracking for TNT bookings
+
+  %h2 Release 157: Monday, May 27<sup>th</sup> 2015
+  %ul
+    %li
+      Big Fix
+      %ul
+        %li
+          Fixed issue with IE10 that caused loading indicators to be incorrectly shown
+
+  %h2 Release 154-156: Monday, May 25<sup>th</sup> 2015
+  %ul
+    %li
+      New Features
+      %ul
+        %li
+          Companies and customers can now upload extra attachments for shipments
+        %li
+          Companies can now add internal notes on a shipment
+
+  %h2 Release 153: Wednesday, May 20<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved validation on email fields when creating new shipments
+
+  %h2 Release 152: Thursday, May 14<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Rearranged order of package dimensions on custom labels
+
+  %h2 Release 151: Monday, May 11<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed crash when searching for shipments in incomplete autobook states
+
+  %h2 Release 148-150: Wednesday, May 8<sup>th</sup> 2015
+  %ul
+    %li
+      Features
+      %ul
+        %li
+          Added the ability to search for specific shipments based on the AWB or id
+
+  %h2 Release 145-147: Tuesday, May 5<sup>st</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Now displaying the full shipment id under reports section
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed issue with DAO bookings
+
+  %h2 Release 142-144: Tuesday, April 28<sup>st</sup> 2015
+  %ul
+    %li
+      Features
+      %ul
+        %li
+          Added automatic track and trace updates for UPS shipments
+
+  %h2 Release 141: Friday, April 24<sup>st</sup> 2015
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with fetching assets on edited shipments
+        %li
+          Now correctly clearing errors when changing a shipment's state to booked
+
+  %h2 Release 140: Tuesday, April 21<sup>st</sup> 2015
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with single-piece only carrier products
+
+  %h2 Release 138-139: Saturday, April 11<sup>st</sup> 2015
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Now correctly aggregates packages
+        %li
+          Now displaying the correct state when editing a shipment and using a manually booked carrier products
+
+  %h2 Release 137: Tuesday, April 7<sup>st</sup> 2015
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Now correctly validating state field when booking shipments
+
+  %h2 Release 136: Wednesday, April 1<sup>st</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          It is now possible for customers to retry and cancel failed shipments
+        %li
+          Added UPS Express import carrier product
+
+  %h2 Release 134-135: Tuesday, March 31<sup>th</sup> 2015
+  %ul
+    %li
+      Maintenance release
+
+  %h2 Release 133: Tuesday, March 24<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Recipient zip code is no longer required when sending shipment
+
+
+  %h2 Release 131-132: Monday, March 18<sup>th</sup> 2015
+  %ul
+    %li
+      New Features
+      %ul
+        %li
+          Input fields are now dynamically validated when creating new shipments
+    %li
+      Bug fix
+      %ul
+        %li
+          Added missing city field on custom labels
+        %li
+          Fixed problem when specifing margins for different customer companies
+
+  %h2 Release 130: Monday, March 9<sup>th</sup> 2015
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed bug that didn't allow input with commas when calculating prices on some browsers
+
+  %h2 Release 129: Saturday, March 7<sup>th</sup> 2015
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Zip code is no longer required for price calculations
+
+  %h2 Release 127-128: Thursday, March 5<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Redesigned packages selector when creating new shipments
+
+  %h2 Release 126: Wednesday, March 4<sup>th</sup> 2015
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed a bug that caused the pricing on some shipments with multiple packages to be incorrect
+    %li
+      Improvements
+      %ul
+        %li
+          Document and excel files are now allowed when uploading files.
+
+  %h2 Release 123-125: Monday, March 2<sup>th</sup> 2015
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem saving custom codes
+        %li
+          Fixed problem exporting reports to excel
+
+  %h2 Release 121-122: Sunday, March 1<sup>th</sup> 2015
+  %ul
+    %li
+      Improvement
+      %ul
+        %li
+          Now displaying customer reference on shipment page
+
+  %h2 Release 120: Friday, February 27<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed bug that made DPD shipments unavailable for international shipments
+
+  %h2 Release 119: Thursday, February 26<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Autocompletion now correctly triggers price calculations when creating a new shipment
+    %li
+      Features
+      %ul
+        %li
+          Added support for DAO shipments
+        %li
+          Address line 3 is now available for UPS and TNT bookings
+        %li
+          Shipment bookings now support a customer supplied reference field
+
+  %h2 Release 117-118: Tuesday, February 19<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added support for DPD shipments
+
+  %h2 Release 114-116: Tuesday, February 17<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed problem creating new users
+        %li
+          Fixed problem activating new user accounts
+        %li
+          New carrier products are now disabled by default for customers
+
+  %h2 Release 112-113: Sunday, February 14<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li When creating shipments, price calculations are now also saved when no margin has been specified by the customer company
+    %li
+      Bug Fixes
+      %ul
+        %li
+          End-of-day manifests no longer contain canceled shipments
+
+  %h2 Release 111: Sunday, February 8<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed UI bug that caused price calculation to be executed twice
+        %li
+          Fixed bug that caused some errors to not be correctly displayed on Pacsoft shipments
+        %li
+          Fixed bug that that caused shipment errors to be overwritten when updating state
+    %li
+      Improvements
+      %ul
+        %li System now displays a descriptive error when providing invalid TNT booking credentials
+
+
+  %h2 Release 107-110: Friday, February 5<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added confirmation before removing price documents
+        %li
+          No longer clearing errors when changing the status of a shipment to canceled
+        %li
+          A loading animation is now shown when waiting for price calculations to complete
+    %li
+      Features
+      %ul
+        %li
+          Added the ability for users to control which emails they receive from the booking system
+
+  %h2 Release 106: Friday, January 23<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug that crashed system for some users when updating a shipment's price
+
+  %h2 Release 104-105: Tuesday, January 20<sup>th</sup> 2015
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed bug that made customers unable to book shipments
+
+  %h2 Release 103: Tuesday, January 20<sup>th</sup> 2015
+  %ul
+    %li
+      Reduced functionality
+      %ul
+        %li
+          Price calculations on shipments are temporarily disabled while we solve some technical issues
+
+
+  %h2 Release 98-102: Saturday, January 19<sup>th</sup> 2015
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Maintenance release
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed performance issues related to previous release
+
+
+  %h2 Release 97: Saturday, January 17<sup>th</sup> 2015
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          Carrier product pricing are now available to all companies
+    %li
+      Improvements
+      %ul
+        %li
+          Improved sales price management
+        %li
+          Improved performance when generating large excel reports
+    %li
+      Bug Fixes
+      %ul
+        %li
+          Fixed various bugs
+
+
+  %h2 Release 96: Tuesday, December 9<sup>th</sup> 2014
+  %ul
+    %li
+      Bug Fix
+      %ul
+        %li
+          Fixed volume weight calculation for TNT document shipments
+
+  %h2 Release 95: Sunday, December 7<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          Shipments now support pallet based price calculation
+
+  %h2 Release 94: Monday, December 1<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added volume weight calculations to TNT Express Document
+
+  %h2 Release 93: Wednesday, November 27<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed a problem with custom labels
+
+  %h2 Release 92: Tuesday, November 25<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed problem with custom labels when printing in A5 landscape layout
+    %li
+      Improvements
+      %ul
+        %li
+          Maintance release
+
+  %h2 Release 91: Friday, November 21<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed problem with customers not being able to view pricing information on their shipments
+
+
+  %h2 Release 90: Tuesday, November 18<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Pricing information are now only visible to companies who are directly responsible for a shipment
+
+  %h2 Release 89: Tuesday, November 18<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Maintenance release
+
+  %h2 Release 88: Sunday, November 16<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          Added the ability to print special shipping labels for custom carrier products
+    %li
+      Improvements
+      %ul
+        %li
+          It's now possible to specify prices for custom products
+        %li
+          When booking shipments with Post Danmark, the recipient is now advised via sms and/or email
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed bug with import product pricing
+
+  %h2 Release 87: Thursday, November 6<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed bug with excel report exports
+
+  %h2 Release 86: Wednesday, November 5<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed bug where TNT Economy Import sometimes didn't work
+
+  %h2 Release 85: Wednesday, November 5<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed bug where disabled products were shown on the sales price page
+
+  %h2 Release 84: Wednesday, November 5<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fix
+      %ul
+        %li
+          Fixed bug when creating a shipment and a sales price for the customer was not set
+
+  %h2 Release 78-83: Tuesday, November 4<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Maintenance releases
+
+  %h2 Release 77: Tuesday, November 4<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          It's now possible to add pricing information for carrier products. Please contact us for more details
+
+  %h2 Release 76: Monday, November 3<sup>rd</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Optimized performance of shipments + archive
+
+  %h2 Release 69-75: Monday, November 3<sup>rd</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Maintenance release
+
+  %h2 Release 68: Friday, October 31<sup>st</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          UPS shipments: The CargoFlux shipment id is now added to the UPS AWB document
+
+  %h2 Release 67: Thursday, October 30<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed a bug with report exports, which could in some cases fail
+
+  %h2 Release 66: Friday, October 17<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved error messages from UPS when autobooking
+
+  %h2 Release 65: Monday, October 6<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with UPS imports from Canada
+        %li
+          Fixed problem with booking UPS without supplying a phone number
+        %li
+          Added state dropdown for US / Canada when creating new customers
+
+  %h2 Release 64: Monday, September 15<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed bug booking with Pacsoft (Introduced in Release 63)
+
+  %h2 Release 63: Monday, September 15<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Added support for states for US and Canada
+
+  %h2 Release 62: Thursday, September 11<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with emails
+
+  %h2 Release 61: Thursday, September 4<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with account confirmation and password reset
+
+  %h2 Release 56-60: August 25<sup>th</sup> to September 3<sup>rd</sup> 2014
+  %ul
+    %li
+      Maintenance releases
+
+  %h2 Release 53-55: Sunday, August 24<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          Added import functionality. Contact CargoFlux support to have it enabled on your account
+
+  %h2 Release 52: Wednesday, July 30<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Changed UPS shipping label size to A5
+    %li
+      New features
+      %ul
+        %li
+          Added UPS Expedited and UPS Saver
+
+  %h2 Release 51: Monday, July 28<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Improved speed when creating shipments
+    %li
+      New features
+      %ul
+        %li
+          Added UPS integration
+
+  %h2 Release 50: Tuesday, July 22<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem with Post Danmark Track & Trace
+
+  %h2 Release 49: Friday, June 6<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed problem where errors booking a shipment were incorrectly not saved and therefore could not be shown on the shipment page
+
+  %h2 Release 47-48: Tuesday, April 29<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          It's now possible to upload all file types as attachments to shipments instead of only PDF and HTML files.
+
+  %h2 Release 46: Sunday, April 27<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          New Shipments and pickups created will use a new id scheme. The new scheme ensures that id's are unique for shipments and pickups created by carrier product and company customers
+
+  %h2 Release 43-45: Thursday, April 24<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li
+          Shipments and pickup pages are now paginated so that they load faster
+
+  %h2 Release 42: Wednesday, April 9<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          It's now possible to use Post DK for autobooking shipments if it's enabled for your account
+        %li
+          Sender addresses can now be completed from the address book
+
+  %h2 Release 39-41: Tuesday, April 1<sup>st</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          Added sender address to shipments page.
+        %li
+          Optimized design for price from on shipments page.
+        %li
+          Fixed Internet Explorer 10 bug on input fields on new shipment page.
+
+  %h2 Release 35-38: Thursday, March 6<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          It's now possible to add a cost and sales price to a shipment
+
+  %h2 Release 34: Wednesday, March 5<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          It's now possible to change the sender address when creating a shipment
+        %li
+          We've optimized the design a bit on the new shipment page and the view
+
+  %h2 Release 33: Wednesday, March 5<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li
+          Fixed a bug for customers creating end of day manifest
+
+  %h2 Release 31-32: Wednesday, March 5<sup>th</sup> 2014
+  %ul
+    %li
+      New features
+      %ul
+        %li
+          The CargoFlux platform now supports selling your carrier products to other companies using CargoFlux. Contact CargoFlux support for more information.
+        %li
+          There are new grouping and filtering options on shipment overview pages for use when you for instance have other companies using your carrier products.
+    %li
+      Improvements
+      %ul
+        %li
+          Loading speed of shipment lists have been improved. This should be noticable when there are many shipments, such as there typically is in the archive.
+
+  %h2 Release 30: Thursday, February 20<sup>th</sup> 2014
+  %ul
+    %li
+      Improvements
+      %ul
+        %li Added support for track & trace via trackload.com on own carrier products - please contact Cargoflux support for setup
+        %li Added support for custom volume weight calculations on own carrier products - please contact Cargoflux support for setup
+
+  %h2 Release 28-29: Monday, February 10<sup>th</sup> 2014
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug where reports could contain the same shipment more than once
+        %li Fixed bug where customer number could be skipped when creating new customer
+
+  %h2 Release 27: Thursday, February 6<sup>th</sup> 2014
+  %ul
+    %li
+      Enhancements
+      %ul
+        %li When you change the status of a shipment or pickup, the screen is prevented from scrolling to the top
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug where emails weren't sent when customer created pickup
+        %li Fixed bug where volume weight and total weight weren't calculated in UI when creating new shipment from existing. Had no influence on actual stored data.
+
+  %h2 Release 24-26: Tuesday, February 4<sup>th</sup> 2014
+  %ul
+    %li TNT booking: Now correctly adds label and consignment note to bookings - only consignment note was added earlier
+    %li Bug fixes, including preventing screen from scrolling to top when TNT tracking link is clicked
+
+  %h2 Release 23: Wednesday, January 29<sup>th</sup> 2014
+  %ul
+    %li
+      Booking enhancements.
+      %ul
+        %li When auto-booking with TNT, we now check if shipment data conforms to TNTs data limits, e.g. 30 characters on address line 1. Gives error if data doesn't conform
+        %li If an error occurs while auto-booking, the errors are displayed to the end user, if possible. This lets the user determine the cause and fix it in a new shipment
+    %li Reporting. It's now possible for administrators to export reports of shipments in Excel format.
+
+  %h2 Release 22: Friday, January 24<sup>th</sup> 2014
+  %ul
+    %li Customers are now sorted by customer id.
+
+  %h2 Release 21: Tuesday, January 21<sup>th</sup> 2014
+  %ul
+    %li Various bug fixes related to TNT auto-booking. If the AWB document generation fails, you will be notified and can retry the generation.
+    %li Fixed some bugs in the email links
+    %li Fixed bug where some customers did not receive emails when shipment changed state
+    %li Fixed bug where some customers did not receive emails when pickup changed state
+
+  %h2 Release 20: Friday, January 17<sup>th</sup> 2014
+  %ul
+    %li Various bug fixes related to TNT auto-booking. Now handles shipment data with special characters such as æøå.
+    %li It's now possible to create a new shipment from an existing. Go to an existing shipment and click the "new" button in the top right corner.
+
+  %h2 Release 18-19: Wednesday, January 15<sup>th</sup> 2014
+  %ul
+    %li Various bug fixes related to TNT auto-booking. AWB documents are now generated as PDF files instead of html files
+
+  %h2 Release 14-17: Tuesday, January 14<sup>th</sup> 2014
+  %ul
+    %li TNT shipments can now be auto-booked. Setup credentials in carriers and products under each TNT product. Then enable auto-book on a customer to customer basis in customer settings
+    %li Various bug fixes
+
+  %h2 Release 10-13: Tuesday, November 28<sup>th</sup> 2013
+  %ul
+    %li Emails now include links using custom domains if they are set up.
+    %li Emails now contain unique ids, e.g. 2-17
+    %li Page title in browser is now company name
+    %li Shipment weights can now use comma (,) as decimal delimiter as well as point (.)
+
+  %h2 Release 9: Tuesday, November 19<sup>th</sup> 2013
+  %ul
+    %li Company shipments are now correctly sorted by shipment date, then creating time
+
+  %h2 Release 8: Wednesday, November 13<sup>th</sup> 2013
+  %ul
+    %li Shipments and pickups now all have unique IDs. They are created by prefixing the shipment/pickup ID with the customer ID, e.g. #1-2 is customer 1, shipment 2.
+
+  %h2 Release 7: Monday, November 11<sup>th</sup> 2013
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug with id's in emails
+
+  %h2 Release 6: Sunday, November 10<sup>th</sup> 2013
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug on what's new page
+
+  %h2 Release 5: Friday, November 8<sup>th</sup> 2013
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug with missing countries (e.g. Serbia) when creaing shipment
+
+  %h2 Release 4: Friday, November 8<sup>th</sup> 2013
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Fixed bug with creating new end of day manifest
+
+  %h2 Release 3: Thursday, November 7<sup>th</sup> 2013
+  %ul
+    %li Create shipment now has dropdown for customs currency
+    %li
+      Bug fixes
+      %ul
+        %li Group by state now shows correct state names
+        %li Ensure shipments, pickups and other items can't be double-booked
+        %li Various minor bugs
+
+  %h2 Release 2: Wednesday, November 6<sup>th</sup> 2013
+  %ul
+    %li
+      Bug fixes
+      %ul
+        %li Ordering of shipment and pickup events now in correct time order
+        %li Fixed some issues with file uploads in IE
+        %li Ordering of carrier products on create shipment form now in alphabetical order
+        %li Various minor bugs
+
+  %h2 Release 1: Wednesday, November 6<sup>th</sup> 2013
+  %ul
+    %li Our very first release!

@@ -1,0 +1,33 @@
+%header.page_header
+  %h1= @customer.name
+
+  %ul.page_actions
+    %li= link_to("Cancel", companies_customer_address_path(@customer), class: "secondary-btn")
+
+= render "companies/customers/subnav", active_nav: :address, customer_id: params[:customer_id]
+
+%h2 Address
+
+= simple_form_for(@form_model, as: :customer, url: companies_customer_address_path(@customer), method: :patch) do |f|
+  = f.input :name, label: "Company name", autofocus: true
+  = f.input :email
+  = f.input :attention
+  = f.input :address_line1
+  = f.input :address_line2
+  = f.input :address_line3
+  = f.input :zip_code
+  = f.input :city
+  %div{ data: { behavior: "country_and_state_inputs__container" } }
+    = f.input :country_code, iso_codes: true, label: "Country", input_html: { data: { behavior: "country_and_state_inputs__country" } }
+    = f.input :state_code, as: :states_grouped_by_country, label: "State", input_html: { data: { behavior: "country_and_state_inputs__state" } }
+  = f.input :phone_number
+  = f.input :cvr_number
+  = f.input :note, as: :text
+
+  %h2 Accounting
+
+  = f.input :external_accounting_number
+
+  %ul.actions
+    %li.primary
+      = f.submit("Save")

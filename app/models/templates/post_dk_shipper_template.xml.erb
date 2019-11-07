@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <meta>
+    <val n="created"><%= shipment.created_at.strftime('%Y-%m-%d %H:%M') %></val>
+    <val n="autoprint">yes</val>
+  </meta>
+  <sender sndid="<%= sender.contact_id %>">
+    <val n="name"><%= transform_to_post_dk_char_set(sender.company_name) %></val>
+    <val n="address1"><%= transform_to_post_dk_char_set(sender.address_line1) %></val>
+    <val n="address2"><%= transform_to_post_dk_char_set(sender.address_line2) %></val>
+    <val n="zipcode"><%= transform_to_post_dk_char_set(sender.zip_code) %></val>
+    <val n="city"><%= transform_to_post_dk_char_set(sender.city) %></val>
+    <val n="country"><%= transform_to_post_dk_char_set(sender.country_code.try(:downcase)) %></val>
+    <val n="contact"><%= transform_to_post_dk_char_set(sender.attention) %></val>
+    <val n="phone"><%= transform_to_post_dk_char_set(sender.phone_number) %></val>
+    <val n="email"><%= transform_to_post_dk_char_set(sender.email) %></val>
+    <partner parid="<%= shipment.carrier_product.partner %>">
+      <val n="custno"><%= credentials.company %></val>
+        <% if shipment.carrier_product.partner == PacsoftShipperLib::PartnerCodes::DPDDK %>
+          <val n="sourcecode"><%= PacsoftShipperLib::DPD_DEPOT %></val>
+        <% end %>
+    </partner>
+  </sender>
+  <receiver rcvid="<%= recipient.contact_id %>">
+    <val n="name"><%= transform_to_post_dk_char_set(recipient.company_name) %></val>
+    <val n="address1"><%= transform_to_post_dk_char_set(recipient.address_line1) %></val>
+    <val n="address2"><%= transform_to_post_dk_char_set(recipient.address_line2) %></val>
+    <val n="zipcode"><%= transform_to_post_dk_char_set(recipient.zip_code) %></val>
+    <val n="city"><%= transform_to_post_dk_char_set(recipient.city) %></val>
+    <val n="country"><%= transform_to_post_dk_char_set(recipient.country_code.try(:downcase)) %></val>
+    <val n="contact"><%= transform_to_post_dk_char_set(recipient.attention) %></val>
+    <val n="phone"><%= transform_to_post_dk_char_set(recipient.phone_number) %></val>
+    <val n="email"><%= transform_to_post_dk_char_set(recipient.email) %></val>
+  </receiver>
+  <shipment orderno="<%= shipment.shipment_id %>" linkprintkey="<%= shipment.linkprintkey %>">
+    <val n="from"><%= sender.contact_id %></val>
+    <val n="to"><%= recipient.contact_id %></val>
+    <val n="reference"><%= shipment.shipment_id %></val>
+    <val n="freetext1"><%= transform_to_post_dk_char_set(shipment.description) %></val>
+    <val n="freetext2"><%= transform_to_post_dk_char_set(shipment.reference) %></val>
+    <val n="shipdate"><%= shipment.shipping_date.strftime('%Y-%m-%d %H:%M') %></val>
+    <service srvid="<%= shipment.carrier_product_service %>">
+      <val n="nondelivery">RETURN</val>
+      <% if shipment.carrier_product_supports_auto_book_delivery %>
+        <addon adnid="DLV"></addon>
+      <% end %>
+      <% if recipient.phone_number.present? %>
+        <addon adnid="NOTSMS">
+          <val n="misc"><%= transform_to_post_dk_char_set(recipient.phone_number) %></val>
+        </addon>
+      <% end %>
+      <% if recipient.email.present? %>
+        <addon adnid="NOTEMAIL">
+          <val n="misc"><%= transform_to_post_dk_char_set(recipient.email) %></val>
+        </addon>
+      <% end %>
+    </service>
+  <ufonline>
+    <option optid="LNKPRTN">
+      <val n="sendemail">NO</val>
+    </option>
+  </ufonline>
+    <% shipment.package_dimensions.dimensions.each do |dimension| %>
+      <container type="parcel">
+        <val n="copies">1</val>
+        <val n="weight"><%= Float(dimension.weight) %></val>
+        <val n="volume"><%= "%.8f" % (Float(dimension.volume) / 1000000.0) %></val>
+        <val n="contents"><%= transform_to_post_dk_char_set(shipment.description) %></val>
+      </container>
+    <% end %>
+  </shipment>
+</data>

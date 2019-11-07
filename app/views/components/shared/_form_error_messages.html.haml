@@ -1,0 +1,11 @@
+-# Display error messages on attributes of "target"
+- if target.errors.any?
+  .error_explanation
+    %h3
+      = "Please correct the following errors:"
+    %ul 
+      - target.errors.full_messages.each do |msg|
+        %li= msg
+
+-# Display error messages on "base" of "target"
+-#= display_base_errors(target)

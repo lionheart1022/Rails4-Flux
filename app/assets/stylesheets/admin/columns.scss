@@ -1,0 +1,27 @@
+.columns_container {
+  margin-left: -24px;
+
+  &:after {
+    visibility: hidden;
+    display: inline-block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+    width: 100%;
+  }
+}
+
+.column_w50p {
+  box-sizing: border-box;
+  float: left;
+  width: 50%;
+  padding-left: 24px;
+}
+
+.column_wspan4 {
+  box-sizing: border-box;
+  float: left;
+  width: 33.3%;
+  padding-left: 24px;
+}

@@ -1,0 +1,17 @@
+%header.page_header
+  %h1
+    = @carrier.name
+    %small= @customer.name
+
+  %ul.page_actions
+    %li= link_to "Back", companies_customer_carrier_path(@customer, @carrier)
+
+= simple_form_for @credential, as: :credential, url: companies_customer_carrier_credential_configuration_path(@customer, @carrier), method: :patch do |form|
+  - if params[:redirect_url].present?
+    = hidden_field_tag "redirect_url", params[:redirect_url]
+
+  = render @credential.form_partial_path, form: form
+
+  %ul.actions
+    %li= link_to "Cancel", companies_customer_carrier_path(@customer, @carrier)
+    %li.primary= form.submit "Update"

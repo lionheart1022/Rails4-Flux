@@ -1,0 +1,6 @@
+<%- if @error_message && @error_message != '' -%>
+  var errorMessage = '<%= escape_javascript(@error_message) %>';
+  alert(errorMessage);
+<%- else -%>
+  cargoflux.updateAwbFilelink('#awb_attachment', '<%= escape_javascript(link_to(image_tag("admin/ic_awb_blue.png"), @asset.attachment.url, target: "_blank")) %>');
+<%- end -%>

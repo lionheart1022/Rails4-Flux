@@ -1,0 +1,19 @@
+<% if @company.addon_enabled?(identifier) %>
+  <%= form_tag exec_company_addon_path(@company, identifier), method: :delete, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+    <%= hidden_field_tag "addon[identifier]", identifier, id: nil %>
+
+    <label class="toggle-switch">
+      <%= check_box_tag nil, "1", true %>
+      <span class="toggle-switch-slider"></span>
+    </label>
+  <% end %>
+<% else %>
+  <%= form_tag exec_company_addons_path(@company), method: :post, class: "inline-form", data: { behavior: "auto_submit_on_change" } do %>
+    <%= hidden_field_tag "addon[identifier]", identifier, id: nil %>
+
+    <label class="toggle-switch">
+      <%= check_box_tag nil, "1", false %>
+      <span class="toggle-switch-slider"></span>
+    </label>
+  <% end %>
+<% end %>

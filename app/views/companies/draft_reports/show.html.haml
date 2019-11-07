@@ -1,0 +1,50 @@
+%header.page_header.with_table_below
+  %h1
+    Create Report
+    %small Select shipments
+
+  %ul.page_actions
+    %li
+      = link_to("New search", new_companies_draft_report_path(existing: @draft_report.id), class: "secondary-btn")
+      = button_to("Create report", complete_companies_draft_report_path(@draft_report), method: :post, class: "primary-btn")
+
+%table.shipments
+  %thead
+    %tr
+      %th
+        = form_tag toggle_all_shipments_companies_draft_report_path(@draft_report), remote: true, data: { behavior: "auto_submit_on_change" } do
+          = hidden_field_tag "page", params[:page], id: nil
+          = hidden_field_tag "selected", "0", id: nil
+          = check_box_tag "selected", "1", @draft_report.all_shipments_selected?, id: "draft_report_toggle_all_shipments__checkbox"
+      %th State
+      %th #
+      %th Date
+      %th Recipient
+      %th Country
+      %th Product
+      %th AWB
+      %th Description
+
+  %tbody
+    - @shipment_collection_items.each do |item|
+      - shipment = item.shipment
+      %tr{ id: "report_shipment_#{shipment.id}_row" }
+        %td
+          = form_tag toggle_shipment_companies_draft_report_path(@draft_report), remote: true, data: { behavior: "auto_submit_on_change" } do
+            = hidden_field_tag "shipment_id", shipment.id, id: nil
+            = hidden_field_tag "selected", "0", id: nil
+            = check_box_tag "selected", "1", item.selected, id: nil, class: "draft_report_toggle_shipment__checkbox"
+        %td
+          %span.state_indicator.shipment_state_indicator{ class: "shipment_state_#{shipment.state}" }
+            = ViewHelper::Shipments.state_name(shipment.state)
+        %td.unique_shipment_id
+          = link_to shipment.unique_shipment_id, companies_shipment_path(shipment)
+        %td= shipment.shipping_date
+        %td= shipment.recipient.company_name
+        %td= shipment.recipient.country_name
+        %td= shipment.carrier_product.name
+        %td= render("components/shared/carrier_products/awb", shipment: shipment)
+        %td= shipment.description
+
+.pagination
+  = paginate @shipment_collection_items

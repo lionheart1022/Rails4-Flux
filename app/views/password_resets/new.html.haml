@@ -1,0 +1,11 @@
+%h2 Forgot your password?
+
+= simple_form_for(@form, as: :user, url: password_reset_path, method: :post, html: { id: nil, class: "password_reset_form" }) do |form|
+  .password_reset_form__inputs
+    = form.input :email, required: true, autofocus: true
+
+  .password_reset_form__actions
+    = form.button :submit, "Send me reset password instructions", class: "primary-btn"
+
+%ul.password_reset_form__help_links
+  %li= link_to "Sign in", new_user_session_path

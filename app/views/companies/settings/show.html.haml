@@ -1,0 +1,25 @@
+%header.page_header
+  %h1 Company settings
+
+.columns_container
+  .column_w50p
+    %h2.no-t-margin Logo
+
+    = render "attachment"
+
+    = s3_uploader_form(callback_url: callback_companies_company_logo_path(format: "js"), data: { "behavior" => "s3_uploader_form", "progress-bar-target" => "#company_logo__attachment__progress_bar", "bucket_name" => Rails.configuration.aws[:bucket] }, id: nil, key: "uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/uploaded_file", callback_param: "file[direct_attachment_url]", expiration: 24.hours.from_now.utc.iso8601, max_file_size: 10.megabytes) do |_|
+      = file_field_tag :file, multiple: false
+
+    #company_logo__attachment__progress_bar
+
+  .column_w50p
+    %h2.no-t-margin Info
+
+    = simple_form_for current_company.address_for_edit, url: companies_company_address_path, as: :company_info, method: :put, html: { id: nil, class: nil } do |form|
+      = form.input :phone_number
+      = form.input :email
+
+      %ul.actions
+        %li.primary= form.submit "Update", name: nil, id: nil
+
+= render "admin/s3_direct_upload_progress_bar"

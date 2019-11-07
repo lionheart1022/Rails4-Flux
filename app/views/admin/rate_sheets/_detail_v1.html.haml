@@ -1,0 +1,78 @@
+%table.rate_sheet_price_table
+  %thead
+    %tr
+      %th
+      %th
+      - rate_sheet.rate_snapshot["zones"].each do |zone|
+        %th= zone["name"]
+  %tbody
+    - rate_sheet.rate_snapshot["prices"].each do |price|
+      - if price["charge_type"] == "FlatWeightCharge"
+        %tr
+          %td.rate_sheet_price_table__scale
+            = price["charge_data"]["weight"]
+            - if rate_sheet.carrier_product.options.basis == "weight"
+              kg
+          %td
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["amount"]
+      - elsif price["charge_type"] == "WeightRangeCharge"
+        %tr
+          %td.rate_sheet_price_table__scale
+            = price["charge_data"]["weight_low"]
+            - if rate_sheet.carrier_product.options.basis == "weight"
+              kg
+          %td
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["price_low"]
+        %tr
+          %td.rate_sheet_price_table__scale
+            = price["charge_data"]["weight_high"]
+            - if rate_sheet.carrier_product.options.basis == "weight"
+              kg
+          %td
+          - price["zone_prices"].each do |zone_price|
+            %td
+        %tr
+          %td.rate_sheet_price_table__scale
+          %td.rate_sheet_price_table__secondary_scale
+            = price["charge_data"]["interval"]
+            - if rate_sheet.carrier_product.options.basis == "weight"
+              kg
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["price_per_interval"]
+      - elsif price["charge_type"] == "RangeCharge"
+        %tr
+          %td.rate_sheet_price_table__scale From price
+          %td
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["price_low"]
+        %tr
+          %td.rate_sheet_price_table__scale To price
+          %td
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["price_high"]
+        %tr
+          %td.rate_sheet_price_table__scale
+          %td.rate_sheet_price_table__secondary_scale
+            = price["charge_data"]["interval"]
+            - if rate_sheet.carrier_product.options.basis == "distance"
+              km
+          - price["zone_prices"].each do |zone_price|
+            %td= zone_price["price_per_interval"]
+
+%h2.rate_sheet__zones_heading Zones
+
+%table
+  %thead
+    %tr
+      %th Zone
+      %th Country
+  %tbody
+    - rate_sheet.rate_snapshot["zones"].each do |zone|
+      %tr
+        %td= zone["name"]
+        %td
+          - zone["regions"].each do |region|
+            %span.rate_sheet__region
+              = "#{region['country_code']}&nbsp;#{region['country_name']}".html_safe

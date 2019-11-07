@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:m0="http://fedex.com/ws/openship/v11">
+  <SOAP-ENV:Body>
+    <CreateOpenShipmentRequest xmlns="http://fedex.com/ws/openship/v11">
+      <WebAuthenticationDetail>
+        <UserCredential>
+          <Key>e3JYB2UmrCRail5A</Key>
+          <Password>Nyl5WroxCLn1VCUPqwn0wmPiB</Password>
+        </UserCredential>
+      </WebAuthenticationDetail>
+      <ClientDetail>
+        <AccountNumber>510087305</AccountNumber>
+        <MeterNumber>118762816</MeterNumber>
+      </ClientDetail>
+      <Version>
+        <ServiceId>ship</ServiceId>
+        <Major>11</Major>
+        <Intermediate>0</Intermediate>
+        <Minor>0</Minor>
+      </Version>
+      <Index>627-213-391</Index>
+      <Actions>CONFIRM</Actions>
+      <RequestedShipment>
+        <ShipTimestamp>2016-11-25T00:00:00+00:00</ShipTimestamp>
+        <ServiceType>INTERNATIONAL_ECONOMY</ServiceType>
+        <PackagingType>YOUR_PACKAGING</PackagingType>
+        <TotalWeight>
+          <Units>KG</Units>
+          <Value>110</Value>
+        </TotalWeight>
+        <Shipper>
+          <AccountNumber>510087305</AccountNumber>
+          <Contact>
+            <PersonName>Jannick Sloth</PersonName>
+            <CompanyName>CargoFlux ApS</CompanyName>
+            <PhoneNumber>+45 12 34 56 78</PhoneNumber>
+            <EMailAddress>jannick.sloth@cargoflux.com</EMailAddress>
+          </Contact>
+          <Address>
+            <StreetLines>Njalsgade 17A</StreetLines>
+            <StreetLines>Islands Brygge</StreetLines>
+            <City>Copenhagen</City>
+            <PostalCode>2300</PostalCode>
+            <CountryCode>dk</CountryCode>
+            <CountryName>Denmark</CountryName>
+          </Address>
+        </Shipper>
+        <Recipient>
+          <Contact>
+            <PersonName>Henrik Andersen</PersonName>
+            <CompanyName>Andersen A/S</CompanyName>
+            <PhoneNumber>+45 98 76 54 32</PhoneNumber>
+            <EMailAddress>henrik@andersen.dk</EMailAddress>
+          </Contact>
+          <Address>
+            <StreetLines>Florsgade 60, 10.th.</StreetLines>
+            <City>Copenhagen</City>
+            <PostalCode>2200</PostalCode>
+            <CountryCode>dk</CountryCode>
+            <CountryName>Denmark</CountryName>
+          </Address>
+        </Recipient>
+        <ShippingChargesPayment>
+          <PaymentType>SENDER</PaymentType>
+          <Payor>
+            <ResponsibleParty>
+              <AccountNumber>510087305</AccountNumber>
+            </ResponsibleParty>
+          </Payor>
+        </ShippingChargesPayment>
+          <CustomsClearanceDetail>
+            <DutiesPayment>
+              <PaymentType>RECIPIENT</PaymentType>
+              <Payor>
+                <ResponsibleParty>
+                  <AccountNumber></AccountNumber>
+                </ResponsibleParty>
+              </Payor>
+            </DutiesPayment>
+            <CustomsValue>
+              <Currency>DKK</Currency>
+              <Amount>1500.00</Amount>
+            </CustomsValue>
+            <Commodities>
+              <NumberOfPieces>1</NumberOfPieces>
+              <Description>Pretty Chair</Description>
+              <CountryOfManufacture>DK</CountryOfManufacture>
+              <HarmonizedCode>010190</HarmonizedCode>
+              <Weight>
+                <Units>KG</Units>
+                <Value>110</Value>
+              </Weight>
+              <Quantity>1</Quantity>
+              <QuantityUnits>CM</QuantityUnits>
+              <UnitPrice>
+                <Currency>DKK</Currency>
+                <Amount>1500.00</Amount>
+              </UnitPrice>
+            </Commodities>
+          </CustomsClearanceDetail>
+        <LabelSpecification>
+          <LabelFormatType>COMMON2D</LabelFormatType>
+          <ImageType>PDF</ImageType>
+          <LabelStockType>PAPER_8.5X11_TOP_HALF_LABEL</LabelStockType>
+        </LabelSpecification>
+        <PackageCount>2</PackageCount>
+          <RequestedPackageLineItems>
+            <SequenceNumber>1</SequenceNumber>
+            <Weight>
+              <Units>KG</Units>
+              <Value>50</Value>
+            </Weight>
+            <Dimensions>
+              <Length>10</Length>
+              <Width>20</Width>
+              <Height>30</Height>
+              <Units>CM</Units>
+            </Dimensions>
+              <CustomerReferences>
+                <CustomerReferenceType>CUSTOMER_REFERENCE</CustomerReferenceType>
+                <Value>TX#1337</Value>
+              </CustomerReferences>
+          </RequestedPackageLineItems>
+          <RequestedPackageLineItems>
+            <SequenceNumber>2</SequenceNumber>
+            <Weight>
+              <Units>KG</Units>
+              <Value>60</Value>
+            </Weight>
+            <Dimensions>
+              <Length>20</Length>
+              <Width>30</Width>
+              <Height>40</Height>
+              <Units>CM</Units>
+            </Dimensions>
+              <CustomerReferences>
+                <CustomerReferenceType>CUSTOMER_REFERENCE</CustomerReferenceType>
+                <Value>TX#1337</Value>
+              </CustomerReferences>
+          </RequestedPackageLineItems>
+      </RequestedShipment>
+    </CreateOpenShipmentRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

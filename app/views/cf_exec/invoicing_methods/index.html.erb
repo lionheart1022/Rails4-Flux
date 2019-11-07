@@ -1,0 +1,43 @@
+<header class="page-header">
+  <h1>Invoicing</h1>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="12"></th>
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Initials</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoicing_methods.each do |invoicing_method| %>
+      <% company = invoicing_method.company %>
+      <tr>
+        <% if company.primary_brand_color? %>
+          <td style="background-color: <%= raw company.primary_brand_color %>;" title="<%= company.primary_brand_color %>"></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td></td>
+        <td><%= company.id %></td>
+        <td><%= company.name %></td>
+        <td><%= company.initials %></td>
+        <td><code><%= invoicing_method.class.name.demodulize %></code></td>
+        <td class="show-btn-cell">
+          <%= link_to("Remove", exec_invoicing_method_path(invoicing_method.id, company_id: invoicing_method.company_id), method: :delete, class: "delete-btn", data: { confirm: "Are you sure?" }) if invoicing_method.can_destroy_via_ui? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag exec_invoicing_methods_path, method: :post, class: "add-invoicing-method-form" do %>
+  <%= select_tag "company_id", options_from_collection_for_select(@addable_companies, "id", "name"), include_blank: "Select company" %>
+  <%= button_tag "Add", type: "submit" %>
+<% end %>

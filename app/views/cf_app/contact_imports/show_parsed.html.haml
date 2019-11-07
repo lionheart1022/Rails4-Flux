@@ -1,0 +1,59 @@
+%header.page_header
+  %h1 Import Contacts
+
+= form_tag url_for(action: "create"), method: :post, data: { behavior: "auto_focus_first" } do
+  = hidden_field_tag "state", "bulk_create", id: nil
+
+  .overflow-x-box
+    %table
+      %thead
+        %tr
+          %th
+          %th{ title: "company_name" } Company name
+          %th{ title: "attention" } Attention
+          %th{ title: "address_1, address_2, address_3" } Address
+          %th{ title: "zip_code" } Zip code
+          %th{ title: "city" } City
+          %th{ title: "country_code" } Country code
+          %th{ title: "state_code" } State code
+          %th{ title: "phone" } Phone
+          %th{ title: "email" } Email
+      %tbody
+        - @import.rows.each_with_index do |row, row_index|
+          = fields_for "import[rows]", row, index: row_index do |row_fields|
+            %tr{ class: row.errors.any? ? "error" : nil }
+              %td{ class: row.errors.any? ? "error" : nil }
+                - if row.errors.any?
+                  - row.errors.full_messages.each do |message|
+                    %p= message
+                - else
+                  %span.ok-color OK
+              %td{ class: row.errors.include?(:company_name) ? "error" : nil }
+                = row_fields.text_field(:company_name, id: nil, class: "cf_input")
+              %td
+                = row_fields.text_field(:attention, id: nil, class: "cf_input")
+              %td{ class: row.errors.include?(:address_1) ? "error" : nil }
+                %div
+                  = row_fields.text_field(:address_1, id: nil, class: "cf_input", placeholder: "Address 1")
+                %div
+                  = row_fields.text_field(:address_2, id: nil, class: "cf_input", placeholder: "Address 2")
+                %div
+                  = row_fields.text_field(:address_3, id: nil, class: "cf_input", placeholder: "Address 3")
+              %td
+                = row_fields.text_field(:zip_code, id: nil, class: "cf_input")
+              %td
+                = row_fields.text_field(:city, id: nil, class: "cf_input")
+              %td{ class: row.errors.include?(:country_code) ? "error" : nil }
+                = row_fields.text_field(:country_code, id: nil, class: "cf_input")
+              %td{ class: row.errors.include?(:state_code) ? "error" : nil }
+                = row_fields.text_field(:state_code, id: nil, class: "cf_input")
+              %td
+                = row_fields.text_field(:phone, id: nil, class: "cf_input")
+              %td
+                = row_fields.text_field(:email, id: nil, class: "cf_input")
+
+  %ul.actions
+    %li
+      = link_to("Cancel", url_for(action: "new"))
+    %li.primary
+      = submit_tag "Import", id: nil

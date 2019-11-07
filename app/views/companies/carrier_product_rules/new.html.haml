@@ -1,0 +1,9 @@
+%header.page_header
+  %h1
+    Edit rules
+    %small= @carrier_product.name
+
+= render "description_text"
+
+= form_for @carrier_product_rule, url: companies_carrier_product_rules_path(@carrier_product), method: :post do |form|
+  = render "form_fields", form: form

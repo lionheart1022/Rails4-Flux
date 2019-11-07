@@ -1,0 +1,18 @@
+.page_header
+  %h1 Customer users
+
+= render "companies/users/subnav", active_nav: :customer_users
+
+%table
+  %tr
+    %th{ width: "45%" } Email
+    %th{ width: "25%" } Customer
+    %th Last sign in
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= link_to(user.accessible_customer_name, companies_customer_path(user.accessible_customer_id))
+      %td= user.last_sign_in_at? ? l(user.last_sign_in_at, format: :long) : ""
+
+.pagination
+  = paginate @users

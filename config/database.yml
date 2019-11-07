@@ -1,0 +1,11 @@
+development:
+ adapter:  postgresql
+ database: cargoflux_development
+ username: 
+ host:     localhost
+
+test:
+ adapter:  postgresql
+ database: cargoflux_test
+ username: 
+ host:     localhost

@@ -1,0 +1,5 @@
+<%= "#{@customer.name} ferry booking ##{@shipment.unique_shipment_id} was successfully booked with #{@shipment.carrier_product.name}" %>
+
+<%= CurrentContextUrls.new(company: @company).companies_shipment_url(@shipment) %>
+
+<%= render "ferry_booking_details", shipment: @shipment, ferry_booking: @ferry_booking %>

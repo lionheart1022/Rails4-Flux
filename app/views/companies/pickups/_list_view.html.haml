@@ -1,0 +1,18 @@
+- if @filter.is_ungrouped?
+  - if @filter.ungrouped_pickups.size > 0
+    %table.pickups
+      = render "companies/pickups/list_view_header"
+      = render partial: "companies/pickups/list_view_row", collection: @filter.ungrouped_pickups, as: :pickup
+  - else
+    %p.no_results No pickups found
+
+- else
+  - @filter.grouped_pickups.each do |group|
+    %h2= group.name
+    - if group.data.size > 0
+      %table.pickups
+        = render "companies/pickups/list_view_header"
+        = render partial: "companies/pickups/list_view_row", collection: group.data, as: :pickup
+
+  - if @filter.grouped_pickups.size < 1
+    %p.no_results No pickups found

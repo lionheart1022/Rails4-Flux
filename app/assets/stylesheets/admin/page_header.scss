@@ -1,0 +1,41 @@
+.page_header {
+  border-bottom: 1px solid #bebebe;
+  margin-bottom: 20px;
+  position: relative;
+
+  &.with_table_below {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 20px 0 16px;
+
+    small {
+      font-size: 24px;
+      margin-left: 12px;
+    }
+  }
+
+  h1 .header_select2_container {
+    font-size: 16px;
+    display: inline-block;
+  }
+
+  h1 .inline_block_container {
+    vertical-align: top;
+  }
+
+  ul.page_actions {
+    position: absolute;
+    right: 0;
+    top: 25px;
+
+    li {
+      float: left;
+      line-height: 36px;
+      margin-left: 18px;
+    }
+  }
+}

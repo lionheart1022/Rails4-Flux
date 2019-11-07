@@ -1,0 +1,33 @@
+@import "admin/mixins";
+
+form.shipment_bulk_update_form {
+  display: block;
+  margin: 0 0 20px;
+  padding-top: 20px;
+  border-top: 1px dashed #ddd;
+}
+
+.shipment_bulk_update__state_select {
+  @include font_maven_pro;
+
+  -webkit-appearance: menulist-button;
+
+  background: white;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  box-sizing: border-box;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 8px 0 0;
+  padding: 0 6px;
+}
+
+.shipment_bulk_update__shipment_count {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.shipment_bulk_update__shipment_id_checkbox {
+  margin-right: 4px;
+}

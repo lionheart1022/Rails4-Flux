@@ -1,0 +1,33 @@
+%header.page_header.with_table_below
+  %h1
+    .inline_block_container Customers
+
+    .header_select2_container.inline_block_container.initially_hidden
+      %select{ data: { "behavior" => "select_redirect", "ajax--url" => companies_autocomplete_customer_recordings_path(format: "json", variant: "select2"), "width" => "300px", placeholder: "Find customer" } }
+
+  %ul.page_actions
+    %li= link_to("Import", new_companies_customer_import_path, class: "primary-btn")
+    %li= link_to("New Customer", new_companies_customer_path, class: "primary-btn")
+
+- if @customer_recordings.size > 0
+  %table
+    %thead
+      %tr
+        %th{ width: 100 } ID
+        %th Name
+
+    %tbody
+      - @customer_recordings.each do |customer_recording|
+        %tr
+          %td= customer_recording.company_scoped_id
+          %td
+            - if path = build_path_for_customer_recording(customer_recording)
+              = link_to(customer_recording.customer_name, path)
+            - else
+              - # This branch should really not be hit
+              = customer_recording.customer_name
+
+  .pagination
+    = paginate @customer_recordings
+- else
+  %p.no_results No customers

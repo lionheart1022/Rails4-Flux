@@ -1,0 +1,2 @@
+class FedExTracking < Tracking
+end

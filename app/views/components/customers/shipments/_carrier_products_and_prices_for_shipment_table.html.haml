@@ -1,0 +1,23 @@
+%table
+  %tr
+    %th
+    %th Carrier Product
+    %th Price
+    %th Time in Transit
+  - carrier_products_and_prices.each do |cp|
+    %tr
+      %td
+        = radio_button_tag('shipment[carrier_product_id]', cp[:carrier_product_id], cp[:carrier_product_is_selected])
+        = product_selection_carrier_product_metadata(cp)
+      %td= cp[:carrier_product_name]
+      - if cp[:price]
+        %td.carrier_product_price= number_to_currency(cp[:price].total_sales_price_amount, unit: cp[:price].sales_price_currency, format: '%u %n')
+      - else
+        %td= 'N/A'
+      %td
+        - if cp[:carrier_product_transit_time].present?
+          = cp[:carrier_product_transit_time]
+        - else
+          N/A
+%p
+  * All calculated prices excluding bridge, ferry and road taxes and are for informational use only. We are not responsible for pricing, typographical, or other errors. Please contact us if you are in doubt about pricing for a shipment

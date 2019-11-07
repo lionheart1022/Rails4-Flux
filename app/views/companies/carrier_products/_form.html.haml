@@ -1,0 +1,7 @@
+= render view_model.form_object.form_partial_path, form: form
+
+%ul.actions
+  %li
+    = link_to "Cancel", companies_carrier_path(view_model.carrier)
+  %li.primary
+    = form.submit "Save"

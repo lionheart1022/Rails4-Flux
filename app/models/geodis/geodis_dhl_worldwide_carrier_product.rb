@@ -1,0 +1,2 @@
+class GeodisDHLWorldwideCarrierProduct < GeodisGenericDHLCarrierProduct
+end

@@ -1,0 +1,23 @@
+<%= form_for filter, url: url_for(), as: :filter, method: :get, html: { class: nil, id: nil } do |form| %>
+  <div class="filter-input-group">
+    <div class="form-input-group filter-input-item">
+      <%= form.label :status %>
+
+      <span class="plain-form-select--wrapper">
+        <%= form.select :status, [["Current", "current"], ["Archived", "archived"]], {}, { class: "plain-form-select" } %>
+      </span>
+    </div>
+
+    <div class="form-input-group filter-input-item">
+      <%= form.label :company_id %>
+
+      <span class="plain-form-select--wrapper">
+        <%= form.collection_select :company_id, Company.all.order(:name), :id, :name, { include_blank: true }, { class: "plain-form-select" } %>
+      </span>
+    </div>
+
+    <div class="filter-input-item filter-input-item--input-group-aligned">
+      <%= button_tag "Search", type: "submit", class: "plain-form-submit" %>
+    </div>
+  </div>
+<% end %>

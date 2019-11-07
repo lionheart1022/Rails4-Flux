@@ -1,0 +1,19 @@
+<header class="page-header">
+  <h1>Token: <strong><%= @token.owner.name %></strong></h1>
+</header>
+
+<h2>API token</h2>
+
+<p>
+  <%= @token.value %>
+</p>
+
+<h2>SSL access</h2>
+
+<p>
+  <% if @token.force_ssl? %>
+    This token requires using HTTPS. <%= link_to "Allow unsafe HTTP access", unsafe_access_exec_company_token_path(@token), method: :post, data: { confirm: "Confirm that you are aware of the consequences of this change." } %>.
+  <% else %>
+    This token allows unsafe HTTP access. <%= link_to "Disable unsafe HTTP access", safe_access_exec_company_token_path(@token), method: :post, data: { confirm: "Confirm that you are aware that if this company is currently performing HTTP requests then this change will now redirect the requests to HTTPS." } %>.
+  <% end %>
+</p>

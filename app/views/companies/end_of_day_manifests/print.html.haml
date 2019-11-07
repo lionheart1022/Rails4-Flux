@@ -1,0 +1,50 @@
+.eod_manifest
+
+  %table.header
+    %tr
+      %td.name
+        %h1= "End of Day Manifest ##{@end_of_day_manifest.owner_scoped_id}"
+      %td.meta_data
+        %dl
+          %dt Date
+          %dd= @end_of_day_manifest.created_at.to_s(:eod_manifest_date)
+          %dt Time
+          %dd= @end_of_day_manifest.created_at.to_s(:eod_manifest_time)
+
+
+  %h2.packages Packages
+
+  = render "packages", shipments: @shipments
+
+  %table.summary
+    %tr
+      %td
+        Total weight:
+      %td.result
+        = "#{@end_of_day_manifest.total_weight} kg"
+    %tr
+      %td
+        Number of shipments:
+      %td.result
+        = @end_of_day_manifest.number_of_shipments
+    %tr
+      %td
+        Number of packages:
+      %td.result
+        = @end_of_day_manifest.number_of_packages
+
+  %h2.signature Signature
+
+  %table.date_signature
+    %tr
+      %td.date
+        %div Date & Time
+
+      %td.signature
+        %div Pickup driver signature
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      window.print();
+    });

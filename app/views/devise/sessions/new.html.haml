@@ -1,0 +1,18 @@
+- content_for(:body_pre_flash) do
+  - if @company && @company.asset_logo
+    .app_brand_logo__centered
+      = image_tag(@company.asset_logo.attachment.url)
+
+%h2 Sign in
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :id => nil, :class => "sign_in_form" }) do |f|
+  .sign_in_form__inputs
+    = f.input :email, :required => false, :autofocus => true
+    = f.input :password, :required => false
+    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+
+  .sign_in_form__actions
+    = f.button(:submit, "Sign in", class: "primary-btn")
+
+%ul.sign_in_form__help_links
+  %li= link_to "Forgot your password?", new_password_reset_path

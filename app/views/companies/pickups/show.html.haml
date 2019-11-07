@@ -1,0 +1,9 @@
+%header.page_header.with_table_below
+  %h1= "Pickup ##{@pickup.unique_pickup_id}"
+
+%table.pickups
+  = render "companies/pickups/list_view_header"
+  = render "companies/pickups/list_view_row", pickup: @pickup, disable_remote_state_update_form: true
+
+= render partial: "components/shared/pickups/address", locals: { heading: "Address", contact: @pickup.contact }
+= render partial: "components/shared/history", locals: { heading: "History", data: @pickup_events, event_formatter: ViewHelper::Pickups }

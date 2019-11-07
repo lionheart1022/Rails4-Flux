@@ -1,0 +1,28 @@
+%h2 Dangerous Goods
+
+- if view_model.shipment.dangerous_goods_predefined_option_used?
+  %table
+    %tr
+      %th DGR
+      %th UN number
+      %th Description
+    %tr
+      %td ✓
+      %td= view_model.shipment.prefixed_un_number_from_dangerous_goods_predefined_option
+      %td= view_model.shipment.description_from_dangerous_goods_predefined_option
+- else
+  %table
+    %tr
+      %th DGR
+      %th UN number
+      %th Description
+      %th Class
+      %th Packing group
+      %th Packing instruction
+    %tr
+      %td ✓
+      %td= view_model.shipment.un_number
+      %td= view_model.shipment.dangerous_goods_description
+      %td= view_model.shipment.dangerous_goods_class
+      %td= view_model.shipment.un_packing_group
+      %td= view_model.shipment.packing_instruction

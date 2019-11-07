@@ -1,0 +1,16 @@
+%header.page-header
+  %h1 Shipments
+
+= render "filter", filter: @view_model.filter_object
+
+- if @view_model.shipments.size > 0
+  %table.table.table_valign_top
+    %thead
+      = render partial: "header_row"
+    %tbody
+      = render partial: "row", collection: @view_model.shipments, as: :shipment
+- else
+  %p No shipments found
+
+.pagination
+  = paginate(@view_model.shipments)

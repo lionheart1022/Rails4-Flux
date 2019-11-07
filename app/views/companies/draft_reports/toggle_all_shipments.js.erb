@@ -1,0 +1,5 @@
+<% if @draft_report.all_shipments_selected? %>
+  $(".draft_report_toggle_shipment__checkbox").prop("checked", true)
+<% else %>
+  $(".draft_report_toggle_shipment__checkbox").prop("checked", false)
+<% end %>

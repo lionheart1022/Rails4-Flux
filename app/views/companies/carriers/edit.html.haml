@@ -1,0 +1,11 @@
+%header.page_header
+  %h1 Edit carrier
+
+= simple_form_for(@carrier, url: companies_carrier_path(@carrier.id), as: :carrier, method: :patch) do |f|
+  = f.input :name, autofocus: true
+
+  %ul.actions
+    %li
+      = link_to("Cancel", companies_carrier_path(@carrier.id))
+    %li.primary
+      = f.submit "Save"

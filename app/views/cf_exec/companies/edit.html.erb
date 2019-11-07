@@ -1,0 +1,15 @@
+<header class="page-header">
+  <h1>Edit company</h1>
+
+  <div class="page-header-controls">
+    <%= link_to "Cancel", exec_company_path(@company.record), class: "page-header-cancel-btn" %>
+  </div>
+</header>
+
+<%= form_for(@company, as: :company, url: exec_company_path(@company.record), method: :patch) do |form| %>
+  <%= render "form", form: form %>
+
+  <div class="form-actions">
+    <%= form.submit "Update company", class: "form-primary-submit-btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+@import "admin/mixins";
+
+.destroy_btn_container {
+  color: $red;
+  text-align: right;
+}
+
+.destroy_btn {
+  color: $red;
+  font-size: 12px;
+  font-weight: bold;
+}

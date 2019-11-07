@@ -1,0 +1,17 @@
+%h2 Change your password
+
+= simple_form_for(@form, as: :user, url: password_reset_path, method: :put, html: { id: nil, class: "password_reset_complete_form" }) do |form|
+  = form.input :reset_password_token, as: :hidden, error: false
+
+  .field_with_errors
+    = form.full_error :reset_password_token
+
+  .password_reset_complete_form__inputs
+    = form.input :password, label: "New password", required: true, autofocus: true
+    = form.input :password_confirmation, label: "Confirm your new password", required: true
+
+  .password_reset_complete_form__actions
+    = form.button :submit, "Change my password", class: "primary-btn"
+
+%ul.password_reset_complete_form__help_links
+  %li= link_to "Sign in", new_user_session_path

@@ -1,0 +1,17 @@
+!!!  5 utf-8
+%html
+  %head
+    %title= "CargoFlux"
+    %meta{ "http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8" }
+    %meta{ "http-equiv" => "X-UA-Compatible", "content" => "IE=Edge" }
+    %meta{ "name" => "viewport", "content" => "width=device-width, initial-scale=1.0" }
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Maven+Pro:400,700", media: "all"
+    = stylesheet_link_tag "new_default_label", media: "all"
+    :css
+      @page {
+        size: #{@page_width} #{@page_height};
+        margin: 0;
+      }
+    = csrf_meta_tags
+  %body
+    = yield

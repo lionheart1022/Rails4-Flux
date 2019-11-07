@@ -1,0 +1,3 @@
+var container = $("#list_view_shipment_<%= @shipment.id %>");
+container.find("*[data-behavior~=shipment_state_updating]").qtip("hide");
+alert("You are not permitted to change state on ferry bookings");

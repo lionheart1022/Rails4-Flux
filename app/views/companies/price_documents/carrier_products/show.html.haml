@@ -1,0 +1,24 @@
+%header.page_header
+  %h1
+    Price Documents
+    %small= @view_model.carrier_product.name
+
+  %ul.page_actions
+    %li
+      = link_to @view_model.carrier_product.carrier.name, companies_price_documents_carrier_path(@view_model.carrier_product.carrier_id)
+
+- if @view_model.parsing_errors.count > 0
+  %h2 Errors
+  %table.price_document_parsing_errors
+    %tr
+      %th Severity
+      %th Description
+      %th Consequence
+      %th Cell
+
+    - @view_model.parsing_errors.each do |error|
+      %tr{class: (error.severity == PriceDocumentV1::ParseError::Severity::WARNING ? "warning" : "fatal")}
+        %td= error.severity.capitalize
+        %td= error.description
+        %td= error.consequence
+        %td= @view_model.format_cell(indices: error.indices)
