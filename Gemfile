@@ -86,7 +86,7 @@ gem 'creek', '~> 1.0.5' # alternative excel parser
 gem 'rubyzip', '1.2.2' # rubyzip is a ruby module for reading and writing zip files
 
 # ImageMagick
-gem 'mini_magick', '~> 4.9.0' # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
+gem 'mini_magick', '~> 4.9.4' # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick
 
 # respond_with / respond_to
 gem 'responders', '~> 2.0'
