@@ -81,7 +81,7 @@ gem 'barby', '~> 0.6.0' # Barby creates barcodes
 
 # Excel
 gem 'write_xlsx', '~> 0.77.0' # for writing excel files
-gem 'creek', '~> 1.0.5' # alternative excel parser
+gem 'creek', '~> 2.5.1' # alternative excel parser
 
 gem 'rubyzip', '1.2.2' # rubyzip is a ruby module for reading and writing zip files
 
